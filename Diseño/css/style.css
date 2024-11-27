@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Work Sans", sans-serif;
+}
+:root{
+    --blanco: #FEF6F4;
+    --amarillo: #FFCE43;
+    --morado: #7E3CFF;
+    --rojo: #ff5596;
+    --azul: #01D7F9;
+}
+
+.wave{
+    height: 50px;
+    position: relative;
+    background: var(--rojo);
+  }
+  
+  /* Wave text css */
+  .wave {
+    color:#fff;
+    text-align:center;
+    font-weight:bold;
+    font-size:24px;
+    padding-top:25px;
+    padding-bottom:25px;
+    
+  }
+  /* */
+  
+  
+  .wave::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-repeat: repeat;
+    height: 10px;
+    background-size: 20px 20px;
+    background-image:
+     radial-gradient(circle at 10px -5px, transparent 12px, #fff 13px);
+  }
+  .wave::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-repeat: repeat;
+    height: 15px;
+    background-size: 40px 20px;
+    background-image:
+      radial-gradient(circle at 10px 15px, #fff 12px, transparent 13px);
+  }
