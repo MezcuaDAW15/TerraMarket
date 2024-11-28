@@ -11,46 +11,122 @@
     --azul: #01D7F9;
 }
 
-.wave{
+.wave {
+    height: 50px;
+    background: var(--rojo);
+    display: flex;
+    justify-content: center;
+    padding-top: 2.4%;
+    p {
+        color: #fef6f4;
+        font-weight: bold;
+        font-size: 32px;
+        text-align: center;
+    }
+}
+.waveFooter {
     height: 50px;
     position: relative;
-    background: var(--rojo);
-  }
-  
-  /* Wave text css */
-  .wave {
-    color:#fff;
-    text-align:center;
-    font-weight:bold;
-    font-size:24px;
-    padding-top:25px;
-    padding-bottom:25px;
-    
-  }
-  /* */
-  
-  
-  .wave::before{
-    content: "";
+    background: var(--amarillo);
+
+    p {
+        color: black;
+    }
+}
+.wave {
+    height: 200px;
+    --mask: radial-gradient(
+                201.25px at 50% calc(100% - 270px),
+                #000 100%,
+                #0000 100%
+            )
+            calc(50% - 180px) 0/360px 100%,
+        radial-gradient(
+                201.25px at 50% calc(100% + 180px),
+                #0000 100%,
+                #000 100%
+            )
+            50% calc(100% - 90px) / 360px 100% repeat-x;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+}
+.waveFooter {
     position: absolute;
-    left: 0;
     bottom: 0;
-    right: 0;
-    background-repeat: repeat;
-    height: 10px;
-    background-size: 20px 20px;
-    background-image:
-     radial-gradient(circle at 10px -5px, transparent 12px, #fff 13px);
-  }
-  .wave::after{
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-repeat: repeat;
-    height: 15px;
-    background-size: 40px 20px;
-    background-image:
-      radial-gradient(circle at 10px 15px, #fff 12px, transparent 13px);
-  }
+    height: 200px;
+    width: 100%;
+    --maskfooter: radial-gradient(201.25px at 50% 270px, #000 100%, #0000 100%)
+            calc(50% - 180px) 0/360px 100%,
+        radial-gradient(201.25px at 50% -180px, #0000 100%, #000 100%) 50% 90px/360px
+            100% repeat-x;
+    -webkit-mask: var(--maskfooter);
+    mask: var(--maskfooter);
+}
+/* NAV ---------------------------------*/
+nav {
+    margin: 16px;
+
+    ul {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 16px;
+
+        li {
+            font-weight: 600;
+            border: 4px solid black;
+            border-radius: 6px;
+            padding: 10px 20px 10px 20px;
+        }
+        .subMenu {
+            display: none;
+        }
+
+        #actNumeros {
+            background-color: var(--azul);
+        }
+        #actNumeros:hover .subMenu {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            li {
+                background-color: var(--blanco);
+            }
+        }
+        #actEscribir {
+            background-color: var(--rojo);
+        }
+        #actEscribir:hover .subMenu {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            li {
+                background-color: var(--blanco);
+            }
+        }
+        #actPalabras {
+            background-color: var(--amarillo);
+        }
+        #actPalabras:hover .subMenu {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            li {
+                background-color: var(--blanco);
+            }
+        }
+        #actImg {
+            background-color: var(--morado);
+        }
+        #actImg:hover .subMenu {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            li {
+                background-color: var(--blanco);
+            }
+        }
+    }
+}
