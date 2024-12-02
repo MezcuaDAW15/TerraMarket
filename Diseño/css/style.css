@@ -11,6 +11,10 @@
     --azul: #01D7F9;
 }
 
+body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
 .wave {
     height: 50px;
     background: var(--rojo);
@@ -51,7 +55,6 @@
     mask: var(--mask);
 }
 .waveFooter {
-    position: relative;
     bottom: 0;
     height: 200px;
     width: 100%;
