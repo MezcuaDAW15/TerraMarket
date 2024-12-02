@@ -15,6 +15,11 @@ body {
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
 }
+body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
 
 .wave {
     height: 50px;
@@ -55,6 +60,8 @@ body {
     mask: var(--mask);
 }
 .waveFooter {
+    position: absolute;
+    bottom: 0;
     height: 200px;
     width: 100%;
     --maskfooter: radial-gradient(201.25px at 50% 270px, #000 100%, #0000 100%)
@@ -131,4 +138,7 @@ nav {
             }
         }
     }
+}
+main{
+    padding: 0 100px;
 }
