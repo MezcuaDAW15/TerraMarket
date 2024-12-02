@@ -1,14 +1,19 @@
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: "Work Sans", sans-serif;
 }
-:root{
-    --blanco: #FEF6F4;
-    --amarillo: #FFCE43;
-    --morado: #7E3CFF;
+:root {
+    --blanco: #fef6f4;
+    --amarillo: #ffce43;
+    --morado: #7e3cff;
     --rojo: #ff5596;
-    --azul: #01D7F9;
+    --azul: #01d7f9;
+}
+body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
 }
 
 .wave {
@@ -26,7 +31,6 @@
 }
 .waveFooter {
     height: 50px;
-    position: relative;
     background: var(--amarillo);
 
     p {
@@ -51,8 +55,6 @@
     mask: var(--mask);
 }
 .waveFooter {
-    position: absolute;
-    bottom: 0;
     height: 200px;
     width: 100%;
     --maskfooter: radial-gradient(201.25px at 50% 270px, #000 100%, #0000 100%)
