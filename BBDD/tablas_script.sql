@@ -52,7 +52,7 @@ CREATE TABLE `terramarket_v0`.`tiendas` (
   CREATE TABLE `terramarket_v0`.`categorias_tienda` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(100) NOT NULL,
-  `descripcion` TEXT NOT NULL,vendedores
+  `descripcion` TEXT NOT NULL,
   `icono` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`));
   
