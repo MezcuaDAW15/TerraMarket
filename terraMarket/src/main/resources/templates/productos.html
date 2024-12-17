@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Lista Productos</title>
+</head>
+
+<body>
+	<div>
+		<br>
+		<h2>Lisa Productos</h2>
+		<table border="1">
+			<thead>
+				<tr>
+					<td>id</td>
+					<td>Nombre</td>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="item : ${listaProductosDTO}">
+					<td th:text="${item.id}"></td>
+					<td th:text="${item.nombre}" />
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br>
+	<div>
+		<a th:href="@{/clientes/add}">Agregar</a>
+		<br>
+		<a th:href="@{/}">Volver al inicio</a>
+	</div>
+</body>
+
+</html>
