@@ -16,16 +16,16 @@ import lombok.Data;
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 
     @Column(name = "idcliente") 
-    private int idCliente;
+    private Long idCliente;
 
     @Column(name = "idpago") 
-    private int idPago;
+    private Long idPago;
 
     @Column(name = "idpr") 
-    private int idPR;
+    private Long idPR;
 
     @Column(name = "fecha_pedido") 
     private Date fechaPedido;
@@ -43,7 +43,7 @@ public class Pedido {
     private Date fechaFactura;
 
     @Column(name = "num_factura") 
-    private int numFactura;
+    private Long numFactura;
 
     private boolean recogido;
     private float importe;

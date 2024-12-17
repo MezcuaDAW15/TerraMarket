@@ -13,7 +13,7 @@ import lombok.Data;
 public class Tienda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String nombre;
     private String logo;
     private String descripcion;

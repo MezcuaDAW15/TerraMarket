@@ -14,7 +14,7 @@ import lombok.Data;
 public class Mercado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String nombre;
     @Column(name = "direccion_f")
     private String direccionF;
