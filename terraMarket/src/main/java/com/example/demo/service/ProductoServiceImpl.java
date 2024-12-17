@@ -34,4 +34,17 @@ public class ProductoServiceImpl implements ProductoService {
 
     }
 
+    @Override
+    public ProductoDTO findById(Long idProducto) {
+        log.info("ProductoServiceImpl - findById: Mostramos la info del producto ", idProducto);
+
+        return ProductoDTO.convertToDTO(productoRepository.findById(idProducto).get());
+    }
+
+    @Override
+    public void delete(Long idProducto) {
+        log.info("ProductoServiceImpl - delete: Eliminamos el producto ", idProducto);
+        productoRepository.deleteById(idProducto);
+    }
+
 }
