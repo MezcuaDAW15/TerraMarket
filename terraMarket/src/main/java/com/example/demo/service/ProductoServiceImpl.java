@@ -47,4 +47,13 @@ public class ProductoServiceImpl implements ProductoService {
         productoRepository.deleteById(idProducto);
     }
 
+    @Override
+    public void save(ProductoDTO productoDTO) {
+        if (productoDTO.getId() == null) {
+            log.warn("El producto no tiene id asignado");
+        }
+        log.info("ProductoServiceImpl - save: Guardamos el producto ", productoDTO);
+        productoRepository.save(ProductoDTO.convertToEntity(productoDTO));
+    }
+
 }

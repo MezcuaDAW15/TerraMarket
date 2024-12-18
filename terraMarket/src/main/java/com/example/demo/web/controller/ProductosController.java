@@ -7,12 +7,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.dto.ProductoDTO;
 import com.example.demo.service.ProductoService;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
@@ -56,6 +60,42 @@ public class ProductosController {
         return mav;
     }
 
+    @GetMapping("productos/add")
+    public ModelAndView add() {
+        log.info("ProductosController - add: Mostramos el formulario para anadir un producto");
+        
+        ModelAndView mav = new ModelAndView("productoform");
+        mav.addObject("productoDTO", new ProductoDTO());
+        mav.addObject("add", true);
+
+        return mav;
+    }
+
+    @GetMapping("productos/{idProducto}/update")
+    public ModelAndView update(@PathVariable("idProducto") Long idProducto) {
+        log.info("ProductosController - add: Mostramos el formulario para editar el producto" + idProducto);
+        
+        ProductoDTO productoDTO = productoService.findById(idProducto);
+
+        ModelAndView mav = new ModelAndView("productoform");
+        mav.addObject("productoDTO", productoDTO);
+
+        return mav;
+    }
+
+    @PostMapping("productos/save")
+    public ModelAndView save(@ModelAttribute("productoDTO") ProductoDTO productoDTO) {
+
+        log.info("ProductosController - save: Guardamos el producto ", productoDTO);
+
+        productoService.save(productoDTO);
+
+
+        
+        ModelAndView mav = new ModelAndView("redirect:/productos");
+
+        return mav;
+    }
     
 
 }
