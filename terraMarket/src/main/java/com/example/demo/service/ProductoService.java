@@ -8,4 +8,10 @@ public interface ProductoService {
 
     List<ProductoDTO> findAll();
 
+    ProductoDTO findById(Long idProducto);
+
+    void delete(Long idProducto);
+
+    void save(ProductoDTO productoDTO);
+
 }

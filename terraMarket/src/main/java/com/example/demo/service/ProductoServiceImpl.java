@@ -34,4 +34,26 @@ public class ProductoServiceImpl implements ProductoService {
 
     }
 
+    @Override
+    public ProductoDTO findById(Long idProducto) {
+        log.info("ProductoServiceImpl - findById: Mostramos la info del producto ", idProducto);
+
+        return ProductoDTO.convertToDTO(productoRepository.findById(idProducto).get());
+    }
+
+    @Override
+    public void delete(Long idProducto) {
+        log.info("ProductoServiceImpl - delete: Eliminamos el producto ", idProducto);
+        productoRepository.deleteById(idProducto);
+    }
+
+    @Override
+    public void save(ProductoDTO productoDTO) {
+        if (productoDTO.getId() == null) {
+            log.warn("El producto no tiene id asignado");
+        }
+        log.info("ProductoServiceImpl - save: Guardamos el producto ", productoDTO);
+        productoRepository.save(ProductoDTO.convertToEntity(productoDTO));
+    }
+
 }

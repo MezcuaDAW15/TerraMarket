@@ -33,6 +33,15 @@ public class ProductoDTO {
        productoDTO.setImagen(producto.getImagen());
        return productoDTO;
     }
+	public static Producto convertToEntity(ProductoDTO productoDTO) {
+		
+		Producto producto = new Producto();
+		producto.setId(productoDTO.getId());
+		producto.setNombre(productoDTO.getNombre());
+		producto.setImagen(productoDTO.getImagen());
+		return producto;
+
+	}
     
     
 }

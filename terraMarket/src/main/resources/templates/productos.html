@@ -15,20 +15,24 @@
 				<tr>
 					<td>id</td>
 					<td>Nombre</td>
+					<td>Eliminar</td>
+					<td>Actualizar</td>
 
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="item : ${listaProductosDTO}">
-					<td th:text="${item.id}"></td>
+					<td><a th:href="@{/productos/{idProducto}(idProducto=${item.id})}" th:text="${item.id}"></td>
 					<td th:text="${item.nombre}" />
+					<td><a th:href="@{/productos/{idProducto}/delete(idProducto=${item.id})}">Eliminar</a></td>
+					<td><a th:href="@{/productos/{idProducto}/update(idProducto=${item.id})}">Actualizar</a></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	<br>
 	<div>
-		<a th:href="@{/clientes/add}">Agregar</a>
+		<a th:href="@{/productos/add}">Agregar</a>
 		<br>
 		<a th:href="@{/}">Volver al inicio</a>
 	</div>
