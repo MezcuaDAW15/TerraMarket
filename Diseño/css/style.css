@@ -15,7 +15,10 @@ body {
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
 }
-
+a{
+    text-decoration: none;
+    color: black;
+}
 .wave {
     height: 50px;
     background: var(--rojo);
