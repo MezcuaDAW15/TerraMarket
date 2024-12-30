@@ -16,3 +16,11 @@
     grid-template-columns: auto auto auto;
     text-align: center;
 }
+
+.completar {
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
+    border: transparent;
+    border-bottom: 2px solid black;
+}
