@@ -1,6 +1,4 @@
-img {
-    border: solid 1px #000;
-}
+
 #palabras {
     border: solid 1px #000;
     padding: 10px;
@@ -13,10 +11,18 @@ img {
     align-items: flex-start;
 }
 
+
 .left, .right {
     flex: 1;
     padding: 10px;
     box-sizing: border-box;
+    .texto{
+        font-weight: 500;
+
+        padding: 10px;
+        border: 5px double black;
+    
+    }
 }
 .right {
     margin-top: 5%;
@@ -25,7 +31,18 @@ img {
     }
 }
 
-img {
-    max-width: 100%;
-    height: auto;
+table{
+    padding: 10px;
+    border-collapse: collapse;
+    width: 100%;
+    height: 300px;
+    
+}
+
+textarea{
+    border: 5px double black;
+    width: 100%;
+    height: 200px;
+    padding: 5px;
+
 }
