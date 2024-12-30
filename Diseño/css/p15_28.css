@@ -1,0 +1,60 @@
+#contenidoFicha{
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+#divActividad{
+    margin-top: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 64px;
+}
+#tabla{
+    border: 2px solid #7E3CFF;
+    border-radius: 10px;
+    background-color: #ddcefc;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+}
+.celda{
+    width: 50px;
+    height: 50px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.celda:hover{
+    background-color: #FFCE43;
+}
+#divCompletar{
+    width: 40%;
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+ul{
+    list-style: circle;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+.completar{
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
+    border: transparent;
+    border-bottom: 2px solid black;
+}
+.completar2{
+    width: 100%;
+    font-size: 18px;
+    text-align: left;
+    border: transparent;
+    border-bottom: 2px solid black;
+}
