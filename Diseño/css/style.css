@@ -10,10 +10,14 @@
     --rojo: #ff5596;
     --azul: #01D7F9;
 }
-
 body {
     display: grid;
     grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+a{
+    text-decoration: none;
+    color: black;
 }
 .wave {
     height: 50px;
@@ -30,7 +34,6 @@ body {
 }
 .waveFooter {
     height: 50px;
-    position: relative;
     background: var(--amarillo);
 
     p {
@@ -55,7 +58,7 @@ body {
     mask: var(--mask);
 }
 .waveFooter {
-    bottom: 0;
+    
     height: 200px;
     width: 100%;
     --maskfooter: radial-gradient(201.25px at 50% 270px, #000 100%, #0000 100%)
@@ -132,4 +135,7 @@ nav {
             }
         }
     }
+}
+main{
+    padding: 0 100px;
 }
