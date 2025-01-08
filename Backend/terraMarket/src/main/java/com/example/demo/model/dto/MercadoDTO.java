@@ -41,6 +41,7 @@ public class MercadoDTO {
     public static MercadoDTO convertToDTO(Mercado mercado){
         MercadoDTO mercadoDTO = new MercadoDTO();
         mercadoDTO.setId(mercado.getId());
+        mercadoDTO.setNombre(mercado.getNombre());
         mercadoDTO.setDireccionF(mercado.getDireccionF());
         mercadoDTO.setTelefono(mercado.getTelefono());
         mercadoDTO.setEmail(mercado.getEmail());
@@ -52,6 +53,7 @@ public class MercadoDTO {
     public static Mercado convertToEntity(MercadoDTO mercadoDTO){
         Mercado mercado = new Mercado();
         mercado.setId(mercadoDTO.getId());
+        mercado.setNombre(mercadoDTO.getNombre());
         mercado.setDireccionF(mercadoDTO.getDireccionF());
         mercado.setTelefono(mercadoDTO.getTelefono());
         mercado.setEmail(mercadoDTO.getEmail());
