@@ -17,7 +17,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "categorias_productos")
+@Table(name = "categorias_producto")
 public class CategoriaP {
 
     @Id
@@ -27,10 +27,11 @@ public class CategoriaP {
     private String descripcion;
 
     @OneToMany(mappedBy = "categoriaP", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idproducto")
+//    @JoinColumn(name = "idproducto")
     private Set<Producto> productos;
     
     @ManyToOne
+    @JoinColumn(name = "idcategoria_tienda")
     private CategoriaT categoriaT; 
 
 }

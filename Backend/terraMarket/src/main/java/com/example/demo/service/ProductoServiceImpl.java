@@ -48,12 +48,14 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public void save(ProductoDTO productoDTO) {
+    public ProductoDTO save(ProductoDTO productoDTO) {
         if (productoDTO.getId() == null) {
             log.warn("El producto no tiene id asignado");
         }
         log.info("ProductoServiceImpl - save: Guardamos el producto ", productoDTO);
-        productoRepository.save(ProductoDTO.convertToEntity(productoDTO));
+        
+                return ProductoDTO.convertToDTO(productoRepository.save(ProductoDTO.convertToEntity(productoDTO)));
     }
+
 
 }
