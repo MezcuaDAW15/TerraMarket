@@ -5,6 +5,7 @@ import java.util.Objects;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -17,6 +18,9 @@ public class Producto {
     private Long id;
     private String nombre;
     private String imagen;
+
+	@ManyToOne
+	private CategoriaP categoriaP;
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
