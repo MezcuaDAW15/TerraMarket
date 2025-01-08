@@ -1,28 +1,17 @@
 package com.example.demo.model.dto;
 
 import java.io.Serializable;
-import java.util.Date;
-
-import com.example.demo.repository.entity.EstadoPedido;
 
 import lombok.Data;
 
 @Data
-public class PedidoDTO implements Serializable{
+public class EstadoPedidoDTO implements Serializable{
 
     private static final long serialVersionUID = 1L;
     private Long id;
-    private Long idCliente;
-    private Long idPR;
-    private Date fechaPedido;
-    private Date fechaCompra;
-    private Date fechaEntrega;
-    private Date fechaMaxRecogida;
-    private Date fechaFactura;
-    private Long numFactura;
-    private EstadoPedido recogido;
-    private float importe;
-    
+    private String estado;
+
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -31,7 +20,7 @@ public class PedidoDTO implements Serializable{
             return false;
         if (getClass() != obj.getClass())
             return false;
-        PedidoDTO other = (PedidoDTO) obj;
+        EstadoPedidoDTO other = (EstadoPedidoDTO) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -46,6 +35,9 @@ public class PedidoDTO implements Serializable{
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
-    
-    
+
+    public static EstadoPedidoDTO convertToDTO(){
+        
+        return null;
+    }
 }

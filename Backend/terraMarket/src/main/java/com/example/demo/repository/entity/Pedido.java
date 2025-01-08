@@ -18,15 +18,10 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-    @Column(name = "idcliente") 
-    private Long idCliente;
-
-    @Column(name = "idpago") 
-    private Long idPago;
-
-    @Column(name = "idpr") 
-    private Long idPR;
+ 
+    private Cliente idCliente;
+    private MetodoPago idPago;
+    private PuntoRecogida idPR;
 
     @Column(name = "fecha_pedido") 
     private Date fechaPedido;
@@ -46,7 +41,7 @@ public class Pedido {
     @Column(name = "num_factura") 
     private Long numFactura;
 
-    private boolean recogido;
+    private EstadoPedido estado;
     private float importe;
 
     //  lista de linea pedido!! relacion N a N con atributos
