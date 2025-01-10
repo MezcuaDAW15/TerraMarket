@@ -45,6 +45,7 @@ public class ProductoDTO {
 		producto.setId(productoDTO.getId());
 		producto.setNombre(productoDTO.getNombre());
 		producto.setImagen(productoDTO.getImagen());
+		producto.setCategoriaP(CategoriaPDTO.convertToEntity(productoDTO.getCategoriaPDTO()));
 		return producto;
 
 	}

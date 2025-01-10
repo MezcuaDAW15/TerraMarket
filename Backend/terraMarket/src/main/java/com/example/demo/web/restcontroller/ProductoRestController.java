@@ -37,6 +37,7 @@ public class ProductoRestController {
         return productoService.findAll();
     }
 
+
     @PostMapping("/productos")
     public ResponseEntity<ProductoDTO> add(@RequestBody ProductoDTO productoDTO) {
         log.info("ProductoRestController - add: " + productoDTO);
