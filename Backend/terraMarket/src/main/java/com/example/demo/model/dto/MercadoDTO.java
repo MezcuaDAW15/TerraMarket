@@ -1,11 +1,15 @@
 package com.example.demo.model.dto;
 
+import java.io.Serializable;
+
 import com.example.demo.repository.entity.Mercado;
 
 import lombok.Data;
 
 @Data
-public class MercadoDTO {
+public class MercadoDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private Long id;
     private String nombre;
     private String direccionF;
@@ -30,6 +34,7 @@ public class MercadoDTO {
             return false;
         return true;
     }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -38,7 +43,7 @@ public class MercadoDTO {
         return result;
     }
 
-    public static MercadoDTO convertToDTO(Mercado mercado){
+    public static MercadoDTO convertToDTO(Mercado mercado) {
         MercadoDTO mercadoDTO = new MercadoDTO();
         mercadoDTO.setId(mercado.getId());
         mercadoDTO.setNombre(mercado.getNombre());
@@ -47,10 +52,11 @@ public class MercadoDTO {
         mercadoDTO.setEmail(mercado.getEmail());
         mercadoDTO.setImagen(mercado.getImagen());
         mercadoDTO.setActivo(mercado.isActivo());
+
         return mercadoDTO;
     }
 
-    public static Mercado convertToEntity(MercadoDTO mercadoDTO){
+    public static Mercado convertToEntity(MercadoDTO mercadoDTO) {
         Mercado mercado = new Mercado();
         mercado.setId(mercadoDTO.getId());
         mercado.setNombre(mercadoDTO.getNombre());
@@ -62,5 +68,4 @@ public class MercadoDTO {
         return mercado;
     }
 
-    
 }
