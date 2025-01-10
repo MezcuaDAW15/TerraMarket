@@ -13,12 +13,9 @@ public class TiendaDTO {
     private String descripcion;
     private String imagen;
     private boolean activo;
-
-    private Long idMercado;
-    //private MercadoDTO mercadoDTO;
+    private MercadoDTO mercadoDTO;
 
     private Long idDireccion;
-
 
     @Override
     public boolean equals(Object obj) {
@@ -36,6 +33,7 @@ public class TiendaDTO {
             return false;
         return true;
     }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -44,7 +42,7 @@ public class TiendaDTO {
         return result;
     }
 
-    public static TiendaDTO convertToDTO(Tienda tienda){
+    public static TiendaDTO convertToDTO(Tienda tienda) {
         TiendaDTO tiendaDTO = new TiendaDTO();
         tiendaDTO.setId(tienda.getId());
         tiendaDTO.setNombre(tienda.getNombre());
@@ -52,12 +50,12 @@ public class TiendaDTO {
         tiendaDTO.setDescripcion(tienda.getDescripcion());
         tiendaDTO.setImagen(tienda.getImagen());
         tiendaDTO.setActivo(tienda.isActivo());
-        tiendaDTO.setIdMercado(tienda.getIdMercado());
+        tiendaDTO.setMercadoDTO(MercadoDTO.convertToDTO(tienda.getMercado()));
         tiendaDTO.setIdDireccion(tienda.getIdDireccion());
         return tiendaDTO;
     }
 
-    public static Tienda convertToEntity(TiendaDTO tiendaDTO){
+    public static Tienda convertToEntity(TiendaDTO tiendaDTO) {
         Tienda tienda = new Tienda();
         tienda.setId(tiendaDTO.getId());
         tienda.setNombre(tiendaDTO.getNombre());
@@ -69,5 +67,4 @@ public class TiendaDTO {
         return tienda;
     }
 
-    
 }

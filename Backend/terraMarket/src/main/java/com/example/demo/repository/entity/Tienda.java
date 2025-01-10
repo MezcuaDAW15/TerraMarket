@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -21,12 +23,11 @@ public class Tienda {
     private String imagen;
     private boolean activo;
 
-    @Column(name="idmercado")
-    private Long idMercado;
-    //private Mercado mercado;
+    @ManyToOne
+    @JoinColumn(name = "idmercado")
+    private Mercado mercado;
 
-    @Column(name="iddireccion")
+    @Column(name = "iddireccion")
     private Long idDireccion;
-
 
 }

@@ -14,7 +14,6 @@ import com.example.demo.service.TiendaService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
 @Controller
 public class TiendaController {
 
@@ -33,9 +32,10 @@ public class TiendaController {
         List<TiendaDTO> listaTiendasPorMercado = tiendaService.findAllByMercado(mercadoDTO);
 
         ModelAndView mav = new ModelAndView("tiendas");
+
         mav.addObject("listaTiendasPorMercado", listaTiendasPorMercado);
-        if (listaTiendasPorMercado.size()>0) {
-            mav.addObject("mercadoDTO", listaTiendasPorMercado.get(0).getIdMercado());
+        if (listaTiendasPorMercado.size() > 0) {
+            mav.addObject("mercadoDTO", listaTiendasPorMercado.get(0).getMercadoDTO());
         }
 
         return mav;
