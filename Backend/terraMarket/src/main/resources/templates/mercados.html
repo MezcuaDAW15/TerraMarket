@@ -19,6 +19,7 @@
             <td>email</td>
             <td>imagen</td>
             <td>activo</td>
+            <td>Tiendas</td>
           </tr>
         </thead>
         <tbody>
@@ -30,6 +31,9 @@
             <td th:text="${item.email}" />
             <td th:text="${item.imagen}" />
             <td th:text="${item.activo}" />
+            <td>
+              <a th:href="@{/mercados/{idMercado}/tiendas(idMercado=${item.id})}" />Ver Tiendas</a>
+            </td>
           </tr>
         </tbody>
       </table>
