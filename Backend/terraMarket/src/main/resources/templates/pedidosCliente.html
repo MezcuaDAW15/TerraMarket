@@ -34,16 +34,16 @@
 				<tr th:each="pedidoDTO : ${listaPedidosDTO}">
 					
 					<td th:text="${pedidoDTO.id}"></td>
-                    <td th:text="${pedidoDTO.idCliente}"></td>
-                    <td th:text="${pedidoDTO.idPago}"></td>
-                    <td th:text="${pedidoDTO.idPR}"></td>
+                    <td th:text="${pedidoDTO.clienteDTO.nombre}"></td>
+                    <!--<td th:text="${pedidoDTO.idPago}"></td>-->
+                    <!--<td th:text="${pedidoDTO.idPR}"></td>-->
                     <td th:text="${pedidoDTO.fechaPedido}"></td>
                     <td th:text="${pedidoDTO.fechaCompra}"></td>
                     <td th:text="${pedidoDTO.fechaEntrega}"></td>
 					<td th:text="${pedidoDTO.fechaMaxRecogida}"></td>
                     <td th:text="${pedidoDTO.fechaFactura}"></td>
                     <td th:text="${pedidoDTO.numFactura}"></td>
-                    <td th:text="${pedidoDTO.estado}"></td>
+                    <!--<td th:text="${pedidoDTO.estado}"></td>-->
                     <td th:text="${pedidoDTO.importe}"></td>
 
                     <td><a th:href="@{/pedidos/{idPedido}(idPedido=${pedidoDTO.id})}">Ver pedido</td>
@@ -54,7 +54,7 @@
 	</div>
 	<br>
 	<div>
-		<a th:href="@{/}">Volver al inicio</a>
+		<a th:href="@{/clientes}">Volver a Clientes</a>
 	</div>
 </body>
 

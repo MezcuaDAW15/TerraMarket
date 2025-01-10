@@ -7,8 +7,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -18,10 +21,18 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
- 
-    private Cliente idCliente;
-    private MetodoPago idPago;
-    private PuntoRecogida idPR;
+
+    @ManyToOne
+	@JoinColumn(name = "idcliente")
+    @ToString.Exclude
+	private Cliente cliente;
+    
+    @ManyToOne
+	@JoinColumn(name = "idpago")
+    @ToString.Exclude
+    private MetodoPago metodoPago;
+
+    //private PuntoRecogida idPR;
 
     @Column(name = "fecha_pedido") 
     private Date fechaPedido;
@@ -41,7 +52,7 @@ public class Pedido {
     @Column(name = "num_factura") 
     private Long numFactura;
 
-    private EstadoPedido estado;
+    //private EstadoPedido estado;
     private float importe;
 
     //  lista de linea pedido!! relacion N a N con atributos

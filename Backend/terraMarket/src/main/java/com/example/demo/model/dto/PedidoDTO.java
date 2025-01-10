@@ -2,25 +2,27 @@ package com.example.demo.model.dto;
 
 import java.io.Serializable;
 import java.util.Date;
-
-import com.example.demo.repository.entity.EstadoPedido;
-
+import com.example.demo.repository.entity.Cliente;
+import com.example.demo.repository.entity.Pedido;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 public class PedidoDTO implements Serializable{
 
     private static final long serialVersionUID = 1L;
     private Long id;
-    private Long idCliente;
-    private Long idPR;
+    
+    @ToString.Exclude
+    private ClienteDTO clienteDTO;
+    private MetodoPagoDTO metodoPago;
     private Date fechaPedido;
     private Date fechaCompra;
     private Date fechaEntrega;
     private Date fechaMaxRecogida;
     private Date fechaFactura;
     private Long numFactura;
-    private EstadoPedido recogido;
+    //private EstadoPedido recogido;
     private float importe;
     
     @Override
@@ -47,5 +49,36 @@ public class PedidoDTO implements Serializable{
         return result;
     }
     
-    
+    public static PedidoDTO convertToDTO(Pedido pedido, ClienteDTO clienteDTO) {
+
+		PedidoDTO pedidoDTO = new PedidoDTO();
+
+		pedidoDTO.setId(pedido.getId());
+		pedidoDTO.setClienteDTO(clienteDTO);
+        pedidoDTO.setFechaPedido(pedido.getFechaPedido());
+        pedidoDTO.setFechaCompra(pedido.getFechaCompra());
+        pedidoDTO.setFechaEntrega(pedido.getFechaMaxRecogida());
+        pedidoDTO.setNumFactura(pedido.getNumFactura());
+        pedidoDTO.setImporte(pedido.getImporte());
+
+        pedidoDTO.setMetodoPago(pedido.getMetodoPago());
+        
+		return pedidoDTO;
+	}
+
+    public static Pedido convertToEntity(PedidoDTO pedidoDTO) {
+
+		Pedido pedido = new Pedido();
+        Cliente cliente = ClienteDTO.convertToEntity(pedidoDTO.getClienteDTO());
+		
+        pedido.setId(pedidoDTO.getId());
+		pedido.setCliente(cliente);
+        pedido.setFechaPedido(pedidoDTO.getFechaPedido());
+        pedido.setFechaCompra(pedidoDTO.getFechaCompra());
+        pedido.setFechaEntrega(pedidoDTO.getFechaMaxRecogida());
+        pedido.setNumFactura(pedidoDTO.getNumFactura());
+        pedido.setImporte(pedidoDTO.getImporte());
+
+		return pedido;
+	}
 }
