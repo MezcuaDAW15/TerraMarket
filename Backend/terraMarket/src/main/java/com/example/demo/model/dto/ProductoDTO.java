@@ -2,6 +2,7 @@ package com.example.demo.model.dto;
 
 import java.util.Objects;
 
+import com.example.demo.repository.entity.CategoriaP;
 import com.example.demo.repository.entity.Producto;
 
 import lombok.Data;
@@ -11,6 +12,9 @@ public class ProductoDTO {
     private Long id;
     private String nombre;
     private String imagen;
+	private CategoriaPDTO categoriaPDTO;
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -31,7 +35,9 @@ public class ProductoDTO {
        productoDTO.setId(producto.getId());
        productoDTO.setNombre(producto.getNombre());
        productoDTO.setImagen(producto.getImagen());
+	   productoDTO.setCategoriaPDTO(CategoriaPDTO.convertToDTO(producto.getCategoriaP()));
        return productoDTO;
+
     }
 	public static Producto convertToEntity(ProductoDTO productoDTO) {
 		

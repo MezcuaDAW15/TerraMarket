@@ -49,11 +49,6 @@ public class ProductoRestController {
     }
 
     @PutMapping("/productos")
-    public String putMethodName(@PathVariable String id, @RequestBody String entity) {
-        //TODO: process PUT request
-        
-        return entity;
-    }
     public ResponseEntity<ProductoDTO> update(@RequestBody ProductoDTO productoDTO) {
         log.info("ProductoRestController - update: " + productoDTO);
         ProductoDTO productoExDTO = productoService.findById(productoDTO.getId());

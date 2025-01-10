@@ -54,6 +54,7 @@ public class ProductoServiceImpl implements ProductoService {
         }
         log.info("ProductoServiceImpl - save: Guardamos el producto ", productoDTO);
         
+        
                 return ProductoDTO.convertToDTO(productoRepository.save(ProductoDTO.convertToEntity(productoDTO)));
     }
 
