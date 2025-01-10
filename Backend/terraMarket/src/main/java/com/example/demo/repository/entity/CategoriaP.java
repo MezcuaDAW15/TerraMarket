@@ -4,6 +4,7 @@ package com.example.demo.repository.entity;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +28,6 @@ public class CategoriaP {
     private String descripcion;
 
     @OneToMany(mappedBy = "categoriaP", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "idproducto")
     private Set<Producto> productos;
     
     @ManyToOne

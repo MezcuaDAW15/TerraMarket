@@ -12,4 +12,5 @@ import jakarta.transaction.Transactional;
 public interface ProductoRepository extends JpaRepository<Producto, Long>{
 
     
+    
 }

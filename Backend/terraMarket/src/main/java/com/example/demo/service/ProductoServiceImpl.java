@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.dto.ProductoDTO;
 import com.example.demo.repository.dao.ProductoRepository;
+import com.example.demo.repository.entity.Producto;
 
 @Service
 public class ProductoServiceImpl implements ProductoService {
@@ -25,8 +26,8 @@ public class ProductoServiceImpl implements ProductoService {
         log.info("ProductoServiceImpl - findAll: Lista de todos los productos");
 
         List<ProductoDTO> listaProductosDTO = new ArrayList<ProductoDTO>();
-
-        productoRepository.findAll().forEach(producto -> {
+        List<Producto> listaProductos = productoRepository.findAll();
+        listaProductos.forEach(producto -> {
             ProductoDTO productoDTO = ProductoDTO.convertToDTO(producto);
             listaProductosDTO.add(productoDTO);
         });
@@ -38,7 +39,8 @@ public class ProductoServiceImpl implements ProductoService {
     public ProductoDTO findById(Long idProducto) {
         log.info("ProductoServiceImpl - findById: Mostramos la info del producto ", idProducto);
 
-        return ProductoDTO.convertToDTO(productoRepository.findById(idProducto).get());
+        Producto p = productoRepository.findById(idProducto).get();
+        return ProductoDTO.convertToDTO(p);
     }
 
     @Override
