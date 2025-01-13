@@ -1,6 +1,5 @@
 package com.example.demo.model.dto;
 
-import com.example.demo.model.CategoriaTDTO;
 import com.example.demo.repository.entity.CategoriaP;
 
 import lombok.Data;

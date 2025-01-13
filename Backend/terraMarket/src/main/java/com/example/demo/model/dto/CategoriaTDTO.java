@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.model.dto;
 
 import com.example.demo.repository.entity.CategoriaT;
 
