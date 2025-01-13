@@ -8,7 +8,7 @@
   <body>
     <div>
       <br />
-      <h2>Lista Tiendas</h2>
+      <h2 th:text="'Tiendas de '+${mercadoDTO.nombre}"></h2>
       <table border="1">
         <thead>
           <tr>
@@ -29,7 +29,7 @@
             <td th:text="${item.logo}" />
             <td th:text="${item.descripcion}" />
             <td th:text="${item.imagen}" />
-            <td th:text="${item.idMercado}" />
+            <td th:text="${item.mercadoDTO.id}" />
             <td th:text="${item.idDireccion}" />
             <td th:text="${item.activo}" />
           </tr>
@@ -38,7 +38,7 @@
     </div>
     <br />
     <div>
-      <a th:href="@{/}">Volver al inicio</a>
+      <a th:href="@{/mercados}">Volver</a>
     </div>
   </body>
 </html>

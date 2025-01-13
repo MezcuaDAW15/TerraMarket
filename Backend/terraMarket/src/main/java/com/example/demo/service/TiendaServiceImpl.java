@@ -13,7 +13,7 @@ import com.example.demo.model.dto.TiendaDTO;
 import com.example.demo.repository.dao.TiendaRepository;
 
 @Service
-public class TiendaServiceImpl implements TiendaService{
+public class TiendaServiceImpl implements TiendaService {
 
     private static final Logger log = LoggerFactory.getLogger(TiendaServiceImpl.class);
 
@@ -25,8 +25,8 @@ public class TiendaServiceImpl implements TiendaService{
         log.info("TiendaServiceImpl - findAllByMercado: Lista de todos las tiendas por mercado");
         List<TiendaDTO> listaTiendasPorMercado = new ArrayList<TiendaDTO>();
 
-        tiendaRepository.findAllByMercado(mercadoDTO.getId()).forEach(tienda ->{
-            TiendaDTO tiendaDTO = TiendaDTO.convertToDTO(tienda);
+        tiendaRepository.findAllByMercado(mercadoDTO.getId()).forEach(tienda -> {
+            TiendaDTO tiendaDTO = TiendaDTO.convertToDTO(tienda, mercadoDTO);
             listaTiendasPorMercado.add(tiendaDTO);
         });
         return listaTiendasPorMercado;

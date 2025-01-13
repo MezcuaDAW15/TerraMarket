@@ -7,4 +7,6 @@ import com.example.demo.model.dto.MercadoDTO;
 public interface MercadoService {
 
     List<MercadoDTO> findAll();
+
+    MercadoDTO findById(MercadoDTO mercadoDTO);
 }
