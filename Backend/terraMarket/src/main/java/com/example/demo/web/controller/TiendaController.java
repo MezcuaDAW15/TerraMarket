@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.dto.MercadoDTO;
 import com.example.demo.model.dto.TiendaDTO;
+import com.example.demo.service.MercadoService;
 import com.example.demo.service.TiendaService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +23,8 @@ public class TiendaController {
     @Autowired
     TiendaService tiendaService;
 
-    // @Autowired
-    // MercadoService mercadoService;
+    @Autowired
+    MercadoService mercadoService;
 
     @GetMapping("/mercados/{idMercado}/tiendas")
     public ModelAndView findAllByMercado(@PathVariable("idMercado") Long idMercado) {
@@ -31,7 +32,7 @@ public class TiendaController {
 
         MercadoDTO mercadoDTO = new MercadoDTO();
         mercadoDTO.setId(idMercado);
-        // mercadoDTO = mercadoService.findById(mercadoDTO);
+        mercadoDTO = mercadoService.findById(mercadoDTO);
         List<TiendaDTO> listaTiendasPorMercado = tiendaService.findAllByMercado(mercadoDTO);
 
         ModelAndView mav = new ModelAndView("tiendas");

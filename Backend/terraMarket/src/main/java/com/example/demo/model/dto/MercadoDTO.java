@@ -1,6 +1,8 @@
 package com.example.demo.model.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.example.demo.repository.entity.Mercado;
 
@@ -17,6 +19,7 @@ public class MercadoDTO implements Serializable {
     private String email;
     private String imagen;
     private boolean activo;
+    List<TiendaDTO> listaTiendasDTO;
 
     @Override
     public boolean equals(Object obj) {
@@ -53,6 +56,12 @@ public class MercadoDTO implements Serializable {
         mercadoDTO.setImagen(mercado.getImagen());
         mercadoDTO.setActivo(mercado.isActivo());
 
+        List<TiendaDTO> listaTDTO = new ArrayList<TiendaDTO>();
+        mercado.getListaTiendas().forEach(tienda -> {
+            listaTDTO.add(TiendaDTO.convertToDTO(tienda, mercadoDTO));
+        });
+
+        mercadoDTO.setListaTiendasDTO(listaTDTO);
         return mercadoDTO;
     }
 
