@@ -2,7 +2,6 @@ package com.example.demo.model.dto;
 
 import java.util.Objects;
 
-import com.example.demo.repository.entity.CategoriaP;
 import com.example.demo.repository.entity.Producto;
 
 import lombok.Data;

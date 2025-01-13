@@ -7,6 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,9 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.dto.ProductoDTO;
 import com.example.demo.service.ProductoService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 
 
@@ -60,7 +60,18 @@ public class ProductoRestController {
             return new ResponseEntity<>(productoDTO, HttpStatus.OK);
         }
     }
-    
+    @DeleteMapping("/productos")
+    public ResponseEntity<ProductoDTO> delete(@RequestBody ProductoDTO productoDTO) {
+        log.info("ProductoRestController - delete: " + productoDTO);
+        ProductoDTO productoExDTO = productoService.findById(productoDTO.getId());
+        if (productoExDTO == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            productoService.delete(productoDTO.getId());
+            return new ResponseEntity<>(productoDTO, HttpStatus.OK);
+        }
+    }
+
 
 
 }
