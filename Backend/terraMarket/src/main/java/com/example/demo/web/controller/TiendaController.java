@@ -64,4 +64,21 @@ public class TiendaController {
         return mav;
     }
 
+    @GetMapping("/mercados/{idMercado}/tiendas/add")
+    public ModelAndView add(@PathVariable("idMercado") Long idMercado) {
+        log.info("TiendaController - findById: Muestra la tienda por id");
+
+        MercadoDTO mercadoDTO = new MercadoDTO();
+        mercadoDTO.setId(idMercado);
+        mercadoService.findById(mercadoDTO);
+
+        TiendaDTO tiendaDTO = new TiendaDTO();
+        tiendaDTO.setMercadoDTO(mercadoDTO);
+
+        ModelAndView mav = new ModelAndView("tiendaform");
+        mav.addObject("tiendaDTO", tiendaDTO);
+        mav.addObject("add", true);
+        return mav;
+    }
+
 }
