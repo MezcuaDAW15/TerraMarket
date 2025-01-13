@@ -40,14 +40,12 @@ public class ClienteServiceImpl implements ClienteService{
 		List<Cliente>listaClientes = clienteRepository.findAll();
 		List<ClienteDTO>listaClientesDTO = new ArrayList<ClienteDTO>();	
 		
-        log.info(ClienteServiceImpl.class.getSimpleName() + " -findAll() lista Entidades " + listaClientes);
+        log.info(ClienteServiceImpl.class.getSimpleName() + " -findAll() lista Entidades ");
 
 		for(Cliente c : listaClientes) {
 			ClienteDTO cDTO = ClienteDTO.convertToDTO(c);
 			listaClientesDTO.add(cDTO);
 		}
-
-        log.info(ClienteServiceImpl.class.getSimpleName() + " -findAll() lista DTO " + listaClientesDTO);
 		
 		return listaClientesDTO;
     }

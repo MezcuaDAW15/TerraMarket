@@ -61,7 +61,7 @@ public class PedidoDTO implements Serializable{
         pedidoDTO.setNumFactura(pedido.getNumFactura());
         pedidoDTO.setImporte(pedido.getImporte());
 
-        pedidoDTO.setMetodoPago(pedido.getMetodoPago());
+        pedidoDTO.setMetodoPago(MetodoPagoDTO.convertToDTO(pedido.getMetodoPago()));
         
 		return pedidoDTO;
 	}
@@ -78,6 +78,8 @@ public class PedidoDTO implements Serializable{
         pedido.setFechaEntrega(pedidoDTO.getFechaMaxRecogida());
         pedido.setNumFactura(pedidoDTO.getNumFactura());
         pedido.setImporte(pedidoDTO.getImporte());
+
+        pedido.setMetodoPago(MetodoPagoDTO.convertToEntity(pedidoDTO.getMetodoPago()));
 
 		return pedido;
 	}

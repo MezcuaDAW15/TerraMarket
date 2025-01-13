@@ -16,7 +16,7 @@
 				<tr>
 					<td>id Pedido</td>
 					<td>id Cliente</td>
-                    <td>id Pago</td>
+                    <td>Método de Pago</td>
 					<td>id Punto de recogida</td>
 					<td>Fecha Pedido</td>
                     <td>Fecha Compra</td>
@@ -35,7 +35,7 @@
 					
 					<td th:text="${pedidoDTO.id}"></td>
                     <td th:text="${pedidoDTO.clienteDTO.nombre}"></td>
-                    <!--<td th:text="${pedidoDTO.idPago}"></td>-->
+                    <td th:text="${pedidoDTO.metodoPago.nombre}"></td>
                     <!--<td th:text="${pedidoDTO.idPR}"></td>-->
                     <td th:text="${pedidoDTO.fechaPedido}"></td>
                     <td th:text="${pedidoDTO.fechaCompra}"></td>

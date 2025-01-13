@@ -43,4 +43,22 @@ public class PedidosController {
 		
 		return mav;
 	}
+
+	// realizar pedido
+	@GetMapping("/clientes/{idCliente}/pedidos/add")
+	public ModelAndView add(@PathVariable("idCliente") Long idCliente) {
+		
+		// recuperar el cliente
+		ClienteDTO clienteDTO = new ClienteDTO();
+		clienteDTO.setId(idCliente);
+		clienteDTO = clienteService.findById(clienteDTO);
+		
+		ModelAndView mav = new ModelAndView("cuentaform");
+		mav.addObject("pedidoDTO", new PedidoDTO());
+		mav.addObject("clienteDTO", clienteDTO);
+		mav.addObject("add", true);
+		
+		
+		return mav;
+	}
 }

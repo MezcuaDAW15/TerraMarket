@@ -54,6 +54,7 @@ public class ProductosController {
     @GetMapping("productos/{idProducto}/delete")
     public ModelAndView delete (@PathVariable("idProducto") Long idProducto) {
         
+
         log.info("ProductosController - delete: Eliminamos el producto ", idProducto);
         productoService.delete(idProducto);
         ModelAndView mav = new ModelAndView("redirect:/productos");
