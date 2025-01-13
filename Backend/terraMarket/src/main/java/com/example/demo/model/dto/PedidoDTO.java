@@ -16,13 +16,14 @@ public class PedidoDTO implements Serializable{
     @ToString.Exclude
     private ClienteDTO clienteDTO;
     private MetodoPagoDTO metodoPago;
+    private PuntoRecogidaDTO puntoRecogidaDTO;
     private Date fechaPedido;
     private Date fechaCompra;
     private Date fechaEntrega;
     private Date fechaMaxRecogida;
     private Date fechaFactura;
     private Long numFactura;
-    //private EstadoPedido recogido;
+    private EstadoPedidoDTO estado;
     private float importe;
     
     @Override
@@ -62,6 +63,8 @@ public class PedidoDTO implements Serializable{
         pedidoDTO.setImporte(pedido.getImporte());
 
         pedidoDTO.setMetodoPago(MetodoPagoDTO.convertToDTO(pedido.getMetodoPago()));
+        pedidoDTO.setEstado(EstadoPedidoDTO.convertToDTO(pedido.getEstado()));
+        pedidoDTO.setPuntoRecogidaDTO(PuntoRecogidaDTO.convertToDTO(pedido.getPuntoRecogida()));
         
 		return pedidoDTO;
 	}
@@ -80,6 +83,8 @@ public class PedidoDTO implements Serializable{
         pedido.setImporte(pedidoDTO.getImporte());
 
         pedido.setMetodoPago(MetodoPagoDTO.convertToEntity(pedidoDTO.getMetodoPago()));
+        pedido.setEstado(EstadoPedidoDTO.convertToEntity(pedidoDTO.getEstado()));
+        pedido.setPuntoRecogida(PuntoRecogidaDTO.convertToEntity(pedidoDTO.getPuntoRecogidaDTO()));
 
 		return pedido;
 	}

@@ -1,11 +1,17 @@
 package com.example.demo.repository.entity;
 
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -17,6 +23,10 @@ public class MetodoPago {
     private Long id;
     private String nombre;
     private String descripcion;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "metodoPago")
+    @ToString.Exclude
+    private Set<Pedido> listaPedidos;
     
     @Override
     public boolean equals(Object obj) {

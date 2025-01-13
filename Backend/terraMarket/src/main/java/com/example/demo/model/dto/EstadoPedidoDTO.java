@@ -1,7 +1,7 @@
 package com.example.demo.model.dto;
 
 import java.io.Serializable;
-
+import com.example.demo.repository.entity.EstadoPedido;
 import lombok.Data;
 
 @Data
@@ -36,8 +36,21 @@ public class EstadoPedidoDTO implements Serializable{
         return result;
     }
 
-    public static EstadoPedidoDTO convertToDTO(){
-        
-        return null;
+    public static EstadoPedidoDTO convertToDTO(EstadoPedido estado) {
+
+		EstadoPedidoDTO estadoDTO = new EstadoPedidoDTO();
+		estadoDTO.setId(estado.getId());
+        estadoDTO.setEstado(estado.getEstado());
+		
+        return estadoDTO;
+    }
+
+    public static EstadoPedido convertToEntity(EstadoPedidoDTO estadoDTO){
+
+        EstadoPedido estado = new EstadoPedido();
+        estado.setId(estadoDTO.getId());
+        estado.setEstado(estadoDTO.getEstado());
+
+        return estado;
     }
 }

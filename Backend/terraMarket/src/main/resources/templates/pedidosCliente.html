@@ -15,9 +15,9 @@
 			<thead>
 				<tr>
 					<td>id Pedido</td>
-					<td>id Cliente</td>
+					<td>Cliente</td>
                     <td>Método de Pago</td>
-					<td>id Punto de recogida</td>
+					<td>Punto de recogida</td>
 					<td>Fecha Pedido</td>
                     <td>Fecha Compra</td>
                     <td>Fecha Entrega</td>
@@ -28,22 +28,23 @@
                     <td>Importe</td>
 
                     <td>Ver pedido</td>
+					<td>Cancelar pedido</td>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="pedidoDTO : ${listaPedidosDTO}">
 					
 					<td th:text="${pedidoDTO.id}"></td>
-                    <td th:text="${pedidoDTO.clienteDTO.nombre}"></td>
+                    <td th:text="${pedidoDTO.clienteDTO.nombre} + ' ' + ${pedidoDTO.clienteDTO.apellidos}"></td>
                     <td th:text="${pedidoDTO.metodoPago.nombre}"></td>
-                    <!--<td th:text="${pedidoDTO.idPR}"></td>-->
+                    <td th:text="${pedidoDTO.puntoRecogidaDTO}"></td>
                     <td th:text="${pedidoDTO.fechaPedido}"></td>
                     <td th:text="${pedidoDTO.fechaCompra}"></td>
                     <td th:text="${pedidoDTO.fechaEntrega}"></td>
 					<td th:text="${pedidoDTO.fechaMaxRecogida}"></td>
                     <td th:text="${pedidoDTO.fechaFactura}"></td>
                     <td th:text="${pedidoDTO.numFactura}"></td>
-                    <!--<td th:text="${pedidoDTO.estado}"></td>-->
+                    <td th:text="${pedidoDTO.estado.estado}"></td>
                     <td th:text="${pedidoDTO.importe}"></td>
 
                     <td><a th:href="@{/pedidos/{idPedido}(idPedido=${pedidoDTO.id})}">Ver pedido</td>
