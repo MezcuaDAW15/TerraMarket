@@ -1,12 +1,15 @@
 package com.example.demo.model.dto;
 
+import java.io.Serializable;
+
 import com.example.demo.repository.entity.Tienda;
 
 import lombok.Data;
 
 @Data
-public class TiendaDTO {
+public class TiendaDTO implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private Long id;
     private String nombre;
     private String logo;
@@ -42,7 +45,7 @@ public class TiendaDTO {
         return result;
     }
 
-    public static TiendaDTO convertToDTO(Tienda tienda) {
+    public static TiendaDTO convertToDTO(Tienda tienda, MercadoDTO mercadoDTO) {
         TiendaDTO tiendaDTO = new TiendaDTO();
         tiendaDTO.setId(tienda.getId());
         tiendaDTO.setNombre(tienda.getNombre());
@@ -50,7 +53,7 @@ public class TiendaDTO {
         tiendaDTO.setDescripcion(tienda.getDescripcion());
         tiendaDTO.setImagen(tienda.getImagen());
         tiendaDTO.setActivo(tienda.isActivo());
-        tiendaDTO.setMercadoDTO(MercadoDTO.convertToDTO(tienda.getMercado()));
+        tiendaDTO.setMercadoDTO(mercadoDTO);
         tiendaDTO.setIdDireccion(tienda.getIdDireccion());
         return tiendaDTO;
     }
