@@ -10,4 +10,6 @@ public interface TiendaService {
     List<TiendaDTO> findAllByMercado(MercadoDTO mercadoDTO);
 
     TiendaDTO findById(TiendaDTO tiendaDTO);
+
+    void save(TiendaDTO tiendaDTO);
 }

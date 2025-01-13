@@ -27,6 +27,8 @@ public class Mercado {
     private String email;
     private String imagen;
     private boolean activo;
+    @Column(name = "iddireccion")
+    private Long idDireccion;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "mercado")
     List<Tienda> listaTiendas;

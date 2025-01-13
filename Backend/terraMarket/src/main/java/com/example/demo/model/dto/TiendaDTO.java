@@ -2,6 +2,9 @@ package com.example.demo.model.dto;
 
 import java.io.Serializable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.example.demo.repository.entity.Tienda;
 
 import lombok.Data;
@@ -9,6 +12,7 @@ import lombok.Data;
 @Data
 public class TiendaDTO implements Serializable {
 
+    private static final Logger log = LoggerFactory.getLogger(TiendaDTO.class);
     private static final long serialVersionUID = 1L;
     private Long id;
     private String nombre;
@@ -59,6 +63,7 @@ public class TiendaDTO implements Serializable {
     }
 
     public static Tienda convertToEntity(TiendaDTO tiendaDTO) {
+        log.info("TiendaDTo - convertToEntity: convirtiendo a entidad");
         Tienda tienda = new Tienda();
         tienda.setId(tiendaDTO.getId());
         tienda.setNombre(tiendaDTO.getNombre());
@@ -66,6 +71,7 @@ public class TiendaDTO implements Serializable {
         tienda.setDescripcion(tiendaDTO.getDescripcion());
         tienda.setImagen(tiendaDTO.getImagen());
         tienda.setActivo(tiendaDTO.isActivo());
+        tienda.setMercado(MercadoDTO.convertToEntity(tiendaDTO.getMercadoDTO()));
         tienda.setIdDireccion(tiendaDTO.getIdDireccion());
         return tienda;
     }

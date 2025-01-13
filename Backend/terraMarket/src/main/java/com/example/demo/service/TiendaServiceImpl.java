@@ -36,6 +36,7 @@ public class TiendaServiceImpl implements TiendaService {
 
     @Override
     public TiendaDTO findById(TiendaDTO tiendaDTO) {
+        log.info("TiendaServiceImpl - findById: Buscar tienda");
         Optional<Tienda> tienda = tiendaRepository.findById(tiendaDTO.getId());
 
         if (tienda.isPresent()) {
@@ -44,6 +45,14 @@ public class TiendaServiceImpl implements TiendaService {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public void save(TiendaDTO tiendaDTO) {
+        log.info("TiendaServiceImpl - save: guardar tienda");
+        Tienda tienda = TiendaDTO.convertToEntity(tiendaDTO);
+
+        tiendaRepository.save(tienda);
     }
 
 }

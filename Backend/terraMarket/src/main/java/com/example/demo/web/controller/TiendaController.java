@@ -13,7 +13,9 @@ import com.example.demo.model.dto.TiendaDTO;
 import com.example.demo.service.MercadoService;
 import com.example.demo.service.TiendaService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class TiendaController {
@@ -74,10 +76,29 @@ public class TiendaController {
 
         TiendaDTO tiendaDTO = new TiendaDTO();
         tiendaDTO.setMercadoDTO(mercadoDTO);
+        tiendaDTO.setIdDireccion(mercadoDTO.getIdDireccion());
 
         ModelAndView mav = new ModelAndView("tiendaform");
         mav.addObject("tiendaDTO", tiendaDTO);
         mav.addObject("add", true);
+        return mav;
+    }
+
+    @PostMapping("/mercados/{idMercado}/tiendas/save")
+    public ModelAndView save(@ModelAttribute("tiendaDTO") TiendaDTO tiendaDTO,
+            @PathVariable("idMercado") Long idMercado) {
+
+        log.info("TiendaController - save: Guardamos la tienda " + tiendaDTO.getId());
+
+        MercadoDTO mercadoDTO = new MercadoDTO();
+        mercadoDTO.setId(idMercado);
+        mercadoService.findById(mercadoDTO);
+
+        tiendaDTO.setMercadoDTO(mercadoDTO);
+
+        tiendaService.save(tiendaDTO);
+
+        ModelAndView mav = new ModelAndView("redirect:/mercados/{idMercado}/tiendas");
         return mav;
     }
 

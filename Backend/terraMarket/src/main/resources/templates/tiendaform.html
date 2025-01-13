@@ -19,6 +19,13 @@
           <td>:</td>
           <td><input type="text" th:field="*{id}" readonly /></td>
         </tr>
+        <tr th:if="${tiendaDTO.mercadoDTO.id}">
+          <td>idMercado</td>
+          <td>:</td>
+          <td>
+            <p th:text="${tiendaDTO.mercadoDTO.id}"></p>
+          </td>
+        </tr>
         <tr>
           <td>Nombre</td>
           <td>:</td>
@@ -29,12 +36,17 @@
           <td>:</td>
           <td><input type="text" th:field="*{descripcion}" /></td>
         </tr>
+        <tr>
+          <td>Direccion</td>
+          <td>:</td>
+          <td><input type="text" th:field="*{idDireccion}" /></td>
+        </tr>
       </table>
       <input type="submit" th:value="${add} ? 'Crear' : 'Actualizar'" />
     </form>
     <br />
     <a
-      th:href="@{/mercados/{idMercado}/tiendas (idMercado=${tiendaDTO.mercadoDTO.id})}"
+      th:href="@{/mercados/{idMercado}/tiendas/ (idMercado=${tiendaDTO.mercadoDTO.id})}"
       >Volver a la lista de tiendas</a
     >
   </body>
