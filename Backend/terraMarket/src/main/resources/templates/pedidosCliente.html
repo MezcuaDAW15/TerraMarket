@@ -11,6 +11,8 @@
 		<br>
 		<h2>Lista pedidos</h2>
         <h2 th:if="${listaPedidosDTO.isEmpty()}">No hay pedidos todavía</h2>
+		<a th:href="@{/clientes/{idCliente}/pedidos/add (idCliente=${clienteDTO.id})}">Realizar pedido</a>
+		<br>
 		<table border="1">
 			<thead>
 				<tr>
