@@ -1,10 +1,9 @@
 package com.example.demo.repository.entity;
 
-
+import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -27,11 +26,16 @@ public class CategoriaP {
     private String nombre;
     private String descripcion;
 
-    @OneToMany(mappedBy = "categoriaP", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "categoriaP", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Producto> productos;
-    
+
     @ManyToOne
-    @JoinColumn(name = "idcategoria_tienda")
-    private CategoriaT categoriaT; 
+    @JoinColumn(name = "id_categoria_tienda")
+    private CategoriaT categoriaT;
+
+    public CategoriaP() {
+        super();
+        this.productos = new HashSet<>();
+    }
 
 }
