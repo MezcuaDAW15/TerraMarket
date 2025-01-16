@@ -254,3 +254,6 @@ CREATE TABLE `terramarket_v0`.`valoraciones` (
     REFERENCES `terramarket_v0`.`clientes` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE);
+    
+    ALTER TABLE `terramarket_v0`.`punto_recogoida` 
+RENAME TO  `terramarket_v0`.`punto_recogida` ;
