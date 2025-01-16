@@ -71,5 +71,16 @@ public class PedidoServiceImpl implements PedidoService{
 		return listaMPDTO;
 
 	}
+	/* 
+	@Override
+	public void save(PedidoDTO pedidoDTO) {
+		
+		log.info(PedidoServiceImpl.class.getSimpleName() + " - save: guardando direccion ");
 
+		ClienteDireccion cd = new ClienteDireccion();
+		cd = ClienteDireccionDTO.convertToEntity(cdDTO);
+		
+		clienteDireccionRepository.save(cd);
+	}
+	*/
 }
