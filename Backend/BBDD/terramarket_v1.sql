@@ -217,7 +217,7 @@ ADD CONSTRAINT `FG_CATEGORIA_CATEGORIA1`
   ON DELETE NO ACTION
   ON UPDATE NO ACTION,
 ADD CONSTRAINT `FG_CATEGORIA_TIENDA1`
-  FOREIGN KEY (`id`)
+  FOREIGN KEY (`id_tienda`)
   REFERENCES `terramarket_v1`.`tiendas` (`id`)
   ON DELETE CASCADE
   ON UPDATE CASCADE;
@@ -277,4 +277,14 @@ ADD CONSTRAINT `FG_VENTA_TIENDA1`
   FOREIGN KEY (`idtienda`)
   REFERENCES `terramarket_v1`.`tiendas` (`id`)
   ON DELETE CASCADE
+  ON UPDATE CASCADE;
+ALTER TABLE `terramarket_v1`.`productos` 
+CHANGE COLUMN `idcategoria` `idcategoria` INT NULL ,
+ADD INDEX `FG_PRODUCTO_CATEGORIA1_idx` (`idcategoria` ASC) VISIBLE;
+;
+ALTER TABLE `terramarket_v1`.`productos` 
+ADD CONSTRAINT `FG_PRODUCTO_CATEGORIA1`
+  FOREIGN KEY (`idcategoria`)
+  REFERENCES `terramarket_v1`.`categorias_producto` (`id`)
+  ON DELETE SET NULL
   ON UPDATE CASCADE;
