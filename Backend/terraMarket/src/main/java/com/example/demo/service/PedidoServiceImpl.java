@@ -17,7 +17,6 @@ import com.example.demo.repository.dao.PuntoRecogidaRepository;
 import com.example.demo.repository.entity.MetodoPago;
 import com.example.demo.repository.entity.Pedido;
 import com.example.demo.repository.entity.PuntoRecogida;
-import com.example.demo.web.controller.ClienteController;
 
 @Service
 public class PedidoServiceImpl implements PedidoService{

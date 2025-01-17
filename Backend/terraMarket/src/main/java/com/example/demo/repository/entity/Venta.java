@@ -1,5 +1,6 @@
 package com.example.demo.repository.entity;
 
+import java.util.Date;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -9,8 +10,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -18,27 +17,28 @@ import lombok.ToString;
 
 @Data
 @Entity
-@Table(name = "tiendas")
-public class Tienda {
+@Table(name="ventas")
+public class Venta {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre;
-    private String logo;
+    @Column(name = "idproducto")
+    private Producto producto;
+    @Column(name = "idtienda")
+    private Tienda tienda;
     private String descripcion;
-    private String imagen;
+    @Column(name = "fecha_venta")
+    private Date fechaVenta;
+    private double stock;
+    private double precioVenta;
+    private double precioKg;
+    private double descuento;
     private boolean activo;
 
-    @ManyToOne
-    @JoinColumn(name = "idmercado")
-    private Mercado mercado;
-
-    @Column(name = "iddireccion")
-    private Direccion direccion;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tienda")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "venta")
     @ToString.Exclude
-    private Set<Venta> listaVentas;
+    private Set<LineaPedido> listaLineasPedido;
 
     @Override
     public boolean equals(Object obj) {
@@ -48,7 +48,7 @@ public class Tienda {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Tienda other = (Tienda) obj;
+        Venta other = (Venta) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -65,4 +65,5 @@ public class Tienda {
         return result;
     }
 
+    
 }

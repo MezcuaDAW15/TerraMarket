@@ -28,7 +28,7 @@ public class Mercado {
     private String imagen;
     private boolean activo;
     @Column(name = "iddireccion")
-    private Long idDireccion;
+    private Direccion direccion;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "mercado")
     List<Tienda> listaTiendas;
