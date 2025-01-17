@@ -1,67 +1,36 @@
 package com.example.demo.repository.entity;
 
-import java.util.Date;
-
-import jakarta.persistence.Column;
+import java.util.Set;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.ToString;
 
 @Data
 @Entity
-@Table(name="pedidos")
-public class Pedido {
-    
+@Table(name="punto_recogida")
+public class PuntoRecogida {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    private Long id;
 
     @ManyToOne
-	@JoinColumn(name = "idcliente")
+    @JoinColumn(name = "iddireccion")
     @ToString.Exclude
-	private Cliente cliente;
-    
-    @ManyToOne
-	@JoinColumn(name = "idpago")
+    private Direccion direccion;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "puntoRecogida")
     @ToString.Exclude
-    private MetodoPago metodoPago;
-
-    @ManyToOne
-	@JoinColumn(name = "idpr")
-    private PuntoRecogida puntoRecogida;
-
-    @Column(name = "fecha_pedido")
-    private Date fechaPedido;
-
-    @Column(name = "fecha_compra")
-    private Date fechaCompra;
-
-    @Column(name = "fecha_entrega")
-    private Date fechaEntrega;
-
-    @Column(name = "fecha_max_recogida")
-    private Date fechaMaxRecogida;
-
-    @Column(name = "fecha_factura")
-    private Date fechaFactura;
-
-    @Column(name = "num_factura")
-    private Long numFactura;
-
-    @ManyToOne
-	@JoinColumn(name = "estado")
-    @ToString.Exclude
-    private EstadoPedido estado;
-
-    private float importe;
-
-    // lista de linea pedido - relacion N a N con atributos
+    private Set<Pedido> listaPedidos;
 
     @Override
     public boolean equals(Object obj) {
@@ -71,7 +40,7 @@ public class Pedido {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Pedido other = (Pedido) obj;
+        PuntoRecogida other = (PuntoRecogida) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -79,6 +48,7 @@ public class Pedido {
             return false;
         return true;
     }
+
     @Override
     public int hashCode() {
         final int prime = 31;

@@ -85,11 +85,11 @@ CREATE TABLE `clientes` (
   `username` varchar(45) NOT NULL,
   `fechanacimiento` date NOT NULL,
   `email` varchar(200) NOT NULL,
-  `contrasena` varchar(100) NOT NULL,
+  `contraseña` varchar(100) NOT NULL,
   `cp` char(5) NOT NULL,
   `activo` tinyint NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +98,6 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (1,'Juan','Pérez García','juanpe','1985-05-15','juan@example.com','1234','28001',1),(2,'María','López Fernández','marialf','1990-10-20','maria@example.com','5678','08001',1);
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,7 +122,7 @@ CREATE TABLE `direcciones` (
   `es_tienda` tinyint NOT NULL,
   `es_pr` tinyint NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +131,6 @@ CREATE TABLE `direcciones` (
 
 LOCK TABLES `direcciones` WRITE;
 /*!40000 ALTER TABLE `direcciones` DISABLE KEYS */;
-INSERT INTO `direcciones` VALUES (1,'España','Madrid','Madrid','28001','Calle Mayor','10','B','2',1,0,0),(2,'España','Barcelona','Barcelona','08001','Passeig de Gràcia','5',NULL,NULL,1,0,0),(3,'España','Valencia','Valencia','46001','Avenida del Oeste','20',NULL,'1',0,1,0),(4,'España','Sevilla','Sevilla','41001','Calle Sierpes','15',NULL,NULL,0,1,0),(5,'España','Madrid','Madrid','28002','Calle Serrano','50',NULL,NULL,0,0,1);
 /*!40000 ALTER TABLE `direcciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,7 +228,7 @@ CREATE TABLE `metodos_pago` (
   `nombre` varchar(100) NOT NULL,
   `descripcion` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -239,7 +237,6 @@ CREATE TABLE `metodos_pago` (
 
 LOCK TABLES `metodos_pago` WRITE;
 /*!40000 ALTER TABLE `metodos_pago` DISABLE KEYS */;
-INSERT INTO `metodos_pago` VALUES (1,'Tarjeta de Crédito','Paga con tu tarjeta de crédito habitual'),(2,'Paypal','Paga cómodamente con tu cuenta de Paypal');
 /*!40000 ALTER TABLE `metodos_pago` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -272,7 +269,7 @@ CREATE TABLE `pedidos` (
   CONSTRAINT `FG_PEDIDO_ESTADO1` FOREIGN KEY (`estado`) REFERENCES `estados_pedido` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FG_PEDIDO_PAGO1` FOREIGN KEY (`idpago`) REFERENCES `metodos_pago` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FG_PEDIDO_PR1` FOREIGN KEY (`idpr`) REFERENCES `punto_recogoida` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -281,7 +278,6 @@ CREATE TABLE `pedidos` (
 
 LOCK TABLES `pedidos` WRITE;
 /*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
-INSERT INTO `pedidos` VALUES (1,1,1,1,'2024-12-16 12:36:13','2024-12-16 12:36:13',NULL,NULL,NULL,NULL,NULL,25.5);
 /*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -326,7 +322,7 @@ CREATE TABLE `punto_recogoida` (
   PRIMARY KEY (`id`),
   KEY `FG_PR_DIRECCION1_idx` (`iddireccion`),
   CONSTRAINT `FG_PR_DIRECCION1` FOREIGN KEY (`iddireccion`) REFERENCES `direcciones` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -335,7 +331,6 @@ CREATE TABLE `punto_recogoida` (
 
 LOCK TABLES `punto_recogoida` WRITE;
 /*!40000 ALTER TABLE `punto_recogoida` DISABLE KEYS */;
-INSERT INTO `punto_recogoida` VALUES (1,5,'Punto de Recogida Madrid Centro');
 /*!40000 ALTER TABLE `punto_recogoida` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -496,6 +491,14 @@ LOCK TABLES `ventas` WRITE;
 /*!40000 ALTER TABLE `ventas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ventas` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'terramarket_v1'
+--
+
+--
+-- Dumping routines for database 'terramarket_v1'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -506,4 +509,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-17  9:37:01
+-- Dump completed on 2025-01-16 13:00:06
