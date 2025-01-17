@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.example.demo.repository.entity.Cliente;
 import lombok.Data;
 import lombok.ToString;
@@ -19,7 +21,8 @@ public class ClienteDTO implements Serializable{
     private String nombre;
     private String apellidos;
     private String username;
-    private Date fechaNacimiento;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "yyyy-MM-dd")
+	private Date fechaNacimiento;
     private String email;
     private String contrasena;
     private String cp;
@@ -36,18 +39,10 @@ public class ClienteDTO implements Serializable{
 		clienteDTO.setUsername(cliente.getUsername());
 		clienteDTO.setEmail(cliente.getEmail());
         clienteDTO.setContrasena(cliente.getContrasena());
+		clienteDTO.setFechaNacimiento(cliente.getFechaNacimiento());
 		clienteDTO.setCp(cliente.getCp());
         clienteDTO.setActivo(cliente.isActivo());
 		
-		/*
-		// Convertimos la lista de pedidos
-		List<Pedido> listaPedidos = new ArrayList<Pedido>(cliente.getListaPedidos());
-
-		for (int i = 0; i < listaPedidos.size(); i++) {
-			PedidoDTO pedidoDTO = PedidoDTO.convertToDTO(listaPedidos.get(i), clienteDTO);
-			clienteDTO.getListaPedidos().add(pedidoDTO);
-		}
-		 */
 		log.info(ClienteDTO.class.getSimpleName() + " - convertToDTO() cliente lista pedidos " + cliente.toString());
 
         return clienteDTO;
@@ -63,15 +58,10 @@ public class ClienteDTO implements Serializable{
 		cliente.setUsername(clienteDTO.getUsername());
 		cliente.setEmail(clienteDTO.getEmail());
         cliente.setContrasena(clienteDTO.getContrasena());
+		cliente.setFechaNacimiento(clienteDTO.getFechaNacimiento());
 		cliente.setCp(clienteDTO.getCp());
         cliente.setActivo(clienteDTO.isActivo());
-		/* 
-		// Cargamos la lista de cuentas
-		for (int i = 0; i < clienteDTO.getListaPedidos().size(); i++) {
-			Pedido pedido = PedidoDTO.convertToEntity(clienteDTO.getListaPedidos().get(i));
-			cliente.getListaPedidos().add(pedido);
-		}
-		*/
+		
 		return cliente;
 	}
 }

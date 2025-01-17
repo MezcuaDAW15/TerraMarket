@@ -3,6 +3,8 @@ package com.example.demo.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.model.dto.ClienteDTO;
@@ -15,9 +17,12 @@ import com.example.demo.repository.dao.PuntoRecogidaRepository;
 import com.example.demo.repository.entity.MetodoPago;
 import com.example.demo.repository.entity.Pedido;
 import com.example.demo.repository.entity.PuntoRecogida;
+import com.example.demo.web.controller.ClienteController;
 
 @Service
 public class PedidoServiceImpl implements PedidoService{
+
+	private static final Logger log = LoggerFactory.getLogger(PedidoServiceImpl.class);
 
     @Autowired
     PedidoRepository pedidoRepository;
@@ -29,13 +34,13 @@ public class PedidoServiceImpl implements PedidoService{
     @Override
     public List<PedidoDTO> findAllByCliente(ClienteDTO clienteDTO) {
         // buscamos la lista en el repositorio
-		List<Pedido> listaCuentas = pedidoRepository.findAllByCliente(clienteDTO.getId());
-		
+		List<Pedido> listaPedidos = pedidoRepository.findAllByCliente(clienteDTO.getId());
+		log.info(PedidoServiceImpl.class.getSimpleName() + " - lista pedidos: " + listaPedidos);
 		// la pasamos a dto
 		List <PedidoDTO> listaPedidosDTO = new ArrayList<PedidoDTO>();
 		
-		for(int i = 0; i < listaCuentas.size(); ++i) {
-			listaPedidosDTO.add(PedidoDTO.convertToDTO(listaCuentas.get(i), clienteDTO));
+		for(int i = 0; i < listaPedidos.size(); ++i) {
+			listaPedidosDTO.add(PedidoDTO.convertToDTO(listaPedidos.get(i), clienteDTO));
 		}
 		
 		return listaPedidosDTO;

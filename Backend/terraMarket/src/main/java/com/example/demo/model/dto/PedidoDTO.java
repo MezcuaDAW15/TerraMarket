@@ -61,7 +61,7 @@ public class PedidoDTO implements Serializable{
         pedidoDTO.setFechaEntrega(pedido.getFechaMaxRecogida());
         pedidoDTO.setNumFactura(pedido.getNumFactura());
         pedidoDTO.setImporte(pedido.getImporte());
-
+    
         pedidoDTO.setMetodoPago(MetodoPagoDTO.convertToDTO(pedido.getMetodoPago()));
         pedidoDTO.setEstado(EstadoPedidoDTO.convertToDTO(pedido.getEstado()));
         pedidoDTO.setPuntoRecogidaDTO(PuntoRecogidaDTO.convertToDTO(pedido.getPuntoRecogida()));

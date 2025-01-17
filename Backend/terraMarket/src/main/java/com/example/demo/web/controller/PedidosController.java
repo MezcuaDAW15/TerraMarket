@@ -42,7 +42,7 @@ public class PedidosController {
 		
 		// buscar cuentas del cliente en el servicio
 		List<PedidoDTO> listaPedidosDTO = pedidoService.findAllByCliente(clienteDTO);
-		log.info(PedidosController.class.getSimpleName() + " -findAll() Lista pedidos" + clienteDTO.getNombre());
+		log.info(PedidosController.class.getSimpleName() + " -findAll() Lista pedidos" + clienteDTO.getListaPedidos());
 		
 		ModelAndView mav = new ModelAndView("pedidosCliente");
 		mav.addObject("listaPedidosDTO", listaPedidosDTO);
