@@ -29,6 +29,7 @@ public class Mercado {
     private String email;
     private String imagen;
     private boolean activo;
+
     
     @ManyToOne
     @JoinColumn(name = "iddireccion")

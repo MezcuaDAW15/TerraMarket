@@ -31,7 +31,7 @@
                     th:text="${prDTO.id} +' '+ ${prDTO.direccionDTO}">
             </option>
         </select>
-		<input type="submit" th:value="'Realizar pedido'" />		
+		<input type="submit" th:value="'Realizar pedido'" />
 	</form>
 	<br>
 	<a th:href="@{/clientes/{idCliente}/pedidos(idCliente=${clienteDTO.id})}">Volver a Pedidos</a>

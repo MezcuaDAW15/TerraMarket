@@ -22,11 +22,15 @@ public class Producto {
     private Long id;
     private String nombre;
     private String imagen;
+
+  
     
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "producto")
     @ToString.Exclude
     private Set<Venta> listaVentas;
     
+
+  
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

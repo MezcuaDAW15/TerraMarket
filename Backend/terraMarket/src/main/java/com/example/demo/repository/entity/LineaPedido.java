@@ -21,7 +21,7 @@ public class LineaPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @ManyToOne
 	@JoinColumn(name = "idventa")
     @ToString.Exclude
@@ -35,7 +35,6 @@ public class LineaPedido {
     private int cantidad;
     private Date fecha;
 
-    
 
     
 }
