@@ -33,36 +33,13 @@ public class Tienda {
     @JoinColumn(name = "idmercado")
     private Mercado mercado;
 
-    @Column(name = "iddireccion")
+    @ManyToOne
+    @JoinColumn(name = "iddireccion")
     private Direccion direccion;
-
+    
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tienda")
     @ToString.Exclude
     private Set<Venta> listaVentas;
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Tienda other = (Tienda) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
 
 }

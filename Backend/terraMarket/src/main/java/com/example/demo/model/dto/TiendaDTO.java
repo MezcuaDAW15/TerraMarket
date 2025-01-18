@@ -22,7 +22,10 @@ public class TiendaDTO implements Serializable {
     private boolean activo;
     private MercadoDTO mercadoDTO;
 
+
+
     private DireccionDTO direccionDTO;
+
 
     @Override
     public boolean equals(Object obj) {
@@ -58,7 +61,9 @@ public class TiendaDTO implements Serializable {
         tiendaDTO.setImagen(tienda.getImagen());
         tiendaDTO.setActivo(tienda.isActivo());
         tiendaDTO.setMercadoDTO(mercadoDTO);
-        tiendaDTO.setDireccionDTO(DireccionDTO.convertToDTO(tienda.getDireccion()));
+
+        //tiendaDTO.setDireccion(tienda.getDireccion());
+
         return tiendaDTO;
     }
 
@@ -72,7 +77,9 @@ public class TiendaDTO implements Serializable {
         tienda.setImagen(tiendaDTO.getImagen());
         tienda.setActivo(tiendaDTO.isActivo());
         tienda.setMercado(MercadoDTO.convertToEntity(tiendaDTO.getMercadoDTO()));
-        tienda.setDireccion(DireccionDTO.convertToEntity(tiendaDTO.getDireccionDTO()));
+
+        //tienda.setDireccion(tiendaDTO.getDireccion());
+
         return tienda;
     }
 

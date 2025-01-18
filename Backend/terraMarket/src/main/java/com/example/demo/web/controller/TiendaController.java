@@ -75,7 +75,9 @@ public class TiendaController {
 
         TiendaDTO tiendaDTO = new TiendaDTO();
         tiendaDTO.setMercadoDTO(mercadoDTO);
-        tiendaDTO.setDireccionDTO(mercadoDTO.getDireccionDTO());
+
+        //tiendaDTO.setIdDireccion(mercadoDTO.getIdDireccion());
+
 
         ModelAndView mav = new ModelAndView("tiendaform");
         mav.addObject("tiendaDTO", tiendaDTO);

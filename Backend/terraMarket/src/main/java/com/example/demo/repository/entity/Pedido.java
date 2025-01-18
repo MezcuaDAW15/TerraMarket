@@ -67,7 +67,11 @@ public class Pedido {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pedido")
     @ToString.Exclude
-    private Set<LineaPedido> listaLineasPedido;
+
+      
+    private Set<LineaPedido> listaLineaPedido;
+
+  
 
     @Override
     public boolean equals(Object obj) {
