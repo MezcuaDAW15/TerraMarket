@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 	<meta charset="UTF-8">
@@ -7,7 +7,9 @@
 </head>
 
 <body>
+	
 	<div>
+		
 		<br>
 		<h2>Lista pedidos</h2>
         <h2 th:if="${listaPedidosDTO.isEmpty()}">No hay pedidos todavía</h2>

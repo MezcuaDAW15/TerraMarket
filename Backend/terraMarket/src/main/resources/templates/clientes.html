@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org">
+<html xmlns="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>Mantenimiento de clientes</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link th:href="@{/style/style.css}" rel="stylesheet"/>
+		
 	</head>
     <body>
-		<header>
+		
+		<header th:insert="~{fragments/header.html}">
 			<h3 th:text="${asignatura}"></h3>	
             <div id="nombre">
                 <p th:text="${nombreAlumno}"></p>
