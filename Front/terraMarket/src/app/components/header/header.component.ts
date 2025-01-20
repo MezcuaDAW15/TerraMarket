@@ -8,10 +8,12 @@ import { BadgeModule } from 'primeng/badge';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
 import { RippleModule } from 'primeng/ripple';
+import { SidebarComponent } from "../sidebar/sidebar.component";
+import { MarketSelectorComponent } from "../market-selector/market-selector.component";
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonModule, MenubarModule, BadgeModule, AvatarModule, InputTextModule, RippleModule, CommonModule],
+  imports: [ButtonModule, MenubarModule, BadgeModule, AvatarModule, InputTextModule, RippleModule, CommonModule, SidebarComponent, MarketSelectorComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

@@ -1,0 +1,18 @@
+<p>market-selector works!</p>
+<div style="padding: 8px; background: #FFC6AE; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
+  <div>
+  </div>
+  <span class="material-symbols-outlined">
+    file_map
+    </span>
+  <div style="color: black; font-size: 16px; font-family: Parkinsans; font-weight: 500; line-height: 24px; letter-spacing: 0.50px; word-wrap: break-word">Mercat Central de València</div>
+</div>
+
+
+
+<p-dropdown
+    [options]="markets"
+    [(ngModel)]="selectedMarket"
+    placeholder="Select a City"
+    [editable]="true"
+    optionLabel="name" />
