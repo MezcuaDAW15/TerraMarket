@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.demo.repository.entity.Mercado;
+import com.example.demo.repository.entity.Tienda;
+
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 public class MercadoDTO implements Serializable {
@@ -18,6 +21,7 @@ public class MercadoDTO implements Serializable {
     private String imagen;
     private boolean activo;
     private DireccionDTO direccionDTO;
+    @ToString.Exclude
     List<TiendaDTO> listaTiendasDTO;
 
     @Override
@@ -54,9 +58,7 @@ public class MercadoDTO implements Serializable {
         mercadoDTO.setEmail(mercado.getEmail());
         mercadoDTO.setImagen(mercado.getImagen());
         mercadoDTO.setActivo(mercado.isActivo());
-
-        //mercadoDTO.setIdDireccion(mercado.getIdDireccion());
-
+        mercadoDTO.setDireccionDTO(DireccionDTO.convertToDTO(mercado.getDireccion()));
 
         List<TiendaDTO> listaTDTO = new ArrayList<TiendaDTO>();
         mercado.getListaTiendas().forEach(tienda -> {
@@ -76,8 +78,12 @@ public class MercadoDTO implements Serializable {
         mercado.setEmail(mercadoDTO.getEmail());
         mercado.setImagen(mercadoDTO.getImagen());
         mercado.setActivo(mercadoDTO.isActivo());
+        mercado.setDireccion(DireccionDTO.convertToEntity(mercadoDTO.getDireccionDTO()));
 
-        //mercado.setIdDireccion(mercadoDTO.getIdDireccion());
+        List<Tienda> listaTiendas = new ArrayList<Tienda>();
+        mercadoDTO.getListaTiendasDTO().forEach(tiendaDTO -> {
+            listaTiendas.add(TiendaDTO.convertToEntity(tiendaDTO, mercado));
+        });
 
         return mercado;
     }

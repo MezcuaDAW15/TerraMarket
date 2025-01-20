@@ -27,6 +27,7 @@ public class TiendaController {
     @Autowired
     MercadoService mercadoService;
 
+    // Listar
     @GetMapping("/mercados/{idMercado}/tiendas")
     public ModelAndView findAllByMercado(@PathVariable("idMercado") Long idMercado) {
         log.info("TiendaController - findAllByMercado: Lista de todos las tiendas por mercado");
@@ -46,6 +47,7 @@ public class TiendaController {
         return mav;
     }
 
+    // Ver tienda
     @GetMapping("/mercados/{idMercado}/tiendas/{idTienda}")
     public ModelAndView findById(@PathVariable("idMercado") Long idMercado, @PathVariable("idTienda") Long idTienda) {
         log.info("TiendaController - findById: Muestra la tienda por id");
@@ -65,19 +67,18 @@ public class TiendaController {
         return mav;
     }
 
+    // Agregar Tienda
     @GetMapping("/mercados/{idMercado}/tiendas/add")
     public ModelAndView add(@PathVariable("idMercado") Long idMercado) {
-        log.info("TiendaController - findById: Muestra la tienda por id");
+        log.info("TiendaController - add: Muestra la tienda por id");
 
         MercadoDTO mercadoDTO = new MercadoDTO();
         mercadoDTO.setId(idMercado);
-        mercadoService.findById(mercadoDTO);
+        mercadoDTO = mercadoService.findById(mercadoDTO);
 
         TiendaDTO tiendaDTO = new TiendaDTO();
         tiendaDTO.setMercadoDTO(mercadoDTO);
-
-        //tiendaDTO.setIdDireccion(mercadoDTO.getIdDireccion());
-
+        tiendaDTO.setDireccionDTO(tiendaDTO.getMercadoDTO().getDireccionDTO());
 
         ModelAndView mav = new ModelAndView("tiendaform");
         mav.addObject("tiendaDTO", tiendaDTO);
@@ -85,22 +86,34 @@ public class TiendaController {
         return mav;
     }
 
+    // Guardar Tienda
     @PostMapping("/mercados/{idMercado}/tiendas/save")
     public ModelAndView save(@ModelAttribute("tiendaDTO") TiendaDTO tiendaDTO,
             @PathVariable("idMercado") Long idMercado) {
 
         log.info("TiendaController - save: Guardamos la tienda " + tiendaDTO.getId());
 
-        MercadoDTO mercadoDTO = new MercadoDTO();
-        mercadoDTO.setId(idMercado);
-        mercadoService.findById(mercadoDTO);
-
-        tiendaDTO.setMercadoDTO(mercadoDTO);
-
+        tiendaDTO.setMercadoDTO(mercadoService.findById(tiendaDTO.getMercadoDTO()));
         tiendaService.save(tiendaDTO);
 
         ModelAndView mav = new ModelAndView("redirect:/mercados/{idMercado}/tiendas");
         return mav;
     }
 
+    // Modificar Tienda
+    /*
+     * @GetMapping("/mercados/{idMercado}/tiendas/{idTienda}/update")
+     * public ModelAndView update(@PathVariable("idMercado") Long
+     * idMercado, @PathVariable("idTienda") Long idTienda) {
+     * log.info("TiendaController - update: Modificando Tienda");
+     * 
+     * TiendaDTO tiendaDTO = new TiendaDTO();
+     * tiendaDTO = tiendaService.findById(tiendaDTO);
+     * 
+     * ModelAndView mav = new ModelAndView("tiendaform");
+     * mav.addObject("tiendaDTO", tiendaDTO);
+     * mav.addObject("add", true);
+     * return mav;
+     * }
+     */
 }

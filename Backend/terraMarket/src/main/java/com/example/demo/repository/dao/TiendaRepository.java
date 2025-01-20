@@ -13,8 +13,8 @@ import jakarta.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface TiendaRepository extends JpaRepository<Tienda,Long>{
+public interface TiendaRepository extends JpaRepository<Tienda, Long> {
 
-    @Query(value="SELECT * FROM tiendas WHERE idmercado = :codigoMercado", nativeQuery = true)
-	List<Tienda> findAllByMercado(@Param("codigoMercado") Long idMercado);
+    @Query(value = "SELECT * FROM tiendas WHERE idmercado = :codigoMercado", nativeQuery = true)
+    List<Tienda> findAllByMercado(@Param("codigoMercado") Long idMercado);
 }
