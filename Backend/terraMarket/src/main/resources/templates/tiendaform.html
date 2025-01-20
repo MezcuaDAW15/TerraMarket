@@ -61,6 +61,13 @@
                         />
                     </td>
                 </tr>
+                <tr>
+                    <td>Activo</td>
+                    <td>:</td>
+                    <td>
+                        <input type="checkbox" th:field="*{activo}" />
+                    </td>
+                </tr>
             </table>
             <input type="submit" th:value="${add} ? 'Crear' : 'Actualizar'" />
         </form>

@@ -83,6 +83,7 @@ public class TiendaController {
         TiendaDTO tiendaDTO = new TiendaDTO();
         tiendaDTO.setMercadoDTO(mercadoDTO);
         tiendaDTO.setDireccionDTO(tiendaDTO.getMercadoDTO().getDireccionDTO()); // ! Esto se deberia poder seleccionar
+        tiendaDTO.setActivo(true);
 
         ModelAndView mav = new ModelAndView("tiendaform");
         mav.addObject("tiendaDTO", tiendaDTO);
@@ -107,19 +108,19 @@ public class TiendaController {
     }
 
     // Modificar Tienda
-    /*
-     * @GetMapping("/mercados/{idMercado}/tiendas/{idTienda}/update")
-     * public ModelAndView update(@PathVariable("idMercado") Long
-     * idMercado, @PathVariable("idTienda") Long idTienda) {
-     * log.info("TiendaController - update: Modificando Tienda");
-     * 
-     * TiendaDTO tiendaDTO = new TiendaDTO();
-     * tiendaDTO = tiendaService.findById(tiendaDTO);
-     * 
-     * ModelAndView mav = new ModelAndView("tiendaform");
-     * mav.addObject("tiendaDTO", tiendaDTO);
-     * mav.addObject("add", true);
-     * return mav;
-     * }
-     */
+
+    @GetMapping("/mercados/{idMercado}/tiendas/{idTienda}/update")
+    public ModelAndView update(@PathVariable("idMercado") Long idMercado, @PathVariable("idTienda") Long idTienda) {
+        log.info("TiendaController - update: Modificando Tienda");
+
+        TiendaDTO tiendaDTO = new TiendaDTO();
+        tiendaDTO.setId(idTienda);
+        tiendaDTO = tiendaService.findById(tiendaDTO);
+
+        ModelAndView mav = new ModelAndView("tiendaform");
+        mav.addObject("tiendaDTO", tiendaDTO);
+        mav.addObject("add", false);
+        return mav;
+    }
+
 }

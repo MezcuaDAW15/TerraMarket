@@ -38,7 +38,10 @@
         </div>
         <br />
         <div>
-            <a th:href="@{/mercados}">Volver</a>
+            <a
+                th:href="@{/mercados/{idMercado}/tiendas (idMercado=${tiendaDTO.mercadoDTO.id})}"
+                >Volver</a
+            >
         </div>
     </body>
 </html>
