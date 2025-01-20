@@ -1,6 +1,10 @@
 package com.example.demo.repository.entity;
 
 import java.util.Date;
+import java.util.List;
+
+import com.example.demo.model.dto.LineaPedidoDTO;
+import com.example.demo.model.dto.PedidoDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,7 +38,6 @@ public class LineaPedido {
     
     private int cantidad;
     private Date fecha;
-
-
+	
     
 }

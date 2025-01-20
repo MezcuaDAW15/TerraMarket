@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.model.dto.ClienteDTO;
+import com.example.demo.model.dto.LineaPedidoDTO;
 import com.example.demo.model.dto.MetodoPagoDTO;
 import com.example.demo.model.dto.PedidoDTO;
 import com.example.demo.model.dto.PuntoRecogidaDTO;
 import com.example.demo.service.ClienteService;
+import com.example.demo.service.LineaPedidoService;
 import com.example.demo.service.PedidoService;
 
 @Controller
@@ -28,6 +30,9 @@ public class PedidosController {
 
 	@Autowired
 	PedidoService pedidoService;
+
+	@Autowired
+	LineaPedidoService lineaPedidoService;
 
     @GetMapping("/clientes/{idCliente}/pedidos")
 	public ModelAndView findAll(@PathVariable("idCliente") Long idCliente) {
@@ -44,6 +49,32 @@ public class PedidosController {
 		ModelAndView mav = new ModelAndView("pedidosCliente");
 		mav.addObject("listaPedidosDTO", listaPedidosDTO);
 		mav.addObject("clienteDTO", clienteDTO);
+		
+		return mav;
+	}
+
+	@GetMapping("/clientes/{idCliente}/pedidos/{idPedido}")
+	public ModelAndView view(@PathVariable("idCliente") Long idCliente, @PathVariable("idPedido") Long idPedido) {
+		
+		// recuperar el cliente
+		ClienteDTO clienteDTO = new ClienteDTO();
+		clienteDTO.setId(idCliente);
+		clienteDTO = clienteService.findById(clienteDTO);
+		
+		// recuperar el pedido
+		PedidoDTO pedidoDTO = new PedidoDTO();
+		pedidoDTO.setId(idPedido);
+		pedidoDTO = pedidoService.findById(pedidoDTO, clienteDTO);
+
+		pedidoDTO.setClienteDTO(clienteDTO);
+
+		// recuperar lineas del pedido
+		List<LineaPedidoDTO>listaLineasPedidoDTO = lineaPedidoService.findAllByPedido(pedidoDTO);
+		
+		ModelAndView mav = new ModelAndView("pedidosCliente");
+		mav.addObject("listaLineasPedidoDTO", listaLineasPedidoDTO);
+		mav.addObject("clienteDTO", clienteDTO);
+		mav.addObject("pedidoDTO", pedidoDTO);
 		
 		return mav;
 	}

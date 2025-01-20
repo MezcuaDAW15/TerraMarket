@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Visualizar pedido</title>
+</head>
+
+<body>
+	<h1>Detalles de tu pedido</h1>
+	<br>
+	<table border="0">
+		<tr>
+			<td>Número de pedido</td>
+			<td>:</td>
+			<td th:text="${pedidoDTO.id}"></td>
+		</tr>
+		<tr>
+			<td>Método de pago</td>
+			<td>:</td>
+			<td th:text="${pedidoDTO.pedidoDTO.metodoPago.nombre}"></td>
+		</tr>
+		<tr>
+			<td>Punto de recogida</td>
+			<td>:</td>
+			<td th:text="${pedidoDTO.puntoRecogidaDTO}"></td>
+		</tr>
+        <tr>
+			<td>Fecha de la compra</td>
+			<td>:</td>
+			<td th:text="${pedidoDTO.fechaPedido}"></td>
+		</tr>
+        <tr>
+			<td>Disponible para recoger hasta el</td>
+			<td>:</td>
+			<td th:text="${pedidoDTO.fechaMaxRecogida}"></td>
+		</tr>
+        <tr>
+			<td>Fecha de la factura</td>
+			<td>:</td>
+			<td th:text="${pedidoDTO.fechaFactura}"></td>
+		</tr>
+        <tr>
+			<td>Número de la factura</td>
+			<td>:</td>
+			<td th:text="${pedidoDTO.numFactura}"></td>
+		</tr>
+        <tr>
+			<td>Estado del pedido</td>
+			<td>:</td>
+			<td th:text="${pedidoDTO.estado.estado}"></td>
+		</tr>
+        <tr>
+			<td>Total importe</td>
+			<td>:</td>
+			<td th:text="${pedidoDTO.importe}"></td>
+		</tr>
+	</table>
+    <br>
+    <h2>Lista de productos del pedido</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <td>id Linea pedido</td>
+                <td>id Venta</td>
+                <td>Cantidad</td>
+                <td>Producto</td>
+                <td>Imagen</td>
+                <td>Precio venta</td>
+                <td>-</td>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="lineaPedidoDTO : ${listaLineasPedidoDTO}">
+                
+                <td th:text="${lineaPedidoDTO.id}"></td>
+                <td th:text="${lineaPedidoDTO.venta.id}"></td>
+                <td th:text="${lineaPedidoDTO.cantidad}"></td>
+                <td th:text="${lineaPedidoDTO.venta.nombre}"></td>
+                <td th:text="${lineaPedidoDTO.venta.imagen}"></td>
+                <td th:text="${lineaPedidoDTO.venta.imagen}"></td>
+            </tr>
+        </tbody>
+    </table>
+	<br>
+	<br>
+	<a th:href="@{/cliente/{idCliente}/pedidos}">Volver a la lista de pedidos</a>
+</body>
+
+</html>
