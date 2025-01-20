@@ -55,7 +55,6 @@ public class TiendaServiceImpl implements TiendaService {
     public void save(TiendaDTO tiendaDTO) {
         log.info("TiendaServiceImpl - save: guardar tienda");
         Mercado mercado = MercadoDTO.convertToEntity(tiendaDTO.getMercadoDTO());
-        tiendaDTO.setDireccionDTO(tiendaDTO.getMercadoDTO().getDireccionDTO());
         Tienda tienda = TiendaDTO.convertToEntity(tiendaDTO, mercado);
 
         tiendaRepository.save(tienda);

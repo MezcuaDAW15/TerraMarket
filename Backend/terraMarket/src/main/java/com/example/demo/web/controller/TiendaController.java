@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.model.dto.MercadoDTO;
 import com.example.demo.model.dto.TiendaDTO;
+import com.example.demo.service.DireccionService;
 import com.example.demo.service.MercadoService;
 import com.example.demo.service.TiendaService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,9 @@ public class TiendaController {
 
     @Autowired
     MercadoService mercadoService;
+
+    @Autowired
+    DireccionService direccionService;
 
     // Listar
     @GetMapping("/mercados/{idMercado}/tiendas")
@@ -78,7 +82,7 @@ public class TiendaController {
 
         TiendaDTO tiendaDTO = new TiendaDTO();
         tiendaDTO.setMercadoDTO(mercadoDTO);
-        tiendaDTO.setDireccionDTO(tiendaDTO.getMercadoDTO().getDireccionDTO());
+        tiendaDTO.setDireccionDTO(tiendaDTO.getMercadoDTO().getDireccionDTO()); // ! Esto se deberia poder seleccionar
 
         ModelAndView mav = new ModelAndView("tiendaform");
         mav.addObject("tiendaDTO", tiendaDTO);
@@ -94,6 +98,8 @@ public class TiendaController {
         log.info("TiendaController - save: Guardamos la tienda " + tiendaDTO.getId());
 
         tiendaDTO.setMercadoDTO(mercadoService.findById(tiendaDTO.getMercadoDTO()));
+        tiendaDTO.setDireccionDTO(direccionService.findById(tiendaDTO.getDireccionDTO()));
+
         tiendaService.save(tiendaDTO);
 
         ModelAndView mav = new ModelAndView("redirect:/mercados/{idMercado}/tiendas");
