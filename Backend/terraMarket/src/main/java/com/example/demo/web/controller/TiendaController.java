@@ -108,7 +108,6 @@ public class TiendaController {
     }
 
     // Modificar Tienda
-
     @GetMapping("/mercados/{idMercado}/tiendas/{idTienda}/update")
     public ModelAndView update(@PathVariable("idMercado") Long idMercado, @PathVariable("idTienda") Long idTienda) {
         log.info("TiendaController - update: Modificando Tienda");
