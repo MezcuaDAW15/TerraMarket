@@ -53,7 +53,7 @@ public class PedidosController {
 		return mav;
 	}
 
-	@GetMapping("/clientes/{idCliente}/pedidos/{idPedido}")
+	@GetMapping("/clientes/{idCliente}/pedidos/view/{idPedido}")
 	public ModelAndView view(@PathVariable("idCliente") Long idCliente, @PathVariable("idPedido") Long idPedido) {
 		
 		// recuperar el cliente
@@ -71,7 +71,7 @@ public class PedidosController {
 		// recuperar lineas del pedido
 		List<LineaPedidoDTO>listaLineasPedidoDTO = lineaPedidoService.findAllByPedido(pedidoDTO);
 		
-		ModelAndView mav = new ModelAndView("pedidosCliente");
+		ModelAndView mav = new ModelAndView("pedidoview");
 		mav.addObject("listaLineasPedidoDTO", listaLineasPedidoDTO);
 		mav.addObject("clienteDTO", clienteDTO);
 		mav.addObject("pedidoDTO", pedidoDTO);

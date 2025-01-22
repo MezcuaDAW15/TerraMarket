@@ -12,8 +12,6 @@ import com.example.demo.model.dto.LineaPedidoDTO;
 import com.example.demo.model.dto.PedidoDTO;
 import com.example.demo.repository.dao.LineaPedidoRepository;
 import com.example.demo.repository.entity.LineaPedido;
-import com.example.demo.repository.entity.Pedido;
-import com.example.demo.web.controller.PedidosController;
 
 @Service
 public class LineaPedidoServiceImpl implements LineaPedidoService{
@@ -34,7 +32,8 @@ public class LineaPedidoServiceImpl implements LineaPedidoService{
 		List <LineaPedidoDTO> listaLineasPedidoDTO = new ArrayList<LineaPedidoDTO>();
 		
 		for(int i = 0; i < listaLineasPedido.size(); ++i) {
-			listaLineasPedidoDTO.add(LineaPedidoDTO.convertToDTO(listaLineasPedido.get(i), pedidoDTO));
+            LineaPedidoDTO lpDTO = LineaPedidoDTO.convertToDTO(listaLineasPedido.get(i), pedidoDTO);
+			listaLineasPedidoDTO.add(lpDTO);
 		}
 
         return listaLineasPedidoDTO;

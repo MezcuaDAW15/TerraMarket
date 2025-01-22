@@ -44,8 +44,13 @@ public class LineaPedidoDTO implements Serializable{
 
     public static LineaPedidoDTO convertToDTO(LineaPedido lp, PedidoDTO pedidoDTO){
 
-        
+        LineaPedidoDTO lpDTO = new LineaPedidoDTO();
+        lpDTO.setId(lp.getId());
+        lpDTO.setVentaDTO(VentaDTO.convertToDto(lp.getVenta()));
+        lpDTO.setPedidoDTO(pedidoDTO);
+        lpDTO.setFecha(lp.getFecha());
+        lpDTO.setCantidad(lp.getCantidad());
 
-        return null;
+        return lpDTO;
     }
 }

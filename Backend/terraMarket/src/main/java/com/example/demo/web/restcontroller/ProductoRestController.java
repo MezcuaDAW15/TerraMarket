@@ -20,8 +20,7 @@ public class ProductoRestController {
 
     @Autowired
     private ProductoService productoService;
-
-
+    
     private static final Logger log = LoggerFactory.getLogger(ProductoRestController.class);
 
     @RequestMapping(method=RequestMethod.GET)
