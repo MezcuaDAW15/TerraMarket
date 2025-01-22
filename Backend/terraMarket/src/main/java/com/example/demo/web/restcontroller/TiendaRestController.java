@@ -5,10 +5,12 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.dto.MercadoDTO;
 import com.example.demo.model.dto.TiendaDTO;
@@ -41,5 +43,23 @@ public class TiendaRestController {
         List<TiendaDTO> listaTiendasPorMercado = tiendaService.findAllByMercado(mercadoDTO);
 
         return listaTiendasPorMercado;
+    }
+
+    // Ver tienda
+    @RequestMapping(method = RequestMethod.GET, path = "/ws/mercados/{idMercado}/tiendas/{idTienda}")
+    public TiendaDTO findById(@PathVariable("idMercado") Long idMercado, @PathVariable("idTienda") Long idTienda) {
+        log.info("TiendaRestController - findById: Muestra la tienda por id");
+
+        MercadoDTO mercadoDTO = new MercadoDTO();
+        mercadoDTO.setId(idMercado);
+        mercadoService.findById(mercadoDTO);
+
+        TiendaDTO tiendaDTO = new TiendaDTO();
+        tiendaDTO.setId(idTienda);
+        tiendaDTO.setMercadoDTO(mercadoDTO);
+
+        tiendaDTO = tiendaService.findById(tiendaDTO);
+
+        return tiendaDTO;
     }
 }
