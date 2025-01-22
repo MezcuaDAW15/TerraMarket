@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.example.demo.repository.entity.Mercado;
 import com.example.demo.repository.entity.Tienda;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 import lombok.ToString;
@@ -21,6 +22,7 @@ public class MercadoDTO implements Serializable {
     private String imagen;
     private boolean activo;
     private DireccionDTO direccionDTO;
+    @JsonManagedReference
     @ToString.Exclude
     List<TiendaDTO> listaTiendasDTO;
 

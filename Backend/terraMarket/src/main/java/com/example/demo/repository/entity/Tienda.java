@@ -30,10 +30,12 @@ public class Tienda {
 
     @ManyToOne
     @JoinColumn(name = "idmercado")
+    @ToString.Exclude
     private Mercado mercado;
 
     @ManyToOne
     @JoinColumn(name = "iddireccion")
+    @ToString.Exclude
     private Direccion direccion;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tienda")

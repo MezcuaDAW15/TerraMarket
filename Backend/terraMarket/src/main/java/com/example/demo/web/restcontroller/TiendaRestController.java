@@ -1,0 +1,45 @@
+package com.example.demo.web.restcontroller;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.model.dto.MercadoDTO;
+import com.example.demo.model.dto.TiendaDTO;
+import com.example.demo.service.DireccionService;
+import com.example.demo.service.MercadoService;
+import com.example.demo.service.TiendaService;
+
+@RestController
+public class TiendaRestController {
+
+    private static final Logger log = LoggerFactory.getLogger(TiendaRestController.class);
+
+    @Autowired
+    TiendaService tiendaService;
+
+    @Autowired
+    MercadoService mercadoService;
+
+    @Autowired
+    DireccionService direccionService;
+
+    // Listar
+    @RequestMapping(method = RequestMethod.GET, path = "/ws/mercados/{idMercado}/tiendas")
+    public List<TiendaDTO> findAllByMercado(@PathVariable("idMercado") Long idMercado) {
+        log.info("TiendaRestController - findAllByMercado: Lista de todos las tiendas por mercado");
+
+        MercadoDTO mercadoDTO = new MercadoDTO();
+        mercadoDTO.setId(idMercado);
+        mercadoDTO = mercadoService.findById(mercadoDTO);
+        List<TiendaDTO> listaTiendasPorMercado = tiendaService.findAllByMercado(mercadoDTO);
+
+        return listaTiendasPorMercado;
+    }
+}

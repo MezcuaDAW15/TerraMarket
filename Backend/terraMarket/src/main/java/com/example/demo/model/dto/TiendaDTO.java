@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.example.demo.repository.entity.Mercado;
 import com.example.demo.repository.entity.Tienda;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
 
@@ -21,6 +22,7 @@ public class TiendaDTO implements Serializable {
     private String descripcion;
     private String imagen;
     private boolean activo;
+    @JsonBackReference
     private MercadoDTO mercadoDTO;
     private DireccionDTO direccionDTO;
 
