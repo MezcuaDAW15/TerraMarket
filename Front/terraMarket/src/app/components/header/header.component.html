@@ -1,12 +1,25 @@
 <header>
-  <div class="header__logo ">
-    <img src="assets/logo_light.png" alt="logo" />
+  <div>
+    <div class="header__logo ">
+      <img class="logo" src="assets/logo_light.svg" alt="logo" />
+    </div>
+
+    <app-sidebar></app-sidebar>
+
+    <div class="pastilla">
+      <img src="assets/icons/file_map.svg" alt="pastilla" />
+      Mercat Central de València
+    </div>
+
+  </div>
+  <div>
+    <i class="pi pi-shopping-bag text-xl" pBadge value="2" style="color: #fff"></i>
+
+    <p-menu #menu [model]="items" [popup]="true" />
+    <p-button label="usuario123" (onClick)="menu.toggle($event)" icon="pi pi-angle-down" iconPos="right" [text]="true"
+      className="popup" />
+
   </div>
 
-<app-sidebar></app-sidebar>
-
-<div class="pastilla">Mercat Central de València</div>
 
 </header>
-
-

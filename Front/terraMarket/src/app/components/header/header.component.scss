@@ -1,31 +1,85 @@
 @import '../../../variables';
+@import '../../../styles';
 
 //pastilla
 .pastilla {
-  color: black;
-  font-size: 16px;
-  font-family: Parkinsans;
+  @extend .p;
   font-weight: 500;
-  line-height: 24px;
-  letter-spacing: 0.50px;
+
   height: 40px;
   width: auto;
-  padding: 8px;
+  padding: 12px;
   background: #FFC6AE;
   border-radius: 8px;
-  justify-content: flex-start;
   align-items: center;
-  gap: 8px;
-  display: inline-flex
+  display: inline-flex;
+  word-wrap: break-word;
 }
 
 header {
   display: flex;
   align-items: center;
-  padding: 20px 0;
   width: 100vw;
   background: $red;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1rem;
-  gap: 1rem;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+  }
+}
+
+.logo {
+  height: 37px;
+}
+
+.popup {
+  @extend .p;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: red;
+
+
+
+  &::hover {
+    background-color: none;
+  }
+}
+
+:host ::ng-deep .p-button {
+  @extend .p;
+  font-family: 'Parkinsans', sans-serif;
+  font-weight: 500;
+  //font-family: 'Parkinsans';
+  color: white !important;
+}
+
+:host ::ng-deep .p-menu {
+  @extend .p;
+  font-family: 'Parkinsans', sans-serif;
+  font-weight: 600;
+  color: $gray;
+  border: 2px solid $red;
+  border-radius: 1.25rem;
+  padding: 6px;
+  width: 320px;
+
+  .pi {
+
+
+    font-size: 1.5rem;
+
+  }
+}
+
+:host ::ng-deep .p-menuitem-separator {
+  border-top: solid 1px $orange;
+  margin: 0.25rem 1rem;
+
+
 }

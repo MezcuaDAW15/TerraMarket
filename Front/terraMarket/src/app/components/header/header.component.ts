@@ -1,19 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { MenuItem } from 'primeng/api';
+import { SidebarComponent } from '../sidebar/sidebar.component';
+import { MenuModule } from 'primeng/menu';
 
-import { CommonModule } from '@angular/common';
-import { AvatarModule } from 'primeng/avatar';
-import { BadgeModule } from 'primeng/badge';
-import { InputTextModule } from 'primeng/inputtext';
-import { MenubarModule } from 'primeng/menubar';
-import { RippleModule } from 'primeng/ripple';
-import { SidebarComponent } from "../sidebar/sidebar.component";
-import { MarketSelectorComponent } from "../market-selector/market-selector.component";
+
+
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonModule, MenubarModule, BadgeModule, AvatarModule, InputTextModule, RippleModule, CommonModule, SidebarComponent, MarketSelectorComponent],
+  imports: [ButtonModule, SidebarComponent, MenuModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -24,58 +20,41 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.items = [
       {
-        label: 'Home',
-        icon: 'pi pi-home'
-      },
-      {
-        label: 'Features',
-        icon: 'pi pi-star'
-      },
-      {
-        label: 'Projects',
-        icon: 'pi pi-search',
+        label: 'usuario123',
         items: [
-          {
-            label: 'Core',
-            icon: 'pi pi-bolt',
-            shortcut: '⌘+S'
-          },
-          {
-            label: 'Blocks',
-            icon: 'pi pi-server',
-            shortcut: '⌘+B'
-          },
-          {
-            label: 'UI Kit',
-            icon: 'pi pi-pencil',
-            shortcut: '⌘+U'
-          },
           {
             separator: true
           },
           {
-            label: 'Templates',
-            icon: 'pi pi-palette',
-            items: [
-              {
-                label: 'Apollo',
-                icon: 'pi pi-palette',
-                badge: '2'
-              },
-              {
-                label: 'Ultima',
-                icon: 'pi pi-palette',
-                badge: '3'
-              }
-            ]
+            label: 'Mis pedidos',
+            icon: 'pi pi-receipt'
+          },
+
+          {
+            label: 'Editar perfil',
+            icon: 'pi pi-user-edit',
+            class: 'large-icon'
+
+
+
+          },
+
+          {
+            label: 'Cerrar sesión',
+            icon: 'pi pi-sign-out'
+          },
+          {
+            separator: true,
+            class: 'p-menu-separator-p'
+
+          },
+
+          {
+            label: 'Eliminar mi cuenta',
+            icon: 'pi pi-upload'
           }
         ]
-      },
-      {
-        label: 'Contact',
-        icon: 'pi pi-envelope',
-        badge: '3'
       }
-    ];
+    ]
   }
 }
