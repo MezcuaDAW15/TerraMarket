@@ -82,6 +82,14 @@ body {
   color: $gray;
 }
 
+.border-red {
+  border-color: $red;
+}
+
+.border-orange {
+  border-color: $orange;
+}
+
 img.light {
   filter: invert(1);
 }
@@ -134,6 +142,8 @@ img.light {
 .rd-btn.auto-size {
   @include auto-size;
 }
+
+
 
 
 
