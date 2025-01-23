@@ -1,23 +1,16 @@
 package com.example.demo.web.restcontroller;
 
 import java.util.List;
-
 import org.slf4j.Logger;
-
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.demo.model.dto.ClienteDTO;
 import com.example.demo.model.dto.PedidoDTO;
-import com.example.demo.model.dto.ProductoDTO;
 import com.example.demo.service.ClienteService;
 import com.example.demo.service.PedidoService;
-import com.example.demo.service.ProductoService;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @RestController
@@ -31,7 +24,7 @@ public class PedidoRestController {
     @Autowired
     private ClienteService clienteService;
 
-    @RequestMapping(method = RequestMethod.GET, path = "/ws/clientes/{idCliente}/pedidos")
+    @RequestMapping(method = RequestMethod.GET, path = "/clientes/{idCliente}/pedidos")
     public List<PedidoDTO> findAllByCliente(@PathVariable("idCliente") Long idCliente) {
 
         log.info("PedidoRestController - findAllByCliente: Mostramos pedidos del cliente " + idCliente);
@@ -46,4 +39,6 @@ public class PedidoRestController {
 
         return listaPedidosDTO;
     }
+
 }
+
