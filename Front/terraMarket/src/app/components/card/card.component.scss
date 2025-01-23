@@ -1,0 +1,51 @@
+@import '../../../mixins';
+@import '../../../variables';
+@import '../../../styles';
+
+.product-card-1 {
+  width: 281px;
+
+
+
+  height: 287px;
+  background: url('../../../assets/background-card.svg') no-repeat;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+}
+
+.product-card-img {
+  margin-top: 12px;
+  width: 258px;
+  height: 142px;
+
+}
+
+.product-name {
+  display: inline-block;
+  font-family: 'Parkinsans', serif;
+  margin: 12px;
+}
+
+.product-price {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price {
+  @extend .h3;
+  margin-left: 16px;
+  font-size: 16px
+}
+
+.btn-card {
+  @include button-base($red, $red-hover, 10px);
+  @include auto-size;
+  margin-right: 8px;
+  margin-top: 6px;
+  border: transparent;
+}
