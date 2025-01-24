@@ -1,10 +1,22 @@
+import { Cliente } from "./cliente";
+import { EstadoPedido } from "./estadoPedido";
+import { LineaPedido } from "./lineaPedido";
+import { MetodoPago } from "./metodoPago";
+import { PuntoRecogida } from "./puntoReogida";
+
 export interface Pedido {
     id: number;
-    categoria: number;
-    nombre: string;
-    descripcion: string | null;
-    precio: number;
-    imagen: string;
-    vendedor: number;
-    estado: 'D' | 'V';
+    cliente: Cliente;
+    lineaPedido: LineaPedido[];
+    metodoPago : MetodoPago;
+    puntoRecogida: PuntoRecogida;
+    fechaPedido: Date;
+    fechaCompra: Date;
+    fechaEntrega: Date;
+    fechaMaxRecogida: Date;
+    fechaFactura : Date;
+    numFactura: number;
+    estado: EstadoPedido;
+    importe: number;
+    
 }

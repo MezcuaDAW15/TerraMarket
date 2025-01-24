@@ -10,22 +10,22 @@ import { CommonModule } from '@angular/common';
 })
 export class PedidosComponent {
 
-    products!: Product[];
+    // products!: Product[];
 
-    cols!: Column[];
+    // cols!: Column[];
 
-    constructor(private productService: ProductService) {}
+    // constructor(private productService: ProductService) {}
 
-    ngOnInit() {
-        this.productService.getProductsMini().then((data) => {
-            this.products = data;
-        });
+    // ngOnInit() {
+    //     this.productService.getProductsMini().then((data) => {
+    //         this.products = data;
+    //     });
 
-        this.cols = [
-            { field: 'code', header: 'Code' },
-            { field: 'name', header: 'Name' },
-            { field: 'category', header: 'Category' },
-            { field: 'quantity', header: 'Quantity' }
-        ];
-    }
+    //     this.cols = [
+    //         { field: 'code', header: 'Code' },
+    //         { field: 'name', header: 'Name' },
+    //         { field: 'category', header: 'Category' },
+    //         { field: 'quantity', header: 'Quantity' }
+    //     ];
+    // }
 }
