@@ -11,6 +11,9 @@ public class ProductoDTO {
     private Long id;
     private String nombre;
     private String imagen;
+	private CategoriaPDTO categoriaPDTO;
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -31,7 +34,9 @@ public class ProductoDTO {
        productoDTO.setId(producto.getId());
        productoDTO.setNombre(producto.getNombre());
        productoDTO.setImagen(producto.getImagen());
+	   productoDTO.setCategoriaPDTO(CategoriaPDTO.convertToDTO(producto.getCategoriaP()));
        return productoDTO;
+
     }
 	public static Producto convertToEntity(ProductoDTO productoDTO) {
 		
@@ -39,6 +44,7 @@ public class ProductoDTO {
 		producto.setId(productoDTO.getId());
 		producto.setNombre(productoDTO.getNombre());
 		producto.setImagen(productoDTO.getImagen());
+		producto.setCategoriaP(CategoriaPDTO.convertToEntity(productoDTO.getCategoriaPDTO()));
 		return producto;
 
 	}

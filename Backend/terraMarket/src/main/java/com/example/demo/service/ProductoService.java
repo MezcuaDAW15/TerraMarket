@@ -12,6 +12,6 @@ public interface ProductoService {
 
     void delete(Long idProducto);
 
-    void save(ProductoDTO productoDTO);
+    ProductoDTO save(ProductoDTO productoDTO);
 
 }

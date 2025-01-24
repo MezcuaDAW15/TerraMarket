@@ -1,0 +1,17 @@
+<p>market-selector works!</p>
+<div style="padding: 8px; background: #FFC6AE; border-radius: 8px; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
+  <div>
+  </div>
+  <span class="material-symbols-outlined">
+    file_map
+    </span>
+</div>
+
+
+
+<p-dropdown
+    [options]="markets"
+    [(ngModel)]="selectedMarket"
+    placeholder="Select a City"
+    [editable]="true"
+    optionLabel="name" />
