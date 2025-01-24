@@ -12,6 +12,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 import lombok.ToString;
 
@@ -28,7 +30,8 @@ public class Cliente {
     private String apellidos;
     
     private String username;
-    @Column(name = "fechanacimiento")  
+    @Column(name="fechanacimiento")
+    @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
 
     private String email;

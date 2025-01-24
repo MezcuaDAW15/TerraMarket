@@ -1,14 +1,15 @@
 package com.example.demo.repository.entity;
 
 import java.util.Date;
-
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -17,13 +18,21 @@ public class LineaPedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idpedido")
-    private Long idPedido;
-    @Column(name = "idventa")
-    private Long idVenta;
+    private Long id;
+
+    @ManyToOne
+	@JoinColumn(name = "idventa")
+    @ToString.Exclude
+    private Venta venta;
+    
+    @ManyToOne
+	@JoinColumn(name = "idpedido")
+    @ToString.Exclude
+    private Pedido pedido;
+    
     private int cantidad;
     private Date fecha;
-
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -33,27 +42,20 @@ public class LineaPedido {
         if (getClass() != obj.getClass())
             return false;
         LineaPedido other = (LineaPedido) obj;
-        if (idPedido == null) {
-            if (other.idPedido != null)
+        if (id == null) {
+            if (other.id != null)
                 return false;
-        } else if (!idPedido.equals(other.idPedido))
-            return false;
-        if (idVenta == null) {
-            if (other.idVenta != null)
-                return false;
-        } else if (!idVenta.equals(other.idVenta))
+        } else if (!id.equals(other.id))
             return false;
         return true;
     }
-    
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((idPedido == null) ? 0 : idPedido.hashCode());
-        result = prime * result + ((idVenta == null) ? 0 : idVenta.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
-
+	
     
 }

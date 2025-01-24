@@ -8,8 +8,10 @@
 	<h1 th:text="'Realizar Pedido'" />
 	<br>
 	<br>
-	<form th:action="@{/pedidos/save}" th:object="${pedidoDTO}"
+	<form th:action="@{/clientes/{idCliente}/pedidos/save (idCliente=${clienteDTO.id})}" th:object="${pedidoDTO}"
 		method="POST">
+        <h3>Lista de articulos</h3>
+        <br>
 		<h3>Selecciona método de pago</h3>
         <br>
         <select name="selectMP" id="">
@@ -29,9 +31,9 @@
                     th:text="${prDTO.id} +' '+ ${prDTO.direccionDTO}">
             </option>
         </select>
-		<input type="submit" th:value="'Realizar pedido'" />		
+		<input type="submit" th:value="'Realizar pedido'" />
 	</form>
 	<br>
-	<a th:href="@{/pedidos}">Volver a Pedidos</a>
+	<a th:href="@{/clientes/{idCliente}/pedidos(idCliente=${clienteDTO.id})}">Volver a Pedidos</a>
 </body>
 </html>

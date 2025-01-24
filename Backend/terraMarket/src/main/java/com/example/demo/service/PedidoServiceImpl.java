@@ -2,7 +2,10 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.model.dto.ClienteDTO;
@@ -19,6 +22,8 @@ import com.example.demo.repository.entity.PuntoRecogida;
 @Service
 public class PedidoServiceImpl implements PedidoService{
 
+	private static final Logger log = LoggerFactory.getLogger(PedidoServiceImpl.class);
+
     @Autowired
     PedidoRepository pedidoRepository;
 	@Autowired
@@ -29,13 +34,13 @@ public class PedidoServiceImpl implements PedidoService{
     @Override
     public List<PedidoDTO> findAllByCliente(ClienteDTO clienteDTO) {
         // buscamos la lista en el repositorio
-		List<Pedido> listaCuentas = pedidoRepository.findAllByCliente(clienteDTO.getId());
-		
+		List<Pedido> listaPedidos = pedidoRepository.findAllByCliente(clienteDTO.getId());
+		log.info(PedidoServiceImpl.class.getSimpleName() + " - lista pedidos: " + listaPedidos);
 		// la pasamos a dto
 		List <PedidoDTO> listaPedidosDTO = new ArrayList<PedidoDTO>();
 		
-		for(int i = 0; i < listaCuentas.size(); ++i) {
-			listaPedidosDTO.add(PedidoDTO.convertToDTO(listaCuentas.get(i), clienteDTO));
+		for(int i = 0; i < listaPedidos.size(); ++i) {
+			listaPedidosDTO.add(PedidoDTO.convertToDTO(listaPedidos.get(i), clienteDTO));
 		}
 		
 		return listaPedidosDTO;
@@ -71,5 +76,30 @@ public class PedidoServiceImpl implements PedidoService{
 		return listaMPDTO;
 
 	}
+	/* 
+	@Override
+	public void save(PedidoDTO pedidoDTO) {
+		
+		log.info(PedidoServiceImpl.class.getSimpleName() + " - save: guardando direccion ");
 
+		ClienteDireccion cd = new ClienteDireccion();
+		cd = ClienteDireccionDTO.convertToEntity(cdDTO);
+		
+		clienteDireccionRepository.save(cd);
+	}
+	*/
+
+	@Override
+	public PedidoDTO findById(PedidoDTO pedidoDTO, ClienteDTO clienteDTO) {
+		
+		log.info(PedidoServiceImpl.class.getSimpleName() + " - findById(): buscando Pedido " + pedidoDTO.getId());
+		
+		Optional<Pedido> pedido = pedidoRepository.findById(pedidoDTO.getId());
+
+		if (pedido.isPresent()) {
+			pedidoDTO = PedidoDTO.convertToDTO(pedido.get(), clienteDTO);
+		}
+
+		return pedidoDTO;
+	}
 }

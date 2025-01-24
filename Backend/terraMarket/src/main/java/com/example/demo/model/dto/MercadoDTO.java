@@ -3,9 +3,7 @@ package com.example.demo.model.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.example.demo.repository.entity.Mercado;
-
 import lombok.Data;
 
 @Data
@@ -19,7 +17,7 @@ public class MercadoDTO implements Serializable {
     private String email;
     private String imagen;
     private boolean activo;
-    private Long idDireccion;
+    private DireccionDTO direccionDTO;
     List<TiendaDTO> listaTiendasDTO;
 
     @Override
@@ -56,7 +54,9 @@ public class MercadoDTO implements Serializable {
         mercadoDTO.setEmail(mercado.getEmail());
         mercadoDTO.setImagen(mercado.getImagen());
         mercadoDTO.setActivo(mercado.isActivo());
-        mercadoDTO.setIdDireccion(mercado.getIdDireccion());
+
+        //mercadoDTO.setIdDireccion(mercado.getIdDireccion());
+
 
         List<TiendaDTO> listaTDTO = new ArrayList<TiendaDTO>();
         mercado.getListaTiendas().forEach(tienda -> {
@@ -76,7 +76,9 @@ public class MercadoDTO implements Serializable {
         mercado.setEmail(mercadoDTO.getEmail());
         mercado.setImagen(mercadoDTO.getImagen());
         mercado.setActivo(mercadoDTO.isActivo());
-        mercado.setIdDireccion(mercadoDTO.getIdDireccion());
+
+        //mercado.setIdDireccion(mercadoDTO.getIdDireccion());
+
         return mercado;
     }
 

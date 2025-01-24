@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.example.demo.model.dto.MercadoDTO;
 import com.example.demo.model.dto.TiendaDTO;
 import com.example.demo.service.MercadoService;
@@ -76,7 +75,9 @@ public class TiendaController {
 
         TiendaDTO tiendaDTO = new TiendaDTO();
         tiendaDTO.setMercadoDTO(mercadoDTO);
-        tiendaDTO.setIdDireccion(mercadoDTO.getIdDireccion());
+
+        //tiendaDTO.setIdDireccion(mercadoDTO.getIdDireccion());
+
 
         ModelAndView mav = new ModelAndView("tiendaform");
         mav.addObject("tiendaDTO", tiendaDTO);

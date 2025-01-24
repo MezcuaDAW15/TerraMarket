@@ -50,4 +50,25 @@ public class ClienteServiceImpl implements ClienteService{
 		return listaClientesDTO;
     }
 
+    @Override
+    public void save(ClienteDTO clienteDTO) {
+        
+		log.info(ClienteServiceImpl.class.getSimpleName() + " save() - clienteDto: " + clienteDTO.toString());
+		Cliente c = ClienteDTO.convertToEntity(clienteDTO);
+		log.info(ClienteServiceImpl.class.getSimpleName() + " save() - cliente: " + c.toString());
+		c.setActivo(true);
+        clienteRepository.save(c);
+    }
+
+    @Override
+    public void delete(ClienteDTO cDTO) {
+        log.info(ClienteServiceImpl.class.getSimpleName() + " - borramos el cliente" + cDTO.toString());
+
+		Cliente cliente = new Cliente();
+		cliente = ClienteDTO.convertToEntity(cDTO);
+        cliente.setActivo(false);
+
+		clienteRepository.save(cliente);
+    }
+
 }
