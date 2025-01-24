@@ -2,7 +2,11 @@ package com.example.demo.model.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import com.example.demo.repository.entity.Cliente;
+import com.example.demo.repository.entity.LineaPedido;
 import com.example.demo.repository.entity.Pedido;
 import lombok.Data;
 import lombok.ToString;
@@ -25,6 +29,7 @@ public class PedidoDTO implements Serializable{
     private Long numFactura;
     private EstadoPedidoDTO estado;
     private float importe;
+    private List<LineaPedidoDTO>listaLineasPedidoDTO;
     
     @Override
     public boolean equals(Object obj) {
@@ -65,7 +70,17 @@ public class PedidoDTO implements Serializable{
         pedidoDTO.setMetodoPago(MetodoPagoDTO.convertToDTO(pedido.getMetodoPago()));
         pedidoDTO.setEstado(EstadoPedidoDTO.convertToDTO(pedido.getEstado()));
         pedidoDTO.setPuntoRecogidaDTO(PuntoRecogidaDTO.convertToDTO(pedido.getPuntoRecogida()));
-        
+
+        List<LineaPedidoDTO>listaLPDTO = pedido.getListaLineaPedido().stream()
+                .map(lineaPedido -> {
+                    LineaPedidoDTO lpDTO = new LineaPedidoDTO();
+                    lpDTO = LineaPedidoDTO.convertToDTO(lineaPedido, pedidoDTO);
+                    return lpDTO;
+                })
+                .collect(Collectors.toList());
+
+        pedidoDTO.setListaLineasPedidoDTO(listaLPDTO);
+
 		return pedidoDTO;
 	}
 
@@ -85,6 +100,16 @@ public class PedidoDTO implements Serializable{
         pedido.setMetodoPago(MetodoPagoDTO.convertToEntity(pedidoDTO.getMetodoPago()));
         pedido.setEstado(EstadoPedidoDTO.convertToEntity(pedidoDTO.getEstado()));
         pedido.setPuntoRecogida(PuntoRecogidaDTO.convertToEntity(pedidoDTO.getPuntoRecogidaDTO()));
+
+        Set<LineaPedido>listaLP = pedidoDTO.getListaLineasPedidoDTO().stream()
+                .map(lineaPedidoDTO -> {
+                    LineaPedido lp = new LineaPedido();
+                    lp = LineaPedidoDTO.convertToEntity(lineaPedidoDTO, pedido);
+                    return lp;
+                })
+                .collect(Collectors.toSet());
+
+        pedido.setListaLineaPedido(listaLP);
 
 		return pedido;
 	}

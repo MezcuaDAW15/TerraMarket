@@ -43,4 +43,25 @@ public class VentaDTO implements Serializable{
 
         return vDTO;
     }
+
+    public static Venta convertToEntity(VentaDTO ventaDTO){
+
+        Venta venta = new Venta();
+
+        venta.setId(ventaDTO.getId());
+        venta.setProducto(ProductoDTO.convertToEntity(ventaDTO.getProductoDTO()));
+
+        //MercadoDTO mDTO = MercadoDTO.convertToDTO(venta.getTienda().getMercado());
+        venta.setTienda(TiendaDTO.convertToEntity(ventaDTO.getTiendaDTO()));
+
+        venta.setFechaVenta(ventaDTO.getFechaVenta());
+        venta.setPrecioVenta(ventaDTO.getPrecioVenta());
+        venta.setStock(ventaDTO.getStock());
+        venta.setPrecioKg(ventaDTO.getPrecioKg());
+        venta.setDescuento(ventaDTO.getDescuento());
+        venta.setDescripcion(ventaDTO.getDescripcion());
+        venta.setActivo(ventaDTO.isActivo());
+
+        return venta;
+    }
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.example.demo.repository.entity.LineaPedido;
+import com.example.demo.repository.entity.Pedido;
 
 import lombok.Data;
 
@@ -53,4 +54,17 @@ public class LineaPedidoDTO implements Serializable{
 
         return lpDTO;
     }
+
+    public static LineaPedido convertToEntity(LineaPedidoDTO lpDTO, Pedido pedido){
+
+        LineaPedido lp = new LineaPedido();
+        lp.setId(lpDTO.getId());
+        lp.setVenta(VentaDTO.convertToEntity(lpDTO.getVentaDTO()));
+        lp.setPedido(pedido);
+        lp.setFecha(lp.getFecha());
+        lp.setCantidad(lp.getCantidad());
+
+        return null;
+    }
+
 }
