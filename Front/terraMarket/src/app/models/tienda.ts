@@ -1,3 +1,5 @@
+import { Mercado } from "./mercado";
+
 export interface Tienda {
  id: number;
   nombre: string;

@@ -1,4 +1,5 @@
 import { Tienda } from "./tienda";
+import { Producto } from "./producto";
 
 export interface Venta {
   id: number;

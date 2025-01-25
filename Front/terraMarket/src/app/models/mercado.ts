@@ -1,6 +1,6 @@
 import { Direccion } from "./direccion";
 
-export interface mercado {
+export interface Mercado {
   id: number;
   nombre: string;
   email: string;

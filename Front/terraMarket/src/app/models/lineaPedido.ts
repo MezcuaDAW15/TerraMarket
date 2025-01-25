@@ -1,3 +1,6 @@
+import { Pedido } from "./pedido";
+import { Venta } from "./venta";
+
 export interface LineaPedido {
   id: number;
   cantidad: number;

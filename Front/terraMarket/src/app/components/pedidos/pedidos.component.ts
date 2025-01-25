@@ -1,14 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
+import { BackComponent } from "../back/back.component";
+import { PedidoServiceService } from '../../services/pedido-service.service';
+import { Pedido } from '../../models/pedido';
+
 @Component({
   selector: 'app-pedidos',
   standalone: true,
-  imports: [TableModule, CommonModule],
+  imports: [TableModule, CommonModule, BackComponent],
   templateUrl: './pedidos.component.html',
   styleUrl: './pedidos.component.scss'
 })
-export class PedidosComponent {
+
+export class PedidosComponent implements OnInit{
+
+  pedidos:Pedido[]= [];
+
+  constructor(private pedidoService: PedidoServiceService){}
+
+  ngOnInit(): void {
+    this.mostrarPedidos()
+  }
+
+  mostrarPedidos():void{
+    this.pedidoService.findAllByCliente().subscribe((data)=>{
+      this.pedidos = data;
+      console.log(this.pedidos)
+    })
+  }
 
     // products!: Product[];
 

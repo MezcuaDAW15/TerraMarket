@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.example.demo.repository.entity.LineaPedido;
 import com.example.demo.repository.entity.Pedido;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -14,7 +15,9 @@ public class LineaPedidoDTO implements Serializable{
     private static final long serialVersionUID = 1L;
     private Long id;
 
+    @JsonIgnore
     private VentaDTO ventaDTO;
+    @JsonIgnore
     private PedidoDTO pedidoDTO;
     private int cantidad;
     private Date fecha;

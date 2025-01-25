@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.example.demo.repository.entity.Venta;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -13,7 +14,9 @@ public class VentaDTO implements Serializable{
     private static final long serialVersionUID = 1L;
     private Long id;
 
+    @JsonIgnore
     private ProductoDTO productoDTO;
+    @JsonIgnore
     private TiendaDTO tiendaDTO;
     private Date fechaVenta;
     private double precioVenta;

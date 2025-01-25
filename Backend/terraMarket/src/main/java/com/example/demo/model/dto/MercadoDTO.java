@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.demo.repository.entity.Mercado;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -17,7 +19,9 @@ public class MercadoDTO implements Serializable {
     private String email;
     private String imagen;
     private boolean activo;
+    @JsonIgnore
     private DireccionDTO direccionDTO;
+    @JsonIgnore
     List<TiendaDTO> listaTiendasDTO;
 
     @Override

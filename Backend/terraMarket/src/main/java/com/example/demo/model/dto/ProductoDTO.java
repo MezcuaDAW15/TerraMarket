@@ -3,6 +3,7 @@ package com.example.demo.model.dto;
 import java.util.Objects;
 
 import com.example.demo.repository.entity.Producto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -11,6 +12,7 @@ public class ProductoDTO {
     private Long id;
     private String nombre;
     private String imagen;
+	@JsonIgnore
 	private CategoriaPDTO categoriaPDTO;
 
 

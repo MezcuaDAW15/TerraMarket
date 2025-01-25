@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import com.example.demo.repository.entity.Cliente;
 import com.example.demo.repository.entity.LineaPedido;
 import com.example.demo.repository.entity.Pedido;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -18,6 +20,7 @@ public class PedidoDTO implements Serializable{
     private Long id;
     
     @ToString.Exclude
+    
     private ClienteDTO clienteDTO;
     private MetodoPagoDTO metodoPago;
     private PuntoRecogidaDTO puntoRecogidaDTO;
@@ -29,6 +32,7 @@ public class PedidoDTO implements Serializable{
     private Long numFactura;
     private EstadoPedidoDTO estado;
     private float importe;
+    @JsonIgnore
     private List<LineaPedidoDTO>listaLineasPedidoDTO;
     
     @Override
