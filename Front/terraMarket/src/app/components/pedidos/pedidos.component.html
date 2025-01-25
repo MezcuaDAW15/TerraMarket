@@ -2,9 +2,9 @@
 <app-back></app-back>
 
 <p class="h1">Mis pedidos</p>
-<!--
-<div class="card">
-    <p-table [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
+
+<ng-container class="card">
+    <p-table [columns]="cols" [value]="pedidos" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th *ngFor="let col of columns">
@@ -14,10 +14,19 @@
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">
             <tr>
-                <td *ngFor="let col of columns">
-                    {{ rowData[col.field] }}
+                <td *ngFor="let col of columns" >
+                    <ng-container  *ngIf="col.field === 'fechaPedido' || col.field === 'fechaEntrega'">
+                        {{ rowData[col.field] }}
+                    </ng-container>
+                    <ng-container *ngIf="col.field === 'estado.estado'">
+                        <span [ngClass]="pintarEstado(rowData[col.field])">{{rowData[col.field]}}</span>
+                    </ng-container>
+                    <ng-container *ngIf="col.field === 'id' || col.field === 'importe'">
+                        {{ rowData[col.field] }}
+                    </ng-container>
                 </td>
             </tr>
         </ng-template>
     </p-table>
-</div> -->
+</ng-container> 
+

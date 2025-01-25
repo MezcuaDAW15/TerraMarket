@@ -5,6 +5,11 @@ import { BackComponent } from "../back/back.component";
 import { PedidoServiceService } from '../../services/pedido-service.service';
 import { Pedido } from '../../models/pedido';
 
+interface Column {
+    field: string;
+    header: string;
+}
+
 @Component({
   selector: 'app-pedidos',
   standalone: true,
@@ -16,36 +21,44 @@ import { Pedido } from '../../models/pedido';
 export class PedidosComponent implements OnInit{
 
   pedidos:Pedido[]= [];
+  cols!: Column[];
 
   constructor(private pedidoService: PedidoServiceService){}
 
   ngOnInit(): void {
-    this.mostrarPedidos()
+      this.mostrarPedidos()
+
+      this.cols = [
+        { field: 'id', header: 'Pedido' },
+        { field: 'fechaPedido', header: 'Fecha Pedido' },
+        { field: 'estado.estado', header: 'Estado' },
+        { field: 'fechaEntrega', header: 'Fecha Recogida' },
+        { field: `importe`, header: 'Total €' }
+    ];
   }
 
   mostrarPedidos():void{
+
     this.pedidoService.findAllByCliente().subscribe((data)=>{
       this.pedidos = data;
+      this.pedidos = this.pedidos.map(element =>({
+          ...element,
+          'estado.estado': element.estado.estado
+      }))
       console.log(this.pedidos)
     })
   }
 
-    // products!: Product[];
+  pintarEstado(estado:string){
+    if (estado != undefined) {
+      //alert(estado);
+    }
+    switch(estado){
+      case 'Pendiente': return 'etiqueta-estado-pendiente';
+      case 'Recogido': return 'etiqueta-estado-recogido';
+      case 'Cancelado': return 'etiqueta-estado-cancelado';
+      default: return ''
+    }
+  }
 
-    // cols!: Column[];
-
-    // constructor(private productService: ProductService) {}
-
-    // ngOnInit() {
-    //     this.productService.getProductsMini().then((data) => {
-    //         this.products = data;
-    //     });
-
-    //     this.cols = [
-    //         { field: 'code', header: 'Code' },
-    //         { field: 'name', header: 'Name' },
-    //         { field: 'category', header: 'Category' },
-    //         { field: 'quantity', header: 'Quantity' }
-    //     ];
-    // }
 }

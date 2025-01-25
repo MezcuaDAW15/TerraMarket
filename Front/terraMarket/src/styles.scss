@@ -209,3 +209,16 @@ img.light {
     transform: rotate(-45deg);
   }
 }
+
+// etiquetas de estado
+.etiqueta-estado-pendiente{
+  border-radius: 5px;
+  padding: 10px 2px;
+  color: $etiqueta-amarilla;
+}
+.etiqueta-estado-recogido{
+  background-color: $etiqueta-verde;
+}
+.etiqueta-estado-cancelado{
+  background-color: $etiqueta-roja;
+}

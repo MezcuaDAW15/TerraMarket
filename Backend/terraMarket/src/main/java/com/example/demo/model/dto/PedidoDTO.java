@@ -5,9 +5,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.example.demo.repository.entity.Cliente;
 import com.example.demo.repository.entity.LineaPedido;
 import com.example.demo.repository.entity.Pedido;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -24,9 +28,17 @@ public class PedidoDTO implements Serializable{
     private ClienteDTO clienteDTO;
     private MetodoPagoDTO metodoPago;
     private PuntoRecogidaDTO puntoRecogidaDTO;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date fechaPedido;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date fechaCompra;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date fechaEntrega;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date fechaMaxRecogida;
     private Date fechaFactura;
     private Long numFactura;
