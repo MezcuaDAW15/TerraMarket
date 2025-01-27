@@ -84,7 +84,7 @@ public class MercadoDTO implements Serializable {
 
         List<Tienda> listaTiendas = new ArrayList<Tienda>();
         mercadoDTO.getListaTiendasDTO().forEach(tiendaDTO -> {
-            listaTiendas.add(TiendaDTO.convertToEntity(tiendaDTO, mercado));
+            listaTiendas.add(TiendaDTO.convertToEntity(tiendaDTO));
         });
 
         return mercado;

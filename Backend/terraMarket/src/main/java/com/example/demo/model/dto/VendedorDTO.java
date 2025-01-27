@@ -43,8 +43,7 @@ public class VendedorDTO implements Serializable {
         vendedor.setEmail(vendedorDTO.getEmail());
         vendedor.setContrasena(vendedorDTO.getContrasena());
         vendedor.setActivo(vendedorDTO.isActivo());
-        Mercado mercado = MercadoDTO.convertToEntity(vendedorDTO.getTiendaDTO().getMercadoDTO());
-        vendedor.setTienda(TiendaDTO.convertToEntity(vendedorDTO.getTiendaDTO(), mercado));
+        vendedor.setTienda(TiendaDTO.convertToEntity(vendedorDTO.getTiendaDTO()));
         return vendedor;
     }
 

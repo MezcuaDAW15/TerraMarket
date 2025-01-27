@@ -65,7 +65,7 @@ public class TiendaDTO implements Serializable {
         return tiendaDTO;
     }
 
-    public static Tienda convertToEntity(TiendaDTO tiendaDTO, Mercado mercado) {
+    public static Tienda convertToEntity(TiendaDTO tiendaDTO) {
         log.info("TiendaDTO - convertToEntity: convirtiendo a entidad");
         Tienda tienda = new Tienda();
         tienda.setId(tiendaDTO.getId());
@@ -74,7 +74,7 @@ public class TiendaDTO implements Serializable {
         tienda.setDescripcion(tiendaDTO.getDescripcion());
         tienda.setImagen(tiendaDTO.getImagen());
         tienda.setActivo(tiendaDTO.isActivo());
-        tienda.setMercado(mercado);
+        tienda.setMercado(MercadoDTO.convertToEntity(tiendaDTO.getMercadoDTO()));
         tienda.setDireccion(DireccionDTO.convertToEntity(tiendaDTO.getDireccionDTO()));
 
         return tienda;
