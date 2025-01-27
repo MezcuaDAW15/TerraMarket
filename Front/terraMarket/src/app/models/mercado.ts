@@ -1,4 +1,4 @@
-import { Direccion } from "./direccion";
+import { Direccion } from './direccion';
 
 export interface Mercado {
   id: number;
@@ -9,4 +9,5 @@ export interface Mercado {
   activo: boolean;
   imagen: string;
   direccion: Direccion;
+  listaTiendas: any[];
 }
