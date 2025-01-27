@@ -3,42 +3,39 @@
 
 <p class="h1">Mis pedidos</p>
 
-<div class="m-8">
-    <ng-container class="card border-round-sm">
+<div class="m-8 div-table">
+    <div class="card border-round-sm">
         <p-table [columns]="cols" [value]="pedidos" [tableStyle]="{ 'min-width': '50rem' }" >
             <ng-template pTemplate="header" let-columns >
-                <div class="div-table">
                     <tr class="encabezado-tabla">
                         <th *ngFor="let col of columns">
                             {{ col.header }}
                         </th>
                     </tr>
-                </div>
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns" >
-                        <ng-container  *ngIf="col.field === 'fechaPedido' || col.field === 'fechaEntrega'">
+                        <div  *ngIf="col.field === 'fechaPedido' || col.field === 'fechaEntrega'">
                             {{ rowData[col.field] }}
-                        </ng-container>
-                        <ng-container *ngIf="col.field === 'estado.estado'">
+                        </div>
+                        <div *ngIf="col.field === 'estado.estado'">
                             <span [ngClass]="pintarEstado(rowData[col.field])">{{rowData[col.field]}}</span>
-                        </ng-container>
-                        <ng-container *ngIf="col.field === 'id'">
+                        </div>
+                        <div *ngIf="col.field === 'id' "   >
                             #{{ rowData[col.field] }}
-                        </ng-container>
+                        </div>
                         <!--TODO hacer celda para el importe con dos decimales-->
-                        <ng-container *ngIf=" col.field === 'importe'">
+                        <div *ngIf=" col.field === 'importe'">
                             {{ rowData[col.field] }} &euro;
-                        </ng-container>
-                        <ng-container *ngIf=" col.field === 'detalles'">
-                            <button class="sqr-btn auto-size"> Ver pedido</button>
-                        </ng-container>
-                        
+                        </div>
+                        <div *ngIf="col.field === 'detalles'">
+                            <button class="sqr-btn auto-size" [routerLink]="['/detalles-pedido']" (click)="verDetalles(rowData)" > Ver pedido</button>
+                        </div>
                     </td>
                 </tr>
             </ng-template>
         </p-table>
-    </ng-container> 
+    </div> 
 </div>
 
