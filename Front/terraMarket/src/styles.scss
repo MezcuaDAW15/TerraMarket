@@ -213,8 +213,11 @@ img.light {
 // etiquetas de estado
 .etiqueta-estado-pendiente{
   border-radius: 5px;
-  padding: 10px 2px;
-  color: $etiqueta-amarilla;
+  padding: 2px 10px;
+  background-color: $etiqueta-amarilla;
+  font-weight: 600;
+  
+  @extend .txt-black;
 }
 .etiqueta-estado-recogido{
   background-color: $etiqueta-verde;

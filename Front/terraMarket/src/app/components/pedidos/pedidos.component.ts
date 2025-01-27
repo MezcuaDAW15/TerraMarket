@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
 import { BackComponent } from "../back/back.component";
@@ -15,7 +15,8 @@ interface Column {
   standalone: true,
   imports: [TableModule, CommonModule, BackComponent],
   templateUrl: './pedidos.component.html',
-  styleUrl: './pedidos.component.scss'
+  styleUrl: './pedidos.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 
 export class PedidosComponent implements OnInit{
@@ -33,7 +34,9 @@ export class PedidosComponent implements OnInit{
         { field: 'fechaPedido', header: 'Fecha Pedido' },
         { field: 'estado.estado', header: 'Estado' },
         { field: 'fechaEntrega', header: 'Fecha Recogida' },
-        { field: `importe`, header: 'Total €' }
+        { field: 'importe', header: 'Total' },
+        { field: 'detalles', header: 'Detalles' }
+
     ];
   }
 

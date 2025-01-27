@@ -1,3 +1,22 @@
+@import '../../../variables';
+
 *{
     font-family: 'Parkinsans', sans-serif;
+}
+p{
+    margin-left: 50px;
+}
+.div-table {
+    border: 1px solid $red;
+}
+.p-datatable-thead {
+    tr{
+        border-radius: 5px !important;
+        border: 1px solid $red !important;
+    }
+    th{
+        
+        background-color: $light-hover !important;
+    }
+    
 }
