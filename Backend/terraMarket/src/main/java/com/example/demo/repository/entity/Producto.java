@@ -19,20 +19,23 @@ import lombok.ToString;
 @Entity
 @Table(name = "productos")
 public class Producto {
-	@Id
-	@GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-	private Long id;
-	private String nombre;
-	private String imagen;
+    @Id
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    private Long id;
+    private String nombre;
+    private String imagen;
 
+  
+    
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "producto")
+    @ToString.Exclude
+    private Set<Venta> listaVentas;
+    
 	@ManyToOne
 	@JoinColumn(name = "idcategoria")
 	private CategoriaP categoriaP;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "producto")
-	@ToString.Exclude
-	private Set<Venta> listaVentas;
-
+  
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -44,10 +47,11 @@ public class Producto {
 		Producto other = (Producto) obj;
 		return Objects.equals(id, other.id);
 	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
 
+    
 }
+

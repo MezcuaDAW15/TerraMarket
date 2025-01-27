@@ -68,7 +68,11 @@ header {
   border-radius: 1.25rem;
   padding: 6px;
   width: 320px;
-
+  /*
+  &:: {
+    border: transparent;
+  }
+  */
 }
 
 :host ::ng-deep .p-menuitem-separator {

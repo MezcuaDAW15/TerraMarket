@@ -2,6 +2,8 @@ package com.example.demo.model.dto;
 
 import java.io.Serializable;
 import com.example.demo.repository.entity.PuntoRecogida;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data

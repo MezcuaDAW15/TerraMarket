@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,4 +88,18 @@ public class PedidoServiceImpl implements PedidoService{
 		clienteDireccionRepository.save(cd);
 	}
 	*/
+
+	@Override
+	public PedidoDTO findById(PedidoDTO pedidoDTO, ClienteDTO clienteDTO) {
+		
+		log.info(PedidoServiceImpl.class.getSimpleName() + " - findById(): buscando Pedido " + pedidoDTO.getId());
+		
+		Optional<Pedido> pedido = pedidoRepository.findById(pedidoDTO.getId());
+
+		if (pedido.isPresent()) {
+			pedidoDTO = PedidoDTO.convertToDTO(pedido.get(), clienteDTO);
+		}
+
+		return pedidoDTO;
+	}
 }

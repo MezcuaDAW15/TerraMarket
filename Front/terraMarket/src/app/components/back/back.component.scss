@@ -1,0 +1,21 @@
+@import '../../../variables';
+@import '../../../styles';
+
+@import url('https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap');
+*{
+    font-family: 'Parkinsans', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+button{
+    font-weight: bold;
+    font-size: 16px;
+    background-color: transparent;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+}

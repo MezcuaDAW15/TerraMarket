@@ -29,8 +29,8 @@
                     <td>Estado del pedido</td>
                     <td>Importe</td>
 
-                    <td>Ver pedido</td>
-					<td>Cancelar pedido</td>
+                    <td>-</td>
+					<td>-</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -49,7 +49,7 @@
                     <td th:text="${pedidoDTO.estado.estado}"></td>
                     <td th:text="${pedidoDTO.importe}"></td>
 
-                    <td><a th:href="@{/pedidos/{idPedido}(idPedido=${pedidoDTO.id})}">Ver pedido</td>
+                    <td><a th:href="@{/clientes/{idCliente}/pedidos/view/{idPedido} (idCliente=${clienteDTO.id}, idPedido=${pedidoDTO.id})}">Detalles</td>
 					<td><a th:href="@{/pedidos/{idPedido}(idPedido=${pedidoDTO.id})}">Cancelar pedido</td>
 				</tr>
 			</tbody>

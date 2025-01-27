@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.example.demo.repository.entity.Cliente;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -28,6 +30,7 @@ public class ClienteDTO implements Serializable{
     private String cp;
     private boolean activo;
     @ToString.Exclude
+	@JsonIgnore
     private List<PedidoDTO>listaPedidos;
 
     public static ClienteDTO convertToDTO(Cliente cliente) {
