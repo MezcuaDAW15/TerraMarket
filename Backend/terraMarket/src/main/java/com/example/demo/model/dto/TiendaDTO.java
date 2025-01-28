@@ -63,8 +63,7 @@ public class TiendaDTO implements Serializable {
         tiendaDTO.setImagen(tienda.getImagen());
         tiendaDTO.setActivo(tienda.isActivo());
         tiendaDTO.setMercadoDTO(mercadoDTO);
-
-        //tiendaDTO.setDireccion(tienda.getDireccion());
+        tiendaDTO.setDireccionDTO(DireccionDTO.convertToDTO(tienda.getDireccion()));
 
         return tiendaDTO;
     }
@@ -79,8 +78,7 @@ public class TiendaDTO implements Serializable {
         tienda.setImagen(tiendaDTO.getImagen());
         tienda.setActivo(tiendaDTO.isActivo());
         tienda.setMercado(MercadoDTO.convertToEntity(tiendaDTO.getMercadoDTO()));
-
-        //tienda.setDireccion(tiendaDTO.getDireccion());
+        tienda.setDireccion(DireccionDTO.convertToEntity(tiendaDTO.getDireccionDTO()));
 
         return tienda;
     }

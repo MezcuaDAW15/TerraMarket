@@ -44,7 +44,6 @@ public class PedidoDTO implements Serializable{
     private Long numFactura;
     private EstadoPedidoDTO estado;
     private float importe;
-    @JsonIgnore
     private List<LineaPedidoDTO>listaLineasPedidoDTO;
     
     @Override

@@ -29,7 +29,8 @@ export class HeaderComponent implements OnInit {
           },
           {
             label: 'Mis pedidos',
-            icon: 'pi pi-receipt text-2xl'
+            icon: 'pi pi-receipt text-2xl',
+            routerLink: '/pedidos'
           },
 
           {
