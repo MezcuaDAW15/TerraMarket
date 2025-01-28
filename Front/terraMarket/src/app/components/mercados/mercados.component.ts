@@ -20,7 +20,6 @@ export class MercadosComponent implements OnInit {
   mostrarMercados(): void {
     this.mercadoService.findAll().subscribe((data) => {
       this.mercados = data;
-      console.log(this.mercados);
     });
   }
 }
