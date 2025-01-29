@@ -37,7 +37,7 @@ public class TiendaRestController {
 
     // Listar
     @RequestMapping(method = RequestMethod.GET)
-    public List<TiendaDTO> findAllByMercado(@PathVariable("idMercado") Long idMercado) {
+    public ResponseEntity<List<TiendaDTO>> findAllByMercado(@PathVariable("idMercado") Long idMercado) {
         log.info("TiendaRestController - findAllByMercado: Lista de todos las tiendas por mercado");
 
         MercadoDTO mercadoDTO = new MercadoDTO();
@@ -45,12 +45,13 @@ public class TiendaRestController {
         mercadoDTO = mercadoService.findById(mercadoDTO);
         List<TiendaDTO> listaTiendasPorMercado = tiendaService.findAllByMercado(mercadoDTO);
 
-        return listaTiendasPorMercado;
+        return new ResponseEntity<>(listaTiendasPorMercado, HttpStatus.OK);
     }
 
     // Ver tienda
     @RequestMapping(method = RequestMethod.GET, path = "/{idTienda}")
-    public TiendaDTO findById(@PathVariable("idMercado") Long idMercado, @PathVariable("idTienda") Long idTienda) {
+    public ResponseEntity<TiendaDTO> findById(@PathVariable("idMercado") Long idMercado,
+            @PathVariable("idTienda") Long idTienda) {
         log.info("TiendaRestController - findById: Muestra la tienda por id");
 
         MercadoDTO mercadoDTO = new MercadoDTO();
@@ -63,7 +64,11 @@ public class TiendaRestController {
 
         tiendaDTO = tiendaService.findById(tiendaDTO);
 
-        return tiendaDTO;
+        if (tiendaDTO == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(tiendaDTO, HttpStatus.OK);
+        }
     }
 
     // Agregar tienda
