@@ -34,7 +34,7 @@ public class ClienteRestController {
     }
 
     // Localizamos un cliente por id
-    @GetMapping("/clientes/{idCliente}")
+    @RequestMapping(method = RequestMethod.GET, path = "/{idCliente}")
     public ResponseEntity<ClienteDTO> findById(@PathVariable("idCliente") Long idCliente){
 
         log.info("ClienteRestController - findById: Localizamos el cliente con id:" + idCliente);

@@ -28,9 +28,12 @@ public class ClienteServiceImpl implements ClienteService{
 		Optional<Cliente> cliente = clienteRepository.findById(cDTO.getId());
 		if(cliente.isPresent()) {
 			cDTO = ClienteDTO.convertToDTO(cliente.get());
-		}
+            return cDTO;
+		} else {
+            return null;
+        }
 
-        return cDTO;
+        
     }
 
     @Override
