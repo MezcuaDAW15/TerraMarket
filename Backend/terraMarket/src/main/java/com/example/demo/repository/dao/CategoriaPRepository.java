@@ -9,8 +9,6 @@ import jakarta.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface CategoriaPRepository extends JpaRepository<CategoriaP, Long>{
+public interface CategoriaPRepository extends JpaRepository<CategoriaP, Long> {
 
-    
-    
 }

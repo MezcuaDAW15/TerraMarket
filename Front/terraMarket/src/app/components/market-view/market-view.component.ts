@@ -18,8 +18,8 @@ import { MarketService } from '../../services/markets/market.service';
 })
 export class MarketViewComponent implements OnInit {
 
-  mercado: Mercado | null = null; // Datos del mercado
-  errorMessage: string = ''; // Para manejar errores
+  mercado: Mercado | null = null;
+  errorMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,

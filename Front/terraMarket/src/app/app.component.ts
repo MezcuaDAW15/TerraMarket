@@ -6,11 +6,12 @@ import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { PedidosComponent } from "./components/pedidos/pedidos.component";
 import { BackComponent } from './components/back/back.component';
 import { MarketViewComponent } from "./components/market-view/market-view.component";
+import { FiltrosComponent } from "./components/filtros/filtros.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, CardComponent, PedidosComponent, BackComponent, MarketViewComponent],
+  imports: [RouterOutlet, HeaderComponent, CardComponent, PedidosComponent, BackComponent, MarketViewComponent, FiltrosComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

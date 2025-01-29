@@ -30,6 +30,4 @@ public class CategoriaT {
     @OneToMany(mappedBy = "categoriaT", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<CategoriaP> categoriasP;
 
-
-
 }
