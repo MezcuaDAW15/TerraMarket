@@ -1,7 +1,8 @@
 package com.example.demo.repository.entity;
 
 import java.util.Date;
-import java.util.List;
+
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -44,7 +45,7 @@ public class Cliente {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "cliente")
     @ToString.Exclude
-    private List<Pedido>listaPedidos;
+    private Set<Pedido>listaPedidos;
 
     @Override
     public boolean equals(Object obj) {

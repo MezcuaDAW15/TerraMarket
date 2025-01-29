@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import com.example.demo.model.dto.ClienteDTO;
@@ -22,7 +23,7 @@ public class ClienteRestController {
     @Autowired
     ClienteService clienteService;
 
-    @GetMapping("/clientes")
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<ClienteDTO>> findAll() {
 
         log.info("ClienteRestController - findAll: Mostramos todos los clientes");
