@@ -3,7 +3,7 @@ import { BackComponent } from "../back/back.component";
 import { BannerComponent } from "../banner/banner.component";
 import { ListComponent } from "../list/list.component";
 import { Mercado } from '../../models/mercado';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { MarketService } from '../../services/markets/market.service';
 
@@ -23,11 +23,17 @@ export class MarketViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private marketService: MarketService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    const routerMap = new Map<number, string>();
+    //Crear servicio que devuelva el map de rutas
+
+
     const id = Number(this.route.snapshot.paramMap.get('id'));
+    console.log(this.router.url)
 
     if (!isNaN(id) && id > 0) {
       // Solo llama al servicio si el ID es válido
@@ -44,5 +50,6 @@ export class MarketViewComponent implements OnInit {
       this.errorMessage = 'ID de mercado no válido.';
       console.error('ID de mercado no válido:', id);
     }
+    console.log(this.mercado)
   }
 }

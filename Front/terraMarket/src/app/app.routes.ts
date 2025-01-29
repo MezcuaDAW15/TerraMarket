@@ -6,8 +6,7 @@ import { MarketViewComponent } from './components/market-view/market-view.compon
 
 export const routes: Routes = [
 
-  {path: 'pedidos', component: PedidosComponent },
-    {path: 'detalles-pedido', component: DetallesPedidoComponent },
-    { path: 'mercado-central-valencia', redirectTo: '/mercado/1', pathMatch: 'full' },
-    { path: 'mercado/:id', component: MarketViewComponent },
+  { path: 'pedidos', component: PedidosComponent },
+  { path: 'detalles-pedido', component: DetallesPedidoComponent },
+  { path: 'mercado/:id', component: MarketViewComponent },
 ];
