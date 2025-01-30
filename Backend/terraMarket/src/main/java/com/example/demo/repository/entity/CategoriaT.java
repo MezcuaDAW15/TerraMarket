@@ -1,5 +1,6 @@
 package com.example.demo.repository.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -28,6 +29,6 @@ public class CategoriaT {
     private String icono;
 
     @OneToMany(mappedBy = "categoriaT", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<CategoriaP> categoriasP;
+    private Set<CategoriaP> categoriasP = new HashSet<>();
 
 }

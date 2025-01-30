@@ -26,14 +26,14 @@ public class CategoriaTServiceImpl implements CategoriaTService {
         log.info("CategoriaTServiceImpl - findAll: Lista de todas las categorias");
         List<CategoriaT> listaCategorias = categoriaTRepository.findAll();
 
-        for (int i = 0; i < listaCategorias.size(); i++) {
-            log.info("-----" + listaCategorias.get(i + 1));
-        }
         List<CategoriaTDTO> listaCategoriasDTO = new ArrayList<CategoriaTDTO>();
 
-        listaCategoriasDTO = listaCategorias.stream()
-                .map(CategoriaTDTO::convertToDTO)
-                .collect(Collectors.toList());
+        for (CategoriaT categoria : listaCategorias) {
+            CategoriaTDTO categoriaDTO = CategoriaTDTO.convertToDTO(categoria);
+            listaCategoriasDTO.add(categoriaDTO);
+        }
+        log.info("CategoriaTServiceImpl - findAll: Lista de todas las categorias");
+
         return listaCategoriasDTO;
 
     }
