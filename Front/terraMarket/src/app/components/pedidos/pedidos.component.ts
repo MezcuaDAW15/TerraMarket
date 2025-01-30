@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
 import { BackComponent } from "../back/back.component";
 import { PedidoServiceService } from '../../services/pedido-service.service';
 import { Pedido } from '../../models/pedido';
-import { RouterLink } from '@angular/router';
-
+import { RouterLink, Router } from '@angular/router';
+import { DetallesPedidoComponent } from "../detalles-pedido/detalles-pedido.component";
 
 interface Column {
     field: string;
@@ -15,7 +15,7 @@ interface Column {
 @Component({
   selector: 'app-pedidos',
   standalone: true,
-  imports: [TableModule, CommonModule, BackComponent,CommonModule, RouterLink],
+  imports: [TableModule, CommonModule, BackComponent, CommonModule, RouterLink, DetallesPedidoComponent],
   templateUrl: './pedidos.component.html',
   styleUrl: './pedidos.component.scss',
   encapsulation: ViewEncapsulation.None
@@ -27,7 +27,11 @@ export class PedidosComponent implements OnInit{
   cols!: Column[];
   idpedido: number = 0;
 
-  constructor(private pedidoService: PedidoServiceService){}
+  // objeto que pasamos a otro componente
+  @Output() pedidoEmitido = new EventEmitter<Pedido>()
+
+
+  constructor(private pedidoService: PedidoServiceService, private router:Router){}
 
   ngOnInit(): void {
       this.mostrarPedidos()
@@ -39,11 +43,8 @@ export class PedidosComponent implements OnInit{
         { field: 'fechaEntrega', header: 'Fecha Recogida' },
         { field: 'importe', header: 'Total' },
         { field: 'detalles', header: 'Detalles' }
-
-
-
-    ];
-    console.log(this.cols);
+      ];
+    //console.log(this.cols);
 
   }
 
@@ -69,8 +70,14 @@ export class PedidosComponent implements OnInit{
     }
   }
 
-  verDetalles(rowData: any){
-    console.log(rowData.id)
+  verDetalles(rowData: Pedido){
+
+    //this.pedidoEmitido.emit(rowData);
+    //this.router.navigate(['/detalles-pedido'], {state:{rowData}});
+    //console.log(rowData)
+    this.pedidoService.pasarPedido(rowData);
+    this.router.navigate(['/detalles-pedido']);
+
   }
 
 }

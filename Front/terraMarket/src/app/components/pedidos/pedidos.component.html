@@ -30,7 +30,8 @@
                             {{ rowData[col.field] }} &euro;
                         </div>
                         <div *ngIf="col.field === 'detalles'">
-                            <button class="sqr-btn auto-size" [routerLink]="['/detalles-pedido']" (click)="verDetalles(rowData)" > Ver pedido</button>
+                            <button class="sqr-btn auto-size" [routerLink]="['/detalles-pedido']" (click)="verDetalles(rowData)" >Ver pedido</button>
+                            <!-- <app-detalles-pedido [pedido]="col"></app-detalles-pedido> -->
                         </div>
                     </td>
                 </tr>
