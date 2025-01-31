@@ -14,9 +14,9 @@ export class BannerComponent {
   @Input() mercado: Mercado | null = null;
 
   getFormattedAddress(): string {
-    if (!this.mercado?.direccionDTO) return '';
+    if (!this.mercado?.direccion) return '';
 
-    const { calle, numero, piso, puerta, cp, ciudad, provincia } = this.mercado.direccionDTO;
+    const { calle, numero, piso, puerta, cp, ciudad, provincia } = this.mercado.direccion;
 
     let address = `${calle} ${numero}`;
     if (piso) address += `, Piso ${piso}`;

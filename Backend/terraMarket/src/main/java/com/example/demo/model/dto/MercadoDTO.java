@@ -19,9 +19,10 @@ public class MercadoDTO implements Serializable {
     private String email;
     private String imagen;
     private boolean activo;
-    private DireccionDTO direccionDTO;
     @JsonIgnore
-    List<TiendaDTO> listaTiendasDTO;
+    private DireccionDTO direccion;
+    @JsonIgnore
+    List<TiendaDTO> listaTiendas;
 
     @Override
     public boolean equals(Object obj) {
@@ -58,14 +59,15 @@ public class MercadoDTO implements Serializable {
         mercadoDTO.setImagen(mercado.getImagen());
         mercadoDTO.setActivo(mercado.isActivo());
 
-        mercadoDTO.setDireccionDTO(DireccionDTO.convertToDTO(mercado.getDireccion()));
+        //mercadoDTO.setIdDireccion(mercado.getIdDireccion());
+
 
         List<TiendaDTO> listaTDTO = new ArrayList<TiendaDTO>();
         mercado.getListaTiendas().forEach(tienda -> {
             listaTDTO.add(TiendaDTO.convertToDTO(tienda, mercadoDTO));
         });
 
-        mercadoDTO.setListaTiendasDTO(listaTDTO);
+        mercadoDTO.setListaTiendas(listaTDTO);
         return mercadoDTO;
     }
 
@@ -79,7 +81,7 @@ public class MercadoDTO implements Serializable {
         mercado.setImagen(mercadoDTO.getImagen());
         mercado.setActivo(mercadoDTO.isActivo());
 
-        // mercado.setIdDireccion(mercadoDTO.getIdDireccion());
+        //mercado.setIdDireccion(mercadoDTO.getIdDireccion());
 
         return mercado;
     }

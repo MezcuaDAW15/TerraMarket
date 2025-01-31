@@ -7,5 +7,7 @@ import com.example.demo.model.dto.CategoriaPDTO;
 public interface CategoriaPService {
 
     List<CategoriaPDTO> findAll();
+
+    List<CategoriaPDTO> findByIdCategoriaT(Long id);
     
 }

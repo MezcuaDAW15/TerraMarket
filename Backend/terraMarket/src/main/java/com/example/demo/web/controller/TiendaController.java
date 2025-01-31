@@ -40,7 +40,7 @@ public class TiendaController {
 
         mav.addObject("listaTiendasPorMercado", listaTiendasPorMercado);
         if (listaTiendasPorMercado.size() > 0) {
-            mav.addObject("mercadoDTO", listaTiendasPorMercado.get(0).getMercado());
+            mav.addObject("mercadoDTO", listaTiendasPorMercado.get(0).getMercadoDTO());
         }
 
         return mav;
@@ -56,7 +56,7 @@ public class TiendaController {
 
         TiendaDTO tiendaDTO = new TiendaDTO();
         tiendaDTO.setId(idTienda);
-        tiendaDTO.setMercado(mercadoDTO);
+        tiendaDTO.setMercadoDTO(mercadoDTO);
 
         tiendaDTO = tiendaService.findById(tiendaDTO);
 
@@ -74,9 +74,10 @@ public class TiendaController {
         mercadoService.findById(mercadoDTO);
 
         TiendaDTO tiendaDTO = new TiendaDTO();
-        tiendaDTO.setMercado(mercadoDTO);
+        tiendaDTO.setMercadoDTO(mercadoDTO);
 
-        // tiendaDTO.setIdDireccion(mercadoDTO.getIdDireccion());
+        //tiendaDTO.setIdDireccion(mercadoDTO.getIdDireccion());
+
 
         ModelAndView mav = new ModelAndView("tiendaform");
         mav.addObject("tiendaDTO", tiendaDTO);
@@ -94,7 +95,7 @@ public class TiendaController {
         mercadoDTO.setId(idMercado);
         mercadoService.findById(mercadoDTO);
 
-        tiendaDTO.setMercado(mercadoDTO);
+        tiendaDTO.setMercadoDTO(mercadoDTO);
 
         tiendaService.save(tiendaDTO);
 

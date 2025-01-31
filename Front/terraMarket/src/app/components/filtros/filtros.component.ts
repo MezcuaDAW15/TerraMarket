@@ -22,8 +22,7 @@ export class FiltrosComponent implements OnInit {
   ngOnInit() {
     this.categoriesService.findAll().subscribe((data) => {
       this.categoriasT = data;
-    }),
-      console.log(this.categoriasT)
+    })
   }
   trackByFn(index: number, item: any) {
     return item.id;

@@ -9,10 +9,7 @@
   </header>
   <div class="chip-selectors">
 
-    <div class="chip" *ngFor="let categoriaP of categoriaT?.listaCategoriasPDTO">
-      <input type="checkbox">
-      <div>Pollssssso</div>
-    </div>
+    <app-chip *ngFor="let categoriaP of categoriaT?.listaCategoriaP; index as i; trackBy: trackByFn" [categoriaP]="categoriaP" />
 
   </div>
 </div>

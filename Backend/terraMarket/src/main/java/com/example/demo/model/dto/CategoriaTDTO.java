@@ -19,7 +19,7 @@ public class CategoriaTDTO {
     private String nombre;
     private String descripcion;
     private String icono;
-    private List<CategoriaPDTO> listaCategoriaPDTO;
+    private List<CategoriaPDTO> listaCategoriaP;
 
     private static final Logger log = LoggerFactory.getLogger(CategoriaTDTO.class);
 
@@ -29,16 +29,17 @@ public class CategoriaTDTO {
         categoriaTDTO.setNombre(categoriaT.getNombre());
         categoriaTDTO.setDescripcion(categoriaT.getDescripcion());
         categoriaTDTO.setIcono(categoriaT.getIcono());
-        Set<CategoriaP> categoriasP = categoriaT.getCategoriasP();
+        List<CategoriaP> categoriasP = categoriaT.getCategoriasP();
         if (categoriasP != null && !categoriasP.isEmpty()) {
             log.info("CategoriaTDTO - convertToDTO: Lista de categoriasP no vacia");
-            categoriaTDTO.setListaCategoriaPDTO(
-                    categoriaT.getCategoriasP().stream()
-                            .map(CategoriaPDTO::convertToDTO)
-                            .collect(Collectors.toList()));
+            List<CategoriaPDTO> listaCategoriaPDTO = new ArrayList<>();
+            for (CategoriaP categoriaP : categoriaT.getCategoriasP()) {
+                listaCategoriaPDTO.add(CategoriaPDTO.convertToDTO(categoriaP));
+            }
+            categoriaTDTO.setListaCategoriaP(listaCategoriaPDTO);
 
         } else {
-            categoriaTDTO.setListaCategoriaPDTO(new ArrayList<CategoriaPDTO>());
+            categoriaTDTO.setListaCategoriaP(new ArrayList<CategoriaPDTO>());
         }
         log.info("CategoriaTDTO - convertToDTO: Lista de categoriasP no vacia");
 
@@ -54,9 +55,9 @@ public class CategoriaTDTO {
         categoriaT.setDescripcion(categoriaTDTO.getDescripcion());
         categoriaT.setIcono(categoriaTDTO.getIcono());
         categoriaT.setCategoriasP(
-                categoriaTDTO.getListaCategoriaPDTO().stream()
+                categoriaTDTO.getListaCategoriaP().stream()
                         .map(CategoriaPDTO::convertToEntity)
-                        .collect(Collectors.toSet()));
+                        .collect(Collectors.toList()));
         return categoriaT;
 
     }

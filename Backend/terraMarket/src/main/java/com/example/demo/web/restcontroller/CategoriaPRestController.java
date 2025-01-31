@@ -15,7 +15,7 @@ import com.example.demo.service.CategoriaPService;
 import com.example.demo.service.CategoriaTService;
 
 @RestController
-@RequestMapping("/ws/categoriasp")
+@RequestMapping("/ws/categorias")
 public class CategoriaPRestController {
 
     @Autowired

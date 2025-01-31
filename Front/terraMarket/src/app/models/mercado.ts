@@ -8,5 +8,5 @@ export interface Mercado {
   telefono: string;
   activo: boolean;
   imagen: string;
-  direccionDTO: Direccion;
+  direccion: Direccion;
 }

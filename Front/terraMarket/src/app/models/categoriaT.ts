@@ -4,7 +4,7 @@ export interface CategoriaT {
   nombre: string;
   descripcion: string;
   icono: string;
-  listaCategoriasPDTO: CategoriaP[];
+  listaCategoriaP: CategoriaP[];
 }
 /*
  private Long id;
