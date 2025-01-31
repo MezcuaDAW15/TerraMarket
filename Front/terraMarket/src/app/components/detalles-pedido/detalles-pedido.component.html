@@ -32,25 +32,26 @@
                 <img src="../../../assets/icons/metodoPago.svg" alt="">
                 <div class="divDato">
                     <p>Método de pago:</p>
-                    <span class="detalle">{{rowData.metodoPago.nombre}}</span>
+
+                    <span class="detalle">{{rowData.metodoPago?.nombre}}</span>
                 </div>
             </div>
             <div class="info-detalle">
                 <img src="../../../assets/icons/puntoRecogida.svg" alt="">
                 <div class="divDato">
                     <p>Punto de recogida:</p>
-                    <span class="detalle">{{rowData.puntoRecogida.direccion}}</span>
+                    <span class="detalle" >{{getFormattedAddress()}}</span>
                 </div>
             </div>
         </div>
-        <div class="info-lineas">
+        <div class="info-lineas" *ngFor="let linea of rowData.listaLineasPedido">
             <div class="linea-pedido">
-                <img src="" alt="">
+                <!-- <img src="" alt=""> -->
                 <div class="info-linea-pedido">
-                    <p>Nombre producto</p>
+                    <p>{{linea.venta.producto?.nombre}}</p>
                     <div class="div-cantidad">
-                        <p>Cantidad X</p>
-                        <span>Precio</span>
+                        <p>Cantidad X {{linea?.cantidad}}</p>
+                        <span>{{linea.venta.precioVenta}} &euro;</span>
                     </div>
                     <button>
                         <img src="../../../assets/icons/reviews.svg" alt=""> Escribir una reseña</button>

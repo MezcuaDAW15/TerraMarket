@@ -14,9 +14,9 @@ public class VentaDTO implements Serializable{
     private static final long serialVersionUID = 1L;
     private Long id;
 
-    @JsonIgnore
+    
     private ProductoDTO producto;
-    @JsonIgnore
+    
     private TiendaDTO tienda;
     private Date fechaVenta;
     private double precioVenta;

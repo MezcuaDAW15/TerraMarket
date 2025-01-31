@@ -15,7 +15,6 @@ public class LineaPedidoDTO implements Serializable{
     private static final long serialVersionUID = 1L;
     private Long id;
 
-    @JsonIgnore
     private VentaDTO venta;
     @JsonIgnore
     private PedidoDTO pedido;
