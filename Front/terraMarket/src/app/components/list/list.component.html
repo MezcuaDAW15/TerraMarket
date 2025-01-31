@@ -1,4 +1,6 @@
 <button class="rd-btn" (click)="showFilters()">Aplicar</button>
-<p-dialog header="Filtros" [modal]="true" [(visible)]="visible" [style]="{width: '50vw'}" [modal]="true">
+<p-dialog header="Filtros" [modal]="true" [(visible)]="visible" [style]="{width: '50vw'}">
   <app-filtros (filtersApplied)="onFiltersApplied($event)"></app-filtros>
 </p-dialog>
+
+<app-card *ngFor="let producto of productsToShow; index as i; trackBy: trackByFn" [producto]="producto"></app-card>

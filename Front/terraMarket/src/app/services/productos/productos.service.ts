@@ -13,18 +13,10 @@ export class ProductosService {
   constructor(private httpClient: HttpClient) { }
 
   findByCategories(categories: CategoriaP[]): Observable<Producto[]> {
-    // Crear un objeto FormData
-    let params = new FormData();
+    const categoryIds = categories.map(cat => cat.id).join(',');
 
-    // Agregar cada categoría al FormData
-    categories.forEach((categoria, index) => {
-        params.append(`categorias[${index}]`, categoria.id.toString());
-    });
+    const url = `${this.baseUrl}buscarPorCategorias?categories=${categoryIds}`;
 
-    // URL del endpoint (sin parámetros de consulta)
-    const url = `${this.baseUrl}buscarPorCategorias`;
-
-    // Realizar la solicitud POST con FormData
-    return this.httpClient.post<Producto[]>(url, params);
-}
+    return this.httpClient.get<Producto[]>(url);
+  }
 }
