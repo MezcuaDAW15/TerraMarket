@@ -147,7 +147,11 @@ img.light {
   border: transparent;
 }
 
-
+.review-btn.auto-size {
+  @include button-base($orange, $orange-hover, 10px);
+  color: $gray;
+  height: 38px;
+}
 
 
 .item {
