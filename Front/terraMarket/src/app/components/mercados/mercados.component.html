@@ -1,1 +1,19 @@
-<p>mercados works!</p>
+<div id="main">
+  <div id="buscador">
+    <h1>¿Qué mercado quieres visitar?</h1>
+    <input type="text" />
+  </div>
+  <div>
+    <!-- pasar a svg -->
+    <img src="../../../assets/etiquetas.png" alt="etiquetas" />
+    <p>Echa un vistazo a nuestra lista de mercados y visítalos ;)</p>
+  </div>
+  <div id="vista-mercados">
+    @for (mercado of mercados; track mercado.id) {
+    <app-card-market
+      nombre="{{ mercado.nombre }}"
+      cp="{{ mercado.direccion.cp }}"
+    ></app-card-market>
+    }
+  </div>
+</div>

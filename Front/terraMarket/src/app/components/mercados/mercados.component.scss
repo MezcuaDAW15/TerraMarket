@@ -1,0 +1,15 @@
+@import "../../../variables";
+@import "../../../styles.scss";
+
+* {
+  font-family: "Parkinsans", sans-serif;
+}
+
+#buscador {
+  background-color: $orange;
+}
+#vista-mercados {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow-x: hidden;
+}

@@ -1,17 +1,16 @@
 @import "primeicons/primeicons.css";
-@import url('https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap");
 
 /* You can add global styles to this file, and also import other style files */
-@import 'variables';
-@import 'mixins';
+@import "variables";
+@import "mixins";
 
 * {
   box-sizing: border-box;
-
 }
 
 body {
-  font-family: 'Parkinsans', sans-serif;
+  font-family: "Parkinsans", sans-serif;
   margin: 0;
   padding: 0;
   background-color: $body-backround-color;
@@ -24,28 +23,28 @@ body {
   font-size: 28px;
   font-weight: 700;
   line-height: 24px;
-  letter-spacing: 0.50px;
+  letter-spacing: 0.5px;
 }
 
 .h3 {
   font-size: 18px;
   font-weight: 700;
   line-height: 24px;
-  letter-spacing: 0.50px;
+  letter-spacing: 0.5px;
 }
 
 .mdm {
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
-  letter-spacing: 0.50px;
+  letter-spacing: 0.5px;
 }
 
 .p {
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
-  letter-spacing: 0.50px;
+  letter-spacing: 0.5px;
 }
 
 .txt-red {
@@ -55,7 +54,6 @@ body {
 .bg-red {
   background-color: $red;
 }
-
 
 .txt-orange {
   color: $orange;
@@ -68,7 +66,6 @@ body {
 .txt-black {
   color: black;
 }
-
 
 .txt-white {
   color: $white;
@@ -93,8 +90,6 @@ body {
 img.light {
   filter: invert(1);
 }
-
-
 
 .input-primary {
   @extend .mdm;
@@ -143,12 +138,9 @@ img.light {
   @include auto-size;
 }
 
-.sqr-btn-back{
+.sqr-btn-back {
   border: transparent;
 }
-
-
-
 
 .item {
   display: flex;
@@ -161,10 +153,7 @@ img.light {
   &:not(:last-of-type) {
     margin-bottom: 16px;
   }
-
-
 }
-
 
 .radio {
   appearance: none;
@@ -211,21 +200,21 @@ img.light {
 }
 
 // etiquetas de estado
-.etiqueta-estado{
+.etiqueta-estado {
   border-radius: 5px;
   padding: 2px 10px;
   font-weight: 600;
   width: fit-content;
 
-  &.yellow{
+  &.yellow {
     background-color: $etiqueta-amarilla;
   }
 
-  &.green{
+  &.green {
     background-color: $etiqueta-verde;
   }
 
-  &.red{
+  &.red {
     background-color: $etiqueta-roja;
   }
 
