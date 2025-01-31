@@ -11,14 +11,14 @@ public class PuntoRecogidaDTO implements Serializable{
 
     private static final long serialVersionUID = 1L;
     private Long id;
-    private DireccionDTO direccionDTO;
+    private DireccionDTO direccion;
 
     public static PuntoRecogidaDTO convertToDTO(PuntoRecogida pr) {
 
 		PuntoRecogidaDTO prDTO = new PuntoRecogidaDTO();
 
 		prDTO.setId(pr.getId());
-		prDTO.setDireccionDTO(DireccionDTO.convertToDTO(pr.getDireccion()));
+		prDTO.setDireccion(DireccionDTO.convertToDTO(pr.getDireccion()));
         
 		return prDTO;
 	}
@@ -28,7 +28,7 @@ public class PuntoRecogidaDTO implements Serializable{
 		PuntoRecogida pr = new PuntoRecogida();
 
 		pr.setId(prDTO.getId());
-		pr.setDireccion(DireccionDTO.convertToEntity(prDTO.getDireccionDTO()));
+		pr.setDireccion(DireccionDTO.convertToEntity(prDTO.getDireccion()));
         
 		return pr;
 	}

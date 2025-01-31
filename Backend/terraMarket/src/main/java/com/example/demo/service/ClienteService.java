@@ -8,8 +8,8 @@ public interface ClienteService {
 
     public ClienteDTO findById(ClienteDTO cDTO);
     public List<ClienteDTO> findAll();
-    public void save(ClienteDTO clienteDTO);
-    public void delete(ClienteDTO cDTO);
+    public int save(ClienteDTO clienteDTO);
+    public int delete(ClienteDTO cDTO);
     
 }
 

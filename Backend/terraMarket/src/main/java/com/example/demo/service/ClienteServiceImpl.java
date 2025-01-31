@@ -28,9 +28,12 @@ public class ClienteServiceImpl implements ClienteService{
 		Optional<Cliente> cliente = clienteRepository.findById(cDTO.getId());
 		if(cliente.isPresent()) {
 			cDTO = ClienteDTO.convertToDTO(cliente.get());
-		}
+            return cDTO;
+		} else {
+            return null;
+        }
 
-        return cDTO;
+        
     }
 
     @Override
@@ -51,24 +54,36 @@ public class ClienteServiceImpl implements ClienteService{
     }
 
     @Override
-    public void save(ClienteDTO clienteDTO) {
+    public int save(ClienteDTO clienteDTO) {
         
 		log.info(ClienteServiceImpl.class.getSimpleName() + " save() - clienteDto: " + clienteDTO.toString());
 		Cliente c = ClienteDTO.convertToEntity(clienteDTO);
 		log.info(ClienteServiceImpl.class.getSimpleName() + " save() - cliente: " + c.toString());
 		c.setActivo(true);
-        clienteRepository.save(c);
+
+        c = clienteRepository.save(c);
+
+        if (c != null) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     @Override
-    public void delete(ClienteDTO cDTO) {
+    public int delete(ClienteDTO cDTO) {
         log.info(ClienteServiceImpl.class.getSimpleName() + " - borramos el cliente" + cDTO.toString());
 
 		Cliente cliente = new Cliente();
 		cliente = ClienteDTO.convertToEntity(cDTO);
         cliente.setActivo(false);
-
-		clienteRepository.save(cliente);
+        if (clienteRepository.existsById(cDTO.getId())){
+            clienteRepository.save(cliente);
+            return 1;
+        } else {
+            return 0;
+        }
+		
     }
 
 }

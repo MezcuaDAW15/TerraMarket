@@ -25,9 +25,9 @@ public class PedidoDTO implements Serializable{
     
     @ToString.Exclude
     
-    private ClienteDTO clienteDTO;
+    private ClienteDTO cliente;
     private MetodoPagoDTO metodoPago;
-    private PuntoRecogidaDTO puntoRecogidaDTO;
+    private PuntoRecogidaDTO puntoRecogida;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date fechaPedido;
@@ -44,7 +44,7 @@ public class PedidoDTO implements Serializable{
     private Long numFactura;
     private EstadoPedidoDTO estado;
     private float importe;
-    private List<LineaPedidoDTO>listaLineasPedidoDTO;
+    private List<LineaPedidoDTO>listaLineasPedido;
     
     @Override
     public boolean equals(Object obj) {
@@ -75,7 +75,7 @@ public class PedidoDTO implements Serializable{
 		PedidoDTO pedidoDTO = new PedidoDTO();
 
 		pedidoDTO.setId(pedido.getId());
-		pedidoDTO.setClienteDTO(clienteDTO);
+		pedidoDTO.setCliente(clienteDTO);
         pedidoDTO.setFechaPedido(pedido.getFechaPedido());
         pedidoDTO.setFechaCompra(pedido.getFechaCompra());
         pedidoDTO.setFechaEntrega(pedido.getFechaMaxRecogida());
@@ -84,7 +84,7 @@ public class PedidoDTO implements Serializable{
     
         pedidoDTO.setMetodoPago(MetodoPagoDTO.convertToDTO(pedido.getMetodoPago()));
         pedidoDTO.setEstado(EstadoPedidoDTO.convertToDTO(pedido.getEstado()));
-        pedidoDTO.setPuntoRecogidaDTO(PuntoRecogidaDTO.convertToDTO(pedido.getPuntoRecogida()));
+        pedidoDTO.setPuntoRecogida(PuntoRecogidaDTO.convertToDTO(pedido.getPuntoRecogida()));
 
         List<LineaPedidoDTO>listaLPDTO = pedido.getListaLineaPedido().stream()
                 .map(lineaPedido -> {
@@ -94,7 +94,7 @@ public class PedidoDTO implements Serializable{
                 })
                 .collect(Collectors.toList());
 
-        pedidoDTO.setListaLineasPedidoDTO(listaLPDTO);
+        pedidoDTO.setListaLineasPedido(listaLPDTO);
 
 		return pedidoDTO;
 	}
@@ -102,7 +102,7 @@ public class PedidoDTO implements Serializable{
     public static Pedido convertToEntity(PedidoDTO pedidoDTO) {
 
 		Pedido pedido = new Pedido();
-        Cliente cliente = ClienteDTO.convertToEntity(pedidoDTO.getClienteDTO());
+        Cliente cliente = ClienteDTO.convertToEntity(pedidoDTO.getCliente());
 		
         pedido.setId(pedidoDTO.getId());
 		pedido.setCliente(cliente);
@@ -114,9 +114,9 @@ public class PedidoDTO implements Serializable{
 
         pedido.setMetodoPago(MetodoPagoDTO.convertToEntity(pedidoDTO.getMetodoPago()));
         pedido.setEstado(EstadoPedidoDTO.convertToEntity(pedidoDTO.getEstado()));
-        pedido.setPuntoRecogida(PuntoRecogidaDTO.convertToEntity(pedidoDTO.getPuntoRecogidaDTO()));
+        pedido.setPuntoRecogida(PuntoRecogidaDTO.convertToEntity(pedidoDTO.getPuntoRecogida()));
 
-        Set<LineaPedido>listaLP = pedidoDTO.getListaLineasPedidoDTO().stream()
+        Set<LineaPedido>listaLP = pedidoDTO.getListaLineasPedido().stream()
                 .map(lineaPedidoDTO -> {
                     LineaPedido lp = new LineaPedido();
                     lp = LineaPedidoDTO.convertToEntity(lineaPedidoDTO, pedido);

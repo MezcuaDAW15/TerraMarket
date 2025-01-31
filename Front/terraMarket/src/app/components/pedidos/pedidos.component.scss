@@ -1,4 +1,5 @@
 @import '../../../variables';
+@import '../../../styles.scss';
 
 *{
     font-family: 'Parkinsans', sans-serif;
@@ -22,3 +23,15 @@ p{
     
 }
 
+.etiqueta-estado-recogido{
+    @extend .etiqueta-estado;
+    @extend .green;
+}
+.etiqueta-estado-cancelado{
+    @extend .etiqueta-estado;
+    @extend .red;
+}
+.etiqueta-estado-pendiente{
+    @extend .etiqueta-estado;
+    @extend .yellow;
+}

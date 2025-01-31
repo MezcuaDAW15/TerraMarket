@@ -66,7 +66,7 @@ public class PedidosController {
 		pedidoDTO.setId(idPedido);
 		pedidoDTO = pedidoService.findById(pedidoDTO, clienteDTO);
 
-		pedidoDTO.setClienteDTO(clienteDTO);
+		pedidoDTO.setCliente(clienteDTO);
 
 		// recuperar lineas del pedido
 		List<LineaPedidoDTO>listaLineasPedidoDTO = lineaPedidoService.findAllByPedido(pedidoDTO);
@@ -124,9 +124,9 @@ public class PedidosController {
 		prDTO.setId(idPR);
 
 		// pedido
-		pedidoDTO.setClienteDTO(clienteDTO);
+		pedidoDTO.setCliente(clienteDTO);
 		pedidoDTO.setMetodoPago(mpDTO);
-		pedidoDTO.setPuntoRecogidaDTO(prDTO);
+		pedidoDTO.setPuntoRecogida(prDTO);
 
 		// guardamos en el servicio
 		//direccionService.save(pedidoDTO);

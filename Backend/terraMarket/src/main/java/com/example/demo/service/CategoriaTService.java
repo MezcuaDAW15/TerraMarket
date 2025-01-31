@@ -8,3 +8,4 @@ public interface CategoriaTService {
 
     List<CategoriaTDTO> findAll();
 }
+

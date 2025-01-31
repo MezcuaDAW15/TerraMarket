@@ -22,11 +22,11 @@ public class TiendaDTO implements Serializable {
     private String imagen;
     private boolean activo;
     @JsonIgnore
-    private MercadoDTO mercadoDTO;
+    private MercadoDTO mercado;
 
 
 
-    private DireccionDTO direccionDTO;
+    private DireccionDTO direccion;
 
 
     @Override
@@ -62,8 +62,8 @@ public class TiendaDTO implements Serializable {
         tiendaDTO.setDescripcion(tienda.getDescripcion());
         tiendaDTO.setImagen(tienda.getImagen());
         tiendaDTO.setActivo(tienda.isActivo());
-        tiendaDTO.setMercadoDTO(mercadoDTO);
-        tiendaDTO.setDireccionDTO(DireccionDTO.convertToDTO(tienda.getDireccion()));
+        tiendaDTO.setMercado(mercadoDTO);
+        tiendaDTO.setDireccion(DireccionDTO.convertToDTO(tienda.getDireccion()));
 
         return tiendaDTO;
     }
@@ -77,8 +77,8 @@ public class TiendaDTO implements Serializable {
         tienda.setDescripcion(tiendaDTO.getDescripcion());
         tienda.setImagen(tiendaDTO.getImagen());
         tienda.setActivo(tiendaDTO.isActivo());
-        tienda.setMercado(MercadoDTO.convertToEntity(tiendaDTO.getMercadoDTO()));
-        tienda.setDireccion(DireccionDTO.convertToEntity(tiendaDTO.getDireccionDTO()));
+        tienda.setMercado(MercadoDTO.convertToEntity(tiendaDTO.getMercado()));
+        tienda.setDireccion(DireccionDTO.convertToEntity(tiendaDTO.getDireccion()));
 
         return tienda;
     }
