@@ -40,7 +40,7 @@ public class TiendaServiceImpl implements TiendaService {
         Optional<Tienda> tienda = tiendaRepository.findById(tiendaDTO.getId());
 
         if (tienda.isPresent()) {
-            tiendaDTO = TiendaDTO.convertToDTO(tienda.get(), tiendaDTO.getMercadoDTO());
+            tiendaDTO = TiendaDTO.convertToDTO(tienda.get(), tiendaDTO.getMercado());
             return tiendaDTO;
         } else {
             return null;

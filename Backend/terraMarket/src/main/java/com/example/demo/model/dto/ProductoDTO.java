@@ -13,7 +13,7 @@ public class ProductoDTO {
     private String nombre;
     private String imagen;
 	@JsonIgnore
-	private CategoriaPDTO categoriaPDTO;
+	private CategoriaPDTO categoriaP;
 
 
 	@Override
@@ -36,7 +36,7 @@ public class ProductoDTO {
        productoDTO.setId(producto.getId());
        productoDTO.setNombre(producto.getNombre());
        productoDTO.setImagen(producto.getImagen());
-	   productoDTO.setCategoriaPDTO(CategoriaPDTO.convertToDTO(producto.getCategoriaP()));
+	   productoDTO.setCategoriaP(CategoriaPDTO.convertToDTO(producto.getCategoriaP()));
        return productoDTO;
 
     }
@@ -46,7 +46,7 @@ public class ProductoDTO {
 		producto.setId(productoDTO.getId());
 		producto.setNombre(productoDTO.getNombre());
 		producto.setImagen(productoDTO.getImagen());
-		producto.setCategoriaP(CategoriaPDTO.convertToEntity(productoDTO.getCategoriaPDTO()));
+		producto.setCategoriaP(CategoriaPDTO.convertToEntity(productoDTO.getCategoriaP()));
 		return producto;
 
 	}

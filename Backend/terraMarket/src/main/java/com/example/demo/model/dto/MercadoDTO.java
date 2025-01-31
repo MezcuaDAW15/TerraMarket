@@ -20,9 +20,9 @@ public class MercadoDTO implements Serializable {
     private String imagen;
     private boolean activo;
     @JsonIgnore
-    private DireccionDTO direccionDTO;
+    private DireccionDTO direccion;
     @JsonIgnore
-    List<TiendaDTO> listaTiendasDTO;
+    List<TiendaDTO> listaTiendas;
 
     @Override
     public boolean equals(Object obj) {
@@ -67,7 +67,7 @@ public class MercadoDTO implements Serializable {
             listaTDTO.add(TiendaDTO.convertToDTO(tienda, mercadoDTO));
         });
 
-        mercadoDTO.setListaTiendasDTO(listaTDTO);
+        mercadoDTO.setListaTiendas(listaTDTO);
         return mercadoDTO;
     }
 

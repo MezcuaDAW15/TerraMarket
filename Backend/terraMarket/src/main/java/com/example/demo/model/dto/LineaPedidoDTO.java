@@ -16,9 +16,9 @@ public class LineaPedidoDTO implements Serializable{
     private Long id;
 
     @JsonIgnore
-    private VentaDTO ventaDTO;
+    private VentaDTO venta;
     @JsonIgnore
-    private PedidoDTO pedidoDTO;
+    private PedidoDTO pedido;
     private int cantidad;
     private Date fecha;
 
@@ -50,8 +50,8 @@ public class LineaPedidoDTO implements Serializable{
 
         LineaPedidoDTO lpDTO = new LineaPedidoDTO();
         lpDTO.setId(lp.getId());
-        lpDTO.setVentaDTO(VentaDTO.convertToDto(lp.getVenta()));
-        lpDTO.setPedidoDTO(pedidoDTO);
+        lpDTO.setVenta(VentaDTO.convertToDto(lp.getVenta()));
+        lpDTO.setPedido(pedidoDTO);
         lpDTO.setFecha(lp.getFecha());
         lpDTO.setCantidad(lp.getCantidad());
 
@@ -62,7 +62,7 @@ public class LineaPedidoDTO implements Serializable{
 
         LineaPedido lp = new LineaPedido();
         lp.setId(lpDTO.getId());
-        lp.setVenta(VentaDTO.convertToEntity(lpDTO.getVentaDTO()));
+        lp.setVenta(VentaDTO.convertToEntity(lpDTO.getVenta()));
         lp.setPedido(pedido);
         lp.setFecha(lp.getFecha());
         lp.setCantidad(lp.getCantidad());
