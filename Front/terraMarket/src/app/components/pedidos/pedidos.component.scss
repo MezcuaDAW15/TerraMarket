@@ -1,3 +1,37 @@
+@import '../../../variables';
+@import '../../../styles.scss';
+
 *{
     font-family: 'Parkinsans', sans-serif;
+}
+p{
+    margin-left: 50px;
+}
+.div-table {
+    
+    border: 1px solid $red;
+}
+.p-datatable-thead {
+    tr{
+        border-radius: 5px !important;
+        border: 1px solid $red !important;
+    }
+    th{
+        border-bottom: 1px solid $red !important;
+        background-color: $light-hover !important;
+    }
+    
+}
+
+.etiqueta-estado-recogido{
+    @extend .etiqueta-estado;
+    @extend .green;
+}
+.etiqueta-estado-cancelado{
+    @extend .etiqueta-estado;
+    @extend .red;
+}
+.etiqueta-estado-pendiente{
+    @extend .etiqueta-estado;
+    @extend .yellow;
 }

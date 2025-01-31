@@ -211,14 +211,23 @@ img.light {
 }
 
 // etiquetas de estado
-.etiqueta-estado-pendiente{
+.etiqueta-estado{
   border-radius: 5px;
-  padding: 10px 2px;
-  color: $etiqueta-amarilla;
-}
-.etiqueta-estado-recogido{
-  background-color: $etiqueta-verde;
-}
-.etiqueta-estado-cancelado{
-  background-color: $etiqueta-roja;
+  padding: 2px 10px;
+  font-weight: 600;
+  width: fit-content;
+
+  &.yellow{
+    background-color: $etiqueta-amarilla;
+  }
+
+  &.green{
+    background-color: $etiqueta-verde;
+  }
+
+  &.red{
+    background-color: $etiqueta-roja;
+  }
+
+  @extend .txt-black;
 }

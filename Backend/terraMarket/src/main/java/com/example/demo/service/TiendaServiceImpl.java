@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.dto.MercadoDTO;
 import com.example.demo.model.dto.TiendaDTO;
 import com.example.demo.repository.dao.TiendaRepository;
-import com.example.demo.repository.entity.Mercado;
 import com.example.demo.repository.entity.Tienda;
 
 @Service
@@ -25,7 +24,7 @@ public class TiendaServiceImpl implements TiendaService {
 
     @Override
     public List<TiendaDTO> findAllByMercado(MercadoDTO mercadoDTO) {
-        log.info("TiendaServiceImpl - findAllByMercado: Lista de todas las tiendas por mercado");
+        log.info("TiendaServiceImpl - findAllByMercado: Lista de todos las tiendas por mercado");
         List<TiendaDTO> listaTiendasPorMercado = new ArrayList<TiendaDTO>();
 
         tiendaRepository.findAllByMercado(mercadoDTO.getId()).forEach(tienda -> {
@@ -38,13 +37,10 @@ public class TiendaServiceImpl implements TiendaService {
     @Override
     public TiendaDTO findById(TiendaDTO tiendaDTO) {
         log.info("TiendaServiceImpl - findById: Buscar tienda");
+        Optional<Tienda> tienda = tiendaRepository.findById(tiendaDTO.getId());
 
-        Optional<Tienda> tiendaOp = tiendaRepository.findById(tiendaDTO.getId());
-
-        if (tiendaOp.isPresent()) {
-            Tienda tienda = tiendaOp.get();
-            MercadoDTO mercadoDTO = MercadoDTO.convertToDTO(tienda.getMercado());
-            tiendaDTO = TiendaDTO.convertToDTO(tienda, mercadoDTO);
+        if (tienda.isPresent()) {
+            tiendaDTO = TiendaDTO.convertToDTO(tienda.get(), tiendaDTO.getMercado());
             return tiendaDTO;
         } else {
             return null;
@@ -54,7 +50,6 @@ public class TiendaServiceImpl implements TiendaService {
     @Override
     public void save(TiendaDTO tiendaDTO) {
         log.info("TiendaServiceImpl - save: guardar tienda");
-        // Mercado mercado = MercadoDTO.convertToEntity(tiendaDTO.getMercadoDTO());
         Tienda tienda = TiendaDTO.convertToEntity(tiendaDTO);
 
         tiendaRepository.save(tienda);

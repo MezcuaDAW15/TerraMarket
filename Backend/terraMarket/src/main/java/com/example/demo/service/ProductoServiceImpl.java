@@ -62,8 +62,8 @@ public class ProductoServiceImpl implements ProductoService {
         /*Desde el front traeremos los datos del producto y
          * la categoria a la que pertenece, pero solo el id.*/
 
-        productoDTO.setCategoriaPDTO(CategoriaPDTO.convertToDTO(categoriaPRepository.findById(
-            productoDTO.getCategoriaPDTO().getId()).get()));
+        productoDTO.setCategoriaP(CategoriaPDTO.convertToDTO(categoriaPRepository.findById(
+            productoDTO.getCategoriaP().getId()).get()));
         log.info("ProductoServiceImpl - save: Guardamos el producto ", productoDTO);
 
 

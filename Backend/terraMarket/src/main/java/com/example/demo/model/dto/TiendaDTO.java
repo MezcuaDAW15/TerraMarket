@@ -5,9 +5,8 @@ import java.io.Serializable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.example.demo.repository.entity.Mercado;
 import com.example.demo.repository.entity.Tienda;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -22,9 +21,13 @@ public class TiendaDTO implements Serializable {
     private String descripcion;
     private String imagen;
     private boolean activo;
-    @JsonBackReference
-    private MercadoDTO mercadoDTO;
-    private DireccionDTO direccionDTO;
+    @JsonIgnore
+    private MercadoDTO mercado;
+
+
+
+    private DireccionDTO direccion;
+
 
     @Override
     public boolean equals(Object obj) {
@@ -59,14 +62,14 @@ public class TiendaDTO implements Serializable {
         tiendaDTO.setDescripcion(tienda.getDescripcion());
         tiendaDTO.setImagen(tienda.getImagen());
         tiendaDTO.setActivo(tienda.isActivo());
-        tiendaDTO.setMercadoDTO(mercadoDTO);
-        tiendaDTO.setDireccionDTO(DireccionDTO.convertToDTO(tienda.getDireccion()));
+        tiendaDTO.setMercado(mercadoDTO);
+        tiendaDTO.setDireccion(DireccionDTO.convertToDTO(tienda.getDireccion()));
 
         return tiendaDTO;
     }
 
     public static Tienda convertToEntity(TiendaDTO tiendaDTO) {
-        log.info("TiendaDTO - convertToEntity: convirtiendo a entidad");
+        log.info("TiendaDTo - convertToEntity: convirtiendo a entidad");
         Tienda tienda = new Tienda();
         tienda.setId(tiendaDTO.getId());
         tienda.setNombre(tiendaDTO.getNombre());
@@ -74,8 +77,8 @@ public class TiendaDTO implements Serializable {
         tienda.setDescripcion(tiendaDTO.getDescripcion());
         tienda.setImagen(tiendaDTO.getImagen());
         tienda.setActivo(tiendaDTO.isActivo());
-        tienda.setMercado(MercadoDTO.convertToEntity(tiendaDTO.getMercadoDTO()));
-        tienda.setDireccion(DireccionDTO.convertToEntity(tiendaDTO.getDireccionDTO()));
+        tienda.setMercado(MercadoDTO.convertToEntity(tiendaDTO.getMercado()));
+        tienda.setDireccion(DireccionDTO.convertToEntity(tiendaDTO.getDireccion()));
 
         return tienda;
     }

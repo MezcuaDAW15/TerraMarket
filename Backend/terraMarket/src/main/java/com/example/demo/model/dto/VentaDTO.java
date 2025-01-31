@@ -9,15 +9,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
-public class VentaDTO implements Serializable {
+public class VentaDTO implements Serializable{
 
     private static final long serialVersionUID = 1L;
     private Long id;
 
     @JsonIgnore
-    private ProductoDTO productoDTO;
+    private ProductoDTO producto;
     @JsonIgnore
-    private TiendaDTO tiendaDTO;
+    private TiendaDTO tienda;
     private Date fechaVenta;
     private double precioVenta;
     private double stock;
@@ -25,16 +25,16 @@ public class VentaDTO implements Serializable {
     private double descuento;
     private String descripcion;
     private boolean activo;
-
-    public static VentaDTO convertToDto(Venta venta) {
+    
+    public static VentaDTO convertToDto(Venta venta){
 
         VentaDTO vDTO = new VentaDTO();
 
         vDTO.setId(venta.getId());
-        vDTO.setProductoDTO(ProductoDTO.convertToDTO(venta.getProducto()));
+        vDTO.setProducto(ProductoDTO.convertToDTO(venta.getProducto()));
 
         MercadoDTO mDTO = MercadoDTO.convertToDTO(venta.getTienda().getMercado());
-        vDTO.setTiendaDTO(TiendaDTO.convertToDTO(venta.getTienda(), mDTO));
+        vDTO.setTienda(TiendaDTO.convertToDTO(venta.getTienda(), mDTO));
 
         vDTO.setFechaVenta(venta.getFechaVenta());
         vDTO.setPrecioVenta(venta.getPrecioVenta());
@@ -47,15 +47,15 @@ public class VentaDTO implements Serializable {
         return vDTO;
     }
 
-    public static Venta convertToEntity(VentaDTO ventaDTO) {
+    public static Venta convertToEntity(VentaDTO ventaDTO){
 
         Venta venta = new Venta();
 
         venta.setId(ventaDTO.getId());
-        venta.setProducto(ProductoDTO.convertToEntity(ventaDTO.getProductoDTO()));
+        venta.setProducto(ProductoDTO.convertToEntity(ventaDTO.getProducto()));
 
-        // MercadoDTO mDTO = MercadoDTO.convertToDTO(venta.getTienda().getMercado());
-        venta.setTienda(TiendaDTO.convertToEntity(ventaDTO.getTiendaDTO()));
+        //MercadoDTO mDTO = MercadoDTO.convertToDTO(venta.getTienda().getMercado());
+        venta.setTienda(TiendaDTO.convertToEntity(ventaDTO.getTienda()));
 
         venta.setFechaVenta(ventaDTO.getFechaVenta());
         venta.setPrecioVenta(ventaDTO.getPrecioVenta());

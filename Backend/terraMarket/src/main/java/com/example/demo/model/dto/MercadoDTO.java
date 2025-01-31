@@ -4,11 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.demo.repository.entity.Mercado;
-import com.example.demo.repository.entity.Tienda;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
-import lombok.ToString;
 
 @Data
 public class MercadoDTO implements Serializable {
@@ -21,10 +19,10 @@ public class MercadoDTO implements Serializable {
     private String email;
     private String imagen;
     private boolean activo;
-    private DireccionDTO direccionDTO;
-    @JsonManagedReference
-    @ToString.Exclude
-    List<TiendaDTO> listaTiendasDTO;
+    @JsonIgnore
+    private DireccionDTO direccion;
+    @JsonIgnore
+    List<TiendaDTO> listaTiendas;
 
     @Override
     public boolean equals(Object obj) {
@@ -60,14 +58,16 @@ public class MercadoDTO implements Serializable {
         mercadoDTO.setEmail(mercado.getEmail());
         mercadoDTO.setImagen(mercado.getImagen());
         mercadoDTO.setActivo(mercado.isActivo());
-        mercadoDTO.setDireccionDTO(DireccionDTO.convertToDTO(mercado.getDireccion()));
+
+        //mercadoDTO.setIdDireccion(mercado.getIdDireccion());
+
 
         List<TiendaDTO> listaTDTO = new ArrayList<TiendaDTO>();
         mercado.getListaTiendas().forEach(tienda -> {
             listaTDTO.add(TiendaDTO.convertToDTO(tienda, mercadoDTO));
         });
 
-        mercadoDTO.setListaTiendasDTO(listaTDTO);
+        mercadoDTO.setListaTiendas(listaTDTO);
         return mercadoDTO;
     }
 
@@ -80,12 +80,8 @@ public class MercadoDTO implements Serializable {
         mercado.setEmail(mercadoDTO.getEmail());
         mercado.setImagen(mercadoDTO.getImagen());
         mercado.setActivo(mercadoDTO.isActivo());
-        mercado.setDireccion(DireccionDTO.convertToEntity(mercadoDTO.getDireccionDTO()));
 
-        List<Tienda> listaTiendas = new ArrayList<Tienda>();
-        mercadoDTO.getListaTiendasDTO().forEach(tiendaDTO -> {
-            listaTiendas.add(TiendaDTO.convertToEntity(tiendaDTO));
-        });
+        //mercado.setIdDireccion(mercadoDTO.getIdDireccion());
 
         return mercado;
     }

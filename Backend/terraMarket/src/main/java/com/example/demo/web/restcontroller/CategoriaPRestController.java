@@ -10,22 +10,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.dto.CategoriaPDTO;
+import com.example.demo.model.dto.CategoriaTDTO;
 import com.example.demo.service.CategoriaPService;
-
+import com.example.demo.service.CategoriaTService;
 
 @RestController
 @RequestMapping("/ws/categorias")
 public class CategoriaPRestController {
+
     @Autowired
-    private CategoriaPService categoriaPService;
+    private CategoriaTService categoriaTService;
 
     private static final Logger log = LoggerFactory.getLogger(CategoriaPRestController.class);
 
-    @RequestMapping(method=RequestMethod.GET)
-    public List<CategoriaPDTO> findAll() {
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<CategoriaTDTO> findAl2l() {
         log.info("CategoriaPRestController - findAll: Mostrando todas las categorias");
-        return categoriaPService.findAll();
+        return categoriaTService.findAll();
     }
-    
 
 }
