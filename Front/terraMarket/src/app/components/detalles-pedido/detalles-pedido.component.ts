@@ -54,5 +54,16 @@ export class DetallesPedidoComponent implements OnInit {
     });
 
     
+
   }
+
+  pintarEstado(estado:string){
+    
+    switch(estado){
+      case 'Pendiente': return 'etiqueta-estado-pendiente';
+      case 'Recogido': return 'etiqueta-estado-recogido';
+      case 'Cancelado': return 'etiqueta-estado-cancelado';
+      default: return ''
+    }
+  };
 }

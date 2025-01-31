@@ -2,7 +2,7 @@
 <div class="encabezado">
     <div class="div-encabezado">
         <p class="h1">Detalles del pedido #{{rowData.id}}</p>
-        <span class="etiqueta-estado-pendiente">Estado</span>
+        <span class="etiqueta-estado-pendiente" [ngClass]="pintarEstado(rowData.estado.estado)">{{rowData.estado.estado}}</span>
     </div>
     <button class="sqr-btn light rd-btn auto-size"><img src="../../../assets/icons/tab_close.svg" alt=""> Cancelar pedido</button>
 </div>
