@@ -1,5 +1,5 @@
 import { CategoriaT } from './../../../../models/categoriaT';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoriaP } from '../../../../models/categoriaP';
 import { ChipComponent } from "../chip/chip.component";
@@ -12,8 +12,14 @@ import { ChipComponent } from "../chip/chip.component";
   templateUrl: './chips.component.html',
   styleUrl: './chips.component.scss'
 })
-export class ChipsComponent{
+export class ChipsComponent {
   @Input() categoriaT: CategoriaT | null = null;
+
+  @Output() categorySelected = new EventEmitter<number>();
+
+  onCategoryChange(categoryId: number) {
+    this.categorySelected.emit(categoryId);
+  }
 
   getListCategoriesP(): CategoriaP[] {
     if (!this.categoriaT?.listaCategoriaP) return [];

@@ -1,19 +1,31 @@
 import { CategoriaP } from './../../models/categoriaP';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ChipsComponent } from "./components/chips/chips.component";
 import { CategoriaT } from '../../models/categoriaT';
 import { CommonModule } from '@angular/common';
 import { CategoriesService } from '../../services/categories/categories.service';
+import { FormsModule } from '@angular/forms';
+import { SliderModule } from 'primeng/slider';
 
 @Component({
   selector: 'app-filtros',
   standalone: true,
-  imports: [ChipsComponent, CommonModule],
+  imports: [ChipsComponent, CommonModule, FormsModule, SliderModule],
   templateUrl: './filtros.component.html',
   styleUrl: './filtros.component.scss'
 })
 export class FiltrosComponent implements OnInit {
+  selectedCategories: CategoriaP[] = [];
+
+  @Output() filtersApplied = new EventEmitter<CategoriaP[]>();
+
+  applyFilters() {
+    console.log("Filtros aplicados:", this.selectedCategories);
+    this.filtersApplied.emit(this.selectedCategories);
+  }
   categoriasT: CategoriaT[] = [];
+  rangeValues: number[] = [20, 80];
+
 
   constructor(
     private categoriesService: CategoriesService
@@ -27,6 +39,21 @@ export class FiltrosComponent implements OnInit {
   trackByFn(index: number, item: any) {
     return item.id;
   }
+
+
+  onCategoryChange(categoryId: number) {
+    if (categoryId > 0) {
+
+      this.selectedCategories.push({
+        id: categoryId,
+        nombre: "",
+        descripcion: ""
+      });
+    } else {
+      this.selectedCategories = this.selectedCategories.filter(categoria => categoria.id !== -categoryId);
+    }
+  }
+
 }
 
 

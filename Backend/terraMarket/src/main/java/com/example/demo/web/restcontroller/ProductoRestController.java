@@ -15,13 +15,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.dto.ProductoDTO;
+import com.example.demo.repository.entity.Producto;
 import com.example.demo.service.ProductoService;
-
-
-
 
 @RestController
 @RequestMapping("/ws/productos")
@@ -30,10 +29,9 @@ public class ProductoRestController {
     @Autowired
     private ProductoService productoService;
 
-
     private static final Logger log = LoggerFactory.getLogger(ProductoRestController.class);
 
-    @RequestMapping(method=RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public List<ProductoDTO> findAll() {
         log.info("ProductoRestController - findAll: Mostrando todos los productos");
         return productoService.findAll();
@@ -44,7 +42,6 @@ public class ProductoRestController {
         log.info("ProductoRestController - findById: " + id);
         return productoService.findById(id);
     }
-
 
     @PostMapping("/productos")
     public ResponseEntity<ProductoDTO> add(@RequestBody ProductoDTO productoDTO) {
@@ -68,6 +65,7 @@ public class ProductoRestController {
             return new ResponseEntity<>(productoDTO, HttpStatus.OK);
         }
     }
+
     @DeleteMapping("/productos")
     public ResponseEntity<ProductoDTO> delete(@RequestBody ProductoDTO productoDTO) {
         log.info("ProductoRestController - delete: " + productoDTO);
@@ -78,6 +76,12 @@ public class ProductoRestController {
             productoService.delete(productoDTO.getId());
             return new ResponseEntity<>(productoDTO, HttpStatus.OK);
         }
+    }
+
+    @GetMapping("/buscarPorCategorias")
+    public List<ProductoDTO> findByCategories(@RequestParam List<Long> categories) {
+        log.info("ProductoRestController - findByCategories: " + categories);
+        return productoService.findByCategories(categories);
     }
 
 }

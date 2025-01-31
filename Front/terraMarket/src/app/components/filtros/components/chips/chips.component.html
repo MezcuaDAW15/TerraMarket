@@ -9,7 +9,7 @@
   </header>
   <div class="chip-selectors">
 
-    <app-chip *ngFor="let categoriaP of categoriaT?.listaCategoriaP; index as i; trackBy: trackByFn" [categoriaP]="categoriaP" />
+    <app-chip *ngFor="let categoriaP of categoriaT?.listaCategoriaP; index as i; trackBy: trackByFn" [categoriaP]="categoriaP" (categorySelected)="onCategoryChange($event)"/>
 
   </div>
 </div>

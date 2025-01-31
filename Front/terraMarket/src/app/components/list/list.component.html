@@ -1,1 +1,4 @@
-<p>list works!</p>
+<button class="rd-btn" (click)="showFilters()">Aplicar</button>
+<p-dialog header="Filtros" [modal]="true" [(visible)]="visible" [style]="{width: '50vw'}" [modal]="true">
+  <app-filtros (filtersApplied)="onFiltersApplied($event)"></app-filtros>
+</p-dialog>
