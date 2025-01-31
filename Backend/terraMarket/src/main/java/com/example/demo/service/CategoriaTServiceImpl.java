@@ -2,11 +2,7 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.hibernate.Hibernate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,26 +12,18 @@ import com.example.demo.repository.entity.CategoriaT;
 
 @Service
 public class CategoriaTServiceImpl implements CategoriaTService {
-    private static final Logger log = LoggerFactory.getLogger(CategoriaTServiceImpl.class.getName());
-
     @Autowired
     private CategoriaTRepository categoriaTRepository;
 
     @Override
     public List<CategoriaTDTO> findAll() {
-        log.info("CategoriaTServiceImpl - findAll: Lista de todas las categorias");
+        List<CategoriaTDTO> listaCategoriaTDTO = new ArrayList<CategoriaTDTO>();
         List<CategoriaT> listaCategorias = categoriaTRepository.findAll();
-
-        List<CategoriaTDTO> listaCategoriasDTO = new ArrayList<CategoriaTDTO>();
-
         for (CategoriaT categoria : listaCategorias) {
             CategoriaTDTO categoriaDTO = CategoriaTDTO.convertToDTO(categoria);
-            listaCategoriasDTO.add(categoriaDTO);
+            listaCategoriaTDTO.add(categoriaDTO);
         }
-        log.info("CategoriaTServiceImpl - findAll: Lista de todas las categorias");
-
-        return listaCategoriasDTO;
-
+        return listaCategoriaTDTO;
     }
 
 }

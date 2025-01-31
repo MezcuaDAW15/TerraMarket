@@ -7,5 +7,4 @@ import com.example.demo.model.dto.CategoriaTDTO;
 public interface CategoriaTService {
 
     List<CategoriaTDTO> findAll();
-
 }

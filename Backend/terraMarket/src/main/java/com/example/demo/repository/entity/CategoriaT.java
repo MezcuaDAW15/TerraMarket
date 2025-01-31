@@ -29,6 +29,6 @@ public class CategoriaT {
     private String icono;
 
     @OneToMany(mappedBy = "categoriaT", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<CategoriaP> categoriasP = new HashSet<>();
+    private Set<CategoriaP> categoriasP;
 
 }
