@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Mercado } from './../../models/mercado';
+import { map } from 'rxjs';
+import { Component, Input } from '@angular/core';
 import { DialogModule } from 'primeng/dialog';
 import { CategoriaP } from '../../models/categoriaP';
 import { ProductosService } from '../../services/productos/productos.service';
@@ -6,6 +8,8 @@ import { FiltrosComponent } from "../filtros/filtros.component";
 import { Producto } from '../../models/producto';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from '../card/card.component';
+import { Venta } from '../../models/venta';
+import { VentasService } from '../../services/ventas/ventas.service';
 
 
 @Component({
@@ -16,13 +20,19 @@ import { CardComponent } from '../card/card.component';
   styleUrl: './list.component.scss'
 })
 export class ListComponent {
-  constructor(private productoService: ProductosService) { }
+
+  constructor(
+    private productoService: ProductosService,
+    private ventasService: VentasService
+  ) { }
+  @Input() mercado: Mercado | null = null;
+
 
   selectedFilters: CategoriaP[] = [];
-  productsToShow: Producto[] = [];
+  productsToShow: Venta[] = [];
   visible: boolean = false;
 
-  onFiltersApplied(categories: CategoriaP[]) {
+  onFiltersApplied(categories: CategoriaP[], mercado: Mercado) {
     this.selectedFilters = categories;
     this.visible = false; // Cerrar el diálogo después de aplicar
 
@@ -30,8 +40,8 @@ export class ListComponent {
     this.productsToShow = [];
 
     // Obtener productos filtrados y aplanar el array
-    this.productoService.findByCategories(categories).subscribe(productos => {
-      this.productsToShow = productos.flat(); // Aplana el array de arrays
+    this.ventasService.findByMapVentasProductos(categories, mercado).subscribe(venta => {
+      this.productsToShow = venta;
       console.log(this.productsToShow);
     });
   }
@@ -43,5 +53,6 @@ export class ListComponent {
 
   trackByFn(index: number, item: any) {
     return item.id;
+
   }
 }

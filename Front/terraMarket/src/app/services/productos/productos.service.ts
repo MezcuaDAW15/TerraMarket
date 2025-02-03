@@ -12,11 +12,5 @@ export class ProductosService {
 
   constructor(private httpClient: HttpClient) { }
 
-  findByCategories(categories: CategoriaP[]): Observable<Producto[]> {
-    const categoryIds = categories.map(cat => cat.id).join(',');
-
-    const url = `${this.baseUrl}buscarPorCategorias?categories=${categoryIds}`;
-
-    return this.httpClient.get<Producto[]>(url);
-  }
+  
 }

@@ -16,6 +16,9 @@ import jakarta.transaction.Transactional;
 @Repository
 public interface VentaRepository extends JpaRepository<Venta, Long> {
 
-    @Query("SELECT v FROM Venta v WHERE v.producto = :producto")
-    List<Venta> findAllByProducto(@Param("producto") Producto producto);
+    @Query(value = "SELECT v FROM Venta v JOIN v.producto p JOIN v.tienda t WHERE v.activo=true AND t.mercado.id= :idMercado AND p.categoriaP.id= :idCategoria AND v.precioVenta=(SELECT MIN(v2.precioVenta) FROM Venta v2 JOIN v2.tienda t2 WHERE v2.producto.id = v.producto.id AND v2.activo = true AND t2.mercado.id = t.mercado.id)")
+
+    List<Venta> findCheeperByCategoriasMercado(@Param("idCategoria") Long idCategoria,
+            @Param("idMercado") Long idMercado);
+
 }

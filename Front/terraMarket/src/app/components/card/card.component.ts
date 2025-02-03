@@ -11,16 +11,13 @@ import { Venta } from '../../models/venta';
   styleUrl: './card.component.scss'
 })
 export class CardComponent implements OnInit {
-  @Input() producto: Producto | null = null;
-  ventas: Venta[] = [];
+  @Input() venta: Venta | null = null;
 
   constructor(private ventasService: VentasService) { }
 
   ngOnInit() {
-    if (this.producto) {
-      this.ventasService.findAllByProducto(this.producto).subscribe(ventas => {
-        this.ventas = ventas;
-      });
+    if (this.venta) {
+      console.log(this.venta);
     }
   }
 }

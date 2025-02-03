@@ -4,13 +4,14 @@
     </div>
   </div>
 
-  <span class="product-name">{{producto?.nombre}}</span>
+  <span class="product-name">{{venta?.producto?.nombre}}</span>
   <div class="product-price">
-    <span class="price">1.90 &euro;</span>
+    <span class="price">{{venta?.precioVenta}} &euro;</span>
     <button class="btn-card ">
       <span class="material-symbols-outlined">
-        search
+        add
       </span>
     </button>
   </div>
 </div>
+
