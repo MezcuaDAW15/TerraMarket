@@ -10,18 +10,29 @@
   </div>
   <div id="buscador">
     <h1>¿Qué mercado quieres visitar?</h1>
-
-    <input type="text" placeholder="Escribe el nombre de un mercado" />
+    <p-autoComplete
+      [(ngModel)]="searchText"
+      [suggestions]="filteredItems"
+      (completeMethod)="search($event)"
+      (onSelect)="filtrarMercadoSeleccionado()"
+      (onClear)="filtrarMercadoSeleccionado()"
+      field="nombre"
+      [dropdown]="true"
+      [forceSelection]="true"
+      placeholder="Busca un mercado..."
+    >
+    </p-autoComplete>
   </div>
   <div id="etiquetas">
     <img src="../../../assets/etiquetas.svg" alt="etiquetas" />
     <h1>Echa un vistazo a nuestra lista de mercados y visítalos ;)</h1>
   </div>
   <div id="vista-mercados">
-    @for (mercado of mercados; track mercado.id) {
+    @for (mercado of mercadosFiltrados; track mercado.id) {
     <app-card-market
       nombre="{{ mercado.nombre }}"
       cp="{{ mercado.direccion.cp }}"
+      ciudad="{{ mercado.direccion.ciudad }}"
     ></app-card-market>
     }
   </div>
