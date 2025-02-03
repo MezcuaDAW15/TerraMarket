@@ -1,51 +1,65 @@
 package com.example.demo.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+
+        @Autowired
+        private UserDetailsService userDetailsService;
         
 	@Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-                return http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/","/login","/error", "/fragments/**").permitAll()
-                        .requestMatchers("/")
-                        .hasRole("ADMIN").anyRequest().authenticated())
-                        .formLogin(form -> form.loginPage("/login")
-                                .defaultSuccessUrl("/clientes", true)
-                                .failureUrl("/login?error")
-                                .permitAll()).logout(logout -> logout.logoutSuccessUrl("/").permitAll()).build();
+                http
+                .authorizeHttpRequests(requests -> requests
+                        .antMatchers("/").permitAll()
+                        .antMatchers("/clientes").permitAll()
+                        .antMatchers("/fragments/**").permitAll()
+                        .antMatchers("/clientes/add/**",
+                                "/clientes/delete/**",
+                                "/clientes/update/**",
+                                "/clientes/save/**").hasRole("ADMIN")
+                        .antMatchers("/clientes/{idCliente}/direcciones").hasAnyRole("ADMIN", "USER")
+                        .antMatchers("/clientes/{idCliente}/direcciones/add/**",
+                                "/clientes/{idCliente}/direcciones/delete/**",
+                                "/clientes/{idCliente}/direcciones/update/**",
+                                "/clientes/{idCliente}/direcciones/save/**").hasRole("ADMIN")
+                        .antMatchers("/clientes/{idCliente}/cuentas").hasAnyRole("ADMIN", "USER")
+                        .antMatchers("/clientes/{idCliente}/cuentas/add/**",
+                                "/clientes/{idCliente}/cuentas/delete/**",
+                                "/clientes/{idCliente}/cuentas/update/**",
+                                "/clientes/{idCliente}/cuentas/save/**",
+                                "/clientes/{idCliente}/cuentas/**").hasRole("ADMIN")
+                        .antMatchers("/newRoute/**").hasRole("NEW_ROLE") // Nueva ruta agregada
+                        .anyRequest().authenticated()
+                        .and()
+                        .formLogin()
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/clientes")
+                        .failureUrl("/login?error")
+                        .permitAll()
+                        .and()
+                        .logout()
+                        .permitAll()
+                        .logoutSuccessUrl("/")
+                        .and()
+                        .exceptionHandling().accessDeniedPage("/errors/403"));
+
+                return http.build();
         }
 
-        @Bean
-        public PasswordEncoder passwordEncoder() {
-                return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        }
 
-        @Bean
-        public UserDetailsService userDetailsService() {
-                UserDetails user1 = User.builder()
-                                .username("jpperez")
-                                .password(passwordEncoder().encode("1234"))
-                                .roles("USER")
-                                .build();
-
-                UserDetails user2 = User.builder()
-                                .username("juan123")
-                                .password("secure123")
-                                .roles("ADMIN", "USER")
-                                .build();
-                return new InMemoryUserDetailsManager(user1, user2);
+        @Autowired
+        public void configureGlobal(AuthenticationManagerBuilder build) throws Exception{
+                build.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
         }
 }
