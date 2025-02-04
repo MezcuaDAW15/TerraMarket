@@ -20,4 +20,8 @@ export class CardComponent implements OnInit {
       console.log(this.venta);
     }
   }
+
+  formatNumber(value: number): string {
+    return value.toFixed(2).replace(".", ",").padStart(5, "0");
+  }
 }

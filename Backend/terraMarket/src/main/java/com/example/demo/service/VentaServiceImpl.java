@@ -27,15 +27,10 @@ public class VentaServiceImpl implements VentaService {
     private static final Logger log = LoggerFactory.getLogger(VentaServiceImpl.class);
 
     @Override
-    public List<VentaDTO> findAllByCategoriasMercado(CategoriaPDTO[] categoriasPDTO, MercadoDTO mercadoDTO) {
+    public List<VentaDTO> findAllByCategoriasMercado(List<CategoriaPDTO> categoriasPDTO, MercadoDTO mercadoDTO) {
         log.info("VentaServiceImpl - findAllByCategoriasMercado: " + categoriasPDTO + " " + mercadoDTO);
 
-        // Se pide a la base de datos las ventas de los productos que pertenecen a las
-        // categorias seleccionadas y que esten el mercado seleccionado
-        // Se guardan y se piden esos productos a la base de datos
-        // Se guardan y se devuelven en un mapa donde la clave es el producto y el valor
-        // es la venta
-        if (categoriasPDTO == null || categoriasPDTO.length == 0 || mercadoDTO == null) {
+        if (categoriasPDTO.isEmpty()) {
             List<CategoriaP> categoriasP = categoriaPRepository.findAll();
             categoriasPDTO.addAll(categoriasP.stream().map(CategoriaPDTO::convertToDTO).toList());
 

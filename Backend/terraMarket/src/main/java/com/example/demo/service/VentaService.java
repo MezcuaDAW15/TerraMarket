@@ -10,6 +10,7 @@ import com.example.demo.model.dto.VentaDTO;
 
 public interface VentaService {
 
-    List<VentaDTO> findAllByCategoriasMercado(CategoriaPDTO[] categorias, MercadoDTO mercado);
+    List<VentaDTO> findAllByCategoriasMercado(List<CategoriaPDTO> categoriasDTO, MercadoDTO mercadoDTO);
+
 
 }

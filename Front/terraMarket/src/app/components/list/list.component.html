@@ -1,8 +1,15 @@
-<button class="rd-btn" (click)="showFilters()">Aplicar</button>
-<p-dialog header="Filtros" [modal]="true" [(visible)]="visible" [style]="{width: '50vw'}">
-  <app-filtros (filtersApplied)="mercado && onFiltersApplied($event, mercado)"></app-filtros>
-</p-dialog>
 
-<div class="list-container">
-  <app-card *ngFor="let venta of productsToShow; index as i; trackBy: trackByFn" [venta]="venta"></app-card>
-</div>
+<section class="container">
+
+  <button class="rd-btn auto-size" (click)="showFilters()">
+    <img src="assets/icons/category_search.svg" alt="">
+    Filtrar productos por categorías
+  </button>
+  <p-dialog header="Filtros" [modal]="true" [(visible)]="visible" [style]="{width: '50vw'}">
+    <app-filtros (filtersApplied)="mercado && onFiltersApplied($event, mercado)"></app-filtros>
+  </p-dialog>
+
+  <div class="list-container">
+    <app-card *ngFor="let venta of productsToShow; index as i; trackBy: trackByFn" [venta]="venta"></app-card>
+  </div>
+</section>

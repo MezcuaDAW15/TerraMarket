@@ -1,7 +1,7 @@
 package com.example.demo.web.restcontroller;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.dto.CategoriaPDTO;
 import com.example.demo.model.dto.MercadoDTO;
-import com.example.demo.model.dto.ProductoDTO;
 import com.example.demo.model.dto.VentaDTO;
 import com.example.demo.service.VentaService;
 
@@ -34,11 +33,11 @@ public class VentaRestController {
         MercadoDTO mercadoDTO = new MercadoDTO();
         mercadoDTO.setId(mercado);
         
-        CategoriaPDTO[] categoriasDTO = new CategoriaPDTO[categorias.length];
+        List<CategoriaPDTO> categoriasDTO = new ArrayList<CategoriaPDTO>();
         for (int i = 0; i < categorias.length; i++) {
             CategoriaPDTO categoriaDTO = new CategoriaPDTO();
             categoriaDTO.setId(categorias[i]);
-            categoriasDTO[i] = categoriaDTO;
+            categoriasDTO.add(categoriaDTO);
         }
 
         return ventaService.findAllByCategoriasMercado(categoriasDTO, mercadoDTO);
