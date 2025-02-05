@@ -1,0 +1,13 @@
+@import '../../../assets/css/variables.scss';
+.encabezado{
+    margin-left: 40px;
+}
+.pasos-pedido{
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+.contenedor-componente{
+    border: 2px solid $red;
+}

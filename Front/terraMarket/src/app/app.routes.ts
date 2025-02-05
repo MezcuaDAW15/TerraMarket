@@ -11,4 +11,5 @@ export const routes: Routes = [
     {path: 'mercados', component: MercadosComponent },
     {path: 'detalles-pedido', component: DetallesPedidoComponent },
     {path: 'editar-perfil-cliente', component: EditarPerfilClienteComponent },
+    {path: 'pedido-datos-personales', redirectTo: '/pedido-datos-personales'},
 ];

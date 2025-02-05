@@ -7,6 +7,7 @@ import { PedidosComponent } from './components/pedidos/pedidos.component';
 import { MercadosComponent } from './components/mercados/mercados.component';
 import { BackComponent } from './components/back/back.component';
 import { CardMarketComponent } from './components/card-market/card-market.component';
+import { RealizarPedidoComponent } from "./components/realizar-pedido/realizar-pedido.component";
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ import { CardMarketComponent } from './components/card-market/card-market.compon
     BackComponent,
     MercadosComponent,
     CardMarketComponent,
-  ],
+    RealizarPedidoComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
