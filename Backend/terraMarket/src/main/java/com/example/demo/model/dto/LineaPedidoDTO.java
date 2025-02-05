@@ -10,16 +10,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
-public class LineaPedidoDTO implements Serializable{
+public class LineaPedidoDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Long id;
 
-    @JsonIgnore
     private VentaDTO venta;
     @JsonIgnore
     private PedidoDTO pedido;
-    private int cantidad;
+    private Long cantidad;
     private Date fecha;
 
     @Override
@@ -38,6 +37,7 @@ public class LineaPedidoDTO implements Serializable{
             return false;
         return true;
     }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -46,7 +46,7 @@ public class LineaPedidoDTO implements Serializable{
         return result;
     }
 
-    public static LineaPedidoDTO convertToDTO(LineaPedido lp, PedidoDTO pedidoDTO){
+    public static LineaPedidoDTO convertToDTO(LineaPedido lp, PedidoDTO pedidoDTO) {
 
         LineaPedidoDTO lpDTO = new LineaPedidoDTO();
         lpDTO.setId(lp.getId());
@@ -58,7 +58,7 @@ public class LineaPedidoDTO implements Serializable{
         return lpDTO;
     }
 
-    public static LineaPedido convertToEntity(LineaPedidoDTO lpDTO, Pedido pedido){
+    public static LineaPedido convertToEntity(LineaPedidoDTO lpDTO, Pedido pedido) {
 
         LineaPedido lp = new LineaPedido();
         lp.setId(lpDTO.getId());

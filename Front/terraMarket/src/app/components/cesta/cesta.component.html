@@ -1,2 +1,5 @@
 <app-back></app-back>
-<app-cesta-list [cesta] = "findCesta() ?? []"></app-cesta-list>
+<section class="cesta">
+  <app-cesta-list [cesta]="cesta"></app-cesta-list>
+  <app-resumen [cesta]="cesta"></app-resumen>
+</section>

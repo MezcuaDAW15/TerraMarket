@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CestaItemComponent } from "../cesta-item/cesta-item.component";
 import { CommonModule } from '@angular/common';
-import { LineaPedido } from '../../../../models/lineaPedido';
+import { Pedido } from '../../../../models/pedido';
 
 @Component({
   selector: 'app-cesta-list',
@@ -10,12 +10,17 @@ import { LineaPedido } from '../../../../models/lineaPedido';
   templateUrl: './cesta-list.component.html',
   styleUrl: './cesta-list.component.scss'
 })
-export class CestaListComponent{
-  @Input() cesta: LineaPedido[] = [];
+export class CestaListComponent implements OnInit {
+
+  @Input() cesta: Pedido | null = null;
 
 
   trackByFn(index: number, item: any) {
     return item.id;
+  }
+  ngOnInit(): void {
+    console.log(this.cesta?.lineaPedido);
+
   }
 
 }

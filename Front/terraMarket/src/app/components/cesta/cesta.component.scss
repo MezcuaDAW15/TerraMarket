@@ -1,0 +1,13 @@
+.cesta {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  max-height: 772px;
+  gap: 1rem;
+  margin: 1rem auto;
+  max-width: 1440px;
+
+  app-cesta-list {
+    max-height: 100%;
+    overflow: auto;
+  }
+}

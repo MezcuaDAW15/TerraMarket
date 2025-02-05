@@ -24,6 +24,7 @@ export class VentasService {
   findByMapVentasProductos(categories: CategoriaP[], mercado: Mercado) {
     const url = `${this.baseUrl}?mercado=${mercado.id}&categorias=${categories.map(c => c.id).join(',')}`;
 
+
     return this.httpClient.get<Venta[]>(url);
   }
 }

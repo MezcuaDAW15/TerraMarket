@@ -15,12 +15,14 @@ import { ChipComponent } from "../filtros/components/chip/chip.component";
 
 @Component({
   selector: 'app-list',
+
   standalone: true,
   imports: [DialogModule, FiltrosComponent, CardComponent, CommonModule,
-  
+
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
+
 })
 export class ListComponent {
 

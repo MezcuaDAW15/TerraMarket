@@ -5,17 +5,17 @@
       <img src="assets/image.png" alt="cesta-item" />
     </div>
     <div class="info">
-      <p class="mdm">Pimiento rojo</p>
-      <p class="mdm">1,00 €</p>
+      <p class="mdm">{{lineaPedido?.venta?.producto?.nombre}}</p>
+      <p class="p precio">{{formatNumber(lineaPedido?.venta?.precioVenta ?? 0)}}&euro;</p>
     </div>
   </div>
   <div class="quantity">
     <p class="p">Cantidad</p>
-    <button class="invisible-btn">
+    <button class="invisible-btn" (click)="restar()">
       <img src="assets/icons/minus.svg" alt="restar">
     </button>
-    <p class="mdm">1</p>
-    <button class="invisible-btn">
+    <p class="mdm">{{lineaPedido?.cantidad}}</p>
+    <button class="invisible-btn" (click)="sumar()">
       <img src="assets/icons/plus.svg" alt="sumar">
     </button>
   </div>
