@@ -10,12 +10,15 @@ import { CommonModule } from '@angular/common';
 import { CardComponent } from '../card/card.component';
 import { Venta } from '../../models/venta';
 import { VentasService } from '../../services/ventas/ventas.service';
+import { ChipComponent } from "../filtros/components/chip/chip.component";
 
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [DialogModule, FiltrosComponent, CardComponent, CommonModule],
+  imports: [DialogModule, FiltrosComponent, CardComponent, CommonModule,
+  
+  ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })

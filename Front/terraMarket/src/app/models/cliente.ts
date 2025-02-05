@@ -5,9 +5,6 @@ export interface Cliente {
   username: string;
   fechaNacimiento: Date;
   email: string;
-  contrasena: string;
   cp: string;
-  activo: boolean;
-  listaPedidos: any[];
 }
 

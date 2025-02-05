@@ -1,0 +1,58 @@
+@import '../../../../../variables';
+
+.cesta-item {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  border: 2px solid $red;
+  border-radius: 10px;
+}
+
+.cesta-item_img {
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  border-radius: 5px;
+  margin-right: 10px;
+
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+}
+
+.product-details {
+  display: flex;
+  gap: 5px;
+  width: 100%;
+  align-items: center;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-right: 2rem;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+
+  p {
+    margin: 0;
+  }
+}
+
+
+.invisible-btn {
+  border: none;
+  padding: 2px;
+
+  :hover {
+    cursor: pointer;
+    background-color: rgba($orange, 0.3);
+  }
+}

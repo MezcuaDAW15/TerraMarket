@@ -3,7 +3,7 @@ import { ButtonModule } from 'primeng/button';
 import { MenuItem } from 'primeng/api';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { MenuModule } from 'primeng/menu';
-import { DropdownModule } from 'primeng/dropdown';
+import { BadgeModule } from 'primeng/badge';
 
 
 
@@ -11,7 +11,7 @@ import { DropdownModule } from 'primeng/dropdown';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonModule, SidebarComponent, MenuModule,],
+  imports: [ButtonModule, SidebarComponent, MenuModule, BadgeModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

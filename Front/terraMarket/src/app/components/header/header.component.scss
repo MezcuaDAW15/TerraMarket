@@ -28,7 +28,7 @@ header {
   div {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
 
   }
 }
@@ -56,7 +56,13 @@ header {
   font-family: 'Parkinsans', sans-serif;
   font-weight: 500;
   //font-family: 'Parkinsans';
-  color: white !important;
+  color: white;
+}
+
+:host ::ng-deep .p-badge {
+  font-family: 'Parkinsans', sans-serif;
+  background-color: $orange;
+  color: $black;
 }
 
 :host ::ng-deep .p-menu {

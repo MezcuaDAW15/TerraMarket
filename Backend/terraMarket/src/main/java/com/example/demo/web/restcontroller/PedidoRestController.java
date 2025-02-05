@@ -13,6 +13,7 @@ import com.example.demo.model.dto.PedidoDTO;
 import com.example.demo.service.ClienteService;
 import com.example.demo.service.PedidoService;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @CrossOrigin
 @RestController
@@ -32,15 +33,23 @@ public class PedidoRestController {
         log.info("PedidoRestController - findAllByCliente: Mostramos pedidos del cliente " + idCliente);
 
         // recuperar el cliente
-		ClienteDTO clienteDTO = new ClienteDTO();
-		clienteDTO.setId(idCliente);
-		clienteDTO = clienteService.findById(clienteDTO);
+        ClienteDTO clienteDTO = new ClienteDTO();
+        clienteDTO.setId(idCliente);
+        clienteDTO = clienteService.findById(clienteDTO);
 
         // buscar cuentas del cliente en el servicio
-		List<PedidoDTO> listaPedidosDTO = pedidoService.findAllByCliente(clienteDTO);
+        List<PedidoDTO> listaPedidosDTO = pedidoService.findAllByCliente(clienteDTO);
 
         return listaPedidosDTO;
     }
 
-}
+    @RequestMapping(method = RequestMethod.GET, path = "/buscarPedidoPendiente")
+    public PedidoDTO buscarPedidoPendiente(@RequestParam Long idCliente) {
 
+        log.info("PedidoRestController - buscarPedidoPendiente: Mostramos pedidos pendientes");
+
+        // buscar cuentas del cliente en el servicio
+        return pedidoService.findPedidoPendiente(idCliente);
+
+    }
+}
