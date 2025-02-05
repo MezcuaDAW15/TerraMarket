@@ -1,0 +1,42 @@
+@import "../../../variables";
+@import "../../../styles.scss";
+
+h1 {
+  @extend .h1;
+}
+h3 {
+  @extend .h3;
+}
+
+#banner {
+  margin: 20px 40px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+}
+
+#buscador {
+  background-color: $orange;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+#etiquetas {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+#vista-mercados {
+  margin: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow-x: hidden;
+}
+
+app-card-market {
+  margin: 40px;
+}

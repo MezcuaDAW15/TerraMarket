@@ -1,53 +1,80 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <title th:text="${add} ? 'Crear tienda ' : 'Actualizar tienda'"></title>
-  </head>
-  <body>
-    <h1 th:text="${add} ? 'Crear tienda ' : 'Actualizar tienda'" />
-    <br />
-    <br />
-    <form
-      th:action="@{/mercados/{idMercado}/tiendas/save (idMercado=${tiendaDTO.mercadoDTO.id})}"
-      th:object="${tiendaDTO}"
-      method="POST"
-    >
-      <table border="0">
-        <tr th:if="${tiendaDTO.id}">
-          <td>id</td>
-          <td>:</td>
-          <td><input type="text" th:field="*{id}" readonly /></td>
-        </tr>
-        <tr th:if="${tiendaDTO.mercadoDTO.id}">
-          <td>idMercado</td>
-          <td>:</td>
-          <td>
-            <p th:text="${tiendaDTO.mercadoDTO.id}"></p>
-          </td>
-        </tr>
-        <tr>
-          <td>Nombre</td>
-          <td>:</td>
-          <td><input type="text" th:field="*{nombre}" /></td>
-        </tr>
-        <tr>
-          <td>Descripcion</td>
-          <td>:</td>
-          <td><input type="text" th:field="*{descripcion}" /></td>
-        </tr>
-        <tr>
-          <td>Direccion</td>
-          <td>:</td>
-          <td><input type="text" th:field="*{idDireccion}" /></td>
-        </tr>
-      </table>
-      <input type="submit" th:value="${add} ? 'Crear' : 'Actualizar'" />
-    </form>
-    <br />
-    <a
-      th:href="@{/mercados/{idMercado}/tiendas/ (idMercado=${tiendaDTO.mercadoDTO.id})}"
-      >Volver a la lista de tiendas</a
-    >
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <title th:text="${add} ? 'Crear tienda ' : 'Actualizar tienda'"></title>
+    </head>
+    <body>
+        <h1 th:text="${add} ? 'Crear tienda ' : 'Actualizar tienda'" />
+        <br />
+        <br />
+        <form
+            th:action="@{/mercados/{idMercado}/tiendas/save (idMercado=${tiendaDTO.mercadoDTO.id})}"
+            th:object="${tiendaDTO}"
+            method="POST"
+        >
+            <table border="0">
+                <tr th:if="${tiendaDTO.id}">
+                    <td>id</td>
+                    <td>:</td>
+                    <td><input type="text" th:field="*{id}" readonly /></td>
+                </tr>
+                <tr>
+                    <td>Nombre</td>
+                    <td>:</td>
+                    <td><input type="text" th:field="*{nombre}" /></td>
+                </tr>
+                <tr>
+                    <td>Descripcion</td>
+                    <td>:</td>
+                    <td><input type="text" th:field="*{descripcion}" /></td>
+                </tr>
+                <tr>
+                    <td>Logo</td>
+                    <td>:</td>
+                    <td><input type="text" th:field="*{logo}" /></td>
+                </tr>
+                <tr>
+                    <td>Imagen</td>
+                    <td>:</td>
+                    <td><input type="text" th:field="*{imagen}" /></td>
+                </tr>
+                <tr>
+                    <td>Mercado</td>
+                    <td>:</td>
+                    <td>
+                        <input
+                            type="text"
+                            th:field="*{mercadoDTO.id}"
+                            readonly
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Direccion</td>
+                    <td>:</td>
+                    <td>
+                        <input
+                            type="text"
+                            th:field="*{direccionDTO.id}"
+                            readonly
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Activo</td>
+                    <td>:</td>
+                    <td>
+                        <input type="checkbox" th:field="*{activo}" />
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" th:value="${add} ? 'Crear' : 'Actualizar'" />
+        </form>
+        <br />
+        <a
+            th:href="@{/mercados/{idMercado}/tiendas/ (idMercado=${tiendaDTO.mercadoDTO.id})}"
+            >Volver a la lista de tiendas</a
+        >
+    </body>
 </html>

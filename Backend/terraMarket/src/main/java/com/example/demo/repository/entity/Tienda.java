@@ -3,7 +3,6 @@ package com.example.demo.repository.entity;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -31,15 +30,21 @@ public class Tienda {
 
     @ManyToOne
     @JoinColumn(name = "idmercado")
+    @ToString.Exclude
     private Mercado mercado;
 
     @ManyToOne
     @JoinColumn(name = "iddireccion")
+    @ToString.Exclude
     private Direccion direccion;
-    
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tienda")
     @ToString.Exclude
     private Set<Venta> listaVentas;
 
+    public Tienda() {
+        this.mercado = new Mercado();
+        this.direccion = new Direccion();
+    }
 
 }
