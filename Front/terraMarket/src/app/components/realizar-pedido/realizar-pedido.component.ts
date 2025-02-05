@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { BackComponent } from '../back/back.component';
-import { PedidoDatospersonalesComponent } from './components/pedido-datospersonales/pedido-datospersonales.component';
+import { DatosPersonalesComponent } from './components/datos-personales/datos-personales.component';
 
 @Component({
   selector: 'app-realizar-pedido',
   standalone: true,
-  imports: [BackComponent, PedidoDatospersonalesComponent],
+  imports: [BackComponent, DatosPersonalesComponent],
   templateUrl: './realizar-pedido.component.html',
   styleUrl: './realizar-pedido.component.scss'
 })
