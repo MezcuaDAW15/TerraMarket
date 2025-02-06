@@ -46,20 +46,20 @@ public class ClienteController {
 		return mav;
 	}
     // editar cliente
-    @PostMapping("clientes/save/{add}")
-	public ModelAndView save(@ModelAttribute("clienteDTO") ClienteDTO clienteDTO,
-			@PathVariable("add") boolean add) {
+    // @PostMapping("clientes/save/{add}")
+	// public ModelAndView save(@ModelAttribute("clienteDTO") ClienteDTO clienteDTO,
+	// 		@PathVariable("add") boolean add) {
 
-		ModelAndView mav = new ModelAndView();
+	// 	ModelAndView mav = new ModelAndView();
 
-		clienteService.save(clienteDTO);
+	// 	clienteService.save(clienteDTO);
 		
-		log.info(ClienteController.class.getSimpleName() + " - guardando cliente" + clienteDTO.toString());
+	// 	log.info(ClienteController.class.getSimpleName() + " - guardando cliente" + clienteDTO.toString());
 		
-		mav.setViewName("redirect:/clientes");
-		return mav; 
+	// 	mav.setViewName("redirect:/clientes");
+	// 	return mav; 
 		
-	}
+	// }
 	
 	@GetMapping("/clientes/delete/{idCliente}")
 	public ModelAndView delete(@PathVariable("idCliente") Long idCliente) {
@@ -99,10 +99,10 @@ public class ClienteController {
 	}
 
 	 // Alamcenar usuarios
-	@PostMapping("/users/save")
+	@PostMapping("/clientes/save")
 	public ModelAndView save(@ModelAttribute("usuarioDTO") ClienteDTO clienteDTO,
 	@RequestParam String[] roles) {
-		log.info("UsuarioController - save: Salvamos los datos del usuario:" + clienteDTO.toString());
+		log.info("ClienteController - save: Salvamos los datos del usuario:" + clienteDTO.toString());
 
 		for (String param : roles) {
 			RolDTO rolDTO = new RolDTO();

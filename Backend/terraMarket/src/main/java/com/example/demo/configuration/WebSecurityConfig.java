@@ -29,7 +29,6 @@ public class WebSecurityConfig {
                                 .permitAll())
                                 .logout(logout -> logout.logoutSuccessUrl("/").permitAll())
                                 .build();
-                
         }
 
         @Autowired
