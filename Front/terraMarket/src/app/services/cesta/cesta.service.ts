@@ -33,4 +33,13 @@ export class CestaService {
     return this.httpClient.put<LineaPedido>(url, body);
   }
 
+  deleteLineaPedido(lineaPedido: LineaPedido | null, cliente: Cliente) {
+    cliente.id = 1;
+    this.baseUrl = `http://localhost:8888/ws/clientes/${cliente.id}/pedidos`;
+    console.log(this.baseUrl);
+    const url = `${this.baseUrl}/${lineaPedido?.pedido?.id}/alterLineaPedido/${lineaPedido?.id}`;
+    console.log(url);
+
+    return this.httpClient.delete<LineaPedido>(url );
+  }
 }

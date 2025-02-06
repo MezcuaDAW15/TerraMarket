@@ -3,8 +3,9 @@
   grid-template-columns: 3fr 1fr;
   max-height: 772px;
   gap: 1rem;
-  margin: 1rem auto;
+  margin: 0 auto;
   max-width: 1440px;
+  padding: 1rem;
 
   app-cesta-list {
     max-height: 100%;

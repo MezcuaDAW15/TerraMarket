@@ -1,6 +1,9 @@
 package com.example.demo.service;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,8 +15,7 @@ import com.example.demo.model.dto.ClienteDTO;
 import com.example.demo.model.dto.LineaPedidoDTO;
 import com.example.demo.model.dto.PedidoDTO;
 import com.example.demo.repository.dao.LineaPedidoRepository;
-import com.example.demo.repository.dao.PedidoRepository;
-import com.example.demo.repository.entity.Cliente;
+import com.example.demo.repository.dao.VentaRepository;
 import com.example.demo.repository.entity.LineaPedido;
 
 @Service
@@ -23,6 +25,8 @@ public class LineaPedidoServiceImpl implements LineaPedidoService {
 
     @Autowired
     LineaPedidoRepository lineaPedidoRepository;
+    @Autowired
+    VentaRepository ventaRepository;
     @Autowired
     PedidoService pedidoService;
 
@@ -66,4 +70,27 @@ public class LineaPedidoServiceImpl implements LineaPedidoService {
 
     }
 
+    @Override
+    public LineaPedidoDTO borrarLineaPedido(LineaPedidoDTO lineaPedidoDTO, ClienteDTO clienteDTO) {
+        log.info("LineaPedidoServiceImpl - borrarLineaPedido: " + lineaPedidoDTO.getId());
+        LineaPedido lineaPedido = lineaPedidoRepository.findById(lineaPedidoDTO.getId()).get();
+        lineaPedidoRepository.delete(lineaPedido);
+        PedidoDTO pedidoDTO = new PedidoDTO();
+        pedidoDTO.setId(lineaPedido.getPedido().getId());
+        return null;
+    }
+
+    @Override
+    public LineaPedidoDTO crearLineaPedido(LineaPedidoDTO lineaPedidoDTO, ClienteDTO clienteDTO) {
+        log.info("LineaPedidoServiceImpl - crearLineaPedido: " + lineaPedidoDTO);
+
+        LineaPedido lineaPedido = new LineaPedido();
+        lineaPedido.setCantidad(lineaPedidoDTO.getCantidad());
+        lineaPedido.setVenta(ventaRepository.findById(lineaPedidoDTO.getVenta().getId()).get());
+        lineaPedido
+                .setPedido(PedidoDTO.convertToEntity(pedidoService.findById(lineaPedidoDTO.getPedido(), clienteDTO)));
+        lineaPedido.setFecha(Date.from(Instant.now()));
+        lineaPedidoRepository.save(lineaPedido);
+        return LineaPedidoDTO.convertToDTO(lineaPedido, lineaPedidoDTO.getPedido());
+    }
 }

@@ -12,4 +12,8 @@ public interface LineaPedidoService {
 
     LineaPedidoDTO editarLineaPedido(Long cantidad, Long idLineaPedido, ClienteDTO clienteDTO);
 
+    LineaPedidoDTO borrarLineaPedido(LineaPedidoDTO lineaPedidoDTO, ClienteDTO clienteDTO);
+
+    LineaPedidoDTO crearLineaPedido(LineaPedidoDTO lineaPedidoDTO, ClienteDTO clienteDTO);
+
 }

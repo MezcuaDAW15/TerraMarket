@@ -3,18 +3,21 @@ import { LineaPedido } from '../../../../models/lineaPedido';
 import { Venta } from './../../../../models/venta';
 import { Component, Input } from '@angular/core';
 import { Cliente } from '../../../../models/cliente';
+import { Router } from '@angular/router';
 import { Pedido } from '../../../../models/pedido';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cesta-item',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './cesta-item.component.html',
   styleUrl: './cesta-item.component.scss'
 })
 export class CestaItemComponent {
   constructor(
-    private cestaService: CestaService
+    private cestaService: CestaService,
+    private router: Router
   ) { }
   cliente: Cliente | undefined;
   @Input() lineaPedido: LineaPedido | null = null;
@@ -46,8 +49,11 @@ export class CestaItemComponent {
     console.log("Restar");
     this.cestaService.alterLineaPedido(this.lineaPedido, -1, this.cliente).subscribe((lineaPedido) => {
       this.lineaPedido = lineaPedido;
+
     });
+
   }
+
 
   sumar() {
     if (this.lineaPedido) {
@@ -66,6 +72,27 @@ export class CestaItemComponent {
     }
     console.log("Sumar");
     this.cestaService.alterLineaPedido(this.lineaPedido, 1, this.cliente).subscribe((lineaPedido) => {
+      this.lineaPedido = lineaPedido;
+    });
+  }
+
+  eliminar() {
+    if (this.lineaPedido) {
+      if (this.pedido) {
+        this.lineaPedido.pedido = this.pedido;
+      }
+    }
+    this.cliente = {
+      id: 1,
+      nombre: 'Cliente',
+      apellidos: 'Apellidos',
+      username: 'username',
+      email: 'email',
+      fechaNacimiento: new Date(),
+      cp: 'cp',
+    }
+    console.log("Eliminar");
+    this.cestaService.deleteLineaPedido(this.lineaPedido, this.cliente).subscribe((lineaPedido) => {
       this.lineaPedido = lineaPedido;
     });
   }
