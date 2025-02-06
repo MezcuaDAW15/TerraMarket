@@ -47,6 +47,10 @@ public class Cliente {
     @ToString.Exclude
     private Set<Pedido>listaPedidos;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "cliente")
+    @ToString.Exclude
+    private Set<Rol> roles;
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

@@ -22,7 +22,7 @@ public class Rol {
 
     @ManyToOne
     @JoinColumn(name = "idusuario")
-    private Usuario usuario;
+    private Cliente cliente;
 
     @Override
     public boolean equals(Object obj) {

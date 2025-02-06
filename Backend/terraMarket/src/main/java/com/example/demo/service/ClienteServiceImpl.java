@@ -6,14 +6,20 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import com.example.demo.model.dto.ClienteDTO;
 import com.example.demo.repository.dao.ClienteRepository;
 import com.example.demo.repository.entity.Cliente;
+import com.example.demo.repository.entity.Rol;
 
 @Service
-public class ClienteServiceImpl implements ClienteService{
+public class ClienteServiceImpl implements ClienteService, UserDetailsService{
 
     private static final Logger log = LoggerFactory.getLogger(ClienteServiceImpl.class);
 
@@ -53,22 +59,30 @@ public class ClienteServiceImpl implements ClienteService{
 		return listaClientesDTO;
     }
 
-    @Override
-    public int save(ClienteDTO clienteDTO) {
+    // @Override
+    // public int save(ClienteDTO clienteDTO) {
         
-		log.info(ClienteServiceImpl.class.getSimpleName() + " save() - clienteDto: " + clienteDTO.toString());
-		Cliente c = ClienteDTO.convertToEntity(clienteDTO);
-		log.info(ClienteServiceImpl.class.getSimpleName() + " save() - cliente: " + c.toString());
-		c.setActivo(true);
+	// 	log.info(ClienteServiceImpl.class.getSimpleName() + " save() - clienteDto: " + clienteDTO.toString());
+	// 	Cliente c = ClienteDTO.convertToEntity(clienteDTO);
+	// 	log.info(ClienteServiceImpl.class.getSimpleName() + " save() - cliente: " + c.toString());
+	// 	c.setActivo(true);
 
-        c = clienteRepository.save(c);
+    //     c = clienteRepository.save(c);
 
-        if (c != null) {
-            return 1;
-        } else {
-            return 0;
-        }
+    //     if (c != null) {
+    //         return 1;
+    //     } else {
+    //         return 0;
+    //     }
+    // }
+    @Override
+    public void save(ClienteDTO clienteDTO) {
+        log.info("UsuarioServiceImpl - save: salvamos el usuario : " + clienteDTO.toString());
+        
+        Cliente cliente = ClienteDTO.convertToEntity(clienteDTO);
+        clienteRepository.save(cliente);
     }
+
 
     @Override
     public int delete(ClienteDTO cDTO) {
@@ -84,6 +98,27 @@ public class ClienteServiceImpl implements ClienteService{
             return 0;
         }
 		
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        log.info("UsuarioServiceImpl - loadUserByUsername: " + username);
+
+        Cliente usuario = clienteRepository.findByUsername(username);
+        if(usuario != null) {
+
+            List<GrantedAuthority> listaPermisos = new ArrayList<GrantedAuthority>();
+            List<Rol> listaRoles = new ArrayList<Rol>(usuario.getRoles());
+
+            for(Rol rol:listaRoles) {
+                listaPermisos.add(new SimpleGrantedAuthority(rol.getNombre()));
+            }
+
+            return new User(usuario.getUsername(), usuario.getContrasena(), listaPermisos);
+        } else {
+            throw new UsernameNotFoundException(username);
+        }
     }
 
 }
