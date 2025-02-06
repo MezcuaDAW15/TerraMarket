@@ -21,12 +21,14 @@ public class WebSecurityConfig {
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                 return http.authorizeHttpRequests(auth -> auth
                         .requestMatchers("/","/login","/error", "/fragments/**", "/register", "/clientes/save/**").permitAll()
-                        .requestMatchers("/")
-                        .hasRole("USER").anyRequest().authenticated())
+                        .requestMatchers("/").hasRole("USER")
+                        .anyRequest().authenticated())
                         .formLogin(form -> form.loginPage("/login")
                                 .defaultSuccessUrl("/clientes", true)
                                 .failureUrl("/login?error")
-                                .permitAll()).logout(logout -> logout.logoutSuccessUrl("/").permitAll()).build();
+                                .permitAll())
+                                .logout(logout -> logout.logoutSuccessUrl("/").permitAll())
+                                .build();
                 
         }
 

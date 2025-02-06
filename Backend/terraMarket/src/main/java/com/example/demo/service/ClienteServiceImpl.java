@@ -80,6 +80,7 @@ public class ClienteServiceImpl implements ClienteService, UserDetailsService{
         log.info("UsuarioServiceImpl - save: salvamos el usuario : " + clienteDTO.toString());
         
         Cliente cliente = ClienteDTO.convertToEntity(clienteDTO);
+        cliente.setActivo(true);
         clienteRepository.save(cliente);
     }
 

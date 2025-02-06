@@ -6,10 +6,14 @@
 </head>
 <body>
 
-    <form th:action="@{/users/save}" th:object="${usuarioDTO}" method="post">
+    <form th:action="@{/clientes/save}" th:object="${clienteDTO}" method="post">
         <h3>Registration</h3>
         <input type="text" th:field="*{username}" placeholder="Username" /> <br/><br/>
-        <input type="password" th:field="*{password}" placeholder="Password" /> <br/><br/>
+        <input type="password" th:field="*{contrasena}" placeholder="Contraseña" /> <br/><br/>
+        <input type="text" th:field="*{nombre}" placeholder="Nombre" /> <br/><br/>
+        <input type="text" th:field="*{apellidos}" placeholder="Apellidos" /> <br/><br/>
+        <input type="email" th:field="*{email}" placeholder="Email" /> <br/><br/>
+        <input type="number" th:field="*{cp}" placeholder="Código postal" /> <br/><br/>
         <label>Roles:
         <input type="checkbox" name="roles"
         text="ADMIN"
