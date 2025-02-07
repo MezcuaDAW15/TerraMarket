@@ -2,7 +2,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BackComponent } from '../back/back.component';
 import { Pedido } from '../../models/pedido';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PedidoServiceService } from '../../services/pedido-service.service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -22,7 +22,7 @@ export class DetallesPedidoComponent implements OnInit {
 
   private suscripcion: Subscription = new Subscription();
 
-  constructor(private route: ActivatedRoute, private router: Router, private pedidoService:PedidoServiceService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private pedidoService: PedidoServiceService) { }
 
   getFormattedAddress(): string {
     if (!this.rowData?.puntoRecogida?.direccion) return '';
@@ -48,18 +48,18 @@ export class DetallesPedidoComponent implements OnInit {
 
     this.suscripcion = this.pedidoService.pedidoActual$.subscribe(data => {
       this.rowData = data;
-      console.log("Pedido component Linea pedido:", this.rowData?.listaLineasPedido);
-      
+      console.log("Pedido component Linea pedido:", this.rowData?.lineaPedido);
+
       //console.log(this.rowData.metodoPago.nombre)
     });
 
-    
+
 
   }
 
-  pintarEstado(estado:string){
-    
-    switch(estado){
+  pintarEstado(estado: string) {
+
+    switch (estado) {
       case 'Pendiente': return 'etiqueta-estado-pendiente';
       case 'Recogido': return 'etiqueta-estado-recogido';
       case 'Cancelado': return 'etiqueta-estado-cancelado';

@@ -1,62 +1,64 @@
 <app-back></app-back>
 <div class="encabezado">
-    <div class="div-encabezado">
-        <p class="h1">Detalles del pedido #{{rowData.id}}</p>
-        <span class="etiqueta-estado-pendiente" [ngClass]="pintarEstado(rowData.estado.estado)">{{rowData.estado.estado}}</span>
-    </div>
-    <button class="sqr-btn light rd-btn auto-size"><img src="../../../assets/icons/tab_close.svg" alt=""> Cancelar pedido</button>
+  <div class="div-encabezado">
+    <p class="h1">Detalles del pedido #{{rowData.id}}</p>
+    <span class="etiqueta-estado-pendiente"
+      [ngClass]="pintarEstado(rowData.estado.estado)">{{rowData.estado.estado}}</span>
+  </div>
+  <button class="sqr-btn light rd-btn auto-size"><img src="../../../assets/icons/tab_close.svg" alt=""> Cancelar
+    pedido</button>
 </div>
 <div class="info-pedido">
-    <hr class="divider">
-    <div class="detalles-pedido">
-        <div class="info">
-            <div class="info-precio">
-                <p>Total importe:</p>
-                <span class="precio">{{rowData.importe}} &euro;</span>
-            </div>
-            <div class="info-detalle">
-                <img src="../../../assets/icons/fechaPedido.svg" alt="">
-                <div class="divDato">
-                    <p>Fecha del pedido:</p>
-                    <span class="detalle">{{rowData.fechaPedido}}</span>
-                </div>
-            </div>
-            <div class="info-detalle">
-                <img src="../../../assets/icons/fechaRecogida.svg" alt="">
-                <div class="divDato">
-                    <p>Fecha de recogida:</p>
-                    <span class="detalle">{{rowData.fechaMaxRecogida}}</span>
-                </div>
-            </div>
-            <div class="info-detalle">
-                <img src="../../../assets/icons/metodoPago.svg" alt="">
-                <div class="divDato">
-                    <p>Método de pago:</p>
+  <hr class="divider">
+  <div class="detalles-pedido">
+    <div class="info">
+      <div class="info-precio">
+        <p>Total importe:</p>
+        <span class="precio">{{rowData.importe}} &euro;</span>
+      </div>
+      <div class="info-detalle">
+        <img src="../../../assets/icons/fechaPedido.svg" alt="">
+        <div class="divDato">
+          <p>Fecha del pedido:</p>
+          <span class="detalle">{{rowData.fechaPedido}}</span>
+        </div>
+      </div>
+      <div class="info-detalle">
+        <img src="../../../assets/icons/fechaRecogida.svg" alt="">
+        <div class="divDato">
+          <p>Fecha de recogida:</p>
+          <span class="detalle">{{rowData.fechaMaxRecogida}}</span>
+        </div>
+      </div>
+      <div class="info-detalle">
+        <img src="../../../assets/icons/metodoPago.svg" alt="">
+        <div class="divDato">
+          <p>Método de pago:</p>
 
-                    <span class="detalle">{{rowData.metodoPago?.nombre}}</span>
-                </div>
-            </div>
-            <div class="info-detalle">
-                <img src="../../../assets/icons/puntoRecogida.svg" alt="">
-                <div class="divDato">
-                    <p>Punto de recogida:</p>
-                    <span class="detalle" >{{getFormattedAddress()}}</span>
-                </div>
-            </div>
+          <span class="detalle">{{rowData.metodoPago?.nombre}}</span>
         </div>
-        <div class="info-lineas" *ngFor="let linea of rowData.listaLineasPedido">
-            <div class="linea-pedido">
-                <!-- <img src="" alt=""> -->
-                <div class="info-linea-pedido">
-                    <p class="nombre-producto">{{linea.venta.producto?.nombre}}</p>
-                    <div class="div-cantidad">
-                        <p>Cantidad X {{linea?.cantidad}}</p>
-                        <span>{{linea.venta.precioVenta}} &euro;</span>
-                    </div>
-                    <button class="review-btn auto-size">
-                        <img src="../../../assets/icons/reviews.svg" alt=""> Escribir una reseña</button>
-                </div>
-            </div>
+      </div>
+      <div class="info-detalle">
+        <img src="../../../assets/icons/puntoRecogida.svg" alt="">
+        <div class="divDato">
+          <p>Punto de recogida:</p>
+          <span class="detalle">{{getFormattedAddress()}}</span>
         </div>
+      </div>
     </div>
+    <div class="info-lineas" *ngFor="let linea of rowData.lineaPedido">
+      <div class="linea-pedido">
+        <!-- <img src="" alt=""> -->
+        <div class="info-linea-pedido">
+          <p class="nombre-producto">{{linea.venta.producto?.nombre}}</p>
+          <div class="div-cantidad">
+            <p>Cantidad X {{linea?.cantidad}}</p>
+            <span>{{linea.venta.precioVenta}} &euro;</span>
+          </div>
+          <button class="review-btn auto-size">
+            <img src="../../../assets/icons/reviews.svg" alt=""> Escribir una reseña</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

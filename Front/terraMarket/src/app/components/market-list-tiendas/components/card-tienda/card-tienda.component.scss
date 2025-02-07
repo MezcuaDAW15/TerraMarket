@@ -1,11 +1,11 @@
-@import "../../../mixins";
-@import "../../../variables";
-@import "../../../styles";
+@import "../../../../../variables";
+@import "../../../../../styles";
+@import "../../../../../mixins";
 
-.market-card {
+.tienda-card {
   width: 587px;
   height: 286px;
-  background: url("../../../assets/card-market.svg") no-repeat;
+  background: url("../../../../../assets/card-market.svg") no-repeat;
 }
 
 .img-container {
@@ -13,19 +13,26 @@
   justify-content: center;
 }
 
-.market-card-img {
+.tienda-card-img {
   margin-top: 12px;
   width: 563px;
   height: 142px;
 }
 
-.market-name {
-  @extend .mdm;
+.name {
+  @extend .p;
+  font-weight: 700;
   display: inline-block;
   margin: 12px;
 }
 
-.market-info {
+.categories {
+  display: flex;
+  gap: 1rem;
+}
+
+.bottom {
+  padding-left: 12px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -39,7 +46,7 @@
 }
 
 .btn-card {
-  @include button-base($orange, $orange-hover, 10px);
+  @include button-base($red, $red-hover, 10px);
   width: 155px;
   height: 48px;
   margin-right: 8px;
