@@ -1,4 +1,7 @@
 <app-back></app-back>
-<app-banner [mercado] = "mercado"></app-banner>
-<p-tabMenu [model]="items" />
-<app-list [mercado] = "mercado" ></app-list>
+<app-banner [mercado]="mercado"></app-banner>
+<p-tabMenu [model]="items" [(activeItem)]="selectedItem" (onTabChange)="onTabChange($event)" />
+<div *ngIf="activeTab === 'products'">
+
+  <app-list [mercado]="mercado"></app-list>
+</div>

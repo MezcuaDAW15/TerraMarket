@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { BackComponent } from "../back/back.component";
 import { BannerComponent } from "../banner/banner.component";
@@ -15,11 +16,13 @@ import { MenuItem } from 'primeng/api';
 @Component({
   selector: 'app-market-view',
   standalone: true,
-  imports: [BackComponent, BannerComponent, ListComponent, TabMenuModule],
+  imports: [BackComponent, BannerComponent, CommonModule, ListComponent, TabMenuModule],
   templateUrl: './market-view.component.html',
   styleUrl: './market-view.component.scss'
 })
 export class MarketViewComponent implements OnInit {
+  activeTab: string = 'products';
+  selectedItem: any;
 
   mercado: Mercado | null = null;
   errorMessage: string = '';
@@ -58,10 +61,22 @@ export class MarketViewComponent implements OnInit {
     console.log(this.mercado)
 
     this.items = [
-      { label: 'Dashboard', icon: 'shop' },
-      { label: 'Transactions', icon: 'pi pi-chart-line' },
-      { label: 'Products', icon: 'pi pi-list' },
-      { label: 'Messages', icon: 'pi pi-inbox' }
-  ]
+      { label: 'Tiendas', icon: 'shop', command: () => this.setActiveTab('shop') },
+      { label: 'Productos', icon: 'products', command: () => this.setActiveTab('products') }
+    ];
+    this.selectedItem = this.items ? this.items[1] : null;
+
+  }
+
+  setActiveTab(tab: string) {
+    this.activeTab = tab;
+  }
+
+  onTabChange(event: any) {
+    this.activeTab = event.index === 0 ? 'products' : 'shop';
+    if (this.selectedItem) {
+      this.selectedItem = this.items ? [event.index] : null;
+    }
+    console.log(this.activeTab)
   }
 }
