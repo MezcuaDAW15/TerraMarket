@@ -6,13 +6,16 @@ import { Mercado } from '../../models/mercado';
 import { Router, RouterLink } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { MarketService } from '../../services/markets/market.service';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { MenuItem } from 'primeng/api';
+
 
 
 
 @Component({
   selector: 'app-market-view',
   standalone: true,
-  imports: [BackComponent, BannerComponent, ListComponent],
+  imports: [BackComponent, BannerComponent, ListComponent, TabMenuModule],
   templateUrl: './market-view.component.html',
   styleUrl: './market-view.component.scss'
 })
@@ -20,6 +23,8 @@ export class MarketViewComponent implements OnInit {
 
   mercado: Mercado | null = null;
   errorMessage: string = '';
+  items: MenuItem[] | undefined;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -51,5 +56,12 @@ export class MarketViewComponent implements OnInit {
       console.error('ID de mercado no válido:', id);
     }
     console.log(this.mercado)
+
+    this.items = [
+      { label: 'Dashboard', icon: 'shop' },
+      { label: 'Transactions', icon: 'pi pi-chart-line' },
+      { label: 'Products', icon: 'pi pi-list' },
+      { label: 'Messages', icon: 'pi pi-inbox' }
+  ]
   }
 }
