@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.example.demo.repository.entity.Tienda;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -21,13 +20,9 @@ public class TiendaDTO implements Serializable {
     private String descripcion;
     private String imagen;
     private boolean activo;
-    @JsonIgnore
     private MercadoDTO mercado;
 
-
-
     private DireccionDTO direccion;
-
 
     @Override
     public boolean equals(Object obj) {

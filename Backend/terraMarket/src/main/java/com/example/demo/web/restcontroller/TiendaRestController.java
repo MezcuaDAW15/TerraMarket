@@ -56,7 +56,7 @@ public class TiendaRestController {
 
         MercadoDTO mercadoDTO = new MercadoDTO();
         mercadoDTO.setId(idMercado);
-        mercadoService.findById(mercadoDTO);
+        mercadoDTO = mercadoService.findById(mercadoDTO);
 
         TiendaDTO tiendaDTO = new TiendaDTO();
         tiendaDTO.setId(idTienda);
