@@ -1,0 +1,39 @@
+*{
+    font-family: 'Parkinsans', sans-serif;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    
+}
+
+.info-precio{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+   
+    p{
+        font-size: 16px;
+    }
+
+    .precio{
+        margin: 0;
+        font-weight: 800;
+        font-size: 24px;
+    }
+}
+.info-fecha{
+    display: flex;
+    flex-direction:row;
+    align-items: start;
+    gap: 8px;
+}
+span{
+    font-weight: 600;
+}
