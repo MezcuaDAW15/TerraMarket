@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -30,12 +31,13 @@ public class Mercado {
     private String imagen;
     private boolean activo;
 
-    
     @ManyToOne
     @JoinColumn(name = "iddireccion")
+    @ToString.Exclude
     private Direccion direccion;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "mercado")
+    @ToString.Exclude
     List<Tienda> listaTiendas;
 
 }

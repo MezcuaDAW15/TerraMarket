@@ -33,6 +33,7 @@
     margin: 0;
     margin-left: 40px;
     margin-right: 40px;
+    
 
     .divider{
         height: 2px; 
@@ -42,7 +43,7 @@
     }
     .detalles-pedido{
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 16px;
 
         .info{
@@ -69,10 +70,24 @@
                 flex-direction: row;
                 gap: 8px;
                 align-items: start;
-                
-                    
-                
-                
+            }
+        }
+        // PRODUCTOS DEL PEDIDO -----------------
+        .info-lineas{
+            display: flex;
+            flex-wrap: wrap;
+
+            .info-linea-pedido{
+                background-color: $white;
+                border: 1px solid $orange;
+                border-radius: 7px;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                .nombre-producto{
+                    font-weight: 600;
+                }
             }
         }
     }

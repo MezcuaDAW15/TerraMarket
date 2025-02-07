@@ -1,0 +1,48 @@
+@import "../../../mixins";
+@import "../../../variables";
+@import "../../../styles";
+
+.market-card {
+  width: 587px;
+  height: 286px;
+  background: url("../../../assets/card-market.svg") no-repeat;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+}
+
+.market-card-img {
+  margin-top: 12px;
+  width: 563px;
+  height: 142px;
+}
+
+.market-name {
+  @extend .mdm;
+  display: inline-block;
+  margin: 12px;
+}
+
+.market-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.info {
+  @extend .h3;
+  margin-left: 16px;
+  font-size: 16px;
+}
+
+.btn-card {
+  @include button-base($orange, $orange-hover, 10px);
+  width: 155px;
+  height: 48px;
+  margin-right: 8px;
+  margin-top: 30px;
+  border: transparent;
+}

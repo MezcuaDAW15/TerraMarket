@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
           {
             label: 'Editar perfil',
             icon: 'pi pi-user-edit text-2xl',
-
+            routerLink: '/editar-perfil-cliente'
 
 
           },
