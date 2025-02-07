@@ -78,10 +78,19 @@ public class ClienteDTO implements Serializable{
 		cliente.setCp(clienteDTO.getCp());
         cliente.setActivo(clienteDTO.isActivo());
 
+
+		Rol[] roles = new Rol[clienteDTO.getRolesDTO().size()];
 		for (int i = 0; i < clienteDTO.getRolesDTO().size(); i++) {
-			Rol rol = RolDTO.converToEntity(clienteDTO.getRolesDTO().get(i), cliente);
+			roles[i] = RolDTO.converToEntity(clienteDTO.getRolesDTO().get(i), cliente);
+		}
+		for (Rol rol : roles) {
 			cliente.getRoles().add(rol);
 		}
+		
+
+		// clienteDTO.getRolesDTO().stream()
+		// 	.map(rolDTO -> RolDTO.converToEntity(rolDTO, cliente))
+		// 	.forEach(rol -> cliente.getRoles().add(rol));
 		
 		return cliente;
 	}

@@ -30,7 +30,9 @@ public class RolDTO implements Serializable{
 
     public static Rol converToEntity(RolDTO rolDTO, Cliente cliente) {
         Rol rol = new Rol();
-        rol.setId(rolDTO.getId());
+        if (rolDTO.getId() != null){
+            rol.setId(rolDTO.getId());
+        }
         rol.setNombre(rolDTO.getNombre());
         rol.setCliente(cliente);
         return rol;

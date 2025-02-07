@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -14,9 +16,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.example.demo.model.dto.ClienteDTO;
+import com.example.demo.model.dto.RolDTO;
 import com.example.demo.repository.dao.ClienteRepository;
+import com.example.demo.repository.dao.RolRepository;
 import com.example.demo.repository.entity.Cliente;
 import com.example.demo.repository.entity.Rol;
+import com.example.demo.utils.EncriptaPassword;
 
 @Service
 public class ClienteServiceImpl implements ClienteService, UserDetailsService{
@@ -25,6 +30,8 @@ public class ClienteServiceImpl implements ClienteService, UserDetailsService{
 
     @Autowired
     ClienteRepository clienteRepository;
+    @Autowired
+    RolRepository rolRepository;
 
     @Override
     public ClienteDTO findById(ClienteDTO cDTO) {
@@ -78,10 +85,14 @@ public class ClienteServiceImpl implements ClienteService, UserDetailsService{
     @Override
     public void save(ClienteDTO clienteDTO) {
         log.info("UsuarioServiceImpl - save: salvamos el usuario : " + clienteDTO.toString());
-        
-        Cliente cliente = ClienteDTO.convertToEntity(clienteDTO);
+        Cliente cliente = new Cliente();
+        clienteDTO.setContrasena(EncriptaPassword.encriptarPassword(clienteDTO.getContrasena()));
+
+        cliente = ClienteDTO.convertToEntity(clienteDTO);
+        cliente.setFechaNacimiento(Date.from(Instant.now()));
         cliente.setActivo(true);
         clienteRepository.save(cliente);
+        log.info("UsuarioServiceImpl - save: salvamos el usuario ENTIDAD: " + cliente.toString());
     }
 
 

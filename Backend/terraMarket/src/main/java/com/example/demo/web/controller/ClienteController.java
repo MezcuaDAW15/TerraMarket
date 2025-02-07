@@ -110,7 +110,7 @@ public class ClienteController {
 			rolDTO.setClienteDTO(clienteDTO);
 			clienteDTO.getRolesDTO().add(rolDTO);
 		}
-
+		log.error("ClienteController - save: Salvamos los datos del usuario:" + clienteDTO.toString());
 		// Invocamos a la capa de servicios para que almacene los datos del usuario
 		clienteService.save(clienteDTO);
 

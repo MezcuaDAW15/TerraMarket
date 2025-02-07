@@ -1,8 +1,10 @@
 package com.example.demo.repository.entity;
 
 import java.util.Date;
-
+import java.util.HashSet;
 import java.util.Set;
+
+import com.example.demo.utils.EncriptaPassword;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -49,7 +51,7 @@ public class Cliente {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "cliente")
     @ToString.Exclude
-    private Set<Rol> roles;
+    private Set<Rol> roles = new HashSet<Rol>();
 
     @Override
     public boolean equals(Object obj) {
