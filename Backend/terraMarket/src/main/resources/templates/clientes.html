@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+    <head>
+        <title>Mantenimiento de clientes</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link th:href="@{/style/style.css}" rel="stylesheet"/>
+	</head>
+    <body>
+		<header>
+			<h3 th:text="${asignatura}"></h3>	
+            <div id="nombre">
+                <p th:text="${nombreAlumno}"></p>
+                <div id="icon"></div>
+            </div>
+		</header>
+		<main>
+			<h2 th:if="${listaClientesDTO.isEmpty()}">No hay clientes</h2>
+				<div id="divTabla" th:if="${!listaClientesDTO.isEmpty()}">
+					<h1>Mantenimiento de clientes</h1>
+					<a id="bt" th:href="@{/clientes/add}">Registrarse</a>	
+					<table>
+						<thead>
+							<tr>
+								<th>id</th>
+								<th>Nombre</th>
+								<th>Apellidos</th>
+								<th>Username</th>
+								<th>Fecha nacimiento</th>
+                                <th>Email</th>
+                                <th>Contraseña</th>
+                                <th>C.P</th>
+                                <th>Estado de la cuenta de usuario</th>
+
+								<th>Ver pedidos</th>
+								<th>Editar perfil</th>
+								<th>Eliminar cuenta de usuario</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="clienteDTO : ${listaClientesDTO}">
+								<td th:text="${clienteDTO.id}"></td>
+								<td th:text="${clienteDTO.nombre}"></td>
+								<td th:text="${clienteDTO.apellidos}"></td>
+								<td th:text="${clienteDTO.username}"></td>
+								<td th:text="${clienteDTO.fechaNacimiento}"></td>
+                                <td th:text="${clienteDTO.email}"></td>
+                                <td th:text="${clienteDTO.contrasena}"></td>
+                                <td th:text="${clienteDTO.cp}"></td>
+                                <td th:text="${clienteDTO.activo}"></td>
+								
+								<td><a id="btVerCuentas" th:href="@{/clientes/{idCliente}/pedidos(idCliente=${clienteDTO.id})}">Ver pedidos</a></td>
+                                <td><a id="btEditar" th:href="@{/clientes/update/{idCliente}(idCliente=${clienteDTO.id})}">Editar perfil</a></td>
+								<td><a id="btEliminar" th:href="@{/clientes/delete/{idCliente}(idCliente=${clienteDTO.id})}">Eliminar usuario</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			<br>
+			
+		</main>
+			
+	</body>
+</html>

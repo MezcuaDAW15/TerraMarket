@@ -20,6 +20,8 @@
             <td>idMercado</td>
             <td>idDireccion</td>
             <td>activo</td>
+            <td>Ver Tienda</td>
+            <td>Ver Tienda</td>
           </tr>
         </thead>
         <tbody>
@@ -32,6 +34,18 @@
             <td th:text="${item.mercadoDTO.id}" />
             <td th:text="${item.idDireccion}" />
             <td th:text="${item.activo}" />
+            <td>
+              <a
+                th:href="@{/mercados/{idMercado}/tiendas/{idTienda} (idMercado=${mercadoDTO.id},idTienda=${item.id})}"
+                >Ver Tienda</a
+              >
+            </td>
+            <td>
+              <a
+                th:href="@{/mercados/{idMercado}/tiendas/add (idMercado=${mercadoDTO.id})}"
+                >Crear tienda</a
+              >
+            </td>
           </tr>
         </tbody>
       </table>

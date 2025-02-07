@@ -1,0 +1,29 @@
+<div class="container">
+  <h3 class="h3">Resumen del pedido</h3>
+  <div class="resumen">
+    <div class="resumen-item">
+      <p class="p">Importe total de la cesta:</p>
+      <h3 class="h3 subtotal">{{formatNumber(cesta?.importe ?? 0)}}&euro;</h3>
+    </div>
+    <div class="resumen-item">
+      <div class="fecha">
+
+        <p class="p">Fecha aproximada de recogida</p>
+        <p class="p">
+          <img src="assets/icons/calendar_month.svg" alt="calendar" />
+          12 - 10 - 2024
+        </p>
+      </div>
+
+      <div class="fecha">
+        <p class="p">Fecha maxima aproximada de recogida</p>
+        <p class="p">
+          <img src="assets/icons/calendar_month.svg" alt="calendar" />
+          16 - 10 - 2024
+        </p>
+      </div>
+
+    </div>
+    <button class="sqr-btn auto-size">Realizar pedido</button>
+  </div>
+</div>

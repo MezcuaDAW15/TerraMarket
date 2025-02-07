@@ -1,0 +1,43 @@
+.resumen {
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  border: 2px solid orange;
+  border-radius: 10px;
+  width: 100%;
+  /* Para que ocupe todo el ancho disponible */
+  height: 75%;
+  /* Para que ocupe todo el alto disponible */
+}
+
+.container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.resumen-item {
+  margin-bottom: 1rem;
+}
+
+.p {
+  margin: .5rem 0;
+}
+
+.subtotal {
+  margin-top: 0.5rem;
+}
+
+.fecha {
+  margin-bottom: 1rem;
+}
+
+.sqr-btn {
+  align-self: center;
+  /* Centra el botón horizontalmente */
+  margin-top: auto;
+  /* Empuja el botón hacia abajo */
+}

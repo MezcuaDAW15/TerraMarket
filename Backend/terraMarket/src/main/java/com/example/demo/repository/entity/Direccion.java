@@ -1,12 +1,17 @@
 package com.example.demo.repository.entity;
 
+import java.util.Set;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -40,5 +45,9 @@ public class Direccion {
 
     @Column(name = "es_pr")
     private boolean esPr;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "direccion")
+    @ToString.Exclude
+    private Set<PuntoRecogida> listaPRecogida;
 
 }

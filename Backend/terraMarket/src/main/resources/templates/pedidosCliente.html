@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Lista Productos</title>
+</head>
+
+<body>
+	<div>
+		<br>
+		<h2>Lista pedidos</h2>
+        <h2 th:if="${listaPedidosDTO.isEmpty()}">No hay pedidos todavía</h2>
+		<a th:href="@{/clientes/{idCliente}/pedidos/add (idCliente=${clienteDTO.id})}">Realizar pedido</a>
+		<br>
+		<table border="1">
+			<thead>
+				<tr>
+					<td>id Pedido</td>
+					<td>Cliente</td>
+                    <td>Método de Pago</td>
+					<td>Punto de recogida</td>
+					<td>Fecha Pedido</td>
+                    <td>Fecha Compra</td>
+                    <td>Fecha Entrega</td>
+                    <td>Fecha Máxima para recoger</td>
+                    <td>Fecha Factura</td>
+                    <td>Nº Factura</td>
+                    <td>Estado del pedido</td>
+                    <td>Importe</td>
+
+                    <td>-</td>
+					<td>-</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="pedidoDTO : ${listaPedidosDTO}">
+					
+					<td th:text="${pedidoDTO.id}"></td>
+                    <td th:text="${pedidoDTO.clienteDTO.nombre} + ' ' + ${pedidoDTO.clienteDTO.apellidos}"></td>
+                    <td th:text="${pedidoDTO.metodoPago.nombre}"></td>
+                    <td th:text="${pedidoDTO.puntoRecogidaDTO}"></td>
+                    <td th:text="${pedidoDTO.fechaPedido}"></td>
+                    <td th:text="${pedidoDTO.fechaCompra}"></td>
+                    <td th:text="${pedidoDTO.fechaEntrega}"></td>
+					<td th:text="${pedidoDTO.fechaMaxRecogida}"></td>
+                    <td th:text="${pedidoDTO.fechaFactura}"></td>
+                    <td th:text="${pedidoDTO.numFactura}"></td>
+                    <td th:text="${pedidoDTO.estado.estado}"></td>
+                    <td th:text="${pedidoDTO.importe}"></td>
+
+                    <td><a th:href="@{/clientes/{idCliente}/pedidos/view/{idPedido} (idCliente=${clienteDTO.id}, idPedido=${pedidoDTO.id})}">Detalles</td>
+					<td><a th:href="@{/pedidos/{idPedido}(idPedido=${pedidoDTO.id})}">Cancelar pedido</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br>
+	<div>
+		<a th:href="@{/clientes}">Volver a Clientes</a>
+	</div>
+</body>
+
+</html>

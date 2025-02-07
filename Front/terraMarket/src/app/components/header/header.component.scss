@@ -1,0 +1,82 @@
+@import '../../../variables';
+@import '../../../styles';
+
+//pastilla
+.pastilla {
+  @extend .p;
+  font-weight: 500;
+
+  height: 40px;
+  width: auto;
+  padding: 12px;
+  background: #FFC6AE;
+  border-radius: 8px;
+  align-items: center;
+  display: inline-flex;
+  word-wrap: break-word;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  //width: 100vw;
+  background: $red;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+  }
+}
+
+.logo {
+  height: 37px;
+}
+
+.popup {
+  @extend .p;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: red;
+
+
+
+  &::hover {
+    background-color: none;
+  }
+}
+
+:host ::ng-deep .p-button {
+  @extend .p;
+  font-family: 'Parkinsans', sans-serif;
+  font-weight: 500;
+  //font-family: 'Parkinsans';
+  color: white;
+}
+
+:host ::ng-deep .p-badge {
+  font-family: 'Parkinsans', sans-serif;
+  background-color: $orange;
+  color: $black;
+}
+
+:host ::ng-deep .p-menu {
+  @extend .p;
+  font-family: 'Parkinsans', sans-serif;
+  font-weight: 600;
+  color: $gray;
+  border: 2px solid $red;
+  border-radius: 1.25rem;
+  padding: 6px;
+  width: 320px;
+  /*
+  &:: {
+    border: transparent;
+  }
+  */
+}

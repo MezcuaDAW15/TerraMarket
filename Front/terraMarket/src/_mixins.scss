@@ -1,0 +1,96 @@
+@import 'variables';
+
+// Mixins para botones
+@mixin button-base($bg-color, $hover-color, $border-radius, $font-color: white) {
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0.50px;
+
+
+  width: 100%;
+  height: 48px;
+  max-width: 300px;
+  padding: 12px 20px;
+  background: $bg-color;
+  border-radius: $border-radius;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  color: $font-color;
+  font-size: 16px;
+  text-align: center;
+  word-wrap: break-word;
+
+  &:hover {
+    background: $hover-color;
+  }
+}
+
+@mixin auto-size {
+  width: auto;
+  padding: 10px 20px;
+}
+
+@mixin disabled {
+  opacity: $disabled-opacity;
+  cursor: not-allowed;
+}
+
+
+// Botones redondeados
+.rd-btn {
+  @include button-base($orange, $orange-hover, 26px);
+
+  &.auto-size {
+    @include auto-size;
+  }
+
+  &.red {
+    @include button-base($red, $red-hover, 26px);
+  }
+
+  &.disabled {
+    @include disabled;
+  }
+}
+
+// Botones cuadrados
+.sqr-btn {
+  @include button-base($red, $red-hover, 10px);
+  height: 50px;
+
+  &.auto-size {
+    @include auto-size;
+  }
+
+  &.orange {
+    @include button-base($orange, $orange-hover, 10px);
+  }
+
+  &.light {
+    @include button-base($white, $light-hover, 10px, black);
+    border: $light-border solid $red;
+
+    &:hover {
+      border-color: $red;
+    }
+  }
+
+  &.light.orange {
+    @include button-base($white, $light-hover, 10px, black);
+    border: $light-border solid $orange;
+
+    &:hover {
+      border-color: $orange;
+    }
+  }
+
+
+
+  &.disabled {
+    @include disabled;
+  }
+}

@@ -3,6 +3,7 @@ package com.example.demo.model.dto;
 import java.util.Objects;
 
 import com.example.demo.repository.entity.Producto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -11,6 +12,10 @@ public class ProductoDTO {
     private Long id;
     private String nombre;
     private String imagen;
+	@JsonIgnore
+	private CategoriaPDTO categoriaP;
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -31,7 +36,9 @@ public class ProductoDTO {
        productoDTO.setId(producto.getId());
        productoDTO.setNombre(producto.getNombre());
        productoDTO.setImagen(producto.getImagen());
+	   productoDTO.setCategoriaP(CategoriaPDTO.convertToDTO(producto.getCategoriaP()));
        return productoDTO;
+
     }
 	public static Producto convertToEntity(ProductoDTO productoDTO) {
 		
@@ -39,6 +46,7 @@ public class ProductoDTO {
 		producto.setId(productoDTO.getId());
 		producto.setNombre(productoDTO.getNombre());
 		producto.setImagen(productoDTO.getImagen());
+		producto.setCategoriaP(CategoriaPDTO.convertToEntity(productoDTO.getCategoriaP()));
 		return producto;
 
 	}

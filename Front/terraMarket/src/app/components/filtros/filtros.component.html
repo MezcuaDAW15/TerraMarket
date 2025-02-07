@@ -1,0 +1,4 @@
+<div class="categories">
+  <app-chips *ngFor=" let categoria of categoriasT; index as i; trackBy: trackByFn" [categoriaT]=" categoria" (categorySelected)="onCategoryChange($event)"/>
+  <button class="rd-btn red" (click)="applyFilters()">Aplicar</button>
+</div>

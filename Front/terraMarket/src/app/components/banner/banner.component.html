@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="banner">
+    <img src="assets/banner.png" alt="Mercat Central de València">
+  </div>
+  <div class="content">
+    <div class="left-section">
+      <div class="h1">{{mercado?.nombre}}</div>
+      <div [ngClass]="mercado?.activo ? 'etiqueta-estado green' : 'etiqueta-estado red'">
+        <span>{{ mercado?.activo ? 'Activo' : 'Inactivo' }}</span>
+      </div>
+    </div>
+    <div class="right-section">
+      <div class="info-item">
+        <div class="info-item-icon">
+          <img src="assets/icons/location_red.svg" alt="Ubicacion">
+        </div>
+        <span>{{getFormattedAddress()}}</span>
+      </div>
+      <div class="info-item">
+        <div class="info-item-icon">
+          <img src="assets/icons/call.svg" alt="Phone">
+        </div>
+        <span>{{getFormattedPhone()}}</span>
+      </div>
+      <div class="info-item">
+        <div class="info-item-icon">
+          <img src="assets/icons/mail_red.svg" alt="Email">
+
+        </div>
+        <span>{{mercado?.email}}</span>
+      </div>
+    </div>
+  </div>
+</div>

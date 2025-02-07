@@ -3,8 +3,8 @@ package com.example.demo.model.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.example.demo.repository.entity.Mercado;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -19,7 +19,9 @@ public class MercadoDTO implements Serializable {
     private String email;
     private String imagen;
     private boolean activo;
-    List<TiendaDTO> listaTiendasDTO;
+    private DireccionDTO direccion;
+    @JsonIgnore
+    List<TiendaDTO> listaTiendas;
 
     @Override
     public boolean equals(Object obj) {
@@ -56,12 +58,14 @@ public class MercadoDTO implements Serializable {
         mercadoDTO.setImagen(mercado.getImagen());
         mercadoDTO.setActivo(mercado.isActivo());
 
+        mercadoDTO.setDireccion(DireccionDTO.convertToDTO(mercado.getDireccion()));
+
         List<TiendaDTO> listaTDTO = new ArrayList<TiendaDTO>();
         mercado.getListaTiendas().forEach(tienda -> {
             listaTDTO.add(TiendaDTO.convertToDTO(tienda, mercadoDTO));
         });
 
-        mercadoDTO.setListaTiendasDTO(listaTDTO);
+        mercadoDTO.setListaTiendas(listaTDTO);
         return mercadoDTO;
     }
 
@@ -74,6 +78,9 @@ public class MercadoDTO implements Serializable {
         mercado.setEmail(mercadoDTO.getEmail());
         mercado.setImagen(mercadoDTO.getImagen());
         mercado.setActivo(mercadoDTO.isActivo());
+
+        mercado.setDireccion(DireccionDTO.convertToEntity(mercadoDTO.getDireccion()));
+
         return mercado;
     }
 

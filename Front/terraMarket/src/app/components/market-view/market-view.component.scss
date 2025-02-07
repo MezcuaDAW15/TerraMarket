@@ -1,0 +1,18 @@
+@import '../../../styles';
+@import '../../../variables';
+
+
+:host ::ng-deep .p-tabmenu-nav {
+  @extend .p;
+
+  background-color: transparent;
+
+}
+
+:host ::ng-deep .p-menuitem-link {
+  @extend .p;
+  font-weight: 700;
+  background-color: transparent;
+  color: $black;
+
+}
