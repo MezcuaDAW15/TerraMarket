@@ -2,7 +2,9 @@ package com.example.demo.model.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+
 import com.example.demo.repository.entity.Mercado;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -55,7 +57,11 @@ public class MercadoDTO implements Serializable {
         mercadoDTO.setDireccionF(mercado.getDireccionF());
         mercadoDTO.setTelefono(mercado.getTelefono());
         mercadoDTO.setEmail(mercado.getEmail());
-        mercadoDTO.setImagen(mercado.getImagen());
+
+        if (mercado.getImagen() != null) {
+            mercadoDTO.setImagen(Base64.getEncoder().encodeToString(mercado.getImagen()));
+        }
+
         mercadoDTO.setActivo(mercado.isActivo());
 
         mercadoDTO.setDireccion(DireccionDTO.convertToDTO(mercado.getDireccion()));
@@ -76,7 +82,7 @@ public class MercadoDTO implements Serializable {
         mercado.setDireccionF(mercadoDTO.getDireccionF());
         mercado.setTelefono(mercadoDTO.getTelefono());
         mercado.setEmail(mercadoDTO.getEmail());
-        mercado.setImagen(mercadoDTO.getImagen());
+        // mercado.setImagen(mercadoDTO.getImagen());
         mercado.setActivo(mercadoDTO.isActivo());
 
         mercado.setDireccion(DireccionDTO.convertToEntity(mercadoDTO.getDireccion()));
