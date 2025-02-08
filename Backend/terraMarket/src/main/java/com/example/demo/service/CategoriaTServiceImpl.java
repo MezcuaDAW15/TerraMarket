@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.dto.CategoriaPDTO;
 import com.example.demo.model.dto.CategoriaTDTO;
-import com.example.demo.repository.dao.CategoriaPRepository;
+import com.example.demo.model.dto.TiendaDTO;
 import com.example.demo.repository.dao.CategoriaTRepository;
 import com.example.demo.repository.entity.CategoriaT;
 
@@ -27,6 +27,17 @@ public class CategoriaTServiceImpl implements CategoriaTService {
             List<CategoriaPDTO> listaCategoriaPDTO = categoriaPService.findByIdCategoriaT(categoria.getId());
             CategoriaTDTO categoriaDTO = CategoriaTDTO.convertToDTO(categoria);
             categoriaDTO.setListaCategoriaP(listaCategoriaPDTO);
+            listaCategoriaTDTO.add(categoriaDTO);
+        }
+        return listaCategoriaTDTO;
+    }
+
+    @Override
+    public List<CategoriaTDTO> findAllByTienda(TiendaDTO tiendaDTO) {
+        List<CategoriaTDTO> listaCategoriaTDTO = new ArrayList<CategoriaTDTO>();
+        List<CategoriaT> listaCategorias = categoriaTRepository.findAllByTienda(tiendaDTO.getId());
+        for (CategoriaT categoria : listaCategorias) {
+            CategoriaTDTO categoriaDTO = CategoriaTDTO.convertToDTO(categoria);
             listaCategoriaTDTO.add(categoriaDTO);
         }
         return listaCategoriaTDTO;

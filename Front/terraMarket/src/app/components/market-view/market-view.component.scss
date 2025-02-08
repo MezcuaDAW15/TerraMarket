@@ -7,8 +7,15 @@
 
   background-color: transparent;
   width: fit-content;
-  border-width:  0 0 1px 0;
+  border-width: 0 0 1px 0;
 
+
+}
+
+:host ::ng-deep .p-tabmenu-nav-content {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1rem;
 
 }
 

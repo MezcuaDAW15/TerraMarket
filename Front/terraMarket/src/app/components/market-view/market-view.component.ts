@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MarketService } from '../../services/markets/market.service';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { MenuItem } from 'primeng/api';
+import { MarketListTiendasComponent } from "../market-list-tiendas/market-list-tiendas.component";
 
 
 
@@ -16,7 +17,7 @@ import { MenuItem } from 'primeng/api';
 @Component({
   selector: 'app-market-view',
   standalone: true,
-  imports: [BackComponent, BannerComponent, CommonModule, ListComponent, TabMenuModule],
+  imports: [BackComponent, BannerComponent, CommonModule, ListComponent, TabMenuModule, MarketListTiendasComponent],
   templateUrl: './market-view.component.html',
   styleUrl: './market-view.component.scss'
 })

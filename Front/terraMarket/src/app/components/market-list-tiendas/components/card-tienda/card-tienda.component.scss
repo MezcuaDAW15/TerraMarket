@@ -29,13 +29,14 @@
 .categories {
   display: flex;
   gap: 1rem;
+  padding-bottom: 10px;
 }
 
 .bottom {
   padding-left: 12px;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: end;
   justify-content: space-between;
 }
 

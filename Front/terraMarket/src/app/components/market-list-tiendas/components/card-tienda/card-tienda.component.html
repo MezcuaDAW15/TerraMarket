@@ -3,18 +3,16 @@
     <div class="tienda-card-img" style="background-image: url(assets/market.png)"></div>
   </div>
 
-  <span class="name">Paquito perez</span>
+  <span class="name">{{tienda?.nombre}}</span>
   <div class="bottom">
 
     <div class="categories">
 
 
-      <div class="etiqueta-estado yellow">
+      <div class="etiqueta-estado yellow" *ngFor="let categoria of tienda?.categoriaT">
         <img src="assets/icons/categories/Aves Derivados.svg" alt="">
       </div>
-      <div class="etiqueta-estado yellow">
-        <img src="assets/icons/categories/Aves Derivados.svg" alt="">
-      </div>
+
     </div>
     <button class="btn-card">
       <span class="">Ver Productos</span>

@@ -9,10 +9,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.dto.CategoriaTDTO;
 import com.example.demo.model.dto.MercadoDTO;
 import com.example.demo.model.dto.TiendaDTO;
+import com.example.demo.model.dto.VentaDTO;
+import com.example.demo.repository.dao.CategoriaTRepository;
 import com.example.demo.repository.dao.TiendaRepository;
+import com.example.demo.repository.entity.CategoriaT;
 import com.example.demo.repository.entity.Tienda;
+import com.example.demo.repository.entity.Venta;
 
 @Service
 public class TiendaServiceImpl implements TiendaService {
@@ -21,6 +26,10 @@ public class TiendaServiceImpl implements TiendaService {
 
     @Autowired
     TiendaRepository tiendaRepository;
+    @Autowired
+    CategoriaTRepository categoriaTRepository;
+    @Autowired
+    CategoriaTService categoriaTService;
 
     @Override
     public List<TiendaDTO> findAllByMercado(MercadoDTO mercadoDTO) {
@@ -53,6 +62,30 @@ public class TiendaServiceImpl implements TiendaService {
         Tienda tienda = TiendaDTO.convertToEntity(tiendaDTO);
 
         tiendaRepository.save(tienda);
+    }
+
+    @Override
+    public List<TiendaDTO> findAllByCategoriasMercado(List<CategoriaTDTO> categoriasTDTO, MercadoDTO mercadoDTO) {
+        if (categoriasTDTO.isEmpty()) {
+            List<CategoriaT> categoriasT = categoriaTRepository.findAll();
+            categoriasTDTO.addAll(categoriasT.stream().map(CategoriaTDTO::convertToDTO).toList());
+
+        }
+
+        List<Tienda> tiendas = new ArrayList<Tienda>();
+        for (CategoriaTDTO categoriaTDTO : categoriasTDTO) {
+            log.info("Categoria: " + categoriaTDTO);
+            tiendas.addAll(tiendaRepository.findAllByCategoriasMercado(categoriaTDTO.getId(), mercadoDTO.getId()));
+        }
+
+        List<TiendaDTO> tiendasDTO = new ArrayList<TiendaDTO>();
+        for (Tienda tienda : tiendas) {
+            TiendaDTO tiendaDTO = TiendaDTO.convertToDTO(tienda, mercadoDTO);
+            tiendaDTO.setCategoriaT(categoriaTService.findAllByTienda(tiendaDTO));
+            tiendasDTO.add(tiendaDTO);
+        }
+
+        return tiendasDTO;
     }
 
 }

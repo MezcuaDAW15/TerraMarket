@@ -5,3 +5,7 @@
 
   <app-list [mercado]="mercado"></app-list>
 </div>
+<div *ngIf="activeTab === 'shop'">
+
+  <app-market-list-tiendas [mercado]="mercado"></app-market-list-tiendas>
+</div>

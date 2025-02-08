@@ -1,6 +1,8 @@
 package com.example.demo.model.dto;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +26,8 @@ public class TiendaDTO implements Serializable {
     @JsonIgnore
     private MercadoDTO mercado;
 
-    private DireccionDTO direccionDTO;
+    private DireccionDTO direccion;
+    private List<CategoriaTDTO> categoriaT;
 
     @Override
     public boolean equals(Object obj) {
@@ -60,7 +63,7 @@ public class TiendaDTO implements Serializable {
         tiendaDTO.setImagen(tienda.getImagen());
         tiendaDTO.setActivo(tienda.isActivo());
         tiendaDTO.setMercado(mercadoDTO);
-        tiendaDTO.setDireccionDTO(DireccionDTO.convertToDTO(tienda.getDireccion()));
+        tiendaDTO.setDireccion(DireccionDTO.convertToDTO(tienda.getDireccion()));
 
         return tiendaDTO;
     }
@@ -75,7 +78,11 @@ public class TiendaDTO implements Serializable {
         tienda.setImagen(tiendaDTO.getImagen());
         tienda.setActivo(tiendaDTO.isActivo());
         tienda.setMercado(MercadoDTO.convertToEntity(tiendaDTO.getMercado()));
-        tienda.setDireccion(DireccionDTO.convertToEntity(tiendaDTO.getDireccionDTO()));
+        tienda.setDireccion(DireccionDTO.convertToEntity(tiendaDTO.getDireccion()));
+
+        tienda.setCategorias(tiendaDTO.getCategoriaT().stream()
+                .map(CategoriaTDTO::convertToEntity)
+                .collect(Collectors.toSet()));
 
         return tienda;
     }
