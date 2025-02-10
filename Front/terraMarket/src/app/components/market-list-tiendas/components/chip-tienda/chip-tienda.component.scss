@@ -1,0 +1,31 @@
+@import '../../../../../variables';
+
+.etiqueta-estado {
+  padding: 5px 5px;
+  display: flex;
+  gap: 8px;
+  border: 2px solid $orange;
+  border-radius: 5px;
+}
+
+.p {
+  margin: 2px 0 0 0;
+  font-weight: 500;
+}
+
+.transparent {
+  background-color: transparent;
+}
+
+.flipo {
+  :hover {
+    cursor: pointer;
+    background-color: $orange-hover;
+  }
+
+  &.transparent {
+    :hover {
+      background-color: $light-hover;
+    }
+  }
+}

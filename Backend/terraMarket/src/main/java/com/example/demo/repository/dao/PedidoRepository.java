@@ -15,4 +15,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long>{
     @Query(value = "SELECT * FROM pedidos WHERE idcliente = :idCliente", nativeQuery = true)
     public List<Pedido> findAllByCliente(@Param("idCliente") Long id);
 
+    @Query(value = "SELECT * FROM pedidos WHERE idcliente = :idCliente AND estado = 1", nativeQuery = true)
+    public Pedido findPedidoPendiente(Long idCliente);
+
 }

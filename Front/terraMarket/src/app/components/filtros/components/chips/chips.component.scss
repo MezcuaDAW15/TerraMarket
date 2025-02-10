@@ -1,0 +1,15 @@
+@import "../../../../../variables";
+@import "../../../../../styles";
+
+
+
+.category-header {
+  display: flex;
+  gap: 5px;
+  border-bottom: 2px solid $black;
+}
+
+.chip-selector {
+  display: flex;
+  gap: 5px;
+}

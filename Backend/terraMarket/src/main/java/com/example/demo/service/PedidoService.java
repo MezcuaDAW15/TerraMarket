@@ -17,6 +17,8 @@ public interface PedidoService {
 
     PedidoDTO findById(PedidoDTO pedidoDTO, ClienteDTO clienteDTO);
 
+    PedidoDTO findPedidoPendiente(Long idCliente);
+
     //void save(PedidoDTO pedidoDTO);
 
 }

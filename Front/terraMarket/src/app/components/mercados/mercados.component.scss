@@ -9,9 +9,21 @@ h3 {
 }
 
 #banner {
-  margin: 20px 40px;
+  margin: 20px 60px;
   display: grid;
   grid-template-columns: repeat(2, auto);
+
+  img {
+    width: 677px;
+  }
+
+  h1 {
+    font-size: 4rem;
+  }
+}
+
+#texto-banner {
+  margin-top: 20px;
 }
 
 #buscador {
@@ -22,6 +34,16 @@ h3 {
   align-items: center;
   height: 200px;
 }
+
+:host ::ng-deep .autocomplete {
+  width: 451px;
+
+  button {
+    background-color: $red;
+    border: $red;
+  }
+}
+
 #etiquetas {
   display: flex;
   flex-direction: column;

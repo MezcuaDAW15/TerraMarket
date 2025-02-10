@@ -1,0 +1,5 @@
+<h3 class="h3">Cesta</h3>
+<div class="cesta-list">
+  <app-cesta-item *ngFor="let venta of cesta?.lineaPedido; index as i; trackBy: trackByFn" [lineaPedido]="venta"
+    [pedido]="cesta"></app-cesta-item>
+</div>

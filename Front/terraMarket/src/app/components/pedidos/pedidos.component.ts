@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewEncapsulation, Inject } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
 import { BackComponent } from "../back/back.component";
@@ -15,7 +15,7 @@ interface Column {
 @Component({
   selector: 'app-pedidos',
   standalone: true,
-  imports: [TableModule, CommonModule, BackComponent, CommonModule, RouterLink, DetallesPedidoComponent],
+  imports: [TableModule, CommonModule, BackComponent, CommonModule, RouterLink,],
   templateUrl: './pedidos.component.html',
   styleUrl: './pedidos.component.scss',
   encapsulation: ViewEncapsulation.None
@@ -31,7 +31,7 @@ export class PedidosComponent implements OnInit{
   @Output() pedidoEmitido = new EventEmitter<Pedido>()
 
 
-  constructor(private pedidoService: PedidoServiceService, private router:Router){}
+  constructor(@Inject(PedidoServiceService) private pedidoService: PedidoServiceService, private router:Router){}
 
   ngOnInit(): void {
       this.mostrarPedidos()
@@ -61,7 +61,7 @@ export class PedidosComponent implements OnInit{
   }
 
   pintarEstado(estado:string){
-    
+
     switch(estado){
       case 'Pendiente': return 'etiqueta-estado-pendiente';
       case 'Recogido': return 'etiqueta-estado-recogido';
