@@ -12,13 +12,17 @@ import { Venta } from '../../models/venta';
 })
 export class CardComponent implements OnInit {
   @Input() venta: Venta | null = null;
+  imagenUrl: string | null = null;
+
 
   constructor(private ventasService: VentasService) { }
 
   ngOnInit() {
     if (this.venta) {
-      console.log(this.venta);
+      this.imagenUrl = 'data:image/jpeg;base64,' + this.venta.producto.imagen;
+
     }
+
   }
 
   formatNumber(value: number): string {
