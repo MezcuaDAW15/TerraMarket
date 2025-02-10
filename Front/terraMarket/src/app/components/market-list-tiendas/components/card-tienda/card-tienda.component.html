@@ -1,6 +1,6 @@
 <div class="tienda-card">
   <div class="img-container">
-    <div class="tienda-card-img" style="background-image: url(assets/market.png)"></div>
+    <div class="tienda-card-img" [style.background-image]="'url(' + imagenUrl + ')'"></div>
   </div>
 
   <span class="name">{{tienda?.nombre}}</span>
