@@ -1,6 +1,7 @@
 package com.example.demo.model.dto;
 
 import java.io.Serializable;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,7 +61,9 @@ public class TiendaDTO implements Serializable {
         tiendaDTO.setNombre(tienda.getNombre());
         tiendaDTO.setLogo(tienda.getLogo());
         tiendaDTO.setDescripcion(tienda.getDescripcion());
-        tiendaDTO.setImagen(tienda.getImagen());
+        if (tienda.getImagen() != null) {
+			tiendaDTO.setImagen(Base64.getEncoder().encodeToString(tienda.getImagen()));
+		}
         tiendaDTO.setActivo(tienda.isActivo());
         tiendaDTO.setMercado(mercadoDTO);
         tiendaDTO.setDireccion(DireccionDTO.convertToDTO(tienda.getDireccion()));
@@ -75,7 +78,7 @@ public class TiendaDTO implements Serializable {
         tienda.setNombre(tiendaDTO.getNombre());
         tienda.setLogo(tiendaDTO.getLogo());
         tienda.setDescripcion(tiendaDTO.getDescripcion());
-        tienda.setImagen(tiendaDTO.getImagen());
+        //tienda.setImagen(tiendaDTO.getImagen());
         tienda.setActivo(tiendaDTO.isActivo());
         tienda.setMercado(MercadoDTO.convertToEntity(tiendaDTO.getMercado()));
         tienda.setDireccion(DireccionDTO.convertToEntity(tiendaDTO.getDireccion()));

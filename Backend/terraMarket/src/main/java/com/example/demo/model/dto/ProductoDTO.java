@@ -1,5 +1,6 @@
 package com.example.demo.model.dto;
 
+import java.util.Base64;
 import java.util.Objects;
 
 import com.example.demo.repository.entity.Producto;
@@ -35,7 +36,9 @@ public class ProductoDTO {
        ProductoDTO productoDTO = new ProductoDTO();
        productoDTO.setId(producto.getId());
        productoDTO.setNombre(producto.getNombre());
-       productoDTO.setImagen(producto.getImagen());
+       if (producto.getImagen() != null) {
+			productoDTO.setImagen(Base64.getEncoder().encodeToString(producto.getImagen()));
+		}
 	   productoDTO.setCategoriaP(CategoriaPDTO.convertToDTO(producto.getCategoriaP()));
        return productoDTO;
 
@@ -45,7 +48,8 @@ public class ProductoDTO {
 		Producto producto = new Producto();
 		producto.setId(productoDTO.getId());
 		producto.setNombre(productoDTO.getNombre());
-		producto.setImagen(productoDTO.getImagen());
+		//producto.setImagen(productoDTO.getImagen());
+
 		producto.setCategoriaP(CategoriaPDTO.convertToEntity(productoDTO.getCategoriaP()));
 		return producto;
 
