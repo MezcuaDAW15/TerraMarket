@@ -2,7 +2,7 @@
   <div class="product-details">
 
     <div class="cesta-item_img">
-      <img src="assets/image.png" alt="cesta-item" />
+      <img *ngIf="imagenUrl" [src]="imagenUrl" alt="cesta-item" />
     </div>
     <div class="info">
       <p class="mdm">{{lineaPedido.venta.producto.nombre}}</p>

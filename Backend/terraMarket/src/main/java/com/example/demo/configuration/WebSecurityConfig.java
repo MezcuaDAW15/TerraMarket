@@ -16,24 +16,30 @@ public class WebSecurityConfig {
 
         @Autowired
         private UserDetailsService userDetailsService;
-        
-	@Bean
+
+        @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-                return http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/","/login","/error", "/fragments/**", "/register", "/clientes/save/**").permitAll()
-                        .requestMatchers("/").hasRole("USER")
-                        .anyRequest().authenticated())
-                        .formLogin(form -> form.loginPage("/login")
-                                .defaultSuccessUrl("/clientes", true)
-                                .failureUrl("/login?error")
-                                .permitAll())
-                                .logout(logout -> logout.logoutSuccessUrl("/").permitAll())
-                                .build();
+                // return http.authorizeHttpRequests(auth -> auth
+                // .requestMatchers("/","/login","/error", "/fragments/**", "/register",
+                // "/clientes/save/**").permitAll()
+                // .requestMatchers("/").hasRole("USER")
+                // .anyRequest().authenticated())
+                // .formLogin(form -> form.loginPage("/login")
+                // .defaultSuccessUrl("/clientes", true)
+                // .failureUrl("/login?error")
+                // .permitAll())
+                // .logout(logout -> logout.logoutSuccessUrl("/").permitAll())
+                // .build();
+
+                http.csrf(csrf -> csrf.disable())
+                                .authorizeHttpRequests(auth -> auth
+                                                .requestMatchers("/**").permitAll()
+                                                .anyRequest().authenticated());
+                return http.build();
         }
 
         @Autowired
-        public void configureGlobal(AuthenticationManagerBuilder build) throws Exception{
-                build.userDetailsService(userDetailsService).passwordEncoder(new
-                BCryptPasswordEncoder());
+        public void configureGlobal(AuthenticationManagerBuilder build) throws Exception {
+                build.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
         }
 }
