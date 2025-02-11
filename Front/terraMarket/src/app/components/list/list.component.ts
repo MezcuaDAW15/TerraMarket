@@ -45,6 +45,7 @@ export class ListComponent implements OnInit {
         console.log(this.productsToShow);
       });
     }
+
   }
 
   onFiltersApplied(categories: CategoriaP[], mercado: Mercado) {

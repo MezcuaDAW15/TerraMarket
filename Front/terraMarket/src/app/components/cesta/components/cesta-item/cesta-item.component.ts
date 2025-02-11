@@ -1,7 +1,7 @@
 import { CestaService } from './../../../../services/cesta/cesta.service';
 import { LineaPedido } from '../../../../models/lineaPedido';
 import { Venta } from './../../../../models/venta';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Cliente } from '../../../../models/cliente';
 import { Router } from '@angular/router';
 import { Pedido } from '../../../../models/pedido';
@@ -14,14 +14,24 @@ import { CommonModule } from '@angular/common';
   templateUrl: './cesta-item.component.html',
   styleUrl: './cesta-item.component.scss'
 })
-export class CestaItemComponent {
+export class CestaItemComponent implements OnInit {
   constructor(
     private cestaService: CestaService,
     private router: Router
   ) { }
+
   cliente: Cliente | undefined;
   @Input() lineaPedido: LineaPedido | null = null;
   @Input() pedido: Pedido | null = null;
+  imagenUrl: string | null = null;
+
+
+  ngOnInit(): void {
+    if (this.lineaPedido?.venta.producto) {
+      this.imagenUrl = 'data:image/jpeg;base64,' + this.lineaPedido.venta.producto.imagen;
+
+    }
+  }
 
   formatNumber(value: number): string {
     if (value < 10) {
