@@ -9,4 +9,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/ws/categorias")
 public class MetodoPagoRestController {
 
+    // mostrar lista metodos pago
 }
