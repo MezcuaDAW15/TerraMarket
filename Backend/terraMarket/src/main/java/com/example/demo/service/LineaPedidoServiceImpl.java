@@ -65,7 +65,7 @@ public class LineaPedidoServiceImpl implements LineaPedidoService {
             PedidoDTO pedidoDTO = new PedidoDTO();
             pedidoDTO.setId(lineaPedido.getPedido().getId());
             return LineaPedidoDTO.convertToDTO(lineaPedido,
-                    pedidoService.findById(pedidoDTO, clienteDTO));
+                    pedidoService.findById(pedidoDTO));
         }
 
     }
@@ -88,7 +88,7 @@ public class LineaPedidoServiceImpl implements LineaPedidoService {
         lineaPedido.setCantidad(lineaPedidoDTO.getCantidad());
         lineaPedido.setVenta(ventaRepository.findById(lineaPedidoDTO.getVenta().getId()).get());
         lineaPedido
-                .setPedido(PedidoDTO.convertToEntity(pedidoService.findById(lineaPedidoDTO.getPedido(), clienteDTO)));
+                .setPedido(PedidoDTO.convertToEntity(pedidoService.findById(lineaPedidoDTO.getPedido())));
         lineaPedido.setFecha(Date.from(Instant.now()));
         lineaPedidoRepository.save(lineaPedido);
         return LineaPedidoDTO.convertToDTO(lineaPedido, lineaPedidoDTO.getPedido());

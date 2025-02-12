@@ -92,14 +92,17 @@ public class PedidoServiceImpl implements PedidoService {
 	 */
 
 	@Override
-	public PedidoDTO findById(PedidoDTO pedidoDTO, ClienteDTO clienteDTO) {
+	public PedidoDTO findById(PedidoDTO pedidoDTO) {
 
 		log.info(PedidoServiceImpl.class.getSimpleName() + " - findById(): buscando Pedido " + pedidoDTO.getId());
 
 		Optional<Pedido> pedido = pedidoRepository.findById(pedidoDTO.getId());
 
+		Cliente cliente = new Cliente();
+		cliente = pedido.get().getCliente();
+
 		if (pedido.isPresent()) {
-			pedidoDTO = PedidoDTO.convertToDTO(pedido.get(), clienteDTO);
+			pedidoDTO = PedidoDTO.convertToDTO(pedido.get(), ClienteDTO.convertToDTO(cliente));
 		}
 
 		return pedidoDTO;

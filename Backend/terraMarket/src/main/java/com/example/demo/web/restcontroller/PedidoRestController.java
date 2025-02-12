@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/ws/pedidos")
+@RequestMapping("/ws/clientes/{idCliente}/pedidos")
 public class PedidoRestController {
 
     private static final Logger log = LoggerFactory.getLogger(PedidoRestController.class);
@@ -27,7 +27,7 @@ public class PedidoRestController {
     @Autowired
     private ClienteService clienteService;
 
-    @RequestMapping(method = RequestMethod.GET, path = "/clientes/{idCliente}/pedidos")
+    @RequestMapping(method = RequestMethod.GET)
     public List<PedidoDTO> findAllByCliente(@PathVariable("idCliente") Long idCliente) {
 
         log.info("PedidoRestController - findAllByCliente: Mostramos pedidos del cliente " + idCliente);
@@ -50,6 +50,18 @@ public class PedidoRestController {
 
         // buscar cuentas del cliente en el servicio
         return pedidoService.findPedidoPendiente(idCliente);
+
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{idPedido}")
+    public PedidoDTO findById(@PathVariable("idPedido") Long idPedido) {
+
+        log.info("PedidoRestController - buscarPedido por id");
+
+        PedidoDTO  pedidoDTO= new PedidoDTO();
+        pedidoDTO.setId(idPedido);
+        // buscar cuentas del cliente en el servicio
+        return pedidoService.findById(pedidoDTO);
 
     }
 }

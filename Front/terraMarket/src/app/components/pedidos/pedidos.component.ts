@@ -76,7 +76,7 @@ export class PedidosComponent implements OnInit{
     //this.router.navigate(['/detalles-pedido'], {state:{rowData}});
     //console.log(rowData)
     this.pedidoService.pasarPedido(rowData);
-    this.router.navigate(['/detalles-pedido']);
+    this.router.navigate([`/pedidos/${rowData.id}`]);
     //console.log('pedido component ' + rowData.listaLineasPedido)
 
   }
