@@ -1,11 +1,15 @@
 package com.example.demo.model.dto;
 
 import java.io.Serializable;
+import java.util.Base64;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.example.demo.repository.entity.Tienda;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -20,9 +24,11 @@ public class TiendaDTO implements Serializable {
     private String descripcion;
     private String imagen;
     private boolean activo;
+    @JsonIgnore
     private MercadoDTO mercado;
 
     private DireccionDTO direccion;
+    private List<CategoriaTDTO> categoriaT;
 
     @Override
     public boolean equals(Object obj) {
@@ -55,7 +61,9 @@ public class TiendaDTO implements Serializable {
         tiendaDTO.setNombre(tienda.getNombre());
         tiendaDTO.setLogo(tienda.getLogo());
         tiendaDTO.setDescripcion(tienda.getDescripcion());
-        tiendaDTO.setImagen(tienda.getImagen());
+        if (tienda.getImagen() != null) {
+			tiendaDTO.setImagen(Base64.getEncoder().encodeToString(tienda.getImagen()));
+		}
         tiendaDTO.setActivo(tienda.isActivo());
         tiendaDTO.setMercado(mercadoDTO);
         tiendaDTO.setDireccion(DireccionDTO.convertToDTO(tienda.getDireccion()));
@@ -70,10 +78,14 @@ public class TiendaDTO implements Serializable {
         tienda.setNombre(tiendaDTO.getNombre());
         tienda.setLogo(tiendaDTO.getLogo());
         tienda.setDescripcion(tiendaDTO.getDescripcion());
-        tienda.setImagen(tiendaDTO.getImagen());
+        //tienda.setImagen(tiendaDTO.getImagen());
         tienda.setActivo(tiendaDTO.isActivo());
         tienda.setMercado(MercadoDTO.convertToEntity(tiendaDTO.getMercado()));
         tienda.setDireccion(DireccionDTO.convertToEntity(tiendaDTO.getDireccion()));
+
+        tienda.setCategorias(tiendaDTO.getCategoriaT().stream()
+                .map(CategoriaTDTO::convertToEntity)
+                .collect(Collectors.toSet()));
 
         return tienda;
     }

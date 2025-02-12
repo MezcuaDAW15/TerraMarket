@@ -18,13 +18,13 @@ import lombok.Data;
 import lombok.ToString;
 
 @Data
-public class PedidoDTO implements Serializable{
+public class PedidoDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Long id;
-    
+
     @ToString.Exclude
-    
+
     private ClienteDTO cliente;
     private MetodoPagoDTO metodoPago;
     private PuntoRecogidaDTO puntoRecogida;
@@ -44,8 +44,8 @@ public class PedidoDTO implements Serializable{
     private Long numFactura;
     private EstadoPedidoDTO estado;
     private float importe;
-    private List<LineaPedidoDTO>listaLineasPedido;
-    
+    private List<LineaPedidoDTO> lineaPedido;
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -62,6 +62,7 @@ public class PedidoDTO implements Serializable{
             return false;
         return true;
     }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -69,24 +70,24 @@ public class PedidoDTO implements Serializable{
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
-    
+
     public static PedidoDTO convertToDTO(Pedido pedido, ClienteDTO clienteDTO) {
 
-		PedidoDTO pedidoDTO = new PedidoDTO();
+        PedidoDTO pedidoDTO = new PedidoDTO();
 
-		pedidoDTO.setId(pedido.getId());
-		pedidoDTO.setCliente(clienteDTO);
+        pedidoDTO.setId(pedido.getId());
+        pedidoDTO.setCliente(clienteDTO);
         pedidoDTO.setFechaPedido(pedido.getFechaPedido());
         pedidoDTO.setFechaCompra(pedido.getFechaCompra());
         pedidoDTO.setFechaEntrega(pedido.getFechaMaxRecogida());
         pedidoDTO.setNumFactura(pedido.getNumFactura());
         pedidoDTO.setImporte(pedido.getImporte());
-    
+
         pedidoDTO.setMetodoPago(MetodoPagoDTO.convertToDTO(pedido.getMetodoPago()));
         pedidoDTO.setEstado(EstadoPedidoDTO.convertToDTO(pedido.getEstado()));
         pedidoDTO.setPuntoRecogida(PuntoRecogidaDTO.convertToDTO(pedido.getPuntoRecogida()));
 
-        List<LineaPedidoDTO>listaLPDTO = pedido.getListaLineaPedido().stream()
+        List<LineaPedidoDTO> listaLPDTO = pedido.getListaLineaPedido().stream()
                 .map(lineaPedido -> {
                     LineaPedidoDTO lpDTO = new LineaPedidoDTO();
                     lpDTO = LineaPedidoDTO.convertToDTO(lineaPedido, pedidoDTO);
@@ -94,18 +95,18 @@ public class PedidoDTO implements Serializable{
                 })
                 .collect(Collectors.toList());
 
-        pedidoDTO.setListaLineasPedido(listaLPDTO);
+        pedidoDTO.setLineaPedido(listaLPDTO);
 
-		return pedidoDTO;
-	}
+        return pedidoDTO;
+    }
 
     public static Pedido convertToEntity(PedidoDTO pedidoDTO) {
 
-		Pedido pedido = new Pedido();
+        Pedido pedido = new Pedido();
         Cliente cliente = ClienteDTO.convertToEntity(pedidoDTO.getCliente());
-		
+
         pedido.setId(pedidoDTO.getId());
-		pedido.setCliente(cliente);
+        pedido.setCliente(cliente);
         pedido.setFechaPedido(pedidoDTO.getFechaPedido());
         pedido.setFechaCompra(pedidoDTO.getFechaCompra());
         pedido.setFechaEntrega(pedidoDTO.getFechaMaxRecogida());
@@ -116,7 +117,7 @@ public class PedidoDTO implements Serializable{
         pedido.setEstado(EstadoPedidoDTO.convertToEntity(pedidoDTO.getEstado()));
         pedido.setPuntoRecogida(PuntoRecogidaDTO.convertToEntity(pedidoDTO.getPuntoRecogida()));
 
-        Set<LineaPedido>listaLP = pedidoDTO.getListaLineasPedido().stream()
+        Set<LineaPedido> listaLP = pedidoDTO.getLineaPedido().stream()
                 .map(lineaPedidoDTO -> {
                     LineaPedido lp = new LineaPedido();
                     lp = LineaPedidoDTO.convertToEntity(lineaPedidoDTO, pedido);
@@ -126,6 +127,6 @@ public class PedidoDTO implements Serializable{
 
         pedido.setListaLineaPedido(listaLP);
 
-		return pedido;
-	}
+        return pedido;
+    }
 }

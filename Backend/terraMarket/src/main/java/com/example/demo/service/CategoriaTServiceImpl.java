@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.dto.CategoriaPDTO;
 import com.example.demo.model.dto.CategoriaTDTO;
+import com.example.demo.model.dto.TiendaDTO;
 import com.example.demo.repository.dao.CategoriaTRepository;
 import com.example.demo.repository.entity.CategoriaT;
 
@@ -14,11 +16,26 @@ import com.example.demo.repository.entity.CategoriaT;
 public class CategoriaTServiceImpl implements CategoriaTService {
     @Autowired
     private CategoriaTRepository categoriaTRepository;
+    @Autowired
+    private CategoriaPService categoriaPService;
 
     @Override
     public List<CategoriaTDTO> findAll() {
         List<CategoriaTDTO> listaCategoriaTDTO = new ArrayList<CategoriaTDTO>();
         List<CategoriaT> listaCategorias = categoriaTRepository.findAll();
+        for (CategoriaT categoria : listaCategorias) {
+            List<CategoriaPDTO> listaCategoriaPDTO = categoriaPService.findByIdCategoriaT(categoria.getId());
+            CategoriaTDTO categoriaDTO = CategoriaTDTO.convertToDTO(categoria);
+            categoriaDTO.setListaCategoriaP(listaCategoriaPDTO);
+            listaCategoriaTDTO.add(categoriaDTO);
+        }
+        return listaCategoriaTDTO;
+    }
+
+    @Override
+    public List<CategoriaTDTO> findAllByTienda(TiendaDTO tiendaDTO) {
+        List<CategoriaTDTO> listaCategoriaTDTO = new ArrayList<CategoriaTDTO>();
+        List<CategoriaT> listaCategorias = categoriaTRepository.findAllByTienda(tiendaDTO.getId());
         for (CategoriaT categoria : listaCategorias) {
             CategoriaTDTO categoriaDTO = CategoriaTDTO.convertToDTO(categoria);
             listaCategoriaTDTO.add(categoriaDTO);

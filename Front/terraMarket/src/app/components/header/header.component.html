@@ -13,7 +13,9 @@
 
   </div>
   <div>
-    <i class="pi pi-shopping-bag text-xl" pBadge value="2" style="color: #fff"></i>
+    <button class="sqr-btn auto-size" [routerLink]="['/cesta']">
+      <i class="pi pi-shopping-bag text-xl" pBadge value="0" style="color: #fff"></i>
+    </button>
 
     <p-menu #menu [model]="items" [popup]="true" />
     <p-button label="usuario123" (onClick)="menu.toggle($event)" icon="pi pi-angle-down" iconPos="right" [text]="true"

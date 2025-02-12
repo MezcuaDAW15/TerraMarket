@@ -1,17 +1,35 @@
 <app-back></app-back>
-<div class="encabezado">
-        <p class="h1">Realizar pedido</p>
-</div>
-<div>
-    <div class="pasos-pedido">
-        <p>1. Datos personales</p>
-        <img src="../../../assets/icons/chevron_forward.svg" alt="">
-        <p>2. Método de pago</p>
-        <img src="../../../assets/icons/chevron_forward.svg" alt="">
-        <p>3. Punto de recogida</p>
+<div class="container">
+        <div class="encabezado">
+            <p class="h1">Realizar pedido</p>
     </div>
-    <p>Resumen pedido</p>
-</div>
-<div class="contenedor-componente">
-        
+    <div class="div-realizar-pedido">
+
+        <div class="contenedor-formulario">
+            <div class="pasos-pedido">
+                <p>1. Datos personales</p>
+                <img src="../../../assets/icons/chevron_forward.svg" alt="">
+                <p>2. Método de pago</p>
+                <img src="../../../assets/icons/chevron_forward.svg" alt="">
+                <p>3. Punto de recogida</p>
+            </div>
+            <div class="contenedor-componente">
+                <!-- <app-datos-personales></app-datos-personales> -->
+                <app-elegir-metodo-pago></app-elegir-metodo-pago>
+            </div>
+        </div>
+
+        <div class="contenedor-resumen">
+            
+            <p>Resumen del pedido</p>
+            <div class="resumen-pedido">
+                <app-resumen-pedido></app-resumen-pedido>
+                 
+            </div>
+        </div>
+    </div>
+    <div class="etiquetas-container">
+        <img src="../../../assets/etiquetas.svg" alt="etiquetas" />
+    </div>
+    
 </div>

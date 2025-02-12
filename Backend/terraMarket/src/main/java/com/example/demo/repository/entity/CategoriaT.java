@@ -1,5 +1,6 @@
 package com.example.demo.repository.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -8,6 +9,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -27,9 +29,10 @@ public class CategoriaT {
 
     private String icono;
 
-    @OneToMany(mappedBy = "categoriaT", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<CategoriaP> categoriasP;
+    @OneToMany(mappedBy = "categoriaT", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<CategoriaP> categoriasP;
 
-
+    @ManyToMany(mappedBy = "categorias")
+    private Set<Tienda> tiendas;
 
 }

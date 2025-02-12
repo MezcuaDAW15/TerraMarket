@@ -1,13 +1,14 @@
+import { CategoriaT } from './categoriaT';
 import { Mercado } from "./mercado";
 
 export interface Tienda {
- id: number;
+  id: number;
   nombre: string;
   logo: string;
   descripcion: string;
   imagen: string;
   activo: boolean;
-  mercado:Mercado;
+  categoriaT: CategoriaT[];
 }
 /*    private Long id;
     private String nombre;

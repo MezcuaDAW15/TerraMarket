@@ -1,5 +1,5 @@
-@import "../../../variables";
-@import "../../../styles";
+@import '../../../variables';
+@import '../../../styles';
 
 //pastilla
 .pastilla {
@@ -9,7 +9,7 @@
   height: 40px;
   width: auto;
   padding: 12px;
-  background: #ffc6ae;
+  background: #FFC6AE;
   border-radius: 8px;
   align-items: center;
   display: inline-flex;
@@ -19,8 +19,7 @@
 header {
   display: flex;
   align-items: center;
-  width: 100%;
-  max-width: 100vw;
+  //width: 100vw;
   background: $red;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1rem;
@@ -29,7 +28,8 @@ header {
   div {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
+
   }
 }
 
@@ -44,6 +44,8 @@ header {
   cursor: pointer;
   color: red;
 
+
+
   &::hover {
     background-color: none;
   }
@@ -51,15 +53,21 @@ header {
 
 :host ::ng-deep .p-button {
   @extend .p;
-  font-family: "Parkinsans", sans-serif;
+  font-family: 'Parkinsans', sans-serif;
   font-weight: 500;
   //font-family: 'Parkinsans';
-  color: white !important;
+  color: white;
+}
+
+:host ::ng-deep .p-badge {
+  font-family: 'Parkinsans', sans-serif;
+  background-color: $orange;
+  color: $black;
 }
 
 :host ::ng-deep .p-menu {
   @extend .p;
-  font-family: "Parkinsans", sans-serif;
+  font-family: 'Parkinsans', sans-serif;
   font-weight: 600;
   color: $gray;
   border: 2px solid $red;
@@ -71,9 +79,4 @@ header {
     border: transparent;
   }
   */
-}
-
-:host ::ng-deep .p-menuitem-separator {
-  // border-top: solid 1px $orange;
-  // margin: 0.25rem 1rem;
 }

@@ -1,1 +1,11 @@
-<p>market-view works!</p>
+<app-back></app-back>
+<app-banner [mercado]="mercado"></app-banner>
+<p-tabMenu [model]="items" [(activeItem)]="selectedItem" (onTabChange)="onTabChange($event)" />
+<div *ngIf="activeTab === 'products'">
+
+  <app-list [mercado]="mercado"></app-list>
+</div>
+<div *ngIf="activeTab === 'shop'">
+
+  <app-market-list-tiendas [mercado]="mercado"></app-market-list-tiendas>
+</div>

@@ -1,18 +1,20 @@
 package com.example.demo.repository.entity;
 
+import java.sql.Blob;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import lombok.Data;
 import lombok.ToString;
 
@@ -28,7 +30,10 @@ public class Mercado {
     private String direccionF;
     private String telefono;
     private String email;
-    private String imagen;
+
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] imagen;
     private boolean activo;
 
     @ManyToOne

@@ -3,6 +3,7 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import com.example.demo.model.dto.CategoriaPDTO;
 import com.example.demo.model.dto.ProductoDTO;
 import com.example.demo.repository.dao.CategoriaPRepository;
 import com.example.demo.repository.dao.ProductoRepository;
+import com.example.demo.repository.entity.CategoriaP;
 import com.example.demo.repository.entity.Producto;
 
 @Service
@@ -69,6 +71,24 @@ public class ProductoServiceImpl implements ProductoService {
 
         return ProductoDTO.convertToDTO(productoRepository.save(ProductoDTO.convertToEntity(productoDTO)));
     }
+
+    @Override
+    public List<ProductoDTO> findByCategories(List<Long> categories) {
+        log.info("ProductoServiceImpl - findByCategories: Buscamos productos por categorias ", categories);
+        List<CategoriaP> categorias = new ArrayList<>();
+        for (Long id : categories) {
+            CategoriaP categoria = new CategoriaP();
+            categoria.setId(id);
+            categorias.add(categoria);
+        }
+        List<ProductoDTO> productosDTO = new ArrayList<>();
+        for (CategoriaP categoria : categorias) {
+            productosDTO.addAll(productoRepository.findByCategory(categoria).stream().map(ProductoDTO::convertToDTO)
+                    .collect(Collectors.toList()));
+        }
+        return productosDTO;
+    }
+    
 
 
 

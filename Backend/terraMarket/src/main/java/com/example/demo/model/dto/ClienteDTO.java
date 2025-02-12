@@ -1,15 +1,15 @@
 package com.example.demo.model.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import com.example.demo.repository.entity.Cliente;
+import com.example.demo.repository.entity.Rol;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 import lombok.ToString;
 
@@ -33,6 +33,10 @@ public class ClienteDTO implements Serializable{
 	@JsonIgnore
     private List<PedidoDTO>listaPedidos;
 
+	@ToString.Exclude
+	@JsonIgnore
+ 	private List<RolDTO> rolesDTO;
+
     public static ClienteDTO convertToDTO(Cliente cliente) {
 
 		ClienteDTO clienteDTO = new ClienteDTO();
@@ -45,6 +49,15 @@ public class ClienteDTO implements Serializable{
 		clienteDTO.setFechaNacimiento(cliente.getFechaNacimiento());
 		clienteDTO.setCp(cliente.getCp());
         clienteDTO.setActivo(cliente.isActivo());
+
+		// for (int i = 0; i < cliente.getRoles().size(); i++) {
+		// 	RolDTO rolDTO = RolDTO.converToDTO(cliente.getRoles().get(i), clienteDTO);
+		// 	clienteDTO.getRolesDTO().add(rolDTO);
+		// }
+		for (Rol rol : cliente.getRoles()) {
+			RolDTO rolDTO = RolDTO.converToDTO(rol, clienteDTO);
+			clienteDTO.getRolesDTO().add(rolDTO);
+		}
 		
 		log.info(ClienteDTO.class.getSimpleName() + " - convertToDTO() cliente lista pedidos " + cliente.toString());
 
@@ -64,7 +77,26 @@ public class ClienteDTO implements Serializable{
 		cliente.setFechaNacimiento(clienteDTO.getFechaNacimiento());
 		cliente.setCp(clienteDTO.getCp());
         cliente.setActivo(clienteDTO.isActivo());
+
+
+		Rol[] roles = new Rol[clienteDTO.getRolesDTO().size()];
+		for (int i = 0; i < clienteDTO.getRolesDTO().size(); i++) {
+			roles[i] = RolDTO.converToEntity(clienteDTO.getRolesDTO().get(i), cliente);
+		}
+		for (Rol rol : roles) {
+			cliente.getRoles().add(rol);
+		}
+		
+
+		// clienteDTO.getRolesDTO().stream()
+		// 	.map(rolDTO -> RolDTO.converToEntity(rolDTO, cliente))
+		// 	.forEach(rol -> cliente.getRoles().add(rol));
 		
 		return cliente;
+	}
+
+	public ClienteDTO() {
+		super();
+		this.rolesDTO = new ArrayList<RolDTO>();
 	}
 }

@@ -15,7 +15,9 @@ public interface PedidoService {
 
     List<PuntoRecogidaDTO> findAllPuntoRecogida();
 
-    PedidoDTO findById(PedidoDTO pedidoDTO, ClienteDTO clienteDTO);
+    PedidoDTO findById(PedidoDTO pedidoDTO);
+
+    PedidoDTO findPedidoPendiente(Long idCliente);
 
     //void save(PedidoDTO pedidoDTO);
 

@@ -8,23 +8,15 @@
       <button class="rd-btn red auto-size">¡Regístrate ahora!</button>
     </div>
     <div>
-      <img src="assets/imagen-home.png" alt="" />
+      <img src="../../../assets/productos.svg" alt="" />
     </div>
   </div>
   <div id="buscador">
     <h1>¿Qué mercado quieres visitar?</h1>
-    <p-autoComplete
-      styleClass="autocomplete"
-      [(ngModel)]="searchText"
-      [suggestions]="filteredItems"
-      (completeMethod)="search($event)"
-      (onSelect)="filtrarMercadoSeleccionado()"
-      (onClear)="filtrarMercadoSeleccionado()"
-      field="nombre"
-      [dropdown]="true"
-      [forceSelection]="true"
-      placeholder="Busca un mercado..."
-    >
+    <p-autoComplete styleClass="autocomplete" [(ngModel)]="searchText" [suggestions]="filteredItems"
+      (completeMethod)="search($event)" (onSelect)="filtrarMercadoSeleccionado()"
+      (onClear)="filtrarMercadoSeleccionado()" field="nombre" [dropdown]="true" [forceSelection]="true"
+      placeholder="Busca un mercado...">
     </p-autoComplete>
   </div>
   <div id="etiquetas">
@@ -33,11 +25,8 @@
   </div>
   <div id="vista-mercados">
     @for (mercado of mercadosFiltrados; track mercado.id) {
-    <app-card-market
-      nombre="{{ mercado.nombre }}"
-      cp="{{ mercado.direccion.cp }}"
-      ciudad="{{ mercado.direccion.ciudad }}"
-    ></app-card-market>
+    <app-card-market nombre="{{ mercado.nombre }}" cp="{{ mercado.direccion.cp }}"
+      ciudad="{{ mercado.direccion.ciudad }}"></app-card-market>
     }
   </div>
 </div>

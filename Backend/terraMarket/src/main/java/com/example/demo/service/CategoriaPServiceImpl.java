@@ -33,6 +33,18 @@ public class CategoriaPServiceImpl implements CategoriaPService {
 
     }
 
+    @Override
+    public List<CategoriaPDTO> findByIdCategoriaT(Long id) {
+        log.info("CategoriaPServiceImpl - findByIdCategoriaT: Lista de categorias por id de categoriaT");
+        List<CategoriaP> listaCategorias = categoriaPRepository.findByIdCategoriaT(id);
+        List<CategoriaPDTO> listaCategoriasDTO = new ArrayList<CategoriaPDTO>();
+        listaCategorias.forEach(categoria -> {
+            CategoriaPDTO categoriaDTO = CategoriaPDTO.convertToDTO(categoria);
+            listaCategoriasDTO.add(categoriaDTO);
+        });
+        return listaCategoriasDTO;
+    }
+
 
 
 }

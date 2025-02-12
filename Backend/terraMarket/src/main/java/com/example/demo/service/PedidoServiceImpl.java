@@ -15,43 +15,44 @@ import com.example.demo.model.dto.PuntoRecogidaDTO;
 import com.example.demo.repository.dao.MetodoPagoRepository;
 import com.example.demo.repository.dao.PedidoRepository;
 import com.example.demo.repository.dao.PuntoRecogidaRepository;
+import com.example.demo.repository.entity.Cliente;
 import com.example.demo.repository.entity.MetodoPago;
 import com.example.demo.repository.entity.Pedido;
 import com.example.demo.repository.entity.PuntoRecogida;
 
 @Service
-public class PedidoServiceImpl implements PedidoService{
+public class PedidoServiceImpl implements PedidoService {
 
 	private static final Logger log = LoggerFactory.getLogger(PedidoServiceImpl.class);
 
-    @Autowired
-    PedidoRepository pedidoRepository;
+	@Autowired
+	PedidoRepository pedidoRepository;
 	@Autowired
 	MetodoPagoRepository metodoPagoRepository;
 	@Autowired
 	PuntoRecogidaRepository puntoRecogidaRepository;
 
-    @Override
-    public List<PedidoDTO> findAllByCliente(ClienteDTO clienteDTO) {
-        // buscamos la lista en el repositorio
+	@Override
+	public List<PedidoDTO> findAllByCliente(ClienteDTO clienteDTO) {
+		// buscamos la lista en el repositorio
 		List<Pedido> listaPedidos = pedidoRepository.findAllByCliente(clienteDTO.getId());
 		log.info(PedidoServiceImpl.class.getSimpleName() + " - lista pedidos: " + listaPedidos);
 		// la pasamos a dto
-		List <PedidoDTO> listaPedidosDTO = new ArrayList<PedidoDTO>();
-		
-		for(int i = 0; i < listaPedidos.size(); ++i) {
+		List<PedidoDTO> listaPedidosDTO = new ArrayList<PedidoDTO>();
+
+		for (int i = 0; i < listaPedidos.size(); ++i) {
 			listaPedidosDTO.add(PedidoDTO.convertToDTO(listaPedidos.get(i), clienteDTO));
 		}
-		
+
 		return listaPedidosDTO;
-    }
+	}
 
 	@Override
 	public List<MetodoPagoDTO> findAllMetodoPago() {
 
 		List<MetodoPago> listaMP = metodoPagoRepository.findAll();
-		
-		List<MetodoPagoDTO>listaMPDTO = new ArrayList<MetodoPagoDTO>();
+
+		List<MetodoPagoDTO> listaMPDTO = new ArrayList<MetodoPagoDTO>();
 
 		for (MetodoPago mp : listaMP) {
 			MetodoPagoDTO mpDTO = MetodoPagoDTO.convertToDTO(mp);
@@ -63,10 +64,10 @@ public class PedidoServiceImpl implements PedidoService{
 
 	@Override
 	public List<PuntoRecogidaDTO> findAllPuntoRecogida() {
-		
+
 		List<PuntoRecogida> listaPR = puntoRecogidaRepository.findAll();
-		
-		List<PuntoRecogidaDTO>listaMPDTO = new ArrayList<PuntoRecogidaDTO>();
+
+		List<PuntoRecogidaDTO> listaMPDTO = new ArrayList<PuntoRecogidaDTO>();
 
 		for (PuntoRecogida pr : listaPR) {
 			PuntoRecogidaDTO mpDTO = PuntoRecogidaDTO.convertToDTO(pr);
@@ -76,30 +77,47 @@ public class PedidoServiceImpl implements PedidoService{
 		return listaMPDTO;
 
 	}
-	/* 
-	@Override
-	public void save(PedidoDTO pedidoDTO) {
-		
-		log.info(PedidoServiceImpl.class.getSimpleName() + " - save: guardando direccion ");
+	/*
+	 * @Override
+	 * public void save(PedidoDTO pedidoDTO) {
+	 * 
+	 * log.info(PedidoServiceImpl.class.getSimpleName() +
+	 * " - save: guardando direccion ");
+	 * 
+	 * ClienteDireccion cd = new ClienteDireccion();
+	 * cd = ClienteDireccionDTO.convertToEntity(cdDTO);
+	 * 
+	 * clienteDireccionRepository.save(cd);
+	 * }
+	 */
 
-		ClienteDireccion cd = new ClienteDireccion();
-		cd = ClienteDireccionDTO.convertToEntity(cdDTO);
-		
-		clienteDireccionRepository.save(cd);
-	}
-	*/
-
 	@Override
-	public PedidoDTO findById(PedidoDTO pedidoDTO, ClienteDTO clienteDTO) {
-		
+	public PedidoDTO findById(PedidoDTO pedidoDTO) {
+
 		log.info(PedidoServiceImpl.class.getSimpleName() + " - findById(): buscando Pedido " + pedidoDTO.getId());
-		
+
 		Optional<Pedido> pedido = pedidoRepository.findById(pedidoDTO.getId());
 
+		Cliente cliente = new Cliente();
+		cliente = pedido.get().getCliente();
+
 		if (pedido.isPresent()) {
-			pedidoDTO = PedidoDTO.convertToDTO(pedido.get(), clienteDTO);
+			pedidoDTO = PedidoDTO.convertToDTO(pedido.get(), ClienteDTO.convertToDTO(cliente));
 		}
 
 		return pedidoDTO;
+	}
+
+	@Override
+	public PedidoDTO findPedidoPendiente(Long idCliente) {
+
+		log.info(PedidoServiceImpl.class.getSimpleName()
+				+ " - findPedidoPendiente(): buscando Pedido pendiente del cliente " + idCliente);
+
+		Pedido pedido = pedidoRepository.findPedidoPendiente(idCliente);
+		ClienteDTO clienteDTO = new ClienteDTO();
+		clienteDTO.setId(idCliente);
+
+		return PedidoDTO.convertToDTO(pedido, clienteDTO);
 	}
 }
