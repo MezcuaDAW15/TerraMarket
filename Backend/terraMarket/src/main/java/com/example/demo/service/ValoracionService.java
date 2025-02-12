@@ -7,4 +7,6 @@ import com.example.demo.model.dto.ValoracionDTO;
 public interface ValoracionService {
 
     List<ValoracionDTO> findByTienda(ValoracionDTO valoracionDTO);
+
+    void save(ValoracionDTO valoracionDTO);
 }

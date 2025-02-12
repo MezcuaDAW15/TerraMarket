@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +38,14 @@ public class ValoracionRestController {
         List<ValoracionDTO> listaValTienda = valoracionService.findByTienda(valoracionDTO);
 
         return new ResponseEntity<>(listaValTienda, HttpStatus.OK);
+    }
+
+    // Agregar tienda
+    @PostMapping()
+    public ValoracionDTO addValoracion(@RequestBody ValoracionDTO valoracionDTO) {
+        log.info("ValoracionRestController - add: Agregamos una nueva tienda");
+        valoracionService.save(valoracionDTO);
+        return valoracionDTO;
     }
 
 }

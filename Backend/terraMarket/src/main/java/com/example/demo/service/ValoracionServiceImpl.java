@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.dto.ValoracionDTO;
 import com.example.demo.repository.dao.ValoracionRepository;
+import com.example.demo.repository.entity.Valoracion;
 
 @Service
 public class ValoracionServiceImpl implements ValoracionService {
@@ -29,6 +30,14 @@ public class ValoracionServiceImpl implements ValoracionService {
             listaValPorTienda.add(valoracionDTO2);
         });
         return listaValPorTienda;
+    }
+
+    @Override
+    public void save(ValoracionDTO valoracionDTO) {
+        log.info("TiendaServiceImpl - save: guardar tienda");
+        Valoracion valoracion = ValoracionDTO.convertToEntity(valoracionDTO);
+
+        valoracionRepository.save(valoracion);
     }
 
 }
