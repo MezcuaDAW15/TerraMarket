@@ -10,11 +10,12 @@ import { FiltrosComponent } from "./components/filtros/filtros.component";
 import { CestaItemComponent } from "./components/cesta/components/cesta-item/cesta-item.component";
 import { CestaComponent } from "./components/cesta/cesta.component";
 import { MarketListTiendasComponent } from "./components/market-list-tiendas/market-list-tiendas.component";
+import { RealizarPedidoComponent } from "./components/realizar-pedido/realizar-pedido.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, CardComponent, PedidosComponent, BackComponent, MarketViewComponent, FiltrosComponent, CestaItemComponent, CestaComponent, MarketListTiendasComponent],
+  imports: [RouterOutlet, HeaderComponent, CardComponent, PedidosComponent, BackComponent, MarketViewComponent, FiltrosComponent, CestaItemComponent, CestaComponent, MarketListTiendasComponent, RealizarPedidoComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
