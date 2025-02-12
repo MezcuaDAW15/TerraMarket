@@ -1,6 +1,6 @@
 <div [ngClass]="{'flipo': true, 'transparent': !activo}">
   <div [ngClass]="{'etiqueta-estado yellow': true, 'transparent': !activo}" (click)="toggleCategory()">
-    <img src="assets/icons/categories/Aves Derivados.svg" alt="">
+    <img [src]="'assets/icons/categories/' + categoria?.icono" [alt]="categoria?.nombre" />
     <p class="p">{{categoria?.nombre}}</p>
   </div>
 </div>

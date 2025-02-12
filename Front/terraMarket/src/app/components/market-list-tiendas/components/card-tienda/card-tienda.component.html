@@ -1,6 +1,9 @@
 <div class="tienda-card">
   <div class="img-container">
-    <div class="tienda-card-img" [style.background-image]="'url(' + imagenUrl + ')'"></div>
+    <div class="tienda-card-img">
+      <img [src]="imagenUrl" [alt]="tienda?.nombre">
+
+    </div>
   </div>
 
   <span class="name">{{tienda?.nombre}}</span>
@@ -10,12 +13,12 @@
 
 
       <div class="etiqueta-estado yellow" *ngFor="let categoria of tienda?.categoriaT">
-        <img src="assets/icons/categories/Aves Derivados.svg" alt="">
+        <img [src]="'assets/icons/categories/' + categoria?.icono" [alt]="categoria?.nombre">
       </div>
 
     </div>
     <button class="btn-card">
-      <span class="">Ver Productos</span>
+      <span class="">Ver productos</span>
     </button>
   </div>
 </div>
