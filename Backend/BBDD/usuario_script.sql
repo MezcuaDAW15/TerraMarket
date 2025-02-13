@@ -1,1 +1,0 @@
-CREATE USER 'admin'@'localhost' IDENTIFIED WITH sha256_password BY 'IesCampMorvedre01%';
