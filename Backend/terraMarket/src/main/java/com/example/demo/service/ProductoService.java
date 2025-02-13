@@ -9,7 +9,7 @@ public interface ProductoService {
 
     List<ProductoDTO> findAll();
 
-    ProductoDTO findById(Long idProducto);
+    ProductoDTO findById(ProductoDTO productoDTO);
 
     void delete(Long idProducto);
 

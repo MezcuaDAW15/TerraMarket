@@ -12,8 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.model.dto.ProductoDTO;
 import com.example.demo.service.ProductoService;
 import org.springframework.web.bind.annotation.PostMapping;
-
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ProductosController {
@@ -36,11 +35,13 @@ public class ProductosController {
     }
 
     @GetMapping("/productos/{idProducto}")
-    public ModelAndView findById( @PathVariable("idProducto") Long idProducto) {
+    public ModelAndView findById(@PathVariable("idProducto") Long idProducto, @RequestParam boolean imgRequest) {
 
         log.info("ProductosController - findByid: Mostramos la info del producto ", idProducto);
-
-        ProductoDTO productoDTO = productoService.findById(idProducto);
+        ProductoDTO productoDTORq = new ProductoDTO();
+        productoDTORq.setId(idProducto);
+        productoDTORq.setImgRequest(imgRequest);
+        ProductoDTO productoDTO = productoService.findById(productoDTORq);
         ModelAndView mav = new ModelAndView("productoview");
         mav.addObject("productoDTO", productoDTO);
 
@@ -48,8 +49,7 @@ public class ProductosController {
     }
 
     @GetMapping("productos/{idProducto}/delete")
-    public ModelAndView delete (@PathVariable("idProducto") Long idProducto) {
-        
+    public ModelAndView delete(@PathVariable("idProducto") Long idProducto) {
 
         log.info("ProductosController - delete: Eliminamos el producto ", idProducto);
         productoService.delete(idProducto);
@@ -60,7 +60,7 @@ public class ProductosController {
     @GetMapping("productos/add")
     public ModelAndView add() {
         log.info("ProductosController - add: Mostramos el formulario para anadir un producto");
-        
+
         ModelAndView mav = new ModelAndView("productoform");
         mav.addObject("productoDTO", new ProductoDTO());
         mav.addObject("add", true);
@@ -68,17 +68,18 @@ public class ProductosController {
         return mav;
     }
 
-    @GetMapping("productos/{idProducto}/update")
-    public ModelAndView update(@PathVariable("idProducto") Long idProducto) {
-        log.info("ProductosController - add: Mostramos el formulario para editar el producto" + idProducto);
-        
-        ProductoDTO productoDTO = productoService.findById(idProducto);
+    // @GetMapping("productos/{idProducto}/update")
+    // public ModelAndView update(@PathVariable("idProducto") Long idProducto) {
+    // log.info("ProductosController - add: Mostramos el formulario para editar el
+    // producto" + idProducto);
 
-        ModelAndView mav = new ModelAndView("productoform");
-        mav.addObject("productoDTO", productoDTO);
+    // ProductoDTO productoDTO = productoService.findById(idProducto);
 
-        return mav;
-    }
+    // ModelAndView mav = new ModelAndView("productoform");
+    // mav.addObject("productoDTO", productoDTO);
+
+    // return mav;
+    // }
 
     @PostMapping("productos/save")
     public ModelAndView save(@ModelAttribute("productoDTO") ProductoDTO productoDTO) {
@@ -86,7 +87,7 @@ public class ProductosController {
         log.info("ProductosController - save: Guardamos el producto ", productoDTO);
 
         productoService.save(productoDTO);
-        
+
         ModelAndView mav = new ModelAndView("redirect:/productos");
 
         return mav;

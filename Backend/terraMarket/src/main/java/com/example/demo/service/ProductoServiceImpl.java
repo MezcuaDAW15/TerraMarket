@@ -42,11 +42,15 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public ProductoDTO findById(Long idProducto) {
-        log.info("ProductoServiceImpl - findById: Mostramos la info del producto ", idProducto);
+    public ProductoDTO findById(ProductoDTO productoDTO) {
+        log.info("ProductoServiceImpl - findById: Mostramos la info del producto ", productoDTO.getId());
 
-        Producto p = productoRepository.findById(idProducto).get();
-        return ProductoDTO.convertToDTO(p);
+        Producto p = productoRepository.findById(productoDTO.getId()).get();
+        if (productoDTO.isImgRequest()) {
+            return ProductoDTO.convertToDTO(p, true);
+        } else {
+            return ProductoDTO.convertToDTO(p);
+        }
     }
 
     @Override
@@ -61,13 +65,14 @@ public class ProductoServiceImpl implements ProductoService {
             log.warn("El producto no tiene id asignado");
         }
 
-        /*Desde el front traeremos los datos del producto y
-         * la categoria a la que pertenece, pero solo el id.*/
+        /*
+         * Desde el front traeremos los datos del producto y
+         * la categoria a la que pertenece, pero solo el id.
+         */
 
         productoDTO.setCategoriaP(CategoriaPDTO.convertToDTO(categoriaPRepository.findById(
-            productoDTO.getCategoriaP().getId()).get()));
+                productoDTO.getCategoriaP().getId()).get()));
         log.info("ProductoServiceImpl - save: Guardamos el producto ", productoDTO);
-
 
         return ProductoDTO.convertToDTO(productoRepository.save(ProductoDTO.convertToEntity(productoDTO)));
     }
@@ -88,8 +93,5 @@ public class ProductoServiceImpl implements ProductoService {
         }
         return productosDTO;
     }
-    
-
-
 
 }

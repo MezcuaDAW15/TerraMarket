@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.dto.ProductoDTO;
 import com.example.demo.service.ProductoService;
@@ -38,10 +39,14 @@ public class ProductoRestController {
         return productoService.findAll();
     }
 
-    @GetMapping("/productos/{id}")
-    public ProductoDTO findById(@PathVariable Long id) {
-        log.info("ProductoRestController - findById: " + id);
-        return productoService.findById(id);
+    @GetMapping("/productos/{idProducto}")
+    public ProductoDTO findById(@PathVariable("idProducto") Long idProducto, @RequestParam boolean imgRequest) {
+
+        log.info("ProductoRestController - findById: " + idProducto);
+        ProductoDTO productoDTO = new ProductoDTO();
+        productoDTO.setId(idProducto);
+        productoDTO.setImgRequest(imgRequest);
+        return productoService.findById(productoDTO);
     }
 
     @PostMapping("/productos")
@@ -58,7 +63,7 @@ public class ProductoRestController {
     @PutMapping("/productos")
     public ResponseEntity<ProductoDTO> update(@RequestBody ProductoDTO productoDTO) {
         log.info("ProductoRestController - update: " + productoDTO);
-        ProductoDTO productoExDTO = productoService.findById(productoDTO.getId());
+        ProductoDTO productoExDTO = productoService.findById(productoDTO);
         if (productoExDTO == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
@@ -70,7 +75,7 @@ public class ProductoRestController {
     @DeleteMapping("/productos")
     public ResponseEntity<ProductoDTO> delete(@RequestBody ProductoDTO productoDTO) {
         log.info("ProductoRestController - delete: " + productoDTO);
-        ProductoDTO productoExDTO = productoService.findById(productoDTO.getId());
+        ProductoDTO productoExDTO = productoService.findById(productoDTO);
         if (productoExDTO == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {

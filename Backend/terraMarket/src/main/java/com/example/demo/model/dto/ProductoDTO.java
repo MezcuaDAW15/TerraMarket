@@ -10,12 +10,12 @@ import lombok.Data;
 
 @Data
 public class ProductoDTO {
-    private Long id;
-    private String nombre;
-    private String imagen;
+	private Long id;
+	private String nombre;
+	private String imagen;
 	@JsonIgnore
 	private CategoriaPDTO categoriaP;
-
+	private boolean imgRequest;
 
 	@Override
 	public boolean equals(Object obj) {
@@ -28,32 +28,43 @@ public class ProductoDTO {
 		ProductoDTO other = (ProductoDTO) obj;
 		return Objects.equals(id, other.id);
 	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-    public static ProductoDTO convertToDTO(Producto producto) {
-       ProductoDTO productoDTO = new ProductoDTO();
-       productoDTO.setId(producto.getId());
-       productoDTO.setNombre(producto.getNombre());
-       if (producto.getImagen() != null) {
+
+	public static ProductoDTO convertToDTO(Producto producto) {
+		ProductoDTO productoDTO = new ProductoDTO();
+		productoDTO.setId(producto.getId());
+		productoDTO.setNombre(producto.getNombre());
+
+		productoDTO.setCategoriaP(CategoriaPDTO.convertToDTO(producto.getCategoriaP()));
+		return productoDTO;
+
+	}
+
+	public static ProductoDTO convertToDTO(Producto producto, boolean imgRequest) {
+		ProductoDTO productoDTO = new ProductoDTO();
+		productoDTO.setId(producto.getId());
+		if (imgRequest) {
 			productoDTO.setImagen(Base64.getEncoder().encodeToString(producto.getImagen()));
 		}
-	   productoDTO.setCategoriaP(CategoriaPDTO.convertToDTO(producto.getCategoriaP()));
-       return productoDTO;
+		productoDTO.setImgRequest(imgRequest);
+		return productoDTO;
 
-    }
+	}
+
 	public static Producto convertToEntity(ProductoDTO productoDTO) {
-		
+
 		Producto producto = new Producto();
 		producto.setId(productoDTO.getId());
 		producto.setNombre(productoDTO.getNombre());
-		//producto.setImagen(productoDTO.getImagen());
+		// producto.setImagen(productoDTO.getImagen());
 
 		producto.setCategoriaP(CategoriaPDTO.convertToEntity(productoDTO.getCategoriaP()));
 		return producto;
 
 	}
-    
-    
+
 }
