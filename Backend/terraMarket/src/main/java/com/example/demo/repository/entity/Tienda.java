@@ -10,6 +10,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -26,20 +29,31 @@ public class Tienda {
     private String nombre;
     private String logo;
     private String descripcion;
-    private String imagen;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] imagen;
     private boolean activo;
 
     @ManyToOne
     @JoinColumn(name = "idmercado")
+    @ToString.Exclude
     private Mercado mercado;
 
     @ManyToOne
     @JoinColumn(name = "iddireccion")
+    @ToString.Exclude
     private Direccion direccion;
-    
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tienda")
     @ToString.Exclude
     private Set<Venta> listaVentas;
+    @ManyToMany
+    @JoinTable(name = "rel_categorias_tienda", joinColumns = @JoinColumn(name = "id_tienda"), inverseJoinColumns = @JoinColumn(name = "id_categoria"))
+    private Set<CategoriaT> categorias;
 
+    public Tienda() {
+        this.mercado = new Mercado();
+        this.direccion = new Direccion();
+    }
 
 }

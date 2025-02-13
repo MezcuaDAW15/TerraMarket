@@ -1,0 +1,65 @@
+@import "../../../../../variables";
+@import "../../../../../styles";
+@import "../../../../../mixins";
+
+.tienda-card {
+  width: 587px;
+  height: 286px;
+  background: url("../../../../../assets/card-market.svg") no-repeat;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+}
+
+.tienda-card-img {
+  margin-top: 12px;
+  width: 563px;
+  height: 142px;
+  overflow: hidden;
+  border-radius: 12px;
+
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.name {
+  @extend .p;
+  font-weight: 700;
+  display: inline-block;
+  margin: 12px;
+}
+
+.categories {
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 10px;
+}
+
+.bottom {
+  padding-left: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.info {
+  @extend .h3;
+  margin-left: 16px;
+  font-size: 16px;
+}
+
+.btn-card {
+  @include button-base($red, $red-hover, 10px);
+  font-size: 16px;
+  width: 155px;
+  height: 48px;
+  margin-right: 8px;
+  margin-top: 30px;
+  padding: 16px;
+  border: transparent;
+}

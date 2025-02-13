@@ -1,0 +1,21 @@
+Home-> Links
+Mercado-> Lista Tiendas
+	-> Producto-Link
+LISTA TIENDA
+VISTA PRODUCTO
+Cesta -> Link
+	No hay cesta
+
+REALIZAR PEDIDO
+Vista pedido -> Fotos
+RESEÑAS
+EDITAR PERFIL
+SIDEBAR REACIVO
+
+----------------FRONT------------------------
+SESION
+	LOGIN (JWT)....
+	REGISTRO
+	HEADER REATIVO
+	EDITAR PERFIL
+	BORRAR CUENTA

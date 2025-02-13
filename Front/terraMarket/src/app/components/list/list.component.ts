@@ -1,6 +1,6 @@
 import { Mercado } from './../../models/mercado';
 import { map } from 'rxjs';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DialogModule } from 'primeng/dialog';
 import { CategoriaP } from '../../models/categoriaP';
 import { ProductosService } from '../../services/productos/productos.service';
@@ -24,18 +24,29 @@ import { ChipComponent } from "../filtros/components/chip/chip.component";
   styleUrl: './list.component.scss'
 
 })
-export class ListComponent {
+export class ListComponent implements OnInit {
 
   constructor(
     private productoService: ProductosService,
     private ventasService: VentasService
   ) { }
+
   @Input() mercado: Mercado | null = null;
 
 
   selectedFilters: CategoriaP[] = [];
   productsToShow: Venta[] = [];
   visible: boolean = false;
+
+  ngOnInit(): void {
+    if (this.mercado) {
+      this.ventasService.findByVentasProductos([], this.mercado).subscribe(venta => {
+        this.productsToShow = venta;
+        console.log(this.productsToShow);
+      });
+    }
+
+  }
 
   onFiltersApplied(categories: CategoriaP[], mercado: Mercado) {
     this.selectedFilters = categories;
@@ -45,7 +56,7 @@ export class ListComponent {
     this.productsToShow = [];
 
     // Obtener productos filtrados y aplanar el array
-    this.ventasService.findByMapVentasProductos(categories, mercado).subscribe(venta => {
+    this.ventasService.findByVentasProductos(categories, mercado).subscribe(venta => {
       this.productsToShow = venta;
       console.log(this.productsToShow);
     });

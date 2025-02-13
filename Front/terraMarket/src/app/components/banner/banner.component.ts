@@ -1,5 +1,5 @@
 import { Mercado } from './../../models/mercado';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 
@@ -10,9 +10,16 @@ import { CommonModule } from '@angular/common';
   templateUrl: './banner.component.html',
   styleUrl: './banner.component.scss'
 })
-export class BannerComponent {
-  @Input() mercado: Mercado | null = null;
+export class BannerComponent implements OnInit {
 
+  @Input() mercado: Mercado | null = null;
+  imagenUrl: string | null = null;
+
+  ngOnInit(): void {
+    if (this.mercado?.imagen) {
+      this.imagenUrl = 'data:image/jpeg;base64,' + this.mercado.imagen;
+    }
+  }
   getFormattedAddress(): string {
     if (!this.mercado?.direccion) return '';
 

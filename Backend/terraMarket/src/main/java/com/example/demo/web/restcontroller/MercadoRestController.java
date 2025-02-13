@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.dto.MercadoDTO;
 import com.example.demo.service.MercadoService;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/ws/market")
 public class MercadoRestController {

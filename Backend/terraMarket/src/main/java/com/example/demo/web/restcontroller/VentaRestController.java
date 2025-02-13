@@ -28,11 +28,11 @@ public class VentaRestController {
     private static final Logger log = LoggerFactory.getLogger(VentaRestController.class);
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<VentaDTO> findAllByProducto(@RequestParam Long[] categorias, @RequestParam Long mercado) {
+    public List<VentaDTO> findAll(@RequestParam Long[] categorias, @RequestParam Long mercado) {
         log.info("ProductoRestController - findAll: Mostrando todos los productos");
         MercadoDTO mercadoDTO = new MercadoDTO();
         mercadoDTO.setId(mercado);
-        
+
         List<CategoriaPDTO> categoriasDTO = new ArrayList<CategoriaPDTO>();
         for (int i = 0; i < categorias.length; i++) {
             CategoriaPDTO categoriaDTO = new CategoriaPDTO();

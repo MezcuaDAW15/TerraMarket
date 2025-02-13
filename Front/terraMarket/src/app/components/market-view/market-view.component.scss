@@ -6,6 +6,16 @@
   @extend .p;
 
   background-color: transparent;
+  width: fit-content;
+  border-width: 0 0 1px 0;
+
+
+}
+
+:host ::ng-deep .p-tabmenu-nav-content {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1rem;
 
 }
 
@@ -15,4 +25,22 @@
   background-color: transparent;
   color: $black;
 
+}
+
+:host ::ng-deep.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link {
+  border-color: $red ;
+  border-width: 0 0 3px 0;
+}
+
+:host ::ng-deep .shop:before {
+  content: url('../../../assets/icons/shop.svg');
+  display: block;
+  margin-bottom: -5px;
+
+}
+
+:host ::ng-deep.products:before {
+  content: url('../../../assets/icons/products.svg');
+  display: block;
+  margin-bottom: -5px;
 }

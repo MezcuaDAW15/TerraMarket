@@ -1,0 +1,35 @@
+@import '../../../variables';
+
+.list-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+
+.filter-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.container {
+
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  margin-top: 1rem;
+  padding-left: 20px;
+
+
+
+}
+
+.chip {
+  :hover {
+    cursor: pointer;
+    background-color: $orange-hover;
+  }
+}

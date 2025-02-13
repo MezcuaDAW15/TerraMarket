@@ -1,6 +1,6 @@
 <div class="container">
   <div class="banner">
-    <img src="assets/banner.png" alt="Mercat Central de València">
+    <img *ngIf="imagenUrl" [src]="imagenUrl" alt="Mercat Central de València">
   </div>
   <div class="content">
     <div class="left-section">

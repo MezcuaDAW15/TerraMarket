@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<meta charset="UTF-8">
 	<title th:text="${titulo}"></title>
 </head>
 <body>
+	<header th:insert="~{fragments/header.html}"></header>
 	<h1 th:utext="${titulo}"></h1>
 	<br>
 	<a th:href="@{/productos}">Ver productos</a>
