@@ -15,6 +15,7 @@ public class ProductoDTO {
     private String imagen;
 	@JsonIgnore
 	private CategoriaPDTO categoriaP;
+	private boolean solicitarImagen = false;
 
 
 	@Override

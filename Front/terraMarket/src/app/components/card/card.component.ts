@@ -20,6 +20,8 @@ export class CardComponent implements OnInit {
   ngOnInit() {
     if (this.venta) {
       this.imagenUrl = 'data:image/jpeg;base64,' + this.venta.producto.imagen;
+      // File
+      // save ("producto" + id. + ".jpg")
 
     }
 

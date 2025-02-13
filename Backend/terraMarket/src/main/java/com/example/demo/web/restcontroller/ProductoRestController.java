@@ -38,6 +38,18 @@ public class ProductoRestController {
         return productoService.findAll();
     }
 
+    // @RequestMapping(method = RequestMethod.GET)
+    // public List<ProductoDTO> findAll(List<ProductoDTO> listaSolicitandoImagen) {
+    //     log.info("ProductoRestController - findAll: Mostrando todos los productos");
+    //     return productoService.findAll();
+    // }    
+
+    // @RequestMapping(method = RequestMethod.GET)
+    // public List<ProductoDTO> findAllId() {
+    //     log.info("ProductoRestController - findAll: Mostrando todos los productos");
+    //     return productoService.findAllId();
+    // }    
+
     @GetMapping("/productos/{id}")
     public ProductoDTO findById(@PathVariable Long id) {
         log.info("ProductoRestController - findById: " + id);
