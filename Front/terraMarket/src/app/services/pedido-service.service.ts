@@ -10,12 +10,15 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class PedidoServiceService {
 
-  private url = `http://localhost:8888/ws/pedidos/clientes/1/pedidos`;
+  private url = `http://localhost:8888/ws/clientes/1/pedidos`;
 
   constructor(private httpClient: HttpClient) { }
 
   findAllByCliente():Observable<Pedido[]>{
     return this.httpClient.get<Pedido[]>(this.url)
+  }
+  findById(id: number):Observable<Pedido>{
+    return this.httpClient.get<Pedido>(`${this.url}/${id}`)
   }
 
   private pedidoSource = new BehaviorSubject<Pedido>({} as Pedido); // inicializamos el BehaviorSubject con un objeto vacío

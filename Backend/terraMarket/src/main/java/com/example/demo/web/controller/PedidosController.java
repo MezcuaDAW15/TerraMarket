@@ -64,7 +64,7 @@ public class PedidosController {
 		// recuperar el pedido
 		PedidoDTO pedidoDTO = new PedidoDTO();
 		pedidoDTO.setId(idPedido);
-		pedidoDTO = pedidoService.findById(pedidoDTO, clienteDTO);
+		pedidoDTO = pedidoService.findById(pedidoDTO);
 
 		pedidoDTO.setCliente(clienteDTO);
 
