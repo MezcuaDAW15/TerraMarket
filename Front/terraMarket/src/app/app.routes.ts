@@ -6,11 +6,13 @@ import { EditarPerfilClienteComponent } from './components/editar-perfil-cliente
 import { RealizarPedidoComponent } from './components/realizar-pedido/realizar-pedido.component';
 import { CestaComponent } from './components/cesta/cesta.component';
 import { MarketViewComponent } from './components/market-view/market-view.component';
+import { MercadosComponent } from './components/mercados/mercados.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/pedidos', pathMatch: 'full' },
   { path: 'pedidos', component: PedidosComponent },
   { path: 'pedidos/:id', component: DetallesPedidoComponent },
+  { path: 'mercados', component: MercadosComponent },
   { path: 'mercado/:id', component: MarketViewComponent },
   { path: 'cesta', component: CestaComponent },
 ];

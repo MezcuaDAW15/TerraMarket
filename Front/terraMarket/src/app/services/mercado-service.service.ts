@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class MercadoServiceService {
-  private url = `http://localhost:8888/ws/mercados`;
+  private url = `http://localhost:8888/ws/market`;
 
   constructor(private httpClient: HttpClient) {}
 
