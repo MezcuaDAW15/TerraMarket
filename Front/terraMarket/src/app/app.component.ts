@@ -1,4 +1,4 @@
-import { CardComponent } from './components/card/card.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
@@ -14,7 +14,7 @@ import { MarketListTiendasComponent } from "./components/market-list-tiendas/mar
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, CardComponent, PedidosComponent, BackComponent, MarketViewComponent, FiltrosComponent, CestaItemComponent, CestaComponent, MarketListTiendasComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, PedidosComponent, BackComponent, MarketViewComponent, FiltrosComponent, CestaItemComponent, CestaComponent, MarketListTiendasComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

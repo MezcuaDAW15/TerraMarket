@@ -16,11 +16,13 @@ export class BannerComponent implements OnInit {
   imagenUrl: string | null = null;
 
   ngOnInit(): void {
+
+  }
+  getFormattedAddress(): string {
     if (this.mercado?.imagen) {
       this.imagenUrl = 'data:image/jpeg;base64,' + this.mercado.imagen;
     }
-  }
-  getFormattedAddress(): string {
+
     if (!this.mercado?.direccion) return '';
 
     const { calle, numero, piso, puerta, cp, ciudad, provincia } = this.mercado.direccion;

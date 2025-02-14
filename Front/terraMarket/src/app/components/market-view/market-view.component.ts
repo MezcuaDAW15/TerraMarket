@@ -49,7 +49,7 @@ export class MarketViewComponent implements OnInit {
       this.marketService.findById(id).subscribe({
         next: (data) => {
           this.mercado = data;
-
+          console.log(this.mercado)
         },
         error: (error) => {
           console.error('Error al cargar el mercado:', error);
@@ -60,7 +60,6 @@ export class MarketViewComponent implements OnInit {
       this.errorMessage = 'ID de mercado no válido.';
       console.error('ID de mercado no válido:', id);
     }
-    console.log(this.mercado)
 
     this.items = [
       { label: 'Tiendas', icon: 'shop', command: () => this.setActiveTab('shop') },
