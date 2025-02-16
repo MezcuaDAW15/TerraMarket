@@ -133,4 +133,17 @@ public class ClienteServiceImpl implements ClienteService, UserDetailsService{
         }
     }
 
+	@Override
+	public int login(ClienteDTO clienteDTO) {
+		
+		Cliente cliente = clienteRepository.findByUsername(clienteDTO.getUsername());
+		
+		if(cliente == null) {
+			return 0;
+		} else {
+			return 1;
+		}
+		
+	}
+
 }

@@ -8,6 +8,7 @@ import { CestaComponent } from './components/cesta/cesta.component';
 import { MarketViewComponent } from './components/market-view/market-view.component';
 import { MercadosComponent } from './components/mercados/mercados.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { LoginComponent } from './components/login/login.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -18,4 +19,5 @@ export const routes: Routes = [
   { path: 'home', component: MercadosComponent },
   { path: 'realizar-pedido', component: RealizarPedidoComponent },
   { path: 'registro', component: RegistroComponent },
+  { path: 'login', component: LoginComponent },
 ];
