@@ -1,0 +1,35 @@
+@import '../../../../../variables';
+
+.info-linea-pedido{
+                
+    background-color: $white;
+    border: 1px solid $orange;
+    border-radius: 7px;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    .nombre-producto{
+        font-weight: 600;
+    }
+}
+.img-container{
+    width: 77px;
+    height: 77px;
+    border-radius: 5px;
+    overflow: hidden;
+    img{
+        height: 100%;
+    }
+}
+
+.info-producto{
+    display: flex;
+    flex-direction: column;
+}
+.auto-size{
+    width: fit-content;
+}
+.nombre-producto{
+    margin-top: 0;
+}

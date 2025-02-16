@@ -1,0 +1,44 @@
+
+<app-back></app-back>
+
+<div class="container">
+    <p class="h1">Mis pedidos</p>
+
+<div class="m-8 div-table">
+    <div class="card border-round-sm">
+        <p-table [columns]="cols" [value]="pedidos" [tableStyle]="{ 'min-width': '50rem' }" >
+            <ng-template pTemplate="header" let-columns >
+                    <tr class="encabezado-tabla">
+                        <th *ngFor="let col of columns">
+                            {{ col.header }}
+                        </th>
+                    </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td *ngFor="let col of columns" >
+                        <div  *ngIf="col.field === 'fechaPedido' || col.field === 'fechaEntrega'">
+                            {{ rowData[col.field] }}
+                        </div>
+                        <div *ngIf="col.field === 'estado.estado'">
+                            <span [ngClass]="pintarEstado(rowData[col.field])">{{rowData[col.field]}}</span>
+                        </div>
+                        <div *ngIf="col.field === 'id' "   >
+                            #{{ rowData[col.field] }}
+                        </div>
+                        <!--TODO hacer celda para el importe con dos decimales-->
+                        <div *ngIf=" col.field === 'importe'">
+                            {{ rowData[col.field] }} &euro;
+                        </div>
+                        <div *ngIf="col.field === 'detalles'">
+                            <button class="sqr-btn auto-size" [routerLink]="['/detalles-pedido']" (click)="verDetalles(rowData)" >Ver pedido</button>
+                            <!-- <app-detalles-pedido [pedido]="col"></app-detalles-pedido> -->
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div> 
+</div>
+</div>
+

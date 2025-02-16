@@ -1,0 +1,27 @@
+<div class="cesta-item" *ngIf="lineaPedido">
+  <div class="product-details">
+
+    <div class="cesta-item_img">
+      <img *ngIf="imagenUrl" [src]="imagenUrl" alt="cesta-item" />
+    </div>
+    <div class="info">
+      <p class="mdm">{{lineaPedido.venta.producto.nombre}}</p>
+      <p class="p precio">{{formatNumber(lineaPedido.venta.precioVenta)}}&euro;</p>
+    </div>
+  </div>
+  <div class="quantity">
+    <p class="p">Cantidad</p>
+    <button class="invisible-btn" (click)="restar()">
+      <img src="assets/icons/minus.svg" alt="restar">
+    </button>
+    <p class="mdm">{{lineaPedido.cantidad}}</p>
+    <button class="invisible-btn" (click)="sumar()">
+      <img src="assets/icons/plus.svg" alt="sumar">
+    </button>
+  </div>
+  <button class="sqr-btn auto-size" (click)="eliminar()">
+    <img src="assets/icons/trash.svg" alt="borrar">
+  </button>
+
+
+</div>

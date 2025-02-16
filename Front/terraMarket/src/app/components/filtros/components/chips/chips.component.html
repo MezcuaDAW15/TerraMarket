@@ -1,0 +1,15 @@
+<div class="category">
+  <header class="category-header">
+
+    <img src="assets/icons/categories/Aves Derivados.svg">
+    <h3 class="h3">
+
+      {{categoriaT?.nombre}}
+    </h3>
+  </header>
+  <div class="chip-selectors">
+
+    <app-chip *ngFor="let categoriaP of categoriaT?.listaCategoriaP; index as i; trackBy: trackByFn" [categoriaP]="categoriaP" (categorySelected)="onCategoryChange($event)"/>
+
+  </div>
+</div>

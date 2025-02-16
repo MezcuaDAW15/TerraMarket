@@ -1,0 +1,66 @@
+@import '../../../variables';
+
+.container{
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.pasos-pedido{
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+.contenedor-componente{
+    width: 95%;
+    height: 470px;
+    background-color: $white;
+    border-radius: 10px;
+    border: 2px solid $red;
+    
+    display: flex;
+    flex-direction: column;
+    flex-direction: column;
+    align-items: center;
+}
+.div-realizar-pedido{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+// FORMULARIOS----------
+.contenedor-formulario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+}
+// RESUMEN DE PEDIDO---------
+.contenedor-resumen{
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+}
+.resumen-pedido{
+    padding: 50px;
+    width: 70%;
+    height: 470px;
+    border-radius: 10px;
+    background-color: $white;
+    border: 2px solid $orange;
+}
+
+
+.etiquetas-container{
+    margin-top: 30px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
