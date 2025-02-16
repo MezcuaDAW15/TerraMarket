@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +30,8 @@ public class ClienteRestController {
 
     @Autowired
     ClienteService clienteService;
+    @Autowired
+    UserDetailsService userDetailsService;
 
     // localizamos todos los clientes
     @RequestMapping(method = RequestMethod.GET)
@@ -105,14 +109,13 @@ public class ClienteRestController {
     @PostMapping("/login")
     public ResponseEntity<Integer> login(@RequestParam ClienteDTO clienteDTO){
     	
-    	int resultado = clienteService.login(clienteDTO);
+    	UserDetails cliente = userDetailsService.loadUserByUsername(clienteDTO.getUsername());
     	
-    	//User cliente = clienteService.loadUserByUsername(clienteDTO.getUsername());
     	
-    	if(resultado == 1) {
-    		return new ResponseEntity<>(HttpStatus.OK);
+    	if(cliente != null) {
+    		return new ResponseEntity<>(1, HttpStatus.OK);
 	    } else {
-	        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	        return new ResponseEntity<>(0,HttpStatus.BAD_REQUEST);
 	    }
  
     }

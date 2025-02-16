@@ -2,12 +2,15 @@
     <div class="container-login">
         <div class="div-inicio-sesion">
 
-            <form class="form" action="">
+            <form class="form" action="#" method="post"
+            [formGroup]="formulario"
+            (ngSubmit)="iniciarSesion()" >
+
                 <p class="h1">Inicio de sesión</p>
     
                 <div class="div-inputs">
-                    <input class="input-primary" type="text" name="email" id="" placeholder="Correo electrónico">
-                    <input class="input-primary" type="password" name="contrasena" id="" placeholder="Contraseña">
+                    <input formControlName="username" class="input-primary" type="text" name="email" id="" placeholder="Nombre de usuario">
+                    <input formControlName="password" class="input-primary" type="password" name="contrasena" id="" placeholder="Contraseña">
     
                     <div class="div-cb">
                         <input class="checkbox" type="checkbox" name="recuerdame" id="">
@@ -21,7 +24,7 @@
         <div class="div-enlace-registro">
             <img src="" alt="">
             <p class="h1">¿No tienes una cuenta?</p>
-            <button class="sqr-btn light auto-size">Regístrate</button>
+            <button class="sqr-btn light auto-size" [routerLink]="['/registro']">Regístrate</button>
         </div>
     </div>
 </div>
