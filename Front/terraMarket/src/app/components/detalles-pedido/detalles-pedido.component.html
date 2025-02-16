@@ -2,7 +2,7 @@
 <div class="container">
   <div class="encabezado">
     <div class="div-encabezado">
-      <p class="h1" *ngIf="rowData.id">Detalles del pedido #{{rowData.id}}</p>
+      <p class="h1" *ngIf="rowData.id">Detalles del pedido #{{rowData?.id}}</p>
       <span class="etiqueta-estado-pendiente"
         [ngClass]="pintarEstado(rowData.estado.estado)">{{rowData.estado.estado}}</span>
     </div>

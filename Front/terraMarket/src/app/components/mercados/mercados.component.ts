@@ -4,11 +4,13 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
 import { MercadoServiceService } from '../../services/mercado-service.service';
 import { CardMarketComponent } from '../card-market/card-market.component';
+import { RegistroComponent } from '../registro/registro.component';
+import { RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-mercados',
   standalone: true,
-  imports: [CardMarketComponent, AutoCompleteModule, FormsModule],
+  imports: [CardMarketComponent, AutoCompleteModule, FormsModule, RegistroComponent, RouterLink],
   templateUrl: './mercados.component.html',
   styleUrl: './mercados.component.scss',
 })

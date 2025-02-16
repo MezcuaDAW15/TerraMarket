@@ -45,6 +45,7 @@ export class DetallesPedidoComponent implements OnInit {
       this.pedidoService.findById(id).subscribe({
         next: (data) => {
           this.rowData = data;
+          console.log(this.rowData)
         }
       });
     }
