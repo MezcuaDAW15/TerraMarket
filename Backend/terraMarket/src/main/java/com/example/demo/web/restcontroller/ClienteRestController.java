@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import com.example.demo.service.ClienteService;
 import com.example.demo.web.controller.ClienteController;
 import org.springframework.web.bind.annotation.PutMapping;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/ws/clientes")
 public class ClienteRestController {
@@ -92,7 +94,7 @@ public class ClienteRestController {
     @DeleteMapping("/delete/{idCliente}")
 	public ResponseEntity delete(@PathVariable("idCliente") Long idCliente) {
 
-		log.info(ClienteController.class.getSimpleName() + " - borrando cliente" + idCliente);
+		log.info(ClienteRestController.class.getSimpleName() + " - borrando cliente" + idCliente);
 		
 		ClienteDTO cDTO = new ClienteDTO();
 		cDTO.setId(idCliente);
@@ -110,12 +112,12 @@ public class ClienteRestController {
     public ResponseEntity<Integer> login(@RequestParam ClienteDTO clienteDTO){
     	
     	UserDetails cliente = userDetailsService.loadUserByUsername(clienteDTO.getUsername());
-    	
+    	log.info(ClienteRestController.class.getSimpleName() + " --------> " + clienteDTO.toString());
     	
     	if(cliente != null) {
     		return new ResponseEntity<>(1, HttpStatus.OK);
 	    } else {
-	        return new ResponseEntity<>(0,HttpStatus.BAD_REQUEST);
+	        return new ResponseEntity<>(0,HttpStatus.NOT_FOUND);
 	    }
  
     }

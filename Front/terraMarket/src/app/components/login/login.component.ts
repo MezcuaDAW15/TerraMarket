@@ -28,12 +28,13 @@ export class LoginComponent {
 
   iniciarSesion(): void{
 
-    console.log(this.formulario.value);
-
     this.cliente = {
       username: this.formulario.value.username,
-      contrasena: this.formulario.value.contrasena
+      contrasena: this.formulario.value.password
     }
+
+    console.log('cliente formulario --> ' + this.cliente.username);
+    console.log('cliente formulario --> ' + JSON.stringify(this.cliente));  // Muestra el objeto como una cadena JSON
 
     this.clienteService.login(this.cliente).subscribe((respuesta)=>{
       if (respuesta === 1) {

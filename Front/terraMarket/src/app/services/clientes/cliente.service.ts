@@ -14,6 +14,8 @@ export class ClienteService {
   constructor(private httpClient: HttpClient) {}
 
   login(cliente: Cliente):Observable<number>{
+    
+    console.log('cliente servicio --> ' + JSON.stringify(cliente));
     return this.httpClient.post<number>(`${this.url}/login`, cliente)
   }
   
