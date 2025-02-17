@@ -47,5 +47,9 @@ export class SidebarComponent implements OnInit {
       this.sidebarVisible = false;
     });
   }
+  navigateToCategory(categoryId: number) {
+    window.location.href = `/mercado/3?categoria=${categoryId}`;
+  }
+
 
 }
