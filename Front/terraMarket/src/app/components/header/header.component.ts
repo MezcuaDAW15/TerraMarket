@@ -7,14 +7,15 @@ import { BadgeModule } from 'primeng/badge';
 import { CommonModule } from '@angular/common';
 import { SessionService } from '../../services/session/session.service';
 import { Router } from '@angular/router';
-
+import { LoginComponent } from '../login/login.component';
+import { DialogModule } from 'primeng/dialog';
 
 
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonModule, CommonModule, SidebarComponent, MenuModule, BadgeModule],
+  imports: [ButtonModule, CommonModule, SidebarComponent, MenuModule, BadgeModule, LoginComponent, DialogModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -98,5 +99,15 @@ export class HeaderComponent implements OnInit {
         ]
       }
     ]
+  }
+
+  loginVisible = false;
+  showDialog() {
+
+    this.loginVisible = true;
+  }
+
+  closeDialog(){
+    this.loginVisible = false;
   }
 }
