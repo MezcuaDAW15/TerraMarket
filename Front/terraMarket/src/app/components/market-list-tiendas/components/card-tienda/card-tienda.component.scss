@@ -17,6 +17,13 @@
   margin-top: 12px;
   width: 563px;
   height: 142px;
+  overflow: hidden;
+  border-radius: 12px;
+
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
 }
 
 .name {
@@ -48,9 +55,11 @@
 
 .btn-card {
   @include button-base($red, $red-hover, 10px);
+  font-size: 16px;
   width: 155px;
   height: 48px;
   margin-right: 8px;
   margin-top: 30px;
+  padding: 16px;
   border: transparent;
 }

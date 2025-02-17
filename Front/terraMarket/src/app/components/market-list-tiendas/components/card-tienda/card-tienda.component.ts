@@ -14,8 +14,10 @@ export class CardTiendaComponent implements OnInit {
   @Input() tienda: Tienda | null = null;
   imagenUrl: string | null = null;
   ngOnInit(): void {
+    console.log(this.tienda);
     if (this.tienda?.imagen) {
       this.imagenUrl = 'data:image/jpeg;base64,' + this.tienda.imagen;
+      console.log(this.imagenUrl);
 
     }
   }

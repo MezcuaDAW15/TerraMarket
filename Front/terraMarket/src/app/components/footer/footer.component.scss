@@ -1,0 +1,59 @@
+.footer {
+  height: 400px;
+  background-color: #FFAD21;
+  position: relative;
+  padding: 67px 84px;
+  box-sizing: border-box;
+  margin-top: 2rem;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.columns {
+  display: flex;
+  gap: 10rem;
+  height: 100%;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.socials {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 20px;
+}
+
+.payments {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 20px;
+}
+
+
+.doble-column {
+  display: flex;
+  gap: 3.5rem;
+
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.column div {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  color: black;
+}

@@ -21,6 +21,8 @@ export class BannerComponent implements OnInit {
     }
   }
   getFormattedAddress(): string {
+
+
     if (!this.mercado?.direccion) return '';
 
     const { calle, numero, piso, puerta, cp, ciudad, provincia } = this.mercado.direccion;

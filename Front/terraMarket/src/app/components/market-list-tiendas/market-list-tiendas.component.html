@@ -2,8 +2,10 @@
 
   <p class="p">Filtrar tiendas por categorias</p>
   <div class="filter-container">
-    <app-chip-tienda *ngFor="let categoria of categorias; index as i; trackBy:trackByFn" [categoria]="categoria"
-      (click)="toggleCategoria(categoria)"></app-chip-tienda>
+    <app-chip-tienda *ngFor="let categoria of categorias; index as i; trackBy: trackByFn" [categoria]="categoria"
+      [categoriaActiva]="getCategoriaActiva(categoria)"
+      (click)="toggleCategoria(categoria)">
+    </app-chip-tienda>
   </div>
   <div class="list-container">
     <app-card-tienda *ngFor="let tienda of tiendas; index as i; trackBy: trackByFn" [tienda]="tienda"></app-card-tienda>

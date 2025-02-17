@@ -4,6 +4,9 @@ import { MenuItem } from 'primeng/api';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { MenuModule } from 'primeng/menu';
 import { BadgeModule } from 'primeng/badge';
+import { CommonModule } from '@angular/common';
+import { SessionService } from '../../services/session/session.service';
+import { Router } from '@angular/router';
 
 
 
@@ -11,7 +14,7 @@ import { BadgeModule } from 'primeng/badge';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonModule, SidebarComponent, MenuModule, BadgeModule],
+  imports: [ButtonModule, CommonModule, SidebarComponent, MenuModule, BadgeModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -19,10 +22,44 @@ export class HeaderComponent implements OnInit {
 
   items: MenuItem[] | undefined;
 
+  usuarioLogueado = false;
+
+  usuario: any = null;
+
+  constructor(
+    private sessionService: SessionService,
+    private router: Router
+  ) { }
+
+
   ngOnInit() {
+    this.cargarUsuario();
+
+    this.cargarItems();
+
+
+
+  }
+
+  cargarUsuario() {
+    this.sessionService.usuario$.subscribe((usuario) => {
+
+      this.usuarioLogueado = !!usuario;
+      this.usuario = usuario;
+    });
+
+    this.sessionService.obtenerUsuario();
+
+  }
+
+  iniciarSesion() {
+    this.sessionService.iniciarSesion();
+  }
+
+  cargarItems() {
     this.items = [
       {
-        label: 'usuario123',
+        label: this.usuario.nombre,
         items: [
           {
             separator: true
@@ -43,7 +80,11 @@ export class HeaderComponent implements OnInit {
 
           {
             label: 'Cerrar sesión',
-            icon: 'pi pi-sign-out text-2xl'
+            icon: 'pi pi-sign-out text-2xl',
+            command: () => {
+              console.log('Cerrar sesión');
+              this.sessionService.cerrarSesion();
+            }
           },
           {
             separator: true,

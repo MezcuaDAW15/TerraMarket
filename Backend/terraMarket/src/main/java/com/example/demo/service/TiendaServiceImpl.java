@@ -80,9 +80,13 @@ public class TiendaServiceImpl implements TiendaService {
 
         List<TiendaDTO> tiendasDTO = new ArrayList<TiendaDTO>();
         for (Tienda tienda : tiendas) {
-            TiendaDTO tiendaDTO = TiendaDTO.convertToDTO(tienda, mercadoDTO);
-            tiendaDTO.setCategoriaT(categoriaTService.findAllByTienda(tiendaDTO));
-            tiendasDTO.add(tiendaDTO);
+            boolean exists = tiendasDTO.stream().anyMatch(t -> t.getId().equals(tienda.getId()));
+            if (!exists) {
+                TiendaDTO tiendaDTO = TiendaDTO.convertToDTO(tienda, mercadoDTO);
+                tiendaDTO.setCategoriaT(categoriaTService.findAllByTienda(tiendaDTO));
+                tiendasDTO.add(tiendaDTO);
+            }
+
         }
 
         return tiendasDTO;

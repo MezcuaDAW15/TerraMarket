@@ -22,7 +22,7 @@ import { MarketListTiendasComponent } from "../market-list-tiendas/market-list-t
   styleUrl: './market-view.component.scss'
 })
 export class MarketViewComponent implements OnInit {
-  activeTab: string = 'products';
+  activeTab: string = 'shop';
   selectedItem: any;
 
   mercado: Mercado | null = null;
@@ -49,6 +49,7 @@ export class MarketViewComponent implements OnInit {
       this.marketService.findById(id).subscribe({
         next: (data) => {
           this.mercado = data;
+          console.log(this.mercado)
         },
         error: (error) => {
           console.error('Error al cargar el mercado:', error);
@@ -59,13 +60,12 @@ export class MarketViewComponent implements OnInit {
       this.errorMessage = 'ID de mercado no válido.';
       console.error('ID de mercado no válido:', id);
     }
-    console.log(this.mercado)
 
     this.items = [
       { label: 'Tiendas', icon: 'shop', command: () => this.setActiveTab('shop') },
       { label: 'Productos', icon: 'products', command: () => this.setActiveTab('products') }
     ];
-    this.selectedItem = this.items ? this.items[1] : null;
+    this.selectedItem = this.items ? this.items[0] : null;
 
   }
 
