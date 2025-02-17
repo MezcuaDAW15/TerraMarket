@@ -12,6 +12,7 @@ public interface ClienteService {
     public int delete(ClienteDTO cDTO);
     public void save(ClienteDTO clienteDTO);
 	public int login(ClienteDTO clienteDTO);
+    public ClienteDTO findByUsername(String username);
 
 }
 

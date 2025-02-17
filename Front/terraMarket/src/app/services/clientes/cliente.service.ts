@@ -13,10 +13,11 @@ export class ClienteService {
 
   constructor(private httpClient: HttpClient) {}
 
-  login(cliente: Cliente):Observable<number>{
+  login(cliente: Cliente):Observable<Cliente>{
     
     console.log('cliente servicio --> ' + JSON.stringify(cliente));
-    return this.httpClient.post<number>(`${this.url}/login`, cliente)
+
+    return this.httpClient.post<Cliente>(`${this.url}/login`, cliente);
   }
   
 }

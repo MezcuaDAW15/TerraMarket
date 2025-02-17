@@ -146,4 +146,15 @@ public class ClienteServiceImpl implements ClienteService, UserDetailsService{
 		
 	}
 
+    @Override
+    public ClienteDTO findByUsername(String username) {
+
+        Cliente cliente = clienteRepository.findByUsername(username);
+
+        ClienteDTO cDTO = new ClienteDTO();
+        cDTO = ClienteDTO.convertToDTO(cliente);
+
+        return cDTO;
+    }
+
 }

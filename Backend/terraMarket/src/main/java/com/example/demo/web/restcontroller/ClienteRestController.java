@@ -109,15 +109,17 @@ public class ClienteRestController {
 	}
     
     @PostMapping("/login")
-    public ResponseEntity<Integer> login(@RequestParam ClienteDTO clienteDTO){
+    public ResponseEntity<ClienteDTO> login(@RequestBody ClienteDTO cliente){
     	
-    	UserDetails cliente = userDetailsService.loadUserByUsername(clienteDTO.getUsername());
-    	log.info(ClienteRestController.class.getSimpleName() + " --------> " + clienteDTO.toString());
+    	UserDetails c = userDetailsService.loadUserByUsername(cliente.getUsername());
+    	log.info(ClienteRestController.class.getSimpleName() + " --------> " + cliente.toString());
     	
-    	if(cliente != null) {
-    		return new ResponseEntity<>(1, HttpStatus.OK);
+    	if(c != null) {
+            ClienteDTO cDTO = new ClienteDTO();
+            cDTO = clienteService.findByUsername(c.getUsername());
+    		return new ResponseEntity<>(cDTO, HttpStatus.OK);
 	    } else {
-	        return new ResponseEntity<>(0,HttpStatus.NOT_FOUND);
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	    }
  
     }

@@ -36,19 +36,14 @@ export class LoginComponent {
     console.log('cliente formulario --> ' + this.cliente.username);
     console.log('cliente formulario --> ' + JSON.stringify(this.cliente));  // Muestra el objeto como una cadena JSON
 
-    this.clienteService.login(this.cliente).subscribe((respuesta)=>{
-      if (respuesta === 1) {
-
-        const username = this.cliente?.username;
-  
-        if (username) {
-          localStorage.setItem('cliente', username);  // Solo si username no es undefined
-          this.router.navigate(['/home']);
-        } else {
-          console.error("El nombre de usuario es undefined");
-        }
+    this.clienteService.login(this.cliente).subscribe(
+      (response: Cliente) => {
+        console.log('Login successful', response);
+      },
+      (error) => {
+        console.error('Login failed', error);
       }
-
-    })
+    );
+    console.log(this.cliente);
   }
 }
