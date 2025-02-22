@@ -8,6 +8,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { SafeHtmlPipe } from '../../pipes/safe-html.pipe';
+import { Cliente } from '../../models/cliente';
+import { RegisterService } from '../../services/register.service';
+import { Router } from '@angular/router';
+import { SessionService } from '../../services/session/session.service';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +27,11 @@ export class RegisterComponent {
   showPasswd: boolean = false;
   showRepeat: boolean = false;
 
-  constructor() {
+  constructor(
+    private registerService: RegisterService,
+    private router: Router,
+    private sessionService: SessionService
+  ) {
     this.registerFase1 = new FormGroup({
       name: new FormControl<string | null>(null, [Validators.required]),
       surnames: new FormControl<string | null>(null, [Validators.required]),
@@ -48,7 +56,7 @@ export class RegisterComponent {
         Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/),
       ]),
       repeat: new FormControl<string | null>(null, [Validators.required]),
-      terms: new FormControl<boolean | null>(null, Validators.required),
+      terms: new FormControl<boolean | null>(null),
     });
   }
 
@@ -70,18 +78,6 @@ export class RegisterComponent {
     return control?.errors;
   }
 
-  changeFase(e: Event) {
-    e.preventDefault();
-
-    this.registerFase1.markAllAsTouched();
-
-    if (this.registerFase1.invalid) {
-      return;
-    }
-
-    this.chFase();
-  }
-
   chPasswd(e: Event) {
     e.preventDefault();
     this.showPasswd = !this.showPasswd;
@@ -97,23 +93,59 @@ export class RegisterComponent {
     this.fase1 = !this.fase1;
   }
 
+  dniOnInput(e: Event) {
+    const input = e.target as HTMLInputElement;
+    input.value = input.value.toUpperCase();
+  }
+
+  changeFase(e: Event) {
+    e.preventDefault();
+
+    this.registerFase1.markAllAsTouched();
+
+    if (this.registerFase1.invalid) {
+      return;
+    }
+
+    this.chFase();
+  }
+
   submit(e: Event) {
     e.preventDefault();
 
     this.registerFase1.markAllAsTouched();
     this.registerFase2.markAllAsTouched();
 
-    if (this.registerFase1.invalid || this.registerFase2.invalid) {
+    if (this.registerFase1.invalid) {
+      this.fase1 = true;
       return;
     }
 
-    const data = new FormData();
-    console.log(this.registerFase1.value);
-    console.log(this.registerFase2.value);
-  }
+    if (this.registerFase2.invalid) {
+      return;
+    }
 
-  dniOnInput(e: Event) {
-    const input = e.target as HTMLInputElement;
-    input.value = input.value.toUpperCase();
+    const form1Value = this.registerFase1.value;
+    const form2Value = this.registerFase2.value;
+    const cliente: Cliente = {
+      nombre: form1Value.name,
+      apellidos: form1Value.surnames,
+      email: form1Value.email,
+      username: form1Value.username,
+      fechaNacimiento: form2Value.birth,
+      contrasena: form2Value.password,
+      cp: form2Value.cp,
+    };
+
+    this.registerService.register(cliente).subscribe({
+      next: (response) => {
+        localStorage.setItem('usuario', JSON.stringify(response));
+        this.sessionService.setUsuario(response);
+        this.router.navigate(['/']);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 }
