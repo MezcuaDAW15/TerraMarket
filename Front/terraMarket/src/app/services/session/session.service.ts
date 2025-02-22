@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Cliente } from '../../models/cliente';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SessionService {
   private usuarioActual = new BehaviorSubject<any>(null);
@@ -18,7 +18,6 @@ export class SessionService {
     // if (usuarioGuardado) {
     //   this.usuarioActual.next(JSON.parse(usuarioGuardado));
     // }
-
     // const mercadoGuardado = localStorage.getItem('mercado');
     // if (mercadoGuardado) {
     //   this.mercadoActual.next(JSON.parse(mercadoGuardado));
@@ -26,8 +25,7 @@ export class SessionService {
   }
 
   iniciarSesion(): void {
-    console.log("SessionService -- iniciarSesion");
-
+    console.log('SessionService -- iniciarSesion');
 
     const usuario = {
       id: 1,
@@ -36,23 +34,21 @@ export class SessionService {
       username: 'usuario123',
       fechaNacimiento: new Date(),
       email: 'emai@iescamp.es',
-      cp: '12345'
-    }
-
+      cp: '12345',
+    };
 
     localStorage.setItem('usuario', JSON.stringify(usuario));
     this.usuarioActual.next(usuario);
   }
 
   cerrarSesion(): void {
-    console.log("SessionService -- cerrarSesion");
+    console.log('SessionService -- cerrarSesion');
     localStorage.removeItem('usuario');
     this.usuarioActual.next(null);
   }
 
   obtenerUsuario(): any {
-
-    console.log("SessionService -- obtenerUsuario");
+    console.log('SessionService -- obtenerUsuario');
     const usuario = localStorage.getItem('usuario');
     if (usuario) {
       this.usuarioActual.next(JSON.parse(usuario));
@@ -60,4 +56,7 @@ export class SessionService {
     return this.usuarioActual.value;
   }
 
+  setUsuario(usuario: Cliente) {
+    this.usuarioActual.next(usuario);
+  }
 }

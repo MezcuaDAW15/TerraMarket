@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.example.demo.model.dto.ClienteDTO;
 import com.example.demo.model.dto.RolDTO;
@@ -24,7 +25,7 @@ import com.example.demo.repository.entity.Rol;
 import com.example.demo.utils.EncriptaPassword;
 
 @Service
-public class ClienteServiceImpl implements ClienteService, UserDetailsService{
+public class ClienteServiceImpl implements ClienteService, UserDetailsService {
 
     private static final Logger log = LoggerFactory.getLogger(ClienteServiceImpl.class);
 
@@ -37,50 +38,51 @@ public class ClienteServiceImpl implements ClienteService, UserDetailsService{
     public ClienteDTO findById(ClienteDTO cDTO) {
 
         log.info(ClienteServiceImpl.class.getSimpleName() + " - buscando cliente " + cDTO.toString());
-		
-		Optional<Cliente> cliente = clienteRepository.findById(cDTO.getId());
-		if(cliente.isPresent()) {
-			cDTO = ClienteDTO.convertToDTO(cliente.get());
+
+        Optional<Cliente> cliente = clienteRepository.findById(cDTO.getId());
+        if (cliente.isPresent()) {
+            cDTO = ClienteDTO.convertToDTO(cliente.get());
             return cDTO;
-		} else {
+        } else {
             return null;
         }
 
-        
     }
 
     @Override
     public List<ClienteDTO> findAll() {
-		
-		//solicitamos lista de entidades al repositorio 
-		List<Cliente>listaClientes = clienteRepository.findAll();
-		List<ClienteDTO>listaClientesDTO = new ArrayList<ClienteDTO>();	
-		
+
+        // solicitamos lista de entidades al repositorio
+        List<Cliente> listaClientes = clienteRepository.findAll();
+        List<ClienteDTO> listaClientesDTO = new ArrayList<ClienteDTO>();
+
         log.info(ClienteServiceImpl.class.getSimpleName() + " -findAll() lista Entidades ");
 
-		for(Cliente c : listaClientes) {
-			ClienteDTO cDTO = ClienteDTO.convertToDTO(c);
-			listaClientesDTO.add(cDTO);
-		}
-		
-		return listaClientesDTO;
+        for (Cliente c : listaClientes) {
+            ClienteDTO cDTO = ClienteDTO.convertToDTO(c);
+            listaClientesDTO.add(cDTO);
+        }
+
+        return listaClientesDTO;
     }
 
     // @Override
     // public int save(ClienteDTO clienteDTO) {
-        
-	// 	log.info(ClienteServiceImpl.class.getSimpleName() + " save() - clienteDto: " + clienteDTO.toString());
-	// 	Cliente c = ClienteDTO.convertToEntity(clienteDTO);
-	// 	log.info(ClienteServiceImpl.class.getSimpleName() + " save() - cliente: " + c.toString());
-	// 	c.setActivo(true);
 
-    //     c = clienteRepository.save(c);
+    // log.info(ClienteServiceImpl.class.getSimpleName() + " save() - clienteDto: "
+    // + clienteDTO.toString());
+    // Cliente c = ClienteDTO.convertToEntity(clienteDTO);
+    // log.info(ClienteServiceImpl.class.getSimpleName() + " save() - cliente: " +
+    // c.toString());
+    // c.setActivo(true);
 
-    //     if (c != null) {
-    //         return 1;
-    //     } else {
-    //         return 0;
-    //     }
+    // c = clienteRepository.save(c);
+
+    // if (c != null) {
+    // return 1;
+    // } else {
+    // return 0;
+    // }
     // }
     @Override
     public void save(ClienteDTO clienteDTO) {
@@ -95,21 +97,20 @@ public class ClienteServiceImpl implements ClienteService, UserDetailsService{
         log.info("UsuarioServiceImpl - save: salvamos el usuario ENTIDAD: " + cliente.toString());
     }
 
-
     @Override
     public int delete(ClienteDTO cDTO) {
         log.info(ClienteServiceImpl.class.getSimpleName() + " - borramos el cliente" + cDTO.toString());
 
-		Cliente cliente = new Cliente();
-		cliente = ClienteDTO.convertToEntity(cDTO);
+        Cliente cliente = new Cliente();
+        cliente = ClienteDTO.convertToEntity(cDTO);
         cliente.setActivo(false);
-        if (clienteRepository.existsById(cDTO.getId())){
+        if (clienteRepository.existsById(cDTO.getId())) {
             clienteRepository.save(cliente);
             return 1;
         } else {
             return 0;
         }
-		
+
     }
 
     @Override
@@ -118,12 +119,12 @@ public class ClienteServiceImpl implements ClienteService, UserDetailsService{
         log.info("UsuarioServiceImpl - loadUserByUsername: " + username);
 
         Cliente usuario = clienteRepository.findByUsername(username);
-        if(usuario != null) {
+        if (usuario != null) {
 
             List<GrantedAuthority> listaPermisos = new ArrayList<GrantedAuthority>();
             List<Rol> listaRoles = new ArrayList<Rol>(usuario.getRoles());
 
-            for(Rol rol:listaRoles) {
+            for (Rol rol : listaRoles) {
                 listaPermisos.add(new SimpleGrantedAuthority(rol.getNombre()));
             }
 
@@ -133,4 +134,17 @@ public class ClienteServiceImpl implements ClienteService, UserDetailsService{
         }
     }
 
+    @Override
+    public ClienteDTO registro(ClienteDTO clienteDTO) {
+        log.info(this.getClass().getSimpleName() + " registro: registrar usuario con datos: {}", clienteDTO);
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        clienteDTO.setContrasena(encoder.encode(clienteDTO.getContrasena()));
+        clienteDTO.setActivo(true);
+
+        Cliente cliente = ClienteDTO.convertToEntity(clienteDTO);
+
+        ClienteDTO saved = ClienteDTO.convertToDTO(this.clienteRepository.save(cliente));
+        return saved;
+    }
 }

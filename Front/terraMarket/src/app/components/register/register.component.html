@@ -1,0 +1,204 @@
+<div class="flex justify-content-center w-screen h-auto">
+  <div
+    class="w-6 h-6 mt-6 flex flex-row justify-content-center align-items-center bg-white border-round shadow-5"
+  >
+    <div
+      class="w-6 h-full bg-orange border-round flex flex-column justify-content-center align-items-center"
+    >
+      <div
+        class="p-6 flex flex-column justify-content-center align-items-center text-white"
+      >
+        <h2>Terra Market</h2>
+        <p>Ya tienes cuenta?</p>
+        <button class="sqr-btn light">Iniciar sesion</button>
+      </div>
+    </div>
+    <div class="w-6 h-full">
+      <div class="p-6">
+        <form
+          class="w-full h-full flex flex-column justify-content-center align-items-start gap-6"
+          [formGroup]="registerFase1"
+          (ngSubmit)="changeFase($event)"
+          *ngIf="fase1"
+        >
+          <h2>Registro</h2>
+          <div class="w-full flex flex-column gap-2">
+            <input
+              type="text"
+              formControlName="name"
+              placeholder="Nombre"
+              class="input-primary"
+            />
+            <small
+              class="bg-red-400 p-2 border-round text-white text-center text-lg"
+              *ngIf="hasErrors('name')"
+            >
+              {{ getError("name")?.["required"] ? 'Nombre obligatorio' : '' }}
+            </small>
+          </div>
+          <div class="w-full flex flex-column gap-2">
+            <input
+              type="text"
+              formControlName="surnames"
+              placeholder="Apellidos"
+              class="input-primary"
+            />
+            <small
+              class="bg-red-400 p-2 border-round text-white text-center text-lg"
+              *ngIf="hasErrors('surnames')"
+            >
+              {{ getError("surnames")?.["required"] ? 'Apellidos obligatorio' : '' }}
+            </small>
+          </div>
+          <div class="w-full flex flex-column gap-2">
+            <input
+              type="text"
+              formControlName="email"
+              placeholder="Correo electronico"
+              class="input-primary"
+            />
+            <small
+              class="bg-red-400 p-2 border-round text-white text-center text-lg"
+              *ngIf="hasErrors('email')"
+            >
+              {{ getError("email")?.["required"] ? 'Email obligatorio' : 'Email no valido' }}
+            </small>
+          </div>
+          <div class="w-full flex flex-column gap-2">
+            <input
+              type="text"
+              formControlName="username"
+              placeholder="Nombre de usuario"
+              class="input-primary"
+            />
+            <small
+              class="bg-red-400 p-2 border-round text-white text-center text-lg"
+              *ngIf="hasErrors('username')"
+            >
+              {{ getError("username")?.["required"] ? 'Nombre de usuario obligatorio' : '' }}
+            </small>
+          </div>
+          <input class="sqr-btn mt-5 m-auto" type="submit" value="Continuar" />
+        </form>
+        <form
+          class="w-full h-full flex flex-column justify-content-center align-items-start gap-6"
+          [formGroup]="registerFase2"
+          (ngSubmit)="submit($event)"
+          *ngIf="!fase1"
+        >
+          <h2></h2>
+          <div class="w-full flex flex-column gap-2">
+            <input
+              type="date"
+              formControlName="birth"
+              placeholder="Fecha de nacimiento"
+              class="input-primary"
+            />
+            <small
+              class="bg-red-400 p-2 border-round text-white text-center text-lg"
+              *ngIf="hasErrors('birth')"
+            >
+              {{ getError("birth")?.["required"] ? 'Fecha de nacimiento obligatoria' : '' }}
+            </small>
+          </div>
+          <div class="w-full flex flex-column gap-2">
+            <input
+              type="number"
+              formControlName="cp"
+              placeholder="Codigo postal"
+              class="input-primary"
+            />
+            <small
+              class="bg-red-400 p-2 border-round text-white text-center text-lg"
+              *ngIf="hasErrors('cp')"
+            >
+              {{ getError("cp")?.["required"] ? 'Codigo postal obligatorio' : 'El codigo postal debe tener 6 digitos' }}
+            </small>
+          </div>
+          <div class="w-full flex flex-column gap-2">
+            <input
+              type="text"
+              formControlName="dni"
+              placeholder="DNI"
+              class="input-primary"
+              (input)="dniOnInput($event)"
+            />
+            <small
+              class="bg-red-400 p-2 border-round text-white text-center text-lg"
+              *ngIf="hasErrors('dni')"
+            >
+              {{ getError("dni")?.["required"] ? 'DNI obligatorio' : 'DNI no valido' }}
+            </small>
+          </div>
+          <div class="w-full flex flex-column gap-2">
+            <div
+              class="flex flex-row justify-content-between gap-3 align-items-center w-full"
+            >
+              <input
+                [type]="showPasswd ? 'text' : 'password'"
+                formControlName="password"
+                placeholder="Contraseña"
+                class="input-primary"
+              />
+              <button (click)="chPasswd($event)" class="sqr-btn w-2">
+                Mostrar
+              </button>
+            </div>
+            <small
+              class="bg-red-400 p-2 border-round text-white text-center text-lg"
+              *ngIf="hasErrors('password')"
+            >
+              <div
+                [innerHTML]="getError('password')?.['required'] ? 'Contraseña obligatoria' : ('Formato contraseña: <br> Minimo 6 caracteres <br> Una letra <br> Un numero' | safeHtml)"
+              ></div>
+            </small>
+          </div>
+          <div class="w-full flex flex-column gap-2">
+            <div
+              class="flex flex-row justify-content-between gap-3 align-items-center w-full"
+            >
+              <input
+                [type]="showRepeat ? 'text' : 'password'"
+                formControlName="repeat"
+                placeholder="Repetir contraseña"
+                class="input-primary"
+              />
+              <button (click)="chRepeat($event)" class="sqr-btn w-2">
+                Mostrar
+              </button>
+            </div>
+            <small
+              class="bg-red-400 p-2 border-round text-white text-center text-lg"
+              *ngIf="hasErrors('repeat')"
+            >
+              {{ getError("repeat")?.["required"] ? 'Campo obligatorio' : 'Las contraseñas no coinciden' }}
+            </small>
+          </div>
+          <div class="flex flex-row gap-2">
+            <input
+              value=""
+              name="terms"
+              type="checkbox"
+              formControlName="repeat"
+              placeholder="Repetir contraseña"
+              class="checkbox"
+            />
+            <label for="terms"
+              >He leido y acepto los terminos y condiciones</label
+            >
+          </div>
+          <small
+            class="bg-red-400 p-2 border-round text-white text-center text-lg"
+            *ngIf="hasErrors('terms')"
+          >
+            {{ getError("terms")?.["required"] ? 'Acepta los terminos y condiciones' : '' }}
+          </small>
+          <div class="mt-5 m-auto flex flex-row justify-content-between w-full">
+            <button class="sqr-btn" (click)="chFase($event)">Volver</button>
+            <input class="sqr-btn" type="submit" value="Registrarse" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
