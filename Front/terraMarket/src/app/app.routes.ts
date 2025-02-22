@@ -7,6 +7,7 @@ import { RealizarPedidoComponent } from './components/realizar-pedido/realizar-p
 import { CestaComponent } from './components/cesta/cesta.component';
 import { MarketViewComponent } from './components/market-view/market-view.component';
 import { MercadosComponent } from './components/mercados/mercados.component';
+import { RegisterComponent } from './components/register/register.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/pedidos', pathMatch: 'full' },
@@ -16,4 +17,5 @@ export const routes: Routes = [
   { path: 'cesta', component: CestaComponent },
   { path: 'home', component: MercadosComponent },
   { path: 'realizar-pedido', component: RealizarPedidoComponent },
+  { path: 'registro', component: RegisterComponent },
 ];
