@@ -48,20 +48,20 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cargarUsuario();
+    //this.cargarUsuario();
     this.cargarItems();
   }
 
-  cargarUsuario() {
-    this.sessionService.usuario$.subscribe((usuario) => {
+  // cargarUsuario() {
+  //   this.sessionService.usuario$.subscribe((usuario) => {
 
-      this.usuarioLogueado = usuario;
-      this.usuario = usuario;
-    });
+  //     this.usuarioLogueado = usuario;
+  //     this.usuario = usuario;
+  //   });
 
-    this.sessionService.obtenerUsuario();
+  //   this.sessionService.obtenerUsuario();
 
-  }
+  // }
 
   iniciarSesion() {
     //this.sessionService.iniciarSesion();

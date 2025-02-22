@@ -11,7 +11,7 @@ export class MercadoServiceService {
 
   constructor(private httpClient: HttpClient) {}
 
-  findAll(): Observable<Mercado[]> {
-    return this.httpClient.get<Mercado[]>(this.url);
-  }
+  // findAll(): Observable<Mercado[]> {
+  //   return this.httpClient.get<Mercado[]>(this.url);
+  // }
 }

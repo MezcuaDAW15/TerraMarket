@@ -8,26 +8,28 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    .divider{
+        height: 2px; 
+        background-color: $orange; 
+        border: none;
+        margin-bottom: 38px;
+    }
 }
-.divider{
-    height: 2px; 
-    background-color: $orange; 
-    border: none;
-    margin-bottom: 38px;
-}
+
 .form{
     width: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 24px;
     padding: 30px;
     background-color: $white;
     border: 3px solid $red;
     border-radius: 20px;
-    input{
-        width: 50%;
-    }
+    
     .div-inputs{
+        width: 60%;
         display: flex;
         flex-direction: column;
         gap: 16px;
