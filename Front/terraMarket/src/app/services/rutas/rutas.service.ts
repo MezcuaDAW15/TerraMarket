@@ -15,4 +15,7 @@ export class RutasService {
   getRutas(): Observable<Map<number, string>> {
     return this.httpClient.get<Map<number, string>>(`${this.baseUrl}market/rutas`);
   }
+  getRutasProductos(): Observable<Map<number, string>> {
+    return this.httpClient.get<Map<number, string>>(`${this.baseUrl}productos/rutas`);
+  }
 }

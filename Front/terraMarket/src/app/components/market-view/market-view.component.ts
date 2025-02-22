@@ -27,7 +27,6 @@ export class MarketViewComponent implements OnInit {
   selectedItem: any;
 
   mercado: Mercado | null = null;
-  errorMessage: string = '';
   items: MenuItem[] | undefined;
 
 
@@ -61,17 +60,14 @@ export class MarketViewComponent implements OnInit {
           if (mercadoId) {
             this.loadMarket(mercadoId);
           } else {
-            this.errorMessage = "Mercado no encontrado.";
             console.error("Mercado no encontrado:", nombreMercado);
           }
         } else {
-          this.errorMessage = "Nombre de mercado no válido.";
           console.error("Nombre de mercado no válido en la URL.");
         }
       },
       error: (error) => {
         console.error("Error al cargar rutas:", error);
-        this.errorMessage = "No se pudieron cargar las rutas.";
       }
     });
 
@@ -102,7 +98,6 @@ export class MarketViewComponent implements OnInit {
       },
       error: (error) => {
         console.error("Error al cargar el mercado:", error);
-        this.errorMessage = "No se pudo cargar la información del mercado.";
       }
     });
   }

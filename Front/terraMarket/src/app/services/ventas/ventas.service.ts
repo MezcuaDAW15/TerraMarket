@@ -21,6 +21,13 @@ export class VentasService {
     return this.httpClient.get<Venta[]>(url);
 
   }
+  findVentasByProducto(idProducto: Number, idMercado: Number): Observable<Venta[]> {
+    const url = `${this.baseUrl}/buscarPorProducto?idProducto=${idProducto}&idMercado=${idMercado}`;
+
+    return this.httpClient.get<Venta[]>(url);
+
+  }
+
   findByVentasProductos(categories: CategoriaP[], mercado: Mercado) {
     const url = `${this.baseUrl}?mercado=${mercado.id}&categorias=${categories.map(c => c.id).join(',')}`;
 

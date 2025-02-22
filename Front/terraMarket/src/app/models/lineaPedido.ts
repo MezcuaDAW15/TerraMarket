@@ -2,7 +2,7 @@ import { Pedido } from "./pedido";
 import { Venta } from "./venta";
 
 export interface LineaPedido {
-  id: number;
+  id?: number;
   cantidad: number;
   fecha: Date;
   venta: Venta;

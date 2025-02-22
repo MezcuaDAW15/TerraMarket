@@ -9,13 +9,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
-public class VentaDTO implements Serializable{
+public class VentaDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Long id;
 
     private ProductoDTO producto;
-    @JsonIgnore
     private TiendaDTO tienda;
     private Date fechaVenta;
     private double precioVenta;
@@ -24,8 +23,8 @@ public class VentaDTO implements Serializable{
     private double descuento;
     private String descripcion;
     private boolean activo;
-    
-    public static VentaDTO convertToDto(Venta venta){
+
+    public static VentaDTO convertToDto(Venta venta) {
 
         VentaDTO vDTO = new VentaDTO();
 
@@ -46,14 +45,14 @@ public class VentaDTO implements Serializable{
         return vDTO;
     }
 
-    public static Venta convertToEntity(VentaDTO ventaDTO){
+    public static Venta convertToEntity(VentaDTO ventaDTO) {
 
         Venta venta = new Venta();
 
         venta.setId(ventaDTO.getId());
         venta.setProducto(ProductoDTO.convertToEntity(ventaDTO.getProducto()));
 
-        //MercadoDTO mDTO = MercadoDTO.convertToDTO(venta.getTienda().getMercado());
+        // MercadoDTO mDTO = MercadoDTO.convertToDTO(venta.getTienda().getMercado());
         venta.setTienda(TiendaDTO.convertToEntity(ventaDTO.getTienda()));
 
         venta.setFechaVenta(ventaDTO.getFechaVenta());

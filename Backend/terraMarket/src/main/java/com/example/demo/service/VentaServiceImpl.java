@@ -54,4 +54,18 @@ public class VentaServiceImpl implements VentaService {
         return ventasDTO;
     }
 
+    @Override
+    public List<VentaDTO> findAllByProductoMercado(Long idProducto, Long idMercado) {
+        log.info("VentaServiceImpl - findAllByProductoMercado: " + idProducto + " " + idMercado);
+
+        List<Venta> ventas = ventaRepository.findAllByProductoMercado(idProducto, idMercado);
+        List<VentaDTO> ventasDTO = new ArrayList<VentaDTO>();
+        for (Venta venta : ventas) {
+            VentaDTO ventaDTO = VentaDTO.convertToDto(venta);
+            ventasDTO.add(ventaDTO);
+        }
+
+        return ventasDTO;
+    }
+
 }

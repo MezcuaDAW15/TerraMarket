@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Pedido } from '../../models/pedido';
 import { HttpClient } from '@angular/common/http';
 import { LineaPedido } from '../../models/lineaPedido';
+import { Venta } from '../../models/venta';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,12 @@ export class CestaService {
     cliente.id = 1;
     const url = `${this.baseUrl}/buscarPedidoPendiente?idCliente=${cliente.id}`;
     console.log(url);
+    return this.httpClient.get<Pedido>(url);
+
+
+  }
+  addCesta(venta: Venta, cantidad Number, idCliente: Number) {
+
     return this.httpClient.get<Pedido>(url);
 
 
@@ -40,6 +47,6 @@ export class CestaService {
     const url = `${this.baseUrl}/${lineaPedido?.pedido?.id}/alterLineaPedido/${lineaPedido?.id}`;
     console.log(url);
 
-    return this.httpClient.delete<LineaPedido>(url );
+    return this.httpClient.delete<LineaPedido>(url);
   }
 }
