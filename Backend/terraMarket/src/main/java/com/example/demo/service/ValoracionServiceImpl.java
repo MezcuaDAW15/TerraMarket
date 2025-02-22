@@ -34,7 +34,7 @@ public class ValoracionServiceImpl implements ValoracionService {
 
     @Override
     public void save(ValoracionDTO valoracionDTO) {
-        log.info("TiendaServiceImpl - save: guardar tienda");
+        log.info("ValoracionServiceImpl - save: guardar valoracion");
         Valoracion valoracion = ValoracionDTO.convertToEntity(valoracionDTO);
 
         valoracionRepository.save(valoracion);

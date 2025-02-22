@@ -9,7 +9,10 @@
         <p>Cantidad X {{ lineaPedido?.cantidad }}</p>
         <p>{{ lineaPedido?.venta?.precioVenta }} &euro;</p>
       </div>
-      <button class="review-btn auto-size">
+      <button
+        class="review-btn auto-size"
+        (click)="lineaPedido ? irAValoracion(lineaPedido) : null"
+      >
         <img src="../../../assets/icons/reviews.svg" alt="" /> Escribir una
         reseña
       </button>

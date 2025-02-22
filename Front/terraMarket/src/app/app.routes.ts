@@ -7,6 +7,7 @@ import { RealizarPedidoComponent } from './components/realizar-pedido/realizar-p
 import { CestaComponent } from './components/cesta/cesta.component';
 import { MarketViewComponent } from './components/market-view/market-view.component';
 import { MercadosComponent } from './components/mercados/mercados.component';
+import { ValoracionesComponent } from './components/valoraciones/valoraciones.component';
 import { RegistroComponent } from './components/registro/registro.component';
 
 export const routes: Routes = [
@@ -19,4 +20,5 @@ export const routes: Routes = [
   { path: 'home', component: MercadosComponent },
   { path: 'realizar-pedido', component: RealizarPedidoComponent },
   { path: 'registro', component: RegistroComponent },
+  { path: 'valoracion', component: ValoracionesComponent },
 ];

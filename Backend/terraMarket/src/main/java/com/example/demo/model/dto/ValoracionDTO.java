@@ -1,8 +1,14 @@
 package com.example.demo.model.dto;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.example.demo.repository.entity.Tienda;
 import com.example.demo.repository.entity.Valoracion;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
@@ -13,7 +19,10 @@ public class ValoracionDTO implements Serializable {
     private Long id;
     private String resena;
     private int puntuacion;
-    // todo falta la fecha
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
+    private Date fecha;
+
     private TiendaDTO tienda;
     private ClienteDTO cliente;
 
@@ -22,6 +31,7 @@ public class ValoracionDTO implements Serializable {
         valoracionDTO.setId(valoracion.getId());
         valoracionDTO.setResena(valoracion.getResena());
         valoracionDTO.setPuntuacion(valoracion.getPuntuacion());
+        valoracionDTO.setFecha(valoracion.getFecha());
         MercadoDTO mercado = MercadoDTO.convertToDTO(valoracion.getTienda().getMercado());
         valoracionDTO.setTienda(TiendaDTO.convertToDTO(valoracion.getTienda(), mercado));
         valoracionDTO.setCliente(ClienteDTO.convertToDTO(valoracion.getCliente()));
@@ -33,7 +43,10 @@ public class ValoracionDTO implements Serializable {
         valoracion.setId(valoracionDTO.getId());
         valoracion.setResena(valoracionDTO.getResena());
         valoracion.setPuntuacion(valoracionDTO.getPuntuacion());
-        valoracion.setTienda(TiendaDTO.convertToEntity(valoracionDTO.getTienda()));
+        valoracion.setFecha(valoracionDTO.getFecha());
+        Tienda tienda = new Tienda();
+        tienda.setId(valoracionDTO.getTienda().getId());
+        valoracion.setTienda(tienda);
         valoracion.setCliente(ClienteDTO.convertToEntity(valoracionDTO.getCliente()));
         return valoracion;
     }

@@ -1,5 +1,7 @@
 package com.example.demo.repository.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 @Data
@@ -19,7 +23,8 @@ public class Valoracion {
     private Long id;
     private String resena;
     private int puntuacion;
-    // todo falta la fecha
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecha;
 
     @ManyToOne
     @JoinColumn(name = "idtienda")

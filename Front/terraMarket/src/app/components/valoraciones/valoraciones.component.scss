@@ -1,0 +1,57 @@
+@import "../../../variables";
+
+.div-contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.div-contenido {
+  background-color: white;
+  width: 600px;
+  padding: 40px;
+  border: 2px solid #ff6b6b;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  * {
+    margin: 10px;
+  }
+
+  .logo-tienda {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+  }
+
+  .nombre-tienda {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    .rating {
+      margin: 10px 0;
+    }
+
+    .comentario {
+      width: 100%;
+      height: 80px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      font-size: 14px;
+      resize: none;
+      margin-top: 10px;
+    }
+  }
+}
