@@ -18,7 +18,7 @@
     </button>
 
     <p-menu #menu [model]="items" [popup]="true" />
-    <p-button label={{usuario.nombre}} (onClick)="menu.toggle($event)" icon="pi pi-angle-down" iconPos="right"
+    <p-button label={{cliente?.username}} (onClick)="menu.toggle($event)" icon="pi pi-angle-down" iconPos="right"
       [text]="true" className="popup" />
 
   </div>
@@ -32,18 +32,21 @@
       <ng-template pTemplate="headless">
         <div class="container">
           <div class="container-login">
+            <button class="btnCerrar" (click)="closeDialog()">
+              <img src="assets/icons/close_white.svg" alt="">
+            </button>
+
               <div class="div-inicio-sesion">
-                  <button (click)="closeDialog()">X</button>
-  
-                  <form class="form" action="#" method="post"
                   
+                  <form class="form" action="#" method="post"
+                  [formGroup]="formulario"
                   (ngSubmit)="iniciarSesion()" >
       
                       <p class="h1">Inicio de sesión</p>
           
                       <div class="div-inputs">
                           <input formControlName="username" class="input-primary" type="text" name="email" id="" placeholder="Nombre de usuario">
-                          <input formControlName="password" class="input-primary" type="password" name="contrasena" id="" placeholder="Contraseña">
+                          <input formControlName="contrasena" class="input-primary" type="password" name="contrasena" id="" placeholder="Contraseña">
           
                           <div class="div-cb">
                               <input class="checkbox" type="checkbox" name="recuerdame" id="">

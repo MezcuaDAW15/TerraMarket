@@ -76,21 +76,21 @@ public class ClienteRestController {
     //         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     //     }
 	// }
+/*
+     @PutMapping()
+	 public ResponseEntity update(@RequestBody ClienteDTO clienteDTO) {
 
-    // @PutMapping()
-	// public ResponseEntity update(@RequestBody ClienteDTO clienteDTO) {
-
-	// 	int resultado = clienteService.save(clienteDTO);
+	 	int resultado = clienteService.save(clienteDTO);
 		
-	// 	log.info(ClienteController.class.getSimpleName() + " - guardando cliente" + clienteDTO.toString());
+	 	log.info(ClienteController.class.getSimpleName() + " - guardando cliente" + clienteDTO.toString());
 		
-    //     if (resultado == 1) {
-    //         return new ResponseEntity<>(HttpStatus.OK);
-    //     } else {
-    //         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    //     }
-	// }
-
+         if (resultado == 1) {
+             return new ResponseEntity<>(HttpStatus.OK);
+         } else {
+             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+         }
+	 }
+*/
     @DeleteMapping("/delete/{idCliente}")
 	public ResponseEntity delete(@PathVariable("idCliente") Long idCliente) {
 
@@ -114,9 +114,10 @@ public class ClienteRestController {
     	UserDetails c = userDetailsService.loadUserByUsername(cliente.getUsername());
     	log.info(ClienteRestController.class.getSimpleName() + " --------> " + cliente.toString());
     	
-    	if(c != null) {
-            ClienteDTO cDTO = new ClienteDTO();
-            cDTO = clienteService.findByUsername(c.getUsername());
+    	ClienteDTO cDTO = new ClienteDTO();
+    	
+    	if(c!=null) {
+    		 cDTO = clienteService.findByUsername(c.getUsername());
     		return new ResponseEntity<>(cDTO, HttpStatus.OK);
 	    } else {
 	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
