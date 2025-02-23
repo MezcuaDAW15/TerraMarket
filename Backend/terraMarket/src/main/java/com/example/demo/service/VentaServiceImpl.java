@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.dto.CategoriaPDTO;
 import com.example.demo.model.dto.MercadoDTO;
+import com.example.demo.model.dto.TiendaDTO;
 import com.example.demo.model.dto.VentaDTO;
 import com.example.demo.repository.dao.CategoriaPRepository;
 import com.example.demo.repository.dao.VentaRepository;
@@ -40,6 +41,34 @@ public class VentaServiceImpl implements VentaService {
         for (CategoriaPDTO categoriaPDTO : categoriasPDTO) {
             log.info("Categoria: " + categoriaPDTO);
             ventas.addAll(ventaRepository.findCheeperByCategoriasMercado(categoriaPDTO.getId(), mercadoDTO.getId()));
+        }
+
+        for (Venta venta : ventas) {
+            log.info("Venta: " + venta);
+        }
+        List<VentaDTO> ventasDTO = new ArrayList<VentaDTO>();
+        for (Venta venta : ventas) {
+            VentaDTO ventaDTO = VentaDTO.convertToDto(venta);
+            ventasDTO.add(ventaDTO);
+        }
+
+        return ventasDTO;
+    }
+
+    @Override
+    public List<VentaDTO> findAllByCategoriasTienda(List<CategoriaPDTO> categoriasPDTO, TiendaDTO tiendaDTO) {
+        log.info("VentaServiceImpl - findAllByCategoriasTienda: " + categoriasPDTO + " " + tiendaDTO);
+
+        if (categoriasPDTO.isEmpty()) {
+            List<CategoriaP> categoriasP = categoriaPRepository.findAll();
+            categoriasPDTO.addAll(categoriasP.stream().map(CategoriaPDTO::convertToDTO).toList());
+
+        }
+
+        List<Venta> ventas = new ArrayList<Venta>();
+        for (CategoriaPDTO categoriaPDTO : categoriasPDTO) {
+            log.info("Categoria: " + categoriaPDTO);
+            ventas.addAll(ventaRepository.findCheeperByCategoriasMercado(categoriaPDTO.getId(), tiendaDTO.getId()));
         }
 
         for (Venta venta : ventas) {

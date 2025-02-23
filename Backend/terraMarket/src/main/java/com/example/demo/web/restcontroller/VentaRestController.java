@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.dto.CategoriaPDTO;
 import com.example.demo.model.dto.MercadoDTO;
+import com.example.demo.model.dto.TiendaDTO;
 import com.example.demo.model.dto.VentaDTO;
 import com.example.demo.service.VentaService;
 
@@ -41,6 +42,22 @@ public class VentaRestController {
         }
 
         return ventaService.findAllByCategoriasMercado(categoriasDTO, mercadoDTO);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/tienda")
+    public List<VentaDTO> findByTienda(@RequestParam Long[] categorias, @RequestParam Long tienda) {
+        log.info("ProductoRestController - findByTienda: Mostrando todos los productos");
+        TiendaDTO tiendaDTO = new TiendaDTO();
+        tiendaDTO.setId(tienda);
+
+        List<CategoriaPDTO> categoriasDTO = new ArrayList<CategoriaPDTO>();
+        for (int i = 0; i < categorias.length; i++) {
+            CategoriaPDTO categoriaDTO = new CategoriaPDTO();
+            categoriaDTO.setId(categorias[i]);
+            categoriasDTO.add(categoriaDTO);
+        }
+
+        return ventaService.findAllByCategoriasTienda(categoriasDTO, tiendaDTO);
     }
 
 }
