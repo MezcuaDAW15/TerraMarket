@@ -77,7 +77,7 @@ public class ClienteRestController {
     //     }
 	// }
 
-     @PutMapping()
+     @PutMapping("/update")
 	 public ResponseEntity update(@RequestBody ClienteDTO clienteDTO) {
 
     	ClienteDTO cDTO = clienteService.save(clienteDTO);
