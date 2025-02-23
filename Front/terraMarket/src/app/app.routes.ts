@@ -14,11 +14,12 @@ export const routes: Routes = [
   { path: '', redirectTo: '/pedidos', pathMatch: 'full' },
   { path: 'pedidos', component: PedidosComponent },
   { path: 'pedidos/:id', component: DetallesPedidoComponent },
+  { path: 'registro', component: RegisterComponent },
+
   { path: ':nombreMercado', component: MarketViewComponent },
   { path: 'cesta', component: CestaComponent },
   { path: 'home', component: MercadosComponent },
   { path: 'realizar-pedido', component: RealizarPedidoComponent },
-  { path: 'registro', component: RegisterComponent },
   { path: ':nombreMercado/:nombreProducto', component: ProductViewComponent },
 
 ];

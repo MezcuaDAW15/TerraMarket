@@ -23,8 +23,9 @@ export class CestaService {
 
 
   }
-  addCesta(venta: Venta, cantidad Number, idCliente: Number) {
+  addCesta(venta: Venta, cantidad: Number, idCliente: Number) {
 
+    const url = `${this.baseUrl}/buscarPedidoPendiente?idCliente=${idCliente}`;
     return this.httpClient.get<Pedido>(url);
 
 
