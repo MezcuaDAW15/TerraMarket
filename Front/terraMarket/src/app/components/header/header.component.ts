@@ -7,6 +7,10 @@ import { BadgeModule } from 'primeng/badge';
 import { CommonModule } from '@angular/common';
 import { SessionService } from '../../services/session/session.service';
 import { Router } from '@angular/router';
+import { SelectedMarketService } from '../../services/global-state/selected-market.service';
+import { Mercado } from '../../models/mercado';
+import { MarketService } from '../../services/markets/market.service';
+import { constrainedMemory } from 'process';
 
 
 
@@ -26,9 +30,12 @@ export class HeaderComponent implements OnInit {
 
   usuario: any = null;
 
+  market: Mercado | undefined
+
   constructor(
     private sessionService: SessionService,
-    private router: Router
+    private router: Router,
+    private selectedMarketService: SelectedMarketService,
   ) { }
 
 
@@ -37,7 +44,13 @@ export class HeaderComponent implements OnInit {
 
     this.cargarItems();
 
-
+    this.selectedMarketService.market.subscribe({
+      next: (market) => {
+        if (market) {
+          this.market = market
+        }
+      }
+    })
 
   }
 

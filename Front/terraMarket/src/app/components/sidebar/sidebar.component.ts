@@ -48,7 +48,7 @@ export class SidebarComponent implements OnInit {
     });
   }
   navigateToCategory(categoryId: number) {
-    window.location.href = `/mercado/3?categoria=${categoryId}`;
+    window.location.href = `/mercado-de-valencia?categoria=${categoryId}`;
   }
 
 

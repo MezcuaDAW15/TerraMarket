@@ -1,26 +1,35 @@
 <header>
   <div>
-    <div class="header__logo ">
+    <div class="header__logo">
       <img class="logo" src="assets/logo_light.svg" alt="logo" />
     </div>
 
     <app-sidebar></app-sidebar>
 
-    <div class="pastilla">
+    <div class="pastilla" *ngIf="market">
       <img src="assets/icons/file_map.svg" alt="pastilla" />
-      Mercat Central de València
+      <p>{{ market.nombre }}</p>
     </div>
-
   </div>
   <div *ngIf="usuarioLogueado">
     <button class="sqr-btn auto-size" [routerLink]="['/cesta']">
-      <i class="pi pi-shopping-bag text-xl" pBadge value="0" style="color: #fff"></i>
+      <i
+        class="pi pi-shopping-bag text-xl"
+        pBadge
+        value="0"
+        style="color: #fff"
+      ></i>
     </button>
 
     <p-menu #menu [model]="items" [popup]="true" />
-    <p-button label={{usuario.nombre}} (onClick)="menu.toggle($event)" icon="pi pi-angle-down" iconPos="right"
-      [text]="true" className="popup" />
-
+    <p-button
+      label="{{ usuario.nombre }}"
+      (onClick)="menu.toggle($event)"
+      icon="pi pi-angle-down"
+      iconPos="right"
+      [text]="true"
+      className="popup"
+    />
   </div>
   <div *ngIf="!usuarioLogueado">
     <button class="sqr-btn auto-size" (click)="iniciarSesion()">
@@ -28,6 +37,4 @@
       Iniciar sesión
     </button>
   </div>
-
-
 </header>
