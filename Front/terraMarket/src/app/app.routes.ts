@@ -15,10 +15,10 @@ export const routes: Routes = [
   { path: 'pedidos', component: PedidosComponent },
   { path: 'pedidos/:id', component: DetallesPedidoComponent },
   { path: 'registro', component: RegisterComponent },
+  { path: 'home', component: MercadosComponent },
 
   { path: ':nombreMercado', component: MarketViewComponent },
   { path: 'cesta', component: CestaComponent },
-  { path: 'home', component: MercadosComponent },
   { path: 'realizar-pedido', component: RealizarPedidoComponent },
   { path: ':nombreMercado/:nombreProducto', component: ProductViewComponent },
 
