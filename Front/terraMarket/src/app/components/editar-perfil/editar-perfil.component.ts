@@ -18,6 +18,8 @@ export class EditarPerfilComponent implements OnInit{
   formulario: FormGroup;
   usuarioId: number | null = null;
 
+  datosEditados: Cliente | null = null;
+
   constructor(private clienteService:ClienteService,
     private fb: FormBuilder
   ){
@@ -26,8 +28,8 @@ export class EditarPerfilComponent implements OnInit{
       username: ['',[Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9 ]{2,20}$/)],],
       nombre: ['',[Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9 ]{2,20}$/)],],
       apellidos: ['', [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9 ]{2,30}$/)],],
-      correo: ['', [Validators.required, Validators.email]],
-      fechanacimiento: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      fechaNacimiento: ['', [Validators.required]],
       contrasena: ['', [Validators.required]],
       cp: ['', [Validators.required]],
     })
@@ -62,9 +64,9 @@ export class EditarPerfilComponent implements OnInit{
           username: this.clienteEncontrado.username,
           nombre: this.clienteEncontrado.nombre,
           apellidos: this.clienteEncontrado.apellidos,
-          correo: this.clienteEncontrado.email,
-          fechanacimiento: this.clienteEncontrado.fechaNacimiento,
-          contrasena: '',
+          email: this.clienteEncontrado.email,
+          fechaNacimiento: this.clienteEncontrado.fechaNacimiento,
+          contrasena: this.clienteEncontrado.contrasena,
           cp: this.clienteEncontrado.cp,
 
         })
@@ -74,5 +76,26 @@ export class EditarPerfilComponent implements OnInit{
 
   editarUsuario():void{
     // llamar al servicio para update
+    this.datosEditados = {
+      id: this.usuarioId!,
+      username: this.formulario.value.username,
+      nombre: this.formulario.value.nombre,
+      apellidos: this.formulario.value.apellidos,
+      email: this.formulario.value.email,
+      fechaNacimiento: this.formulario.value.fechaNacimiento,
+      contrasena: this.formulario.value.contrasena,
+      cp: this.formulario.value.cp,
+    }
+
+    this.clienteService.updateCliente(this.datosEditados).subscribe({
+      next: (response:any) =>{
+        if (!response.error) {
+          console.log('cliente - cambios guardados')
+          this.cargarDatosUsuario(this.usuarioId!);
+        } else {
+          console.log('cliente - cambios no guardados' +  response.error)
+        }
+      }
+    });
   }
 }

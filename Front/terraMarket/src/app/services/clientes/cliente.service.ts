@@ -33,4 +33,8 @@ export class ClienteService {
   findById(id:number):Observable<Cliente>{
     return this.httpClient.get<Cliente>(`${this.url}/${id}`);
   }
+
+  updateCliente(cliente: Cliente):Observable<Cliente>{
+    return this.httpClient.put<Cliente>(`${this.url}`,cliente);
+  }
 }
