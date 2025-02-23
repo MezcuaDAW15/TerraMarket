@@ -66,22 +66,23 @@ public class ClienteServiceImpl implements ClienteService, UserDetailsService{
 		return listaClientesDTO;
     }
 
-    // @Override
-    // public int save(ClienteDTO clienteDTO) {
+     @Override
+     public ClienteDTO save(ClienteDTO clienteDTO) {
         
-	// 	log.info(ClienteServiceImpl.class.getSimpleName() + " save() - clienteDto: " + clienteDTO.toString());
-	// 	Cliente c = ClienteDTO.convertToEntity(clienteDTO);
-	// 	log.info(ClienteServiceImpl.class.getSimpleName() + " save() - cliente: " + c.toString());
-	// 	c.setActivo(true);
+	 	log.info(ClienteServiceImpl.class.getSimpleName() + " save() - clienteDto: " + clienteDTO.toString());
+	 	Cliente c = ClienteDTO.convertToEntity(clienteDTO);
+	 	log.info(ClienteServiceImpl.class.getSimpleName() + " save() - cliente: " + c.toString());
+	 	
+	 	c.setActivo(true);
 
-    //     c = clienteRepository.save(c);
+        c = clienteRepository.save(c);
 
-    //     if (c != null) {
-    //         return 1;
-    //     } else {
-    //         return 0;
-    //     }
-    // }
+        ClienteDTO clienteGuardado = ClienteDTO.convertToDTO(c);
+        
+        return clienteGuardado;
+         
+     }
+/*     
     @Override
     public void save(ClienteDTO clienteDTO) {
         log.info("UsuarioServiceImpl - save: salvamos el usuario : " + clienteDTO.toString());
@@ -94,7 +95,7 @@ public class ClienteServiceImpl implements ClienteService, UserDetailsService{
         clienteRepository.save(cliente);
         log.info("UsuarioServiceImpl - save: salvamos el usuario ENTIDAD: " + cliente.toString());
     }
-
+*/
 
     @Override
     public int delete(ClienteDTO cDTO) {

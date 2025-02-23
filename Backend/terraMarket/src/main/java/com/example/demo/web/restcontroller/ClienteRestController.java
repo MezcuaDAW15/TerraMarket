@@ -76,21 +76,22 @@ public class ClienteRestController {
     //         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     //     }
 	// }
-/*
+
      @PutMapping()
 	 public ResponseEntity update(@RequestBody ClienteDTO clienteDTO) {
 
-	 	int resultado = clienteService.save(clienteDTO);
+    	ClienteDTO cDTO = clienteService.save(clienteDTO);
+	 	
 		
 	 	log.info(ClienteController.class.getSimpleName() + " - guardando cliente" + clienteDTO.toString());
 		
-         if (resultado == 1) {
-             return new ResponseEntity<>(HttpStatus.OK);
+         if (cDTO != null) {
+             return new ResponseEntity<>(cDTO, HttpStatus.OK);
          } else {
              return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
          }
 	 }
-*/
+
     @DeleteMapping("/delete/{idCliente}")
 	public ResponseEntity delete(@PathVariable("idCliente") Long idCliente) {
 

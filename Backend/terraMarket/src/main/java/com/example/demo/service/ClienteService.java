@@ -10,7 +10,7 @@ public interface ClienteService {
     public List<ClienteDTO> findAll();
     //public int save(ClienteDTO clienteDTO);
     public int delete(ClienteDTO cDTO);
-    public void save(ClienteDTO clienteDTO);
+    public ClienteDTO save(ClienteDTO clienteDTO);
 	public int login(ClienteDTO clienteDTO);
     public ClienteDTO findByUsername(String username);
 

@@ -76,7 +76,10 @@ export class HeaderComponent implements OnInit {
         this.cliente = response; // obtenemos cliente del backend
 
         console.log('Login successful', response);
-        
+        // guardamos la session
+        this.clienteService.guardarSesion(response);
+        console.log('guardar session header ---> ' + this.cliente.id)
+
         this.usuarioLogueado = true;
         this.cargarItems();
         this.pedidoService.setId(this.cliente.id!);
@@ -88,7 +91,6 @@ export class HeaderComponent implements OnInit {
       }
     );
     
-    console.log(this.cliente);
   }
 
   cargarItems() {
