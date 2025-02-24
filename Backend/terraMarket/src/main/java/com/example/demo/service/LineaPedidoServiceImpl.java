@@ -63,6 +63,8 @@ public class LineaPedidoServiceImpl implements LineaPedidoService {
         } else {
             lineaPedido.setCantidad(lineaPedido.getCantidad() + cantidad);
             lineaPedidoRepository.save(lineaPedido);
+            this.pedidoService.actualizarTotalPedido(lineaPedido.getPedido().getId());
+
             PedidoDTO pedidoDTO = new PedidoDTO();
             pedidoDTO.setId(lineaPedido.getPedido().getId());
             return LineaPedidoDTO.convertToDTO(lineaPedido,

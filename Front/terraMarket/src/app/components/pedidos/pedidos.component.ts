@@ -8,8 +8,8 @@ import { RouterLink, Router } from '@angular/router';
 import { DetallesPedidoComponent } from "../detalles-pedido/detalles-pedido.component";
 
 interface Column {
-    field: string;
-    header: string;
+  field: string;
+  header: string;
 }
 
 @Component({
@@ -21,9 +21,9 @@ interface Column {
   encapsulation: ViewEncapsulation.None
 })
 
-export class PedidosComponent implements OnInit{
+export class PedidosComponent implements OnInit {
   idUsuario: number | null = null;
-  pedidos:Pedido[]= [];
+  pedidos: Pedido[] = [];
   cols!: Column[];
   idpedido: number = 0;
 
@@ -31,39 +31,39 @@ export class PedidosComponent implements OnInit{
   @Output() pedidoEmitido = new EventEmitter<Pedido>()
 
 
-  constructor(@Inject(PedidoServiceService) private pedidoService: PedidoServiceService, private router:Router){}
+  constructor(@Inject(PedidoServiceService) private pedidoService: PedidoServiceService, private router: Router) { }
 
   ngOnInit(): void {
-      this.mostrarPedidos()
+    this.mostrarPedidos()
 
-      this.cols = [
-        { field: 'id', header: 'Pedido' },
-        { field: 'fechaPedido', header: 'Fecha Pedido' },
-        { field: 'estado.estado', header: 'Estado' },
-        { field: 'fechaEntrega', header: 'Fecha Recogida' },
-        { field: 'importe', header: 'Total' },
-        { field: 'detalles', header: 'Detalles' }
-      ];
+    this.cols = [
+      { field: 'id', header: 'Pedido' },
+      { field: 'fechaPedido', header: 'Fecha Pedido' },
+      { field: 'estado.estado', header: 'Estado' },
+      { field: 'fechaEntrega', header: 'Fecha Recogida' },
+      { field: 'importe', header: 'Total' },
+      { field: 'detalles', header: 'Detalles' }
+    ];
     //console.log(this.cols);
 
   }
 
-  mostrarPedidos():void{
+  mostrarPedidos(): void {
     this.idUsuario = this.pedidoService.getId();
 
-    this.pedidoService.findAllByCliente(this.idUsuario!).subscribe((data)=>{
+    this.pedidoService.findAllByCliente(this.idUsuario!).subscribe((data) => {
       this.pedidos = data;
-      this.pedidos = this.pedidos.map(element =>({
-          ...element,
-          'estado.estado': element.estado.estado
+      this.pedidos = this.pedidos.map(element => ({
+        ...element,
+        'estado.estado': element.estado.estado
       }))
       console.log(this.pedidos)
     })
   }
 
-  pintarEstado(estado:string){
+  pintarEstado(estado: string) {
 
-    switch(estado){
+    switch (estado) {
       case 'Pendiente': return 'etiqueta-estado-pendiente';
       case 'Recogido': return 'etiqueta-estado-recogido';
       case 'Cancelado': return 'etiqueta-estado-cancelado';
@@ -71,7 +71,7 @@ export class PedidosComponent implements OnInit{
     }
   }
 
-  verDetalles(rowData: Pedido){
+  verDetalles(rowData: Pedido) {
 
     //this.pedidoEmitido.emit(rowData);
     //this.router.navigate(['/detalles-pedido'], {state:{rowData}});
@@ -80,6 +80,14 @@ export class PedidosComponent implements OnInit{
     this.router.navigate([`/pedidos/${rowData.id}`]);
     //console.log('pedido component ' + rowData.listaLineasPedido)
 
+  }
+  formatNumber(value: number): string {
+    if (value < 10) {
+      return value.toFixed(2).replace(".", ",");
+    }
+
+    // Si el valor es mayor o igual a 10, formatea con ceros a la izquierda
+    return value.toFixed(2).replace(".", ",").padStart(5, "0");
   }
 
 }

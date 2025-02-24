@@ -85,7 +85,10 @@ public class PedidoDTO implements Serializable {
 
         pedidoDTO.setMetodoPago(MetodoPagoDTO.convertToDTO(pedido.getMetodoPago()));
         pedidoDTO.setEstado(EstadoPedidoDTO.convertToDTO(pedido.getEstado()));
-        pedidoDTO.setPuntoRecogida(PuntoRecogidaDTO.convertToDTO(pedido.getPuntoRecogida()));
+        if (pedidoDTO.getPuntoRecogida() != null) {
+            pedidoDTO.setPuntoRecogida(PuntoRecogidaDTO.convertToDTO(pedido.getPuntoRecogida()));
+
+        }
 
         List<LineaPedidoDTO> listaLPDTO = pedido.getListaLineaPedido().stream()
                 .map(lineaPedido -> {

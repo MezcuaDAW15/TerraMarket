@@ -19,6 +19,11 @@ export class CardLineapedidoComponent implements OnInit {
     this.imagenUrl = 'data:image/jpeg;base64,' + this.lineaPedido?.venta.producto.imagen;
   }
   formatNumber(value: number): string {
+    if (value < 10) {
+      return value.toFixed(2).replace(".", ",");
+    }
+
+    // Si el valor es mayor o igual a 10, formatea con ceros a la izquierda
     return value.toFixed(2).replace(".", ",").padStart(5, "0");
   }
 }

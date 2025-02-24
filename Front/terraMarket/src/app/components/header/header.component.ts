@@ -59,6 +59,8 @@ export class HeaderComponent implements OnInit {
     console.log('usuario --> ' + this.usuario);
     if (this.usuario) {
       this.usuarioLogueado = true;
+      this.pedidoService.setId(this.usuario.id!);
+
       this.clienteService.findById(this.usuario.id).subscribe(
         (data) => {
           this.cliente = data;

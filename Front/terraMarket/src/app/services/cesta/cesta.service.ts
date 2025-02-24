@@ -16,7 +16,6 @@ export class CestaService {
   constructor(private httpClient: HttpClient) { }
 
   findPedidoPendiente(cliente: Cliente) {
-    cliente.id = 1;
     const url = `${this.baseUrl}${cliente.id}/pedidos/buscarPedidoPendiente`;
     console.log(url);
     return this.httpClient.get<Pedido>(url);

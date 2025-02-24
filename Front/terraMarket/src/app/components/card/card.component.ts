@@ -26,6 +26,11 @@ export class CardComponent implements OnInit {
   }
 
   formatNumber(value: number): string {
+    if (value < 10) {
+      return value.toFixed(2).replace(".", ",");
+    }
+
+    // Si el valor es mayor o igual a 10, formatea con ceros a la izquierda
     return value.toFixed(2).replace(".", ",").padStart(5, "0");
   }
 }
