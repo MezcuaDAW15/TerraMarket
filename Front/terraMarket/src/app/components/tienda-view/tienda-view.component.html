@@ -1,0 +1,61 @@
+<app-back></app-back>
+<div class="container">
+  <div class="banner">
+    <img *ngIf="imagenUrl" [src]="imagenUrl" alt="Banner Tienda" />
+  </div>
+  <div class="content">
+    <div class="left-section">
+      <div class="h1">{{ tienda?.nombre }}</div>
+      <p-rating
+        [ngModel]="valoracioMedia"
+        [readonly]="true"
+        [cancel]="false"
+      ></p-rating>
+      <div
+        [ngClass]="
+          tienda?.activo ? 'etiqueta-estado green' : 'etiqueta-estado red'
+        "
+      >
+        <span>{{ tienda?.activo ? "Activo" : "Inactivo" }}</span>
+      </div>
+    </div>
+    <div class="right-section">
+      <div class="info-item">
+        <div class="info-item-icon">
+          <img src="assets/icons/location_red.svg" alt="Ubicacion" />
+        </div>
+        <span>{{ getFormattedAddress() }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="productos">
+    <app-lista-productos [tienda]="tienda"></app-lista-productos>
+  </div>
+  <div class="valoraciones">
+    <p-carousel
+      [value]="valoraciones"
+      [numVisible]="3"
+      [numScroll]="3"
+      [circular]="false"
+    >
+      <ng-template let-valoracion pTemplate="item">
+        <div class="border-1 surface-border border-round m-2 p-3">
+          <div class="mb-2 text-center">
+            <p-rating
+              [ngModel]="valoracion.puntuacion"
+              [readonly]="true"
+              [cancel]="false"
+            ></p-rating>
+          </div>
+          <div class="mb-2 font-medium text-center">
+            {{ valoracion?.resena }}
+          </div>
+          <div class="text-sm text-right text-gray-500">
+            {{ valoracion?.cliente?.nombre }}
+            {{ valoracion?.cliente?.apellidos }}
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+</div>
