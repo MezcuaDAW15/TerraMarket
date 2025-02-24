@@ -42,12 +42,20 @@ export class TiendaViewComponent implements OnInit {
     //const routerMap = new Map<number, string>();
     //Crear servicio que devuelva el map de rutas
 
+    const idMercado = Number(this.route.snapshot.paramMap.get('id'));
     const idTienda = Number(this.route.snapshot.paramMap.get('idTienda'));
-    const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    if (!isNaN(id) && id > 0 && !isNaN(idTienda) && idTienda > 0) {
+    console.log('id', this.route.snapshot.paramMap.get('id'));
+    console.log('tienda', this.route.snapshot.paramMap.get('idTienda'));
+
+    if (
+      !isNaN(idMercado) &&
+      idMercado > 0 &&
+      !isNaN(idTienda) &&
+      idTienda > 0
+    ) {
       // Solo llama al servicio si el ID es válido
-      this.tiendaService.findById(idTienda, id).subscribe({
+      this.tiendaService.findById(idMercado, idTienda).subscribe({
         next: (data) => {
           this.tienda = data;
           this.valoracionService.findByTienda(this.tienda.id).subscribe({
@@ -65,7 +73,7 @@ export class TiendaViewComponent implements OnInit {
         },
       });
     } else {
-      console.error('IDs no válidos:', id, idTienda);
+      console.error('IDs no válidos:', idMercado, idTienda);
     }
     console.log('Tienda: ', this.tienda);
     console.log('Valoraciones: ', this.valoraciones);

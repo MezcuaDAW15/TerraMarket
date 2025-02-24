@@ -91,3 +91,29 @@
   letter-spacing: 0.5px;
   color: black;
 }
+
+@import "../../../variables";
+
+:host ::ng-deep .p-component {
+  font-family: Parkinsans;
+}
+
+.productos {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  margin-top: 1rem;
+  padding-left: 20px;
+}
+
+.rd-btn {
+  color: $black;
+  max-width: none;
+}
+
+.list-container {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
