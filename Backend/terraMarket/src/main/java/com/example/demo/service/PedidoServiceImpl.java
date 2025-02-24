@@ -138,4 +138,13 @@ public class PedidoServiceImpl implements PedidoService {
 
 		return PedidoDTO.convertToDTO(pedido, clienteDTO);
 	}
+
+	@Override
+	public void actualizarTotalPedido(Long id) {
+		log.info(PedidoServiceImpl.class.getSimpleName() + " - actualizarTotalPedido: " + id);
+		Pedido pedido = pedidoRepository.findById(id).get();
+		pedido.setImporte(pedidoRepository.calcularTotalPedido(id).floatValue());
+		pedidoRepository.save(pedido);
+	}
+
 }

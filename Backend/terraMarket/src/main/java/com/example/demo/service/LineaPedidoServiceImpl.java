@@ -57,6 +57,7 @@ public class LineaPedidoServiceImpl implements LineaPedidoService {
             // eliminamos la
             // linea
             lineaPedidoRepository.delete(lineaPedido);
+            this.pedidoService.actualizarTotalPedido(lineaPedido.getPedido().getId());
             return null;
 
         } else {

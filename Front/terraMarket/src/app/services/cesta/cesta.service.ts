@@ -11,13 +11,13 @@ import { Venta } from '../../models/venta';
 })
 export class CestaService {
 
-  private baseUrl = `http://localhost:8888/ws/pedidos`;
+  private baseUrl = `http://localhost:8888/ws/clientes/`;
 
   constructor(private httpClient: HttpClient) { }
 
   findPedidoPendiente(cliente: Cliente) {
     cliente.id = 1;
-    const url = `${this.baseUrl}/buscarPedidoPendiente?idCliente=${cliente.id}`;
+    const url = `${this.baseUrl}${cliente.id}/pedidos/buscarPedidoPendiente`;
     console.log(url);
     return this.httpClient.get<Pedido>(url);
 

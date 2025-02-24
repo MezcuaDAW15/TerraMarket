@@ -44,7 +44,7 @@ public class PedidoRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/buscarPedidoPendiente")
-    public PedidoDTO buscarPedidoPendiente(@RequestParam Long idCliente) {
+    public PedidoDTO buscarPedidoPendiente(@PathVariable("idCliente") Long idCliente) {
 
         log.info("PedidoRestController - buscarPedidoPendiente: Mostramos pedidos pendientes");
 
@@ -58,7 +58,7 @@ public class PedidoRestController {
 
         log.info("PedidoRestController - buscarPedido por id");
 
-        PedidoDTO  pedidoDTO= new PedidoDTO();
+        PedidoDTO pedidoDTO = new PedidoDTO();
         pedidoDTO.setId(idPedido);
         // buscar cuentas del cliente en el servicio
         return pedidoService.findById(pedidoDTO);
