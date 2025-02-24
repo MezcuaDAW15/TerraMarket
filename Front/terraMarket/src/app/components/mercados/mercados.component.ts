@@ -10,7 +10,13 @@ import { RouterLink, Router } from '@angular/router';
 @Component({
   selector: 'app-mercados',
   standalone: true,
-  imports: [CardMarketComponent, AutoCompleteModule, FormsModule, RegistroComponent, RouterLink],
+  imports: [
+    CardMarketComponent,
+    AutoCompleteModule,
+    FormsModule,
+    RegistroComponent,
+    RouterLink,
+  ],
   templateUrl: './mercados.component.html',
   styleUrl: './mercados.component.scss',
 })
@@ -22,15 +28,15 @@ export class MercadosComponent implements OnInit {
 
   constructor(private mercadoService: MercadoServiceService) {}
   ngOnInit(): void {
-    //this.mostrarMercados();
+    this.mostrarMercados();
   }
 
-  // mostrarMercados(): void {
-  //   this.mercadoService.findAll().subscribe((data) => {
-  //     this.mercados = data;
-  //     this.mercadosFiltrados = [...this.mercados];
-  //   });
-  // }
+  mostrarMercados(): void {
+    this.mercadoService.findAll().subscribe((data) => {
+      this.mercados = data;
+      this.mercadosFiltrados = [...this.mercados];
+    });
+  }
 
   // Filtra los mercados en el autocompletado
   search(event: any) {

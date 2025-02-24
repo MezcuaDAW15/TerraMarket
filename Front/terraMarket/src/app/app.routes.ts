@@ -24,10 +24,10 @@ export const routes: Routes = [
   { path: 'home', component: MercadosComponent },
   { path: 'editar-perfil', component: EditarPerfilComponent },
   { path: 'cesta', component: CestaComponent },
-  { path: ':nombreMercado', component: MarketViewComponent },
   { path: 'realizar-pedido', component: RealizarPedidoComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'valoracion', component: ValoracionesComponent },
-  { path: 'mercado/:id/tienda/:idTienda', component: TiendaViewComponent },
+  { path: ':idMercado/tiendas/:idTienda', component: TiendaViewComponent },
   { path: ':nombreMercado/:nombreProducto', component: ProductViewComponent },
+  { path: ':nombreMercado', component: MarketViewComponent },
 ];

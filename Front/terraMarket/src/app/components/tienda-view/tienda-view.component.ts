@@ -42,7 +42,7 @@ export class TiendaViewComponent implements OnInit {
     //const routerMap = new Map<number, string>();
     //Crear servicio que devuelva el map de rutas
 
-    const idMercado = Number(this.route.snapshot.paramMap.get('id'));
+    const idMercado = Number(this.route.snapshot.paramMap.get('idMercado'));
     const idTienda = Number(this.route.snapshot.paramMap.get('idTienda'));
 
     console.log('id', this.route.snapshot.paramMap.get('id'));

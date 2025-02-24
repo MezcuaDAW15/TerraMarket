@@ -1,23 +1,24 @@
 <div class="tienda-card">
   <div class="img-container">
     <div class="tienda-card-img">
-      <img [src]="imagenUrl" [alt]="tienda?.nombre">
-
+      <img [src]="imagenUrl" [alt]="tienda?.nombre" />
     </div>
   </div>
 
-  <span class="name">{{tienda?.nombre}}</span>
+  <span class="name">{{ tienda?.nombre }}</span>
   <div class="bottom">
-
     <div class="categories">
-
-
-      <div class="etiqueta-estado yellow" *ngFor="let categoria of tienda?.categoriaT">
-        <img [src]="'assets/icons/categories/' + categoria?.icono" [alt]="categoria?.nombre">
+      <div
+        class="etiqueta-estado yellow"
+        *ngFor="let categoria of tienda?.categoriaT"
+      >
+        <img
+          [src]="'assets/icons/categories/' + categoria?.icono"
+          [alt]="categoria?.nombre"
+        />
       </div>
-
     </div>
-    <button class="btn-card">
+    <button class="btn-card" (click)="tienda ? irATienda(tienda) : null">
       <span class="">Ver productos</span>
     </button>
   </div>
