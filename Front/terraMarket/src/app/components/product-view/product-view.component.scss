@@ -1,0 +1,146 @@
+@import '../../../variables';
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  margin-top: 1rem;
+  padding-left: 20px;
+
+}
+
+.image {
+  display: flex;
+  width: 599px;
+  height: 401px;
+  border-radius: 5px;
+  overflow: hidden;
+  align-items: center;
+
+  img {
+    width: 100%;
+  }
+}
+
+.info-producto {
+  width: 50%;
+  padding: 0 20px;
+}
+
+.ventas {
+  width: 50%;
+
+  padding: 0 20px;
+}
+
+.tiendas {
+  max-height: 391px;
+  overflow: auto;
+  border: 2px solid rgba($gray, 0.2);
+  padding: 0;
+  border-radius: 10px;
+  scrollbar-color: $red transparent;
+
+  label {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    cursor: pointer;
+  }
+
+  input {
+    display: none;
+    margin-top: 18px;
+    max-height: 20px;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+  }
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+
+  }
+}
+
+.precio {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.mdm {
+  font-weight: 700;
+}
+
+.descripcion {
+  margin-top: 0;
+}
+
+.tienda input[type="radio"] {
+  display: none;
+
+}
+
+.tienda:has(input[type="radio"]:checked) {
+  background-color: rgba($red, 0.2);
+
+}
+
+.invisible-btn {
+  border: none;
+  padding: 2px;
+
+  :hover {
+    cursor: pointer;
+    background-color: rgba($orange, 0.3);
+  }
+}
+
+.cantidad-container {
+  display: flex;
+  margin-top: 1.25rem;
+  width: 100%;
+  justify-content: space-between;
+  border: 3px solid $red;
+  border-radius: 20px;
+  padding: 0.5rem 1.7rem;
+  align-items: center;
+}
+
+.cantidad {
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    height: fit-content;
+    align-items: center;
+  }
+}
+
+.etiquetas {
+  margin-top: 1rem;
+  display: flex;
+  width: 100%;
+  justify-content: center
+}
+
+.error {
+  margin-top: 1rem;
+  border-radius: 10px;
+  background-color: #ff6259;
+  color: $white;
+  padding: 0.5rem 1rem;
+
+  p {
+    margin: 0;
+  }
+}

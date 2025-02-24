@@ -1,0 +1,56 @@
+<app-back></app-back>
+<div class="container">
+  <div class="info-producto">
+    <h1 class="h1">{{producto?.nombre}}</h1>
+    <div class="image">
+      <img *ngIf="imagenUrl" [src]="imagenUrl" alt="">
+
+    </div>
+  </div>
+  <div class="ventas">
+    <p class="mdm">Tiendas que venden este producto</p>
+    <div class="tiendas">
+      <label class="tienda" *ngFor="let venta of ventas">
+        <input type="radio" name="tienda" value="{{venta.id}}" [(ngModel)]="ventaSeleccionada"
+          (change)="handleChange()">
+        <div class="info">
+          <div class="top">
+            <p class="mdm">{{venta.tienda.nombre}}</p>
+            <p class="precio">{{venta.precioVenta}}</p>
+          </div>
+
+          <p class="p descripcion">{{venta.descripcion}}</p>
+        </div>
+
+      </label>
+
+
+    </div>
+    <div *ngIf="error" class="error">
+      <p class="p">{{error}}</p>
+    </div>
+
+    <div class="cantidad-container">
+      <div class="cantidad">
+        <p class="mdm">Cantidad</p>
+        <button class="invisible-btn">
+          <img src="assets/icons/minus.svg" alt="restar" (click)="restarCantidad()">
+        </button>
+        <p class="mdm">{{cantidad}}</p>
+        <button class="invisible-btn" (click)="sumarCantidad()">
+          <img src="assets/icons/plus.svg" alt="sumar">
+        </button>
+      </div>
+      <button class="sqr-btn auto-size" (click)="anadirCesta()">
+        <img src="assets/icons/bag_light.svg" alt="añadir a la cesta">
+        Añadir a la cesta
+      </button>
+
+    </div>
+  </div>
+
+</div>
+<div class="etiquetas">
+  <img src="assets/etiquetas.svg" alt="etiquetas" />
+
+</div>

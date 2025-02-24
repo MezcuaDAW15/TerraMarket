@@ -1,6 +1,7 @@
 package com.example.demo.web.restcontroller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,7 @@ public class ProductoRestController {
         return productoService.findAll();
     }
 
-    @GetMapping("/productos/{id}")
+    @GetMapping("{id}")
     public ProductoDTO findById(@PathVariable Long id) {
         log.info("ProductoRestController - findById: " + id);
         return productoService.findById(id);
@@ -83,6 +84,13 @@ public class ProductoRestController {
     public List<ProductoDTO> findByCategories(@RequestParam List<Long> categories) {
         log.info("ProductoRestController - findByCategories: " + categories);
         return productoService.findByCategories(categories);
+    }
+
+    @GetMapping("/rutas")
+    public Map<Long, String> findRutas() {
+
+        return productoService.findRutas();
+
     }
 
 }

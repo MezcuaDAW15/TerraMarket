@@ -43,4 +43,7 @@ export class CardLineapedidoComponent implements OnInit {
     // Redirigir a la pantalla de valoración
     this.router.navigate(['/valoracion']);
   }
+  formatNumber(value: number): string {
+    return value.toFixed(2).replace('.', ',').padStart(5, '0');
+  }
 }

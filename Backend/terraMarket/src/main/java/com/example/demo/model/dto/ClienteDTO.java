@@ -59,7 +59,7 @@ public class ClienteDTO implements Serializable{
 			clienteDTO.getRolesDTO().add(rolDTO);
 		}
 		
-		log.info(ClienteDTO.class.getSimpleName() + " - convertToDTO() cliente lista pedidos " + cliente.toString());
+		//log.info(ClienteDTO.class.getSimpleName() + " - convertToDTO() cliente lista pedidos " + cliente.toString());
 
         return clienteDTO;
     }

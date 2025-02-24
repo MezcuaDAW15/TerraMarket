@@ -22,7 +22,7 @@ interface Column {
 })
 
 export class PedidosComponent implements OnInit{
-
+  idUsuario: number | null = null;
   pedidos:Pedido[]= [];
   cols!: Column[];
   idpedido: number = 0;
@@ -49,8 +49,9 @@ export class PedidosComponent implements OnInit{
   }
 
   mostrarPedidos():void{
+    this.idUsuario = this.pedidoService.getId();
 
-    this.pedidoService.findAllByCliente().subscribe((data)=>{
+    this.pedidoService.findAllByCliente(this.idUsuario!).subscribe((data)=>{
       this.pedidos = data;
       this.pedidos = this.pedidos.map(element =>({
           ...element,

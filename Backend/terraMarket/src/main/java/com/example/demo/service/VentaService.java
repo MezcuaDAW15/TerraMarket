@@ -15,4 +15,6 @@ public interface VentaService {
 
     List<VentaDTO> findAllByCategoriasTienda(List<CategoriaPDTO> categoriasPDTO, TiendaDTO tiendaDTO);
 
+    List<VentaDTO> findAllByProductoMercado(Long idProducto, Long idMercado);
+
 }

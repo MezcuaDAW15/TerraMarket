@@ -1,6 +1,7 @@
 package com.example.demo.web.restcontroller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,14 @@ public class MercadoRestController {
         } else {
             return ResponseEntity.ok(mercadoDTO);
         }
+
+    }
+
+    @GetMapping("/rutas")
+    public Map<Long, String> findRutas() {
+        log.info("MercadoRestController - findRutas: Localizamos las rutas de los mercados");
+
+        return mercadoService.findRutas();
 
     }
 
