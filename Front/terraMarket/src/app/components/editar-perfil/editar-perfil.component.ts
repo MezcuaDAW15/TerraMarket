@@ -3,6 +3,7 @@ import { BackComponent } from "../back/back.component";
 import { Cliente } from '../../models/cliente';
 import { ClienteService } from '../../services/clientes/cliente.service';
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SessionService } from '../../services/session/session.service';
 
 @Component({
   selector: 'app-editar-perfil',
@@ -11,8 +12,8 @@ import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angula
   templateUrl: './editar-perfil.component.html',
   styleUrl: './editar-perfil.component.scss'
 })
-export class EditarPerfilComponent implements OnInit{
-  clienteRecibido: Cliente | null = null; 
+export class EditarPerfilComponent implements OnInit {
+  clienteRecibido: Cliente | null = null;
   clienteJson: string | null = null;
   clienteEncontrado: Cliente | null = null;
   formulario: FormGroup;
@@ -20,20 +21,22 @@ export class EditarPerfilComponent implements OnInit{
 
   datosEditados: Cliente | null = null;
 
-  constructor(private clienteService:ClienteService,
+  constructor(
+    private clienteService: ClienteService,
+    private sessionService: SessionService,
     private fb: FormBuilder
-  ){
-    
+  ) {
+
     this.formulario = this.fb.group({
-      username: ['',[Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9 ]{2,20}$/)],],
-      nombre: ['',[Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9 ]{2,20}$/)],],
+      username: ['', [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9 ]{2,20}$/)],],
+      nombre: ['', [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9 ]{2,20}$/)],],
       apellidos: ['', [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9 ]{2,30}$/)],],
       email: ['', [Validators.required, Validators.email]],
       fechaNacimiento: ['', [Validators.required]],
       contrasena: ['', [Validators.required]],
       cp: ['', [Validators.required]],
     })
-  } 
+  }
 
   ngOnInit(): void {
     //let sessionStorageCliente = sessionStorage.getItem('cliente');
@@ -45,18 +48,18 @@ export class EditarPerfilComponent implements OnInit{
     //   console.log('perfil sesion storage --->' + this.clienteRecibido?.id);
     // }
 
-    const usuario = this.clienteService.obtenerSesion()
+    const usuario = this.sessionService.obtenerUsuario();
     this.usuarioId = usuario ? usuario.id : null;
     if (this.usuarioId) {
       this.cargarDatosUsuario(this.usuarioId);
-    } 
-    
+    }
+
   }
 
-  cargarDatosUsuario(idUsuario: number):void{
+  cargarDatosUsuario(idUsuario: number): void {
     this.clienteService.findById(idUsuario).subscribe(
-      (data) =>{
-        
+      (data) => {
+
         this.clienteEncontrado = data;
         console.log(this.clienteEncontrado)
 
@@ -74,7 +77,7 @@ export class EditarPerfilComponent implements OnInit{
     )
   }
 
-  editarUsuario():void{
+  editarUsuario(): void {
     // llamar al servicio para update
     this.datosEditados = {
       id: this.usuarioId!,
@@ -88,12 +91,12 @@ export class EditarPerfilComponent implements OnInit{
     }
 
     this.clienteService.updateCliente(this.datosEditados).subscribe({
-      next: (response:any) =>{
+      next: (response: any) => {
         if (!response.error) {
           console.log('cliente - cambios guardados')
           this.cargarDatosUsuario(this.usuarioId!);
         } else {
-          console.log('cliente - cambios no guardados' +  response.error)
+          console.log('cliente - cambios no guardados' + response.error)
         }
       }
     });

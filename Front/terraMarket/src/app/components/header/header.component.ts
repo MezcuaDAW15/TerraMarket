@@ -31,8 +31,9 @@ export class HeaderComponent implements OnInit {
 
   usuario: any = null;
 
+  clienteLogin: any | null = null;
   cliente: Cliente | null = null;
-  formulario : FormGroup;
+  formulario: FormGroup;
 
   constructor(
     private sessionService: SessionService,
@@ -40,57 +41,70 @@ export class HeaderComponent implements OnInit {
     private clienteService: ClienteService,
     private fb: FormBuilder,
     private pedidoService: PedidoServiceService
-  ) { 
-     this.formulario = this.fb.group({
-          username: ["", [Validators.required]],
-          contrasena: ["", [Validators.required]]
-      })
+  ) {
+    this.formulario = this.fb.group({
+      username: ["", [Validators.required]],
+      contrasena: ["", [Validators.required]]
+    })
   }
 
   ngOnInit() {
-    //this.cargarUsuario();
+    this.cargarUsuario();
     this.cargarItems();
   }
 
-  // cargarUsuario() {
-  //   this.sessionService.usuario$.subscribe((usuario) => {
+  cargarUsuario() {
 
-  //     this.usuarioLogueado = usuario;
-  //     this.usuario = usuario;
-  //   });
-
-  //   this.sessionService.obtenerUsuario();
-
-  // }
-
-  iniciarSesion() {
-    //this.sessionService.iniciarSesion();
-
-    this.cliente = {
-      username: this.formulario.value.username,
-      contrasena: this.formulario.value.contrasena
+    this.usuario = this.sessionService.obtenerUsuario();
+    console.log('usuario --> ' + this.usuario);
+    if (this.usuario) {
+      this.usuarioLogueado = true;
+      this.clienteService.findById(this.usuario.id).subscribe(
+        (data) => {
+          this.cliente = data;
+          console.log('cliente --> ' + this.cliente);
+        }
+      );
     }
-    this.clienteService.login(this.cliente).subscribe(
-      (response: Cliente) => {
 
-        this.cliente = response; // obtenemos cliente del backend
+  }
 
+  iniciarSesion(): void {
+
+    this.clienteLogin = {
+      username: this.formulario.value.username,
+      contrasena: this.formulario.value.password
+    }
+
+    console.log('cliente formulario --> ' + this.clienteLogin.username);
+    console.log('cliente formulario --> ' + JSON.stringify(this.clienteLogin));  // Muestra el objeto como una cadena JSON
+
+    // this.clienteService.login(this.clienteLogin).subscribe(
+    //   (response: Cliente) => {
+    //     console.log('Login successful', response);
+    //   },
+    //   (error) => {
+    //     console.error('Login failed', error);
+    //   }
+    // );
+    this.clienteService.login(this.clienteLogin).subscribe({
+      next: (response: Cliente) => {
         console.log('Login successful', response);
-        // guardamos la session
-        this.clienteService.guardarSesion(response);
-        console.log('guardar session header ---> ' + this.cliente.id)
-
+        this.cliente = response;
+        this.sessionService.iniciarSesion(this.cliente);
         this.usuarioLogueado = true;
-        this.cargarItems();
+        this.formulario.value.username = '';
+        this.formulario.value.contrasena = '';
         this.pedidoService.setId(this.cliente.id!);
-        this.router.navigate(['/home']);
         this.closeDialog();
+        this.router.navigate(['/home']);
       },
-      (error) => {
+      error: (error) => {
         console.error('Login failed', error);
       }
-    );
-    
+    });
+
+    console.log(this.cliente);
   }
 
   cargarItems() {
@@ -120,7 +134,7 @@ export class HeaderComponent implements OnInit {
             icon: 'pi pi-sign-out text-2xl',
             command: () => {
               console.log('Cerrar sesión');
-              this.sessionService.cerrarSesion();
+              this.cerrarSesion();
             }
           },
           {
@@ -143,7 +157,13 @@ export class HeaderComponent implements OnInit {
     this.loginVisible = true;
   }
 
-  closeDialog(){
+  closeDialog() {
     this.loginVisible = false;
+  }
+  cerrarSesion() {
+    this.sessionService.cerrarSesion();
+    this.usuarioLogueado = false;
+    this.router.navigate(['/home']);
+    this.usuario = null;
   }
 }
