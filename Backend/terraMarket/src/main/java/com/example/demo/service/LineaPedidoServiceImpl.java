@@ -16,6 +16,7 @@ import com.example.demo.model.dto.LineaPedidoDTO;
 import com.example.demo.model.dto.PedidoDTO;
 import com.example.demo.repository.dao.LineaPedidoRepository;
 import com.example.demo.repository.dao.VentaRepository;
+import com.example.demo.repository.entity.Cliente;
 import com.example.demo.repository.entity.LineaPedido;
 
 @Service
@@ -84,11 +85,13 @@ public class LineaPedidoServiceImpl implements LineaPedidoService {
     public LineaPedidoDTO crearLineaPedido(LineaPedidoDTO lineaPedidoDTO, ClienteDTO clienteDTO) {
         log.info("LineaPedidoServiceImpl - crearLineaPedido: " + lineaPedidoDTO);
 
+        Cliente cliente = ClienteDTO.convertToEntity(clienteDTO,null);
+
         LineaPedido lineaPedido = new LineaPedido();
         lineaPedido.setCantidad(lineaPedidoDTO.getCantidad());
         lineaPedido.setVenta(ventaRepository.findById(lineaPedidoDTO.getVenta().getId()).get());
         lineaPedido
-                .setPedido(PedidoDTO.convertToEntity(pedidoService.findById(lineaPedidoDTO.getPedido())));
+                .setPedido(PedidoDTO.convertToEntity(pedidoService.findById(lineaPedidoDTO.getPedido()), cliente));
         lineaPedido.setFecha(Date.from(Instant.now()));
         lineaPedidoRepository.save(lineaPedido);
         return LineaPedidoDTO.convertToDTO(lineaPedido, lineaPedidoDTO.getPedido());

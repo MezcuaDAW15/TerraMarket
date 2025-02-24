@@ -3,8 +3,11 @@ package com.example.demo.service;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,7 @@ import com.example.demo.model.dto.RolDTO;
 import com.example.demo.repository.dao.ClienteRepository;
 import com.example.demo.repository.dao.RolRepository;
 import com.example.demo.repository.entity.Cliente;
+import com.example.demo.repository.entity.Pedido;
 import com.example.demo.repository.entity.Rol;
 import com.example.demo.utils.EncriptaPassword;
 
@@ -69,10 +73,24 @@ public class ClienteServiceImpl implements ClienteService, UserDetailsService{
      @Override
      public ClienteDTO save(ClienteDTO clienteDTO) {
         
-	 	log.info(ClienteServiceImpl.class.getSimpleName() + " save() - clienteDto: " + clienteDTO.toString());
-	 	Cliente c = ClienteDTO.convertToEntity(clienteDTO);
+	    log.info(ClienteServiceImpl.class.getSimpleName() + " save() - clienteDto: " + clienteDTO.toString());
+
+        Set<Pedido> listaPedidos = new HashSet<Pedido>();
+        if (clienteDTO.getId() != null){
+            listaPedidos = (this.clienteRepository.findById(clienteDTO.getId()).get().getListaPedidos());
+        }
+
+	 	Cliente c = ClienteDTO.convertToEntity(clienteDTO, listaPedidos);
 	 	log.info(ClienteServiceImpl.class.getSimpleName() + " save() - cliente: " + c.toString());
 	 	
+        if (c.getId() != null && c.getContrasena().equals("")) {
+
+            c.setContrasena(this.clienteRepository.findById(c.getId()).get().getContrasena());
+        } else {
+            c.setContrasena(EncriptaPassword.encriptarPassword(clienteDTO.getContrasena()));
+        }
+        
+
 	 	c.setActivo(true);
 
         c = clienteRepository.save(c);
@@ -101,8 +119,12 @@ public class ClienteServiceImpl implements ClienteService, UserDetailsService{
     public int delete(ClienteDTO cDTO) {
         log.info(ClienteServiceImpl.class.getSimpleName() + " - borramos el cliente" + cDTO.toString());
 
+        Set<Pedido> listaPedidos = new HashSet<Pedido>();
+        if (cDTO.getId() != null){
+            listaPedidos = (this.clienteRepository.findById(cDTO.getId()).get().getListaPedidos());
+        }
 		Cliente cliente = new Cliente();
-		cliente = ClienteDTO.convertToEntity(cDTO);
+		cliente = ClienteDTO.convertToEntity(cDTO, listaPedidos);
         cliente.setActivo(false);
         if (clienteRepository.existsById(cDTO.getId())){
             clienteRepository.save(cliente);

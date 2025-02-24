@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.example.demo.repository.entity.Cliente;
+import com.example.demo.repository.entity.Pedido;
 import com.example.demo.repository.entity.Rol;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -64,7 +67,7 @@ public class ClienteDTO implements Serializable{
         return clienteDTO;
     }
     // Convertir un DTO a una entidad
-	public static Cliente convertToEntity(ClienteDTO clienteDTO) {
+	public static Cliente convertToEntity(ClienteDTO clienteDTO , Set<Pedido> listaPedidos) {
 
 		Cliente cliente = new Cliente();
 
@@ -77,7 +80,7 @@ public class ClienteDTO implements Serializable{
 		cliente.setFechaNacimiento(clienteDTO.getFechaNacimiento());
 		cliente.setCp(clienteDTO.getCp());
         cliente.setActivo(clienteDTO.isActivo());
-
+		cliente.setListaPedidos(listaPedidos);
 
 		Rol[] roles = new Rol[clienteDTO.getRolesDTO().size()];
 		for (int i = 0; i < clienteDTO.getRolesDTO().size(); i++) {

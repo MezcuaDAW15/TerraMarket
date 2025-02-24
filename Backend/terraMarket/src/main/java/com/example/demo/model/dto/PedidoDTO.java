@@ -20,6 +20,8 @@ import lombok.ToString;
 @Data
 public class PedidoDTO implements Serializable {
 
+
+
     private static final long serialVersionUID = 1L;
     private Long id;
 
@@ -100,10 +102,13 @@ public class PedidoDTO implements Serializable {
         return pedidoDTO;
     }
 
-    public static Pedido convertToEntity(PedidoDTO pedidoDTO) {
+    public static Pedido convertToEntity(PedidoDTO pedidoDTO, Cliente cliente) {
 
         Pedido pedido = new Pedido();
-        Cliente cliente = ClienteDTO.convertToEntity(pedidoDTO.getCliente());
+
+        
+        
+        //Cliente cliente = ClienteDTO.convertToEntity(pedidoDTO.getCliente(), );
 
         pedido.setId(pedidoDTO.getId());
         pedido.setCliente(cliente);

@@ -66,7 +66,7 @@ export class EditarPerfilComponent implements OnInit{
           apellidos: this.clienteEncontrado.apellidos,
           email: this.clienteEncontrado.email,
           fechaNacimiento: this.clienteEncontrado.fechaNacimiento,
-          contrasena: this.clienteEncontrado.contrasena,
+          contrasena: '',
           cp: this.clienteEncontrado.cp,
 
         })
@@ -92,6 +92,7 @@ export class EditarPerfilComponent implements OnInit{
         if (!response.error) {
           console.log('cliente - cambios guardados')
           this.cargarDatosUsuario(this.usuarioId!);
+          
         } else {
           console.log('cliente - cambios no guardados' +  response.error)
         }

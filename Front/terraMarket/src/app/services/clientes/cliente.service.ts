@@ -19,11 +19,11 @@ export class ClienteService {
   }
   
   guardarSesion(cliente:Cliente){
-    sessionStorage.setItem('cliente', JSON.stringify(cliente));
-    console.log('session storage --> ' + sessionStorage.getItem('cliente'));
+    localStorage.setItem('cliente', JSON.stringify(cliente));
+    console.log('session storage --> ' + localStorage.getItem('cliente'));
   }
   obtenerSesion(){
-    const usuario = sessionStorage.getItem('cliente');
+    const usuario = localStorage.getItem('cliente');
     if (usuario){
       this.usuarioActual.next(JSON.parse(usuario))
     }
