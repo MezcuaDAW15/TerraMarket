@@ -1,16 +1,4 @@
 <section class="container">
-  <button class="rd-btn auto-size" (click)="showFilters()">
-    <img src="assets/icons/category_search.svg" alt="" />
-    Filtrar productos por categorías
-  </button>
-  <p-dialog
-    header="Filtros"
-    [modal]="true"
-    [(visible)]="visible"
-    [style]="{ width: '50vw' }"
-  >
-  </p-dialog>
-
   <div class="list-container">
     <app-card
       *ngFor="let venta of productsToShow; index as i; trackBy: trackByFn"
