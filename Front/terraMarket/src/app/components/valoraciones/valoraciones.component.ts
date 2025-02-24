@@ -7,15 +7,23 @@ import { ValoracionesService } from '../../services/valoraciones/valoraciones.se
 import { Tienda } from '../../models/tienda';
 import { Cliente } from '../../models/cliente';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-valoraciones',
   standalone: true,
-  imports: [BackComponent, RatingModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    BackComponent,
+    RatingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+  ],
   templateUrl: './valoraciones.component.html',
   styleUrl: './valoraciones.component.scss',
 })
 export class ValoracionesComponent implements OnInit {
+  imagenUrl: string | null = null;
   valoracionForm!: FormGroup;
   tienda!: Tienda;
   cliente!: Cliente;
@@ -30,6 +38,10 @@ export class ValoracionesComponent implements OnInit {
       valoracion: [null],
       comentario: [''],
     });
+
+    /*     if (this.tienda?.imagen) {
+      this.imagenUrl = 'data:image/jpeg;base64,' + this.tienda.imagen;
+    } */
 
     this.valoracionesService.datosValoracion$.subscribe((datos) => {
       if (datos) {

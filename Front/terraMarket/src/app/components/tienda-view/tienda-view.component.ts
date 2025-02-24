@@ -10,6 +10,7 @@ import { Valoracion } from '../../models/valoracion';
 import { FormsModule } from '@angular/forms';
 import { CarouselModule } from 'primeng/carousel';
 import { ListaProductosComponent } from './components/lista-productos/lista-productos.component';
+import { BackComponent } from '../back/back.component';
 
 @Component({
   selector: 'app-tienda-view',
@@ -20,6 +21,7 @@ import { ListaProductosComponent } from './components/lista-productos/lista-prod
     FormsModule,
     CarouselModule,
     ListaProductosComponent,
+    BackComponent,
   ],
   templateUrl: './tienda-view.component.html',
   styleUrl: './tienda-view.component.scss',

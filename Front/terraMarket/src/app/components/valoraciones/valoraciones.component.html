@@ -5,7 +5,7 @@
   </div>
   <div class="div-contenedor">
     <div class="div-contenido">
-      <img src="" alt="logo" class="logo-tienda" />
+      <!-- <img *ngIf="imagenUrl" [src]="imagenUrl" alt="logo tienda" /> -->
       <p>{{ tienda.nombre }}</p>
       <form [formGroup]="valoracionForm" (ngSubmit)="onSubmit()">
         <p-rating
