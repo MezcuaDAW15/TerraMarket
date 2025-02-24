@@ -1,5 +1,7 @@
 package com.example.demo.configuration;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,72 +21,46 @@ public class WebSecurityConfig {
 
         @Autowired
         private UserDetailsService userDetailsService;
-        
-        
-        /*
+
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-                return http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/","/login","/error", "/fragments/**", "/register",
-                "/**").permitAll()
-                .requestMatchers("/").hasRole("USER")
-                .anyRequest().authenticated())
-                .formLogin(form -> form.loginPage("/login")
-                .defaultSuccessUrl("/clientes", true)
-                .failureUrl("/login?error")
-                 .permitAll())
-                .logout(logout -> logout.logoutSuccessUrl("/").permitAll())
-                .build();
-        		/*
+                // return http.authorizeHttpRequests(auth -> auth
+                // .requestMatchers("/","/login","/error", "/fragments/**", "/register",
+                // "/clientes/save/**").permitAll()
+                // .requestMatchers("/").hasRole("USER")
+                // .anyRequest().authenticated())
+                // .formLogin(form -> form.loginPage("/login")
+                // .defaultSuccessUrl("/clientes", true)
+                // .failureUrl("/login?error")
+                // .permitAll())
+                // .logout(logout -> logout.logoutSuccessUrl("/").permitAll())
+                // .build();
+
                 http.csrf(csrf -> csrf.disable())
                                 .authorizeHttpRequests(auth -> auth
                                                 .requestMatchers("/**").permitAll()
-                                               .anyRequest().authenticated());
-                                                
-                //return http.build();
+                                                .anyRequest().authenticated());
+
+                http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
+
+                return http.build();
         }
-		
-        */
-        /*
-        @Bean
-        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-            http.csrf(csrf -> csrf.disable())  // Desactiva CSRF para facilitar las llamadas a la API (puedes dejarlo habilitado si lo gestionas con tokens)
-                .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/**").permitAll()  // Permite todas las rutas (ajusta según tus necesidades)
-                    .anyRequest().authenticated())  // Resto de las rutas requieren autenticación
-                .cors()  // Habilita CORS
-                .and();
-            return http.build();
+
+        @Autowired
+        public void configureGlobal(AuthenticationManagerBuilder build) throws Exception {
+                build.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
         }
 
         @Bean
         public CorsConfigurationSource corsConfigurationSource() {
-            CorsConfiguration configuration = new CorsConfiguration();
-            configuration.addAllowedOrigin("http://localhost:4200");  // Permite solicitudes desde localhost:4200
-            configuration.addAllowedMethod("*");  // Permite todos los métodos HTTP (GET, POST, PUT, DELETE)
-            configuration.addAllowedHeader("*");  // Permite todos los encabezados
-            configuration.setAllowCredentials(true);  // Si necesitas manejar cookies o tokens de autenticación
+                CorsConfiguration configuration = new CorsConfiguration();
+                configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+                configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                configuration.setAllowedHeaders(List.of("*"));
 
-            UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-            source.registerCorsConfiguration("/**", configuration);  // Aplica a todas las rutas
+                UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+                source.registerCorsConfiguration("/**", configuration);
 
-            return source;
-        }
-		*/
-        
-        @Bean
-        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-            http
-                    .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                            .anyRequest().permitAll() // Permitir acceso sin autenticación a todas las rutas
-                    )
-                    .csrf(csrf -> csrf.disable()); // Deshabilitar CSRF si no es necesario
-
-            return http.build();
-        }
-        
-        @Autowired
-        public void configureGlobal(AuthenticationManagerBuilder build) throws Exception {
-            build.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+                return source;
         }
 }

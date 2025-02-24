@@ -10,6 +10,7 @@ import { MarketService } from '../../services/markets/market.service';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { MenuItem } from 'primeng/api';
 import { MarketListTiendasComponent } from "../market-list-tiendas/market-list-tiendas.component";
+import { RutasService } from '../../services/rutas/rutas.service';
 
 
 
@@ -26,47 +27,55 @@ export class MarketViewComponent implements OnInit {
   selectedItem: any;
 
   mercado: Mercado | null = null;
-  errorMessage: string = '';
   items: MenuItem[] | undefined;
 
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private marketService: MarketService
+    private marketService: MarketService,
+    private rutaService: RutasService
+
   ) { }
 
   ngOnInit(): void {
     const routerMap = new Map<number, string>();
-    //Crear servicio que devuelva el map de rutas
 
-
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(this.router.url)
-
-    if (!isNaN(id) && id > 0) {
-      // Solo llama al servicio si el ID es válido
-      this.marketService.findById(id).subscribe({
-        next: (data) => {
-          this.mercado = data;
-          console.log(this.mercado)
-        },
-        error: (error) => {
-          console.error('Error al cargar el mercado:', error);
-          this.errorMessage = 'No se pudo cargar la información del mercado.';
+    this.rutaService.getRutas().subscribe({
+      next: (data) => {
+        for (let key in data as { [key: string]: any }) {
+          routerMap.set(Number(key), (data as { [key: string]: any })[key].toString());
         }
-      });
-    } else {
-      this.errorMessage = 'ID de mercado no válido.';
-      console.error('ID de mercado no válido:', id);
-    }
+        console.log("Router Map:", routerMap);
+
+        // Obtener el nombre del mercado desde la URL
+        const nombreMercado = this.route.snapshot.paramMap.get('nombreMercado');
+        console.log("Nombre en URL:", nombreMercado);
+
+        if (nombreMercado) {
+          // Buscar el ID correspondiente en routerMap
+          const mercadoId = [...routerMap.entries()]
+            .find(([id, name]) => name === nombreMercado)?.[0];
+
+          if (mercadoId) {
+            this.loadMarket(mercadoId);
+          } else {
+            console.error("Mercado no encontrado:", nombreMercado);
+          }
+        } else {
+          console.error("Nombre de mercado no válido en la URL.");
+        }
+      },
+      error: (error) => {
+        console.error("Error al cargar rutas:", error);
+      }
+    });
 
     this.items = [
-      { label: 'Tiendas', icon: 'shop', command: () => this.setActiveTab('shop') },
-      { label: 'Productos', icon: 'products', command: () => this.setActiveTab('products') }
+      { label: "Tiendas", icon: "shop", command: () => this.setActiveTab("shop") },
+      { label: "Productos", icon: "products", command: () => this.setActiveTab("products") }
     ];
     this.selectedItem = this.items ? this.items[0] : null;
-
   }
 
   setActiveTab(tab: string) {
@@ -79,5 +88,17 @@ export class MarketViewComponent implements OnInit {
       this.selectedItem = this.items ? [event.index] : null;
     }
     console.log(this.activeTab)
+  }
+
+  loadMarket(id: number): void {
+    this.marketService.findById(id).subscribe({
+      next: (data) => {
+        this.mercado = data;
+        console.log("Mercado cargado:", this.mercado);
+      },
+      error: (error) => {
+        console.error("Error al cargar el mercado:", error);
+      }
+    });
   }
 }

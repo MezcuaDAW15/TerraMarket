@@ -9,14 +9,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClient.ResponseSpec;
+
 import java.util.List;
 import com.example.demo.model.dto.ClienteDTO;
 import com.example.demo.service.ClienteService;
@@ -48,7 +48,7 @@ public class ClienteRestController {
 
     // Localizamos un cliente por id
     @RequestMapping(method = RequestMethod.GET, path = "/{idCliente}")
-    public ResponseEntity<ClienteDTO> findById(@PathVariable("idCliente") Long idCliente){
+    public ResponseEntity<ClienteDTO> findById(@PathVariable("idCliente") Long idCliente) {
 
         log.info("ClienteRestController - findById: Localizamos el cliente con id:" + idCliente);
 
@@ -56,7 +56,7 @@ public class ClienteRestController {
         clienteDTO.setId(idCliente);
         clienteDTO = clienteService.findById(clienteDTO);
 
-        if(clienteDTO == null) { // si no existe el cliente
+        if (clienteDTO == null) { // si no existe el cliente
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         } else { // si existe
             return new ResponseEntity<>(clienteDTO, HttpStatus.OK);
@@ -64,65 +64,79 @@ public class ClienteRestController {
     }
 
     // @PostMapping()
-	// public ResponseEntity add(@RequestBody ClienteDTO clienteDTO) {
+    // public ResponseEntity add(@RequestBody ClienteDTO clienteDTO) {
 
-	// 	int resultado = clienteService.save(clienteDTO);
-		
-	// 	log.info(ClienteController.class.getSimpleName() + " - guardando cliente" + clienteDTO.toString());
-		
-    //     if (resultado == 1) {
-    //         return new ResponseEntity<>(HttpStatus.OK);
-    //     } else {
-    //         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    //     }
-	// }
+    // int resultado = clienteService.save(clienteDTO);
 
-     @PutMapping("")
-	 public ResponseEntity update(@RequestBody ClienteDTO clienteDTO) {
+    // log.info(ClienteController.class.getSimpleName() + " - guardando cliente" +
+    // clienteDTO.toString());
 
-    	ClienteDTO cDTO = clienteService.save(clienteDTO);
-	 	
-		
-	 	log.info(ClienteController.class.getSimpleName() + " - guardando cliente" + clienteDTO.toString());
-		
-         if (cDTO != null) {
-             return new ResponseEntity<>(cDTO, HttpStatus.OK);
-         } else {
-             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-         }
-	 }
+    // if (resultado == 1) {
+    // return new ResponseEntity<>(HttpStatus.OK);
+    // } else {
+    // return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    // }
+    // }
+
+    // @PutMapping()
+    // public ResponseEntity update(@RequestBody ClienteDTO clienteDTO) {
+
+    // int resultado = clienteService.save(clienteDTO);
+
+    // log.info(ClienteController.class.getSimpleName() + " - guardando cliente" +
+    // clienteDTO.toString());
+
+    // if (resultado == 1) {
+    // return new ResponseEntity<>(HttpStatus.OK);
+    // } else {
+    // return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    // }
+    // }
 
     @DeleteMapping("/delete/{idCliente}")
-	public ResponseEntity delete(@PathVariable("idCliente") Long idCliente) {
+    public ResponseEntity delete(@PathVariable("idCliente") Long idCliente) {
 
-		log.info(ClienteRestController.class.getSimpleName() + " - borrando cliente" + idCliente);
-		
-		ClienteDTO cDTO = new ClienteDTO();
-		cDTO.setId(idCliente);
+        log.info(ClienteController.class.getSimpleName() + " - borrando cliente" + idCliente);
+
+        ClienteDTO cDTO = new ClienteDTO();
+        cDTO.setId(idCliente);
         cDTO = clienteService.findById(cDTO);
-		int resultado = clienteService.delete(cDTO);
-		
+        int resultado = clienteService.delete(cDTO);
+
         if (resultado == 1) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-	}
-    
+    }
+
+    @RequestMapping(path = "/registro", method = RequestMethod.POST)
+    public ResponseEntity<ClienteDTO> registro(@RequestBody ClienteDTO clienteDTO) {
+        log.info(this.getClass().getSimpleName() + " registro: registrar cliente con datos: {}", clienteDTO);
+
+        ClienteDTO saved = this.clienteService.registro(clienteDTO);
+
+        if (saved != null) {
+            return ResponseEntity.ok(saved);
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/login")
-    public ResponseEntity<ClienteDTO> login(@RequestBody ClienteDTO cliente){
-    	
-    	UserDetails c = userDetailsService.loadUserByUsername(cliente.getUsername());
-    	log.info(ClienteRestController.class.getSimpleName() + " --------> " + cliente.toString());
-    	
-    	ClienteDTO cDTO = new ClienteDTO();
-    	
-    	if(c!=null) {
-    		 cDTO = clienteService.findByUsername(c.getUsername());
-    		return new ResponseEntity<>(cDTO, HttpStatus.OK);
-	    } else {
-	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
- 
+    public ResponseEntity<ClienteDTO> login(@RequestBody ClienteDTO cliente) {
+
+        UserDetails c = userDetailsService.loadUserByUsername(cliente.getUsername());
+        log.info(ClienteRestController.class.getSimpleName() + " --------> " + cliente.toString());
+
+        ClienteDTO cDTO = new ClienteDTO();
+
+        if (c != null) {
+            cDTO = clienteService.findByUsername(c.getUsername());
+            return new ResponseEntity<>(cDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
 }

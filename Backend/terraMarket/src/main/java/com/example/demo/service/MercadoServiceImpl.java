@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -42,6 +43,17 @@ public class MercadoServiceImpl implements MercadoService {
             return null;
         }
 
+    }
+
+    @Override
+    public Map<Long, String> findRutas() {
+        log.info("MercadoServiceImpl - findRutas: Localizamos las rutas de los mercados");
+        Map<Long, String> rutas = new java.util.HashMap<>();
+        List<Mercado> listaMercados = mercadoRepository.findAll();
+        for (Mercado mercado : listaMercados) {
+            rutas.put(mercado.getId(), mercado.getNombre().toLowerCase().replace(" ", "-"));
+        }
+        return rutas;
     }
 
 }

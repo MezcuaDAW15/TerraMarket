@@ -12,5 +12,12 @@ export class ProductosService {
 
   constructor(private httpClient: HttpClient) { }
 
-  
+  findAllByProductoId(idProducto: Number): Observable<Producto> {
+    const url = `${this.baseUrl}${idProducto}`;
+
+    return this.httpClient.get<Producto>(url);
+
+  }
+
+
 }

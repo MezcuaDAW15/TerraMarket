@@ -21,4 +21,7 @@ public interface VentaRepository extends JpaRepository<Venta, Long> {
     List<Venta> findCheeperByCategoriasMercado(@Param("idCategoria") Long idCategoria,
             @Param("idMercado") Long idMercado);
 
+    @Query(value = "SELECT v FROM Venta v JOIN v.producto p JOIN v.tienda t WHERE v.activo=true AND t.mercado.id= :idMercado AND p.id= :idProducto")
+    List<Venta> findAllByProductoMercado(Long idProducto, Long idMercado);
+
 }

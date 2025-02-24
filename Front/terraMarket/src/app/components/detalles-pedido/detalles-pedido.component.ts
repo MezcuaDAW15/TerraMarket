@@ -38,12 +38,15 @@ export class DetallesPedidoComponent implements OnInit {
 
     return address;
   }
+  formatNumber(value: number): string {
+    return value.toFixed(2).replace(".", ",").padStart(5, "0");
+  }
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.idUsuario = this.pedidoService.getId();
     if (id) {
-      this.pedidoService.findById(this.idUsuario!,id).subscribe({
+      this.pedidoService.findById(this.idUsuario!, id).subscribe({
         next: (data) => {
           this.rowData = data;
           console.log(this.rowData)
