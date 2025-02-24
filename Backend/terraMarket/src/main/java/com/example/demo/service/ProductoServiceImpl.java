@@ -1,9 +1,11 @@
 
 package com.example.demo.service;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -96,8 +98,14 @@ public class ProductoServiceImpl implements ProductoService {
         log.info("ProductoServiceImpl - findRutas: Localizamos las rutas de los productos");
         Map<Long, String> rutas = new java.util.HashMap<>();
         List<Producto> listaProductos = productoRepository.findAll();
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+
         for (Producto producto : listaProductos) {
-            rutas.put(producto.getId(), producto.getNombre().toLowerCase().replace(" ", "-"));
+
+            String ruta = Normalizer.normalize(producto.getNombre(), Normalizer.Form.NFD);
+            ruta = pattern.matcher(ruta).replaceAll("");
+            ruta = ruta.toLowerCase().replace(" ", "-");
+            rutas.put(producto.getId(), ruta);
         }
         return rutas;
     }

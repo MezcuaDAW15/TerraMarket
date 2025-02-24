@@ -24,18 +24,10 @@ export class SessionService {
     // }
   }
 
-  iniciarSesion(): void {
+  iniciarSesion(usuario: Cliente): void {
     console.log('SessionService -- iniciarSesion');
 
-    const usuario = {
-      id: 1,
-      nombre: 'nombre123',
-      apellidos: 'apellidos123',
-      username: 'usuario123',
-      fechaNacimiento: new Date(),
-      email: 'emai@iescamp.es',
-      cp: '12345',
-    };
+
 
     localStorage.setItem('usuario', JSON.stringify(usuario));
     this.usuarioActual.next(usuario);

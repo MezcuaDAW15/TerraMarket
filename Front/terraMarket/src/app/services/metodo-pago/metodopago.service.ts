@@ -12,7 +12,7 @@ export class MetodopagoService {
 
   constructor(private httpClient: HttpClient) { }
 
-  findById():Observable<MetodoPago[]>{
+  findAll():Observable<MetodoPago[]>{
       return this.httpClient.get<MetodoPago[]>(this.url);
   }
   

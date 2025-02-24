@@ -64,10 +64,10 @@ public class LineaPedidoDTO implements Serializable {
         lp.setId(lpDTO.getId());
         lp.setVenta(VentaDTO.convertToEntity(lpDTO.getVenta()));
         lp.setPedido(pedido);
-        lp.setFecha(lp.getFecha());
-        lp.setCantidad(lp.getCantidad());
+        lp.setFecha(lpDTO.getFecha());
+        lp.setCantidad(lpDTO.getCantidad());
 
-        return null;
+        return lp;
     }
 
 }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+    <head>
+        <title th:text="${add} ? 'Nuevo cliente' : 'Actualizar cliente'"></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link th:href="@{/style/style.css}" rel="stylesheet"/>
+		
+	</head>
+    <body>
+		<header>
+            <h3 th:text="${aplicacion}"></h3>
+            <div id="nombre">
+                <h3 th:text="${nombreAlumno}"></h3>
+                <div id="icon"></div>
+            </div>
+        </header>
+		<main>
+			<a id="bt" th:href="@{/clientes}">Volver a la lista de clientes</a>
+		    	<h1 th:text="${add} ? 'Nuevo cliente' : 'Actualizar cliente'"></h1>
+				<form th:action="@{/clientes/save/{add}(add=${add})}" th:object="${clienteDTO}" method="POST">
+					<div class="divInput" th:if="${clienteDTO.id}">
+						<p>ID:</p>
+						<input class="inputText" type="text" th:field="*{id}" readonly/>
+					</div>
+					<div class="divInput">
+						<p>Nombre:</p> 
+						<input class="inputText" type="text" th:field="*{nombre}"/>
+						<div>
+							<small class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"/>
+						</div>
+					</div>
+                    
+					<div class="divInput">
+						<p>Apellidos:</p>
+						<input class="inputText" type="text" th:field="*{apellidos}"/>
+						<div>
+							<small class="error" th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"></small>
+						</div>
+					</div>
+                    <div class="divInput">
+						<p>Username:</p> 
+						<input class="inputText" type="text" th:field="*{username}"/>
+						<div>
+							<small class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"/>
+						</div>
+					</div>
+                    <div class="divInput">
+						<p>Fecha nacimiento:</p>
+						<input class="inputText" type="date" th:field="*{fechaNacimiento}"/>
+						<div>
+							<small class="error" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></small>
+						</div>
+					</div>
+					<div class="divInput">
+						<p>Email:</p>
+						<input class="inputText" type="text" name="email" th:field="*{email}"/>
+						<div>
+							<small class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+						</div>
+					</div>
+					
+					<div class="divInput">
+						<p>Contraseña:</p>
+						<input class="inputText" type="text" th:field="*{contrasena}"/>
+						<div>
+							<small class="error" th:if="${#fields.hasErrors('contrasena')}" th:errors="*{contrasena}"></small>
+						</div>
+					</div>
+					<div class="divInput">
+						<p>CP:</p>
+						<input class="inputText" type="text" th:field="*{cp}"/>
+						<div>
+							<small class="error" th:if="${#fields.hasErrors('cp')}" th:errors="*{cp}"></small>
+						</div>
+					</div>
+					
+					<input id="bt" type="submit" th:value="${add} ? 'Crear cliente' : 'Actualizar'">
+				</form>	
+		</main>	
+		
+	</body>
+</html>

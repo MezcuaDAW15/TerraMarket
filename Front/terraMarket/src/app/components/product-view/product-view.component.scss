@@ -47,9 +47,11 @@
     display: flex;
     gap: 0.5rem;
     padding: 0 1rem;
+    cursor: pointer;
   }
 
   input {
+    display: none;
     margin-top: 18px;
     max-height: 20px;
   }
@@ -79,6 +81,11 @@
 
 .descripcion {
   margin-top: 0;
+}
+
+.tienda input[type="radio"] {
+  display: none;
+
 }
 
 .tienda:has(input[type="radio"]:checked) {
@@ -112,8 +119,28 @@
   width: 30%;
   justify-content: space-between;
   align-items: center;
+
   button {
     height: fit-content;
     align-items: center;
+  }
+}
+
+.etiquetas {
+  margin-top: 1rem;
+  display: flex;
+  width: 100%;
+  justify-content: center
+}
+
+.error {
+  margin-top: 1rem;
+  border-radius: 10px;
+  background-color: #ff6259;
+  color: $white;
+  padding: 0.5rem 1rem;
+
+  p {
+    margin: 0;
   }
 }

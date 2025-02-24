@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +32,8 @@ public class ClienteRestController {
 
     @Autowired
     ClienteService clienteService;
+    @Autowired
+    UserDetailsService userDetailsService;
 
     // localizamos todos los clientes
     @RequestMapping(method = RequestMethod.GET)
@@ -117,5 +121,22 @@ public class ClienteRestController {
         } else {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<ClienteDTO> login(@RequestBody ClienteDTO cliente) {
+
+        UserDetails c = userDetailsService.loadUserByUsername(cliente.getUsername());
+        log.info(ClienteRestController.class.getSimpleName() + " --------> " + cliente.toString());
+
+        ClienteDTO cDTO = new ClienteDTO();
+
+        if (c != null) {
+            cDTO = clienteService.findByUsername(c.getUsername());
+            return new ResponseEntity<>(cDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
 }

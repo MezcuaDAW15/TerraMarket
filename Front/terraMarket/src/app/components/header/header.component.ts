@@ -15,10 +15,11 @@ import { constrainedMemory } from 'process';
 
 
 
+
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonModule, CommonModule, SidebarComponent, MenuModule, BadgeModule],
+  imports: [ButtonModule, CommonModule, SidebarComponent, MenuModule, BadgeModule, LoginComponent, DialogModule, ReactiveFormsModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -32,6 +33,7 @@ export class HeaderComponent implements OnInit {
 
   market: Mercado | undefined
 
+
   constructor(
     private sessionService: SessionService,
     private router: Router,
@@ -39,9 +41,9 @@ export class HeaderComponent implements OnInit {
   ) { }
 
 
+
   ngOnInit() {
     this.cargarUsuario();
-
     this.cargarItems();
 
     this.selectedMarketService.market.subscribe({
@@ -55,24 +57,65 @@ export class HeaderComponent implements OnInit {
   }
 
   cargarUsuario() {
-    this.sessionService.usuario$.subscribe((usuario) => {
 
-      this.usuarioLogueado = !!usuario;
-      this.usuario = usuario;
-    });
+    this.usuario = this.sessionService.obtenerUsuario();
+    console.log('usuario --> ' + this.usuario);
+    if (this.usuario) {
+      this.usuarioLogueado = true;
+      this.pedidoService.setId(this.usuario.id!);
 
-    this.sessionService.obtenerUsuario();
+      this.clienteService.findById(this.usuario.id).subscribe(
+        (data) => {
+          this.cliente = data;
+          console.log('cliente --> ' + this.cliente);
+        }
+      );
+    }
 
   }
 
-  iniciarSesion() {
-    this.sessionService.iniciarSesion();
+  iniciarSesion(): void {
+
+    this.clienteLogin = {
+      username: this.formulario.value.username,
+      contrasena: this.formulario.value.password
+    }
+
+    console.log('cliente formulario --> ' + this.clienteLogin.username);
+    console.log('cliente formulario --> ' + JSON.stringify(this.clienteLogin));  // Muestra el objeto como una cadena JSON
+
+    // this.clienteService.login(this.clienteLogin).subscribe(
+    //   (response: Cliente) => {
+    //     console.log('Login successful', response);
+    //   },
+    //   (error) => {
+    //     console.error('Login failed', error);
+    //   }
+    // );
+    this.clienteService.login(this.clienteLogin).subscribe({
+      next: (response: Cliente) => {
+        console.log('Login successful', response);
+        this.cliente = response;
+        this.sessionService.iniciarSesion(this.cliente);
+        this.usuarioLogueado = true;
+        this.formulario.value.username = '';
+        this.formulario.value.contrasena = '';
+        this.pedidoService.setId(this.cliente.id!);
+        this.closeDialog();
+        this.router.navigate(['/home']);
+      },
+      error: (error) => {
+        console.error('Login failed', error);
+      }
+    });
+
+    console.log(this.cliente);
   }
 
   cargarItems() {
     this.items = [
       {
-        label: this.usuario.nombre,
+        label: this.cliente?.username,
         items: [
           {
             separator: true
@@ -86,7 +129,7 @@ export class HeaderComponent implements OnInit {
           {
             label: 'Editar perfil',
             icon: 'pi pi-user-edit text-2xl',
-            routerLink: '/editar-perfil-cliente'
+            routerLink: '/perfil'
 
 
           },
@@ -96,7 +139,7 @@ export class HeaderComponent implements OnInit {
             icon: 'pi pi-sign-out text-2xl',
             command: () => {
               console.log('Cerrar sesión');
-              this.sessionService.cerrarSesion();
+              this.cerrarSesion();
             }
           },
           {
@@ -111,5 +154,21 @@ export class HeaderComponent implements OnInit {
         ]
       }
     ]
+  }
+
+  loginVisible = false;
+  showDialog() {
+
+    this.loginVisible = true;
+  }
+
+  closeDialog() {
+    this.loginVisible = false;
+  }
+  cerrarSesion() {
+    this.sessionService.cerrarSesion();
+    this.usuarioLogueado = false;
+    this.router.navigate(['/home']);
+    this.usuario = null;
   }
 }

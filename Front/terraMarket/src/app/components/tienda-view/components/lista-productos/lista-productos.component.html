@@ -1,0 +1,6 @@
+<section class="container">
+
+  <div class="list-container">
+    <app-card *ngFor="let venta of productsToShow; index as i; trackBy: trackByFn" [venta]="venta"></app-card>
+  </div>
+</section>

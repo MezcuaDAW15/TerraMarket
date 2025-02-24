@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mercados</title>
+  </head>
+
+  <body>
+    <div>
+      <br />
+      <h2>Lista Mercados</h2>
+      <table border="1">
+        <thead>
+          <tr>
+            <td>id</td>
+            <td>Nombre</td>
+            <td>direccionF</td>
+            <td>telefono</td>
+            <td>email</td>
+            <td>imagen</td>
+            <td>activo</td>
+            <td>Tiendas</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="item : ${listaMercadosDTO}">
+            <td th:text="${item.id}" />
+            <td th:text="${item.nombre}" />
+            <td th:text="${item.direccionF}" />
+            <td th:text="${item.telefono}" />
+            <td th:text="${item.email}" />
+            <td th:text="${item.imagen}" />
+            <td th:text="${item.activo}" />
+            <td>
+              <a th:href="@{/mercados/{idMercado}/tiendas(idMercado=${item.id})}" />Ver Tiendas</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br />
+    <div>
+      <a th:href="@{/}">Volver al inicio</a>
+    </div>
+  </body>
+</html>

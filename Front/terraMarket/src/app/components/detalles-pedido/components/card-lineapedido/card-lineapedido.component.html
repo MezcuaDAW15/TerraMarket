@@ -7,9 +7,12 @@
       <p class="nombre-producto">{{ lineaPedido?.venta?.producto?.nombre }}</p>
       <div class="div-cantidad">
         <p>Cantidad X {{ lineaPedido?.cantidad }}</p>
-        <p>{{ lineaPedido?.venta?.precioVenta }} &euro;</p>
+        <p>{{ formatNumber(lineaPedido?.venta?.precioVenta ?? 0) }} &euro;</p>
       </div>
-      <button class="review-btn auto-size">
+      <button
+        class="review-btn auto-size"
+        (click)="lineaPedido ? irAValoracion(lineaPedido) : null"
+      >
         <img src="../../../assets/icons/reviews.svg" alt="" /> Escribir una
         reseña
       </button>

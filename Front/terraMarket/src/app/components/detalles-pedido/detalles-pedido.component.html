@@ -2,54 +2,63 @@
 <div class="container">
   <div class="encabezado">
     <div class="div-encabezado">
-      <p class="h1" *ngIf="rowData.id">Detalles del pedido #{{rowData.id}}</p>
-      <span class="etiqueta-estado-pendiente"
-        [ngClass]="pintarEstado(rowData.estado.estado)">{{rowData.estado.estado}}</span>
+      <p class="h1" *ngIf="rowData.id">
+        Detalles del pedido #{{ rowData?.id }}
+      </p>
+      <span
+        class="etiqueta-estado-pendiente"
+        [ngClass]="pintarEstado(rowData.estado.estado)"
+        >{{ rowData.estado.estado }}</span
+      >
     </div>
-    <button class="sqr-btn light rd-btn auto-size"><img src="../../../assets/icons/tab_close.svg" alt=""> Cancelar
-      pedido</button>
+    <button class="sqr-btn light rd-btn auto-size">
+      <img src="../../../assets/icons/tab_close.svg" alt="" /> Cancelar pedido
+    </button>
   </div>
   <div class="info-pedido">
-    <hr class="divider">
+    <hr class="divider" />
     <div class="detalles-pedido">
       <div class="info">
         <div class="info-precio">
           <p>Total importe:</p>
-          <span class="precio">{{rowData.importe}} &euro;</span>
+          <span class="precio">{{ rowData.importe }} &euro;</span>
         </div>
         <div class="info-detalle">
-          <img src="../../../assets/icons/fechaPedido.svg" alt="">
+          <img src="../../../assets/icons/fechaPedido.svg" alt="" />
           <div class="divDato">
             <p>Fecha del pedido:</p>
-            <span class="detalle">{{rowData.fechaPedido}}</span>
+            <span class="detalle">{{ rowData.fechaPedido }}</span>
           </div>
         </div>
         <div class="info-detalle">
-          <img src="../../../assets/icons/fechaRecogida.svg" alt="">
+          <img src="../../../assets/icons/fechaRecogida.svg" alt="" />
           <div class="divDato">
             <p>Fecha de recogida:</p>
-            <span class="detalle">{{rowData.fechaMaxRecogida}}</span>
+            <span class="detalle">{{ rowData.fechaMaxRecogida }}</span>
           </div>
         </div>
         <div class="info-detalle">
-          <img src="../../../assets/icons/metodoPago.svg" alt="">
+          <img src="../../../assets/icons/metodoPago.svg" alt="" />
           <div class="divDato">
             <p>Método de pago:</p>
-  
-            <span class="detalle">{{rowData.metodoPago?.nombre}}</span>
+
+            <span class="detalle">{{ rowData.metodoPago?.nombre }}</span>
           </div>
         </div>
         <div class="info-detalle">
-          <img src="../../../assets/icons/puntoRecogida.svg" alt="">
+          <img src="../../../assets/icons/puntoRecogida.svg" alt="" />
           <div class="divDato">
             <p>Punto de recogida:</p>
-            <span class="detalle">{{getFormattedAddress()}}</span>
+            <span class="detalle">{{ getFormattedAddress() }}</span>
           </div>
         </div>
       </div>
       <div class="container-lineaspedido">
         <div class="info-lineas" *ngFor="let linea of rowData.lineaPedido">
-          <app-card-lineapedido [lineaPedido]="linea"></app-card-lineapedido>
+          <app-card-lineapedido
+            [lineaPedido]="linea"
+            [cliente]="clientePedido"
+          ></app-card-lineapedido>
         </div>
       </div>
     </div>

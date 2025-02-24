@@ -8,7 +8,7 @@
   <span class="product-name">{{venta?.producto?.nombre}}</span>
   <div class="product-price">
     <span class="price">{{formatNumber(venta?.precioVenta ?? 0)}} &euro;</span>
-    <button class="btn-card ">
+    <button class="btn-card " (click)="anadirCesta(venta?.producto?.nombre)">
       <img src="assets/icons/add_shopping_cart.svg" alt="add">
     </button>
   </div>

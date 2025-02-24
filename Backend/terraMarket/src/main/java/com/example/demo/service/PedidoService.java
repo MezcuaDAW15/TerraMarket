@@ -19,6 +19,8 @@ public interface PedidoService {
 
     PedidoDTO findPedidoPendiente(Long idCliente);
 
-    //void save(PedidoDTO pedidoDTO);
+    void actualizarTotalPedido(Long id);
+
+    // void save(PedidoDTO pedidoDTO);
 
 }

@@ -17,4 +17,6 @@ public interface ClienteService {
 
     public ClienteDTO registro(ClienteDTO clienteDTO);
 
+    public ClienteDTO findByUsername(String username);
+
 }

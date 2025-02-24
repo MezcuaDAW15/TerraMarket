@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Mercados</title>
+    </head>
+
+    <body>
+        <div>
+            <br />
+            <h2 th:text="'Tienda '+${tiendaDTO.nombre}"></h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <td>id</td>
+                        <td>Nombre</td>
+                        <td>logo</td>
+                        <td>descripcion</td>
+                        <td>imagen</td>
+                        <td>Mercado</td>
+                        <td>Direccion</td>
+                        <td>activo</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td th:text="${tiendaDTO.id}" />
+                        <td th:text="${tiendaDTO.nombre}" />
+                        <td th:text="${tiendaDTO.logo}" />
+                        <td th:text="${tiendaDTO.descripcion}" />
+                        <td th:text="${tiendaDTO.imagen}" />
+                        <td th:text="${tiendaDTO.mercadoDTO.nombre}" />
+                        <td th:text="${tiendaDTO.direccionDTO}" />
+                        <td th:text="${tiendaDTO.activo}" />
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div>
+            <a
+                th:href="@{/mercados/{idMercado}/tiendas (idMercado=${tiendaDTO.mercadoDTO.id})}"
+                >Volver</a
+            >
+        </div>
+    </body>
+</html>

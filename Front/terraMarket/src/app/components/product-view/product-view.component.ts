@@ -28,7 +28,10 @@ export class ProductViewComponent implements OnInit {
   ventas: Venta[] = [];
   imagenUrl: string | null = null;
   cantidad: number = 1;
-  ventaSeleccionada: Venta | null = null;
+  ventaSeleccionada: Number | null = null;
+  routerMapMarket = new Map<number, string>();
+  error: string | null = null;
+
 
 
   constructor(
@@ -46,15 +49,14 @@ export class ProductViewComponent implements OnInit {
 
   ngOnInit(): void {
     const routerMap = new Map<number, string>();
-    const routerMapMarket = new Map<number, string>();
 
 
     this.rutaService.getRutas().subscribe({
       next: (data) => {
         for (let key in data as { [key: string]: any }) {
-          routerMapMarket.set(Number(key), (data as { [key: string]: any })[key].toString());
+          this.routerMapMarket.set(Number(key), (data as { [key: string]: any })[key].toString());
         }
-        console.log("Router Map:", routerMapMarket);
+        console.log("Router Map:", this.routerMapMarket);
 
         // Obtener el nombre del mercado desde la URL
         const nombreMercado = this.route.snapshot.paramMap.get('nombreMercado');
@@ -62,7 +64,7 @@ export class ProductViewComponent implements OnInit {
 
         if (nombreMercado) {
           // Buscar el ID correspondiente en routerMap
-          const mercadoId = [...routerMap.entries()]
+          const mercadoId = [...this.routerMapMarket.entries()]
             .find(([id, name]) => name === nombreMercado)?.[0];
 
           if (mercadoId) {
@@ -108,13 +110,11 @@ export class ProductViewComponent implements OnInit {
         console.error("Error al cargar rutas:", error);
       }
     });
+    console.log(this.ventas)
 
-    if (this.ventas.length <=0 ) {
-      const ruta = routerMapMarket.get(this.mercado?.id!)
-      console.log("Ruta: " , ruta);
-      //window.location.href = `/${ruta}`;
-    }
-    
+
+
+
 
 
   }
@@ -133,10 +133,16 @@ export class ProductViewComponent implements OnInit {
     }
 
     if (this.producto && this.mercado) {
+      console.log(this.producto, this.mercado);
       this.ventasService.findVentasByProducto(this.producto.id, this.mercado.id).subscribe({
         next: (data) => {
           this.ventas = data;
           console.log("Ventas cargadas:", this.ventas);
+          if (this.ventas.length <= 0) {
+            const ruta = this.routerMapMarket.get(this.mercado?.id!)
+            console.log("Ruta: ", ruta);
+            window.location.href = `/${ruta}`;
+          }
         },
         error: (error) => {
           console.error("Error al cargar ventas:", error);
@@ -167,27 +173,57 @@ export class ProductViewComponent implements OnInit {
     }
   }
   anadirCesta(): void {
+    let lineaPedido: LineaPedido | null = null;
     if (this.ventaSeleccionada) {
       console.log('Venta seleccionada:', this.ventaSeleccionada);
-      let lineaPedido: LineaPedido | null = null;
+      console.log(this.ventas.find(v => v.id === Number(this.ventaSeleccionada)));
+
       this.cestaService.findPedidoPendiente(this.sessionService.obtenerUsuario()).subscribe({
         next: (pedido) => {
           lineaPedido = {
             id: undefined,
             cantidad: this.cantidad,
-            venta: this.ventaSeleccionada!,
+            venta: this.ventas.find(v => v.id === Number(this.ventaSeleccionada)) as Venta,
             fecha: new Date(),
             pedido: pedido
           };
+          console.log("-------------------------")
+          this.cestaService.addLineaPedido(lineaPedido!).subscribe({
+            next: (data) => {
+              console.log("Línea de pedido añadida:", data);
+              this.router.navigate(['/cesta']);
+            },
+            error: (error) => {
+              console.error("Error al añadir la línea de pedido:", error);
+
+            }
+          });
         },
         error: (error) => {
           console.error("Error al obtener el pedido pendiente:", error);
         }
 
+
       });
     } else {
-      console.log('Por favor, selecciona una tienda antes de añadir a la cesta.');
+      this.error = "Selecciona una tienda.";
     }
+
+
+
+  }
+  handleChange() {
+    if (this.ventaSeleccionada) {
+      this.error = null;
+    }
+  }
+  formatNumber(value: number): string {
+    if (value < 10) {
+      return value.toFixed(2).replace(".", ",");
+    }
+
+    // Si el valor es mayor o igual a 10, formatea con ceros a la izquierda
+    return value.toFixed(2).replace(".", ",").padStart(5, "0");
   }
 
 }

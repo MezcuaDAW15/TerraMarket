@@ -5,10 +5,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.dto.ClienteDTO;
+import com.example.demo.model.dto.LineaPedidoDTO;
 import com.example.demo.model.dto.PedidoDTO;
 import com.example.demo.service.ClienteService;
 import com.example.demo.service.PedidoService;
@@ -44,7 +46,7 @@ public class PedidoRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/buscarPedidoPendiente")
-    public PedidoDTO buscarPedidoPendiente(@RequestParam Long idCliente) {
+    public PedidoDTO buscarPedidoPendiente(@PathVariable("idCliente") Long idCliente) {
 
         log.info("PedidoRestController - buscarPedidoPendiente: Mostramos pedidos pendientes");
 
@@ -58,10 +60,11 @@ public class PedidoRestController {
 
         log.info("PedidoRestController - buscarPedido por id");
 
-        PedidoDTO  pedidoDTO= new PedidoDTO();
+        PedidoDTO pedidoDTO = new PedidoDTO();
         pedidoDTO.setId(idPedido);
         // buscar cuentas del cliente en el servicio
         return pedidoService.findById(pedidoDTO);
 
     }
+
 }
