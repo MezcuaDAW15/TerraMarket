@@ -18,15 +18,55 @@
     </button>
 
     <p-menu #menu [model]="items" [popup]="true" />
-    <p-button label={{usuario.nombre}} (onClick)="menu.toggle($event)" icon="pi pi-angle-down" iconPos="right"
+    <p-button label={{cliente?.username}} (onClick)="menu.toggle($event)" icon="pi pi-angle-down" iconPos="right"
       [text]="true" className="popup" />
 
   </div>
   <div *ngIf="!usuarioLogueado">
-    <button class="sqr-btn auto-size" (click)="iniciarSesion()">
+    <button class="sqr-btn auto-size" (click)="showDialog()">
       <i class="pi pi-user text-xl"></i>
       Iniciar sesión
     </button>
+   
+    <p-dialog header="" [(visible)]="loginVisible" [style]="{width: 'fit-content'}">
+      <ng-template pTemplate="headless">
+        <div class="container">
+          <div class="container-login">
+            <button class="btnCerrar" (click)="closeDialog()">
+              <img src="assets/icons/close_white.svg" alt="">
+            </button>
+
+              <div class="div-inicio-sesion">
+                  
+                  <form class="form" action="#" method="post"
+                  [formGroup]="formulario"
+                  (ngSubmit)="iniciarSesion()" >
+      
+                      <p class="h1">Inicio de sesión</p>
+          
+                      <div class="div-inputs">
+                          <input formControlName="username" class="input-primary" type="text" name="email" id="" placeholder="Nombre de usuario">
+                          <input formControlName="contrasena" class="input-primary" type="password" name="contrasena" id="" placeholder="Contraseña">
+          
+                          <div class="div-cb">
+                              <input class="checkbox" type="checkbox" name="recuerdame" id="">
+                              <p class="p">Recuérdame</p>
+                          </div>
+                      </div>
+          
+                      <input class="rd-btn p boton-form" type="submit" value="Iniciar sesión">
+                  </form>
+              </div>
+              <div class="div-enlace-registro">
+                  <img src="" alt="">
+                  <p class="h1">¿No tienes una cuenta?</p>
+                  <button class="sqr-btn light auto-size" [routerLink]="['/registro']">Regístrate</button>
+              </div>
+          </div>
+      </div>
+      </ng-template>
+      
+    </p-dialog>
   </div>
 
 

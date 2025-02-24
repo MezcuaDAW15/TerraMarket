@@ -1,0 +1,24 @@
+<app-back></app-back>
+<div class="container">
+    <p class="h1">Mi perfil</p>
+    <hr class="divider">
+    <form class="form" action="" [formGroup]="formulario" (ngSubmit)="editarUsuario()">
+        <div class="div-inputs">
+            <input type="text" placeholder="Nombre de usuario" class="input-primary"
+            formControlName="username">
+            <input type="text" placeholder="Nombre" class="input-primary"
+            formControlName="nombre">
+            <input type="text" placeholder="Apellidos" class="input-primary"
+            formControlName="apellidos">
+            <input type="text" placeholder="Correo electrónico" class="input-primary"
+            formControlName="email">
+            <input type="date" class="input-primary"
+            formControlName="fechaNacimiento">
+            <input type="text" placeholder="Código postal" class="input-primary"
+            formControlName="cp">
+            <input type="password" placeholder="Contraseña" class="input-primary"
+            formControlName="contrasena">
+        </div>
+        <input class="sqr-btn auto-size" type="submit" value="Guardar cambios">
+    </form>
+</div>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="'Nuevo Pedido'"></title>
+</head>
+<body>
+	<h1 th:text="'Realizar Pedido'" />
+	<br>
+	<br>
+	<form th:action="@{/clientes/{idCliente}/pedidos/save (idCliente=${clienteDTO.id})}" th:object="${pedidoDTO}"
+		method="POST">
+        <h3>Lista de articulos</h3>
+        <br>
+		<h3>Selecciona método de pago</h3>
+        <br>
+        <select name="selectMP" id="">
+            <option value="-1">Selecciona una metodo de pago</option>
+            <option th:each="mpDTO : ${listaMetodoPagoDTO}"
+                    th:value="${mpDTO.id}"
+                    th:text="${mpDTO.id} +' '+ ${mpDTO.nombre}">
+            </option>
+        </select>
+        <br>
+        <h3>Selecciona punto de recogida</h3>
+        <br>
+        <select name="selectPR" id="">
+            <option value="-1">Selecciona una dirección</option>
+            <option th:each="prDTO : ${listaPuntoRecogidaDTO}"
+                    th:value="${prDTO.id}"
+                    th:text="${prDTO.id} +' '+ ${prDTO.direccionDTO}">
+            </option>
+        </select>
+		<input type="submit" th:value="'Realizar pedido'" />
+	</form>
+	<br>
+	<a th:href="@{/clientes/{idCliente}/pedidos(idCliente=${clienteDTO.id})}">Volver a Pedidos</a>
+</body>
+</html>

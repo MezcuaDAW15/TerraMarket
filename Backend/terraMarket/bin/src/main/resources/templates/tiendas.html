@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Mercados</title>
+    </head>
+
+    <body>
+        <div>
+            <br />
+            <h2 th:text="'Tiendas de '+${mercadoDTO.nombre}"></h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <td>id</td>
+                        <td>Nombre</td>
+                        <td>logo</td>
+                        <td>descripcion</td>
+                        <td>imagen</td>
+                        <td>idMercado</td>
+                        <td>idDireccion</td>
+                        <td>activo</td>
+                        <td>Ver Tienda</td>
+                        <td>Modificar Tienda</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${listaTiendasPorMercado}">
+                        <td th:text="${item.id}" />
+                        <td th:text="${item.nombre}" />
+                        <td th:text="${item.logo}" />
+                        <td th:text="${item.descripcion}" />
+                        <td th:text="${item.imagen}" />
+                        <td th:text="${item.mercadoDTO.id}" />
+                        <td th:text="${item.direccionDTO.id}" />
+                        <td th:text="${item.activo}" />
+                        <td>
+                            <a
+                                th:href="@{/mercados/{idMercado}/tiendas/{idTienda} (idMercado=${mercadoDTO.id},idTienda=${item.id})}"
+                                >Ver Tienda</a
+                            >
+                        </td>
+                        <td>
+                            <a
+                                th:href="@{/mercados/{idMercado}/tiendas/{idTienda}/update (idMercado=${mercadoDTO.id},idTienda=${item.id})}"
+                                >Modificar Tienda</a
+                            >
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div>
+            <a
+                th:href="@{/mercados/{idMercado}/tiendas/add (idMercado=${mercadoDTO.id})}"
+                >Crear tienda</a
+            >
+            <br />
+            <a th:href="@{/mercados}">Volver</a>
+        </div>
+    </body>
+</html>

@@ -19,6 +19,7 @@ import { CardLineapedidoComponent } from "./components/card-lineapedido/card-lin
 })
 export class DetallesPedidoComponent implements OnInit {
   rowData!: Pedido;
+  idUsuario: number | null = null;
   //subdividir objeto
 
   private suscripcion: Subscription = new Subscription();
@@ -40,11 +41,12 @@ export class DetallesPedidoComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-
+    this.idUsuario = this.pedidoService.getId();
     if (id) {
-      this.pedidoService.findById(id).subscribe({
+      this.pedidoService.findById(this.idUsuario!,id).subscribe({
         next: (data) => {
           this.rowData = data;
+          console.log(this.rowData)
         }
       });
     }

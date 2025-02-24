@@ -7,14 +7,19 @@ import { BadgeModule } from 'primeng/badge';
 import { CommonModule } from '@angular/common';
 import { SessionService } from '../../services/session/session.service';
 import { Router } from '@angular/router';
-
+import { LoginComponent } from '../login/login.component';
+import { DialogModule } from 'primeng/dialog';
+import { ClienteService } from '../../services/clientes/cliente.service';
+import { Cliente } from '../../models/cliente';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { PedidoServiceService } from '../../services/pedido-service.service';
 
 
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonModule, CommonModule, SidebarComponent, MenuModule, BadgeModule],
+  imports: [ButtonModule, CommonModule, SidebarComponent, MenuModule, BadgeModule, LoginComponent, DialogModule, ReactiveFormsModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -26,40 +31,72 @@ export class HeaderComponent implements OnInit {
 
   usuario: any = null;
 
+  cliente: Cliente | null = null;
+  formulario : FormGroup;
+
   constructor(
     private sessionService: SessionService,
-    private router: Router
-  ) { }
-
+    private router: Router,
+    private clienteService: ClienteService,
+    private fb: FormBuilder,
+    private pedidoService: PedidoServiceService
+  ) { 
+     this.formulario = this.fb.group({
+          username: ["", [Validators.required]],
+          contrasena: ["", [Validators.required]]
+      })
+  }
 
   ngOnInit() {
-    this.cargarUsuario();
-
+    //this.cargarUsuario();
     this.cargarItems();
-
-
-
   }
 
-  cargarUsuario() {
-    this.sessionService.usuario$.subscribe((usuario) => {
+  // cargarUsuario() {
+  //   this.sessionService.usuario$.subscribe((usuario) => {
 
-      this.usuarioLogueado = !!usuario;
-      this.usuario = usuario;
-    });
+  //     this.usuarioLogueado = usuario;
+  //     this.usuario = usuario;
+  //   });
 
-    this.sessionService.obtenerUsuario();
+  //   this.sessionService.obtenerUsuario();
 
-  }
+  // }
 
   iniciarSesion() {
-    this.sessionService.iniciarSesion();
+    //this.sessionService.iniciarSesion();
+
+    this.cliente = {
+      username: this.formulario.value.username,
+      contrasena: this.formulario.value.contrasena
+    }
+    this.clienteService.login(this.cliente).subscribe(
+      (response: Cliente) => {
+
+        this.cliente = response; // obtenemos cliente del backend
+
+        console.log('Login successful', response);
+        // guardamos la session
+        this.clienteService.guardarSesion(response);
+        console.log('guardar session header ---> ' + this.cliente.id)
+
+        this.usuarioLogueado = true;
+        this.cargarItems();
+        this.pedidoService.setId(this.cliente.id!);
+        this.router.navigate(['/home']);
+        this.closeDialog();
+      },
+      (error) => {
+        console.error('Login failed', error);
+      }
+    );
+    
   }
 
   cargarItems() {
     this.items = [
       {
-        label: this.usuario.nombre,
+        label: this.cliente?.username,
         items: [
           {
             separator: true
@@ -73,7 +110,7 @@ export class HeaderComponent implements OnInit {
           {
             label: 'Editar perfil',
             icon: 'pi pi-user-edit text-2xl',
-            routerLink: '/editar-perfil-cliente'
+            routerLink: '/perfil'
 
 
           },
@@ -98,5 +135,15 @@ export class HeaderComponent implements OnInit {
         ]
       }
     ]
+  }
+
+  loginVisible = false;
+  showDialog() {
+
+    this.loginVisible = true;
+  }
+
+  closeDialog(){
+    this.loginVisible = false;
   }
 }
