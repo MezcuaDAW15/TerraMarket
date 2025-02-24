@@ -1,16 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BackComponent } from "../back/back.component";
 import { BannerComponent } from "../banner/banner.component";
 import { ListComponent } from "../list/list.component";
 import { Mercado } from '../../models/mercado';
-import { Router, RouterLink } from '@angular/router';
+import { NavigationStart, Router, RouterLink } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { MarketService } from '../../services/markets/market.service';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { MenuItem } from 'primeng/api';
 import { MarketListTiendasComponent } from "../market-list-tiendas/market-list-tiendas.component";
 import { RutasService } from '../../services/rutas/rutas.service';
+import { SelectedMarketService } from '../../services/global-state/selected-market.service';
+import { Subscription } from 'rxjs';
 
 
 
@@ -29,12 +31,14 @@ export class MarketViewComponent implements OnInit {
   mercado: Mercado | null = null;
   items: MenuItem[] | undefined;
 
+  private routerSub: Subscription | undefined;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private marketService: MarketService,
-    private rutaService: RutasService
+    private rutaService: RutasService,
+    private selectedMarketService: SelectedMarketService
 
   ) { }
 
@@ -76,6 +80,7 @@ export class MarketViewComponent implements OnInit {
       { label: "Productos", icon: "products", command: () => this.setActiveTab("products") }
     ];
     this.selectedItem = this.items ? this.items[0] : null;
+
   }
 
   setActiveTab(tab: string) {
@@ -95,6 +100,7 @@ export class MarketViewComponent implements OnInit {
       next: (data) => {
         this.mercado = data;
         console.log("Mercado cargado:", this.mercado);
+        this.selectedMarketService.setMarket(this.mercado)
       },
       error: (error) => {
         console.error("Error al cargar el mercado:", error);

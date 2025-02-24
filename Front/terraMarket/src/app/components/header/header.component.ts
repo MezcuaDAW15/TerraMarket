@@ -7,12 +7,12 @@ import { BadgeModule } from 'primeng/badge';
 import { CommonModule } from '@angular/common';
 import { SessionService } from '../../services/session/session.service';
 import { Router } from '@angular/router';
-import { LoginComponent } from '../login/login.component';
-import { DialogModule } from 'primeng/dialog';
-import { ClienteService } from '../../services/clientes/cliente.service';
-import { Cliente } from '../../models/cliente';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { PedidoServiceService } from '../../services/pedido-service.service';
+import { SelectedMarketService } from '../../services/global-state/selected-market.service';
+import { Mercado } from '../../models/mercado';
+import { MarketService } from '../../services/markets/market.service';
+import { constrainedMemory } from 'process';
+
+
 
 
 
@@ -31,26 +31,29 @@ export class HeaderComponent implements OnInit {
 
   usuario: any = null;
 
-  clienteLogin: any | null = null;
-  cliente: Cliente | null = null;
-  formulario: FormGroup;
+  market: Mercado | undefined
+
 
   constructor(
     private sessionService: SessionService,
     private router: Router,
-    private clienteService: ClienteService,
-    private fb: FormBuilder,
-    private pedidoService: PedidoServiceService
-  ) {
-    this.formulario = this.fb.group({
-      username: ["", [Validators.required]],
-      contrasena: ["", [Validators.required]]
-    })
-  }
+    private selectedMarketService: SelectedMarketService,
+  ) { }
+
+
 
   ngOnInit() {
     this.cargarUsuario();
     this.cargarItems();
+
+    this.selectedMarketService.market.subscribe({
+      next: (market) => {
+        if (market) {
+          this.market = market
+        }
+      }
+    })
+
   }
 
   cargarUsuario() {
