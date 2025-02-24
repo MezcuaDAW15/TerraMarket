@@ -20,6 +20,7 @@ import com.example.demo.repository.dao.PedidoRepository;
 import com.example.demo.repository.dao.PuntoRecogidaRepository;
 import com.example.demo.repository.entity.Cliente;
 import com.example.demo.repository.entity.EstadoPedido;
+import com.example.demo.repository.entity.LineaPedido;
 import com.example.demo.repository.entity.MetodoPago;
 import com.example.demo.repository.entity.Pedido;
 import com.example.demo.repository.entity.PuntoRecogida;
@@ -133,8 +134,11 @@ public class PedidoServiceImpl implements PedidoService {
 			this.pedidoRepository.save(pedido);
 
 		}
-		ClienteDTO clienteDTO = new ClienteDTO();
+		ClienteDTO clienteDTO = ClienteDTO.convertToDTO(this.clienteRepository.findById(idCliente).get());
 		clienteDTO.setId(idCliente);
+		for (LineaPedido p : pedido.getListaLineaPedido()) {
+			p.getVenta().getTienda().setImagen(null);
+		}
 
 		return PedidoDTO.convertToDTO(pedido, clienteDTO);
 	}

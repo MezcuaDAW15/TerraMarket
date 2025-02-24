@@ -28,7 +28,7 @@ export class ProductViewComponent implements OnInit {
   ventas: Venta[] = [];
   imagenUrl: string | null = null;
   cantidad: number = 1;
-  ventaSeleccionada: Venta | null = null;
+  ventaSeleccionada: Number | null = null;
   routerMapMarket = new Map<number, string>();
   error: string | null = null;
 
@@ -173,32 +173,57 @@ export class ProductViewComponent implements OnInit {
     }
   }
   anadirCesta(): void {
+    let lineaPedido: LineaPedido | null = null;
     if (this.ventaSeleccionada) {
       console.log('Venta seleccionada:', this.ventaSeleccionada);
-      let lineaPedido: LineaPedido | null = null;
+      console.log(this.ventas.find(v => v.id === Number(this.ventaSeleccionada)));
+
       this.cestaService.findPedidoPendiente(this.sessionService.obtenerUsuario()).subscribe({
         next: (pedido) => {
           lineaPedido = {
             id: undefined,
             cantidad: this.cantidad,
-            venta: this.ventaSeleccionada!,
+            venta: this.ventas.find(v => v.id === Number(this.ventaSeleccionada)) as Venta,
             fecha: new Date(),
             pedido: pedido
           };
+          console.log("-------------------------")
+          this.cestaService.addLineaPedido(lineaPedido!).subscribe({
+            next: (data) => {
+              console.log("Línea de pedido añadida:", data);
+              this.router.navigate(['/cesta']);
+            },
+            error: (error) => {
+              console.error("Error al añadir la línea de pedido:", error);
+
+            }
+          });
         },
         error: (error) => {
           console.error("Error al obtener el pedido pendiente:", error);
         }
 
+
       });
     } else {
       this.error = "Selecciona una tienda.";
     }
+
+
+
   }
   handleChange() {
     if (this.ventaSeleccionada) {
       this.error = null;
     }
+  }
+  formatNumber(value: number): string {
+    if (value < 10) {
+      return value.toFixed(2).replace(".", ",");
+    }
+
+    // Si el valor es mayor o igual a 10, formatea con ceros a la izquierda
+    return value.toFixed(2).replace(".", ",").padStart(5, "0");
   }
 
 }

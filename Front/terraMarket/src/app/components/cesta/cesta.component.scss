@@ -1,3 +1,5 @@
+@import '../../../variables';
+
 .cesta {
   display: grid;
   grid-template-columns: 3fr 1fr;
@@ -6,9 +8,12 @@
   margin: 0 auto;
   max-width: 1440px;
   padding: 1rem;
+  margin-bottom: 5rem;
 
   app-cesta-list {
     max-height: 100%;
     overflow: auto;
+    scrollbar-color: $red transparent;
+
   }
 }

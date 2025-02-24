@@ -39,6 +39,13 @@ export class CestaService {
     const body = cantidad;
     return this.httpClient.put<LineaPedido>(url, body);
   }
+  addLineaPedido(lineaPedido: LineaPedido): Observable<LineaPedido> {
+    const url = `${this.baseUrl}${lineaPedido.pedido?.cliente?.id}/pedidos/${lineaPedido.pedido?.id}/alterLineaPedido`;
+
+    const body = lineaPedido;
+    console.log(lineaPedido);
+    return this.httpClient.post<LineaPedido>(url, body);
+  }
 
   deleteLineaPedido(lineaPedido: LineaPedido | null, cliente: Cliente) {
     cliente.id = 1;

@@ -16,7 +16,7 @@
         <div class="info">
           <div class="top">
             <p class="mdm">{{venta.tienda.nombre}}</p>
-            <p class="precio">{{venta.precioVenta}}</p>
+            <p class="precio">{{formatNumber(venta.precioVenta) ?? 0 }} €</p>
           </div>
 
           <p class="p descripcion">{{venta.descripcion}}</p>
