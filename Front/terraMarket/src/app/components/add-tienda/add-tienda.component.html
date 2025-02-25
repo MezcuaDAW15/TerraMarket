@@ -1,0 +1,53 @@
+<app-back></app-back>
+<form
+  [formGroup]="addTiendaForm"
+  (ngSubmit)="addTienda()"
+  enctype="multipart/form-data"
+>
+  <div id="datos">
+    <div id="logo">
+      <img
+        [src]="imagenPreview"
+        alt="Previsualización"
+        class="img-thumbnail"
+        style="max-width: 150px"
+      />
+      <input
+        type="file"
+        id="foto"
+        class="form-control"
+        (change)="previsualizarImagen($event)"
+      />
+    </div>
+    <div id="nombre">
+      <input type="text" class="input-primary" placeholder="Nombre Tienda" />
+    </div>
+    <div id="categoria">
+      <p-dropdown
+        formControlName="selectedMercado"
+        [options]="mercados"
+        optionLabel="nombre"
+        [showClear]="true"
+        placeholder="Seleccionar mercado"
+      />
+    </div>
+    <div id="mercado">
+      <p-dropdown
+        formControlName="selectedMercado"
+        [options]="mercados"
+        optionLabel="nombre"
+        [showClear]="true"
+        placeholder="Seleccionar mercado"
+      />
+    </div>
+  </div>
+  <div id="banner">
+    <img [src]="bannerPreview" alt="Previsualización" class="img-thumbnail" />
+    <input
+      type="file"
+      id="bannerFoto"
+      class="form-control"
+      (change)="previsualizarBanner($event)"
+    />
+  </div>
+</form>

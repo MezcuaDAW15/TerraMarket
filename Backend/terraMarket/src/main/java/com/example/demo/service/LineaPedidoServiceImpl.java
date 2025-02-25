@@ -13,10 +13,17 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.dto.ClienteDTO;
 import com.example.demo.model.dto.LineaPedidoDTO;
+import com.example.demo.model.dto.MercadoDTO;
 import com.example.demo.model.dto.PedidoDTO;
+import com.example.demo.model.dto.TiendaDTO;
 import com.example.demo.repository.dao.LineaPedidoRepository;
+import com.example.demo.repository.dao.MercadoRepository;
+import com.example.demo.repository.dao.PedidoRepository;
+import com.example.demo.repository.dao.TiendaRepository;
 import com.example.demo.repository.dao.VentaRepository;
 import com.example.demo.repository.entity.LineaPedido;
+import com.example.demo.repository.entity.Mercado;
+import com.example.demo.repository.entity.Tienda;
 
 @Service
 public class LineaPedidoServiceImpl implements LineaPedidoService {
@@ -27,6 +34,12 @@ public class LineaPedidoServiceImpl implements LineaPedidoService {
     LineaPedidoRepository lineaPedidoRepository;
     @Autowired
     VentaRepository ventaRepository;
+    @Autowired
+    PedidoRepository pedidoRepository;
+    @Autowired
+    TiendaRepository tiendaRepository;
+    @Autowired
+    MercadoRepository mercadoRepository;
     @Autowired
     PedidoService pedidoService;
 
@@ -57,15 +70,18 @@ public class LineaPedidoServiceImpl implements LineaPedidoService {
             // eliminamos la
             // linea
             lineaPedidoRepository.delete(lineaPedido);
+            this.pedidoService.actualizarTotalPedido(lineaPedido.getPedido().getId());
             return null;
 
         } else {
             lineaPedido.setCantidad(lineaPedido.getCantidad() + cantidad);
             lineaPedidoRepository.save(lineaPedido);
+            this.pedidoService.actualizarTotalPedido(lineaPedido.getPedido().getId());
+
             PedidoDTO pedidoDTO = new PedidoDTO();
             pedidoDTO.setId(lineaPedido.getPedido().getId());
             return LineaPedidoDTO.convertToDTO(lineaPedido,
-                    pedidoService.findById(pedidoDTO, clienteDTO));
+                    pedidoService.findById(pedidoDTO));
         }
 
     }
@@ -83,14 +99,27 @@ public class LineaPedidoServiceImpl implements LineaPedidoService {
     @Override
     public LineaPedidoDTO crearLineaPedido(LineaPedidoDTO lineaPedidoDTO, ClienteDTO clienteDTO) {
         log.info("LineaPedidoServiceImpl - crearLineaPedido: " + lineaPedidoDTO);
+        PedidoDTO pedidoDTO = PedidoDTO.convertToDTO(
+                pedidoRepository.findById(lineaPedidoDTO.getPedido().getId()).get(), clienteDTO);
+        lineaPedidoDTO.setPedido(pedidoDTO);
+        MercadoDTO mercadoDTO = pedidoDTO.getLineaPedido().get(0).getVenta().getTienda().getMercado();
 
-        LineaPedido lineaPedido = new LineaPedido();
-        lineaPedido.setCantidad(lineaPedidoDTO.getCantidad());
-        lineaPedido.setVenta(ventaRepository.findById(lineaPedidoDTO.getVenta().getId()).get());
-        lineaPedido
-                .setPedido(PedidoDTO.convertToEntity(pedidoService.findById(lineaPedidoDTO.getPedido(), clienteDTO)));
-        lineaPedido.setFecha(Date.from(Instant.now()));
+        Tienda tienda = tiendaRepository.findById(lineaPedidoDTO.getVenta().getTienda().getId()).get();
+        lineaPedidoDTO.getVenta().setTienda(TiendaDTO.convertToDTO(tienda, mercadoDTO));
+        LineaPedido lineaPedido = LineaPedidoDTO.convertToEntity(lineaPedidoDTO,
+                PedidoDTO.convertToEntity(lineaPedidoDTO.getPedido()));
+
+        List<LineaPedido> listaLineasPedido = lineaPedidoRepository.findAllByPedido(lineaPedidoDTO.getPedido().getId());
+
+        for (LineaPedido lp : listaLineasPedido) {
+            if (lp.getVenta().getId() == lineaPedido.getVenta().getId()) {
+                lp.setCantidad(lp.getCantidad() + lineaPedido.getCantidad());
+                lineaPedidoRepository.save(lp);
+                return LineaPedidoDTO.convertToDTO(lp, lineaPedidoDTO.getPedido());
+            }
+        }
+
         lineaPedidoRepository.save(lineaPedido);
-        return LineaPedidoDTO.convertToDTO(lineaPedido, lineaPedidoDTO.getPedido());
+        return lineaPedidoDTO;
     }
 }

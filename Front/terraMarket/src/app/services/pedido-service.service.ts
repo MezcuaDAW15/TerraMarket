@@ -10,12 +10,26 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class PedidoServiceService {
 
-  private url = `http://localhost:8888/ws/pedidos/clientes/1/pedidos`;
+  private id: number | null = null;
 
+  private url = `http://localhost:8888/ws/clientes`;
+
+  //private url = `http://localhost:8888/ws/clientes/${this.id}/pedidos`;
   constructor(private httpClient: HttpClient) { }
 
-  findAllByCliente():Observable<Pedido[]>{
-    return this.httpClient.get<Pedido[]>(this.url)
+  setId(id : number):void{
+    this.id = id;
+  }
+  getId():number | null{
+    return this.id;
+  }
+
+  findAllByCliente(id:number):Observable<Pedido[]>{
+    return this.httpClient.get<Pedido[]>(`${this.url}/${id}/pedidos`)
+  }
+  // busca un id de pedido
+  findById(idUsuario: number, idPedido: number):Observable<Pedido>{
+    return this.httpClient.get<Pedido>(`${this.url}/${idUsuario}/pedidos/${idPedido}`)
   }
 
   private pedidoSource = new BehaviorSubject<Pedido>({} as Pedido); // inicializamos el BehaviorSubject con un objeto vacío

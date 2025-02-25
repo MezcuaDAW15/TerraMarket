@@ -1,8 +1,11 @@
 package com.example.demo.service;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +45,23 @@ public class MercadoServiceImpl implements MercadoService {
             return null;
         }
 
+    }
+
+    @Override
+    public Map<Long, String> findRutas() {
+        log.info("MercadoServiceImpl - findRutas: Localizamos las rutas de los mercados");
+        Map<Long, String> rutas = new java.util.HashMap<>();
+        List<Mercado> listaMercados = mercadoRepository.findAll();
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+
+        for (Mercado mercado : listaMercados) {
+            // Normalizamos y eliminamos las tildes en línea
+            String ruta = Normalizer.normalize(mercado.getNombre(), Normalizer.Form.NFD);
+            ruta = pattern.matcher(ruta).replaceAll("");
+            ruta = ruta.toLowerCase().replace(" ", "-");
+            rutas.put(mercado.getId(), ruta);
+        }
+        return rutas;
     }
 
 }

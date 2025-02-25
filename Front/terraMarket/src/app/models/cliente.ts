@@ -1,10 +1,10 @@
 export interface Cliente {
-  id: number;
+  id?: number;
   nombre: string;
   apellidos: string;
   username: string;
   fechaNacimiento: Date;
   email: string;
+  contrasena?: string;
   cp: string;
 }
-

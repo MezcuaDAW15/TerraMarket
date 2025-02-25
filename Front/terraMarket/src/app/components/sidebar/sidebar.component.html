@@ -18,7 +18,7 @@
         <div class="overflow-y-auto">
           <ul class="list-none p-0 ml-5 overflow-hidden transition-all transition-duration-400 transition-ease-in-out">
             <li *ngFor="let category of categorias">
-              <a pRipple [routerLink]="['/mercado/1']" [queryParams]="{ categoria: category.id }"
+              <a pRipple (click)="navigateToCategory(category.id)"
                 class="no-underline flex align-items-center cursor-pointer p-3 border-round hover:surface-100 transition-duration-150 transition-colors p-ripple">
                 <img class="w-1 mr-3" [src]="'assets/icons/categories/' + category.icono" alt="icon" />
                 <span class="mdm txt-black">{{ category.nombre }}</span>
@@ -31,7 +31,7 @@
     </ng-template>
   </p-sidebar>
 
-  <button class="bg-red border-none" (click)="sidebarVisible = true">
+  <button class="bg-red border-none boton" (click)="sidebarVisible = true">
     <img class="light" src="assets/icons/menu_light.svg" alt="menu" />
   </button>
 </div>

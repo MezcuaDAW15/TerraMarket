@@ -5,10 +5,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.dto.ClienteDTO;
+import com.example.demo.model.dto.LineaPedidoDTO;
 import com.example.demo.model.dto.PedidoDTO;
 import com.example.demo.service.ClienteService;
 import com.example.demo.service.PedidoService;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/ws/pedidos")
+@RequestMapping("/ws/clientes/{idCliente}/pedidos")
 public class PedidoRestController {
 
     private static final Logger log = LoggerFactory.getLogger(PedidoRestController.class);
@@ -27,7 +29,7 @@ public class PedidoRestController {
     @Autowired
     private ClienteService clienteService;
 
-    @RequestMapping(method = RequestMethod.GET, path = "/clientes/{idCliente}/pedidos")
+    @RequestMapping(method = RequestMethod.GET)
     public List<PedidoDTO> findAllByCliente(@PathVariable("idCliente") Long idCliente) {
 
         log.info("PedidoRestController - findAllByCliente: Mostramos pedidos del cliente " + idCliente);
@@ -44,7 +46,7 @@ public class PedidoRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/buscarPedidoPendiente")
-    public PedidoDTO buscarPedidoPendiente(@RequestParam Long idCliente) {
+    public PedidoDTO buscarPedidoPendiente(@PathVariable("idCliente") Long idCliente) {
 
         log.info("PedidoRestController - buscarPedidoPendiente: Mostramos pedidos pendientes");
 
@@ -52,4 +54,17 @@ public class PedidoRestController {
         return pedidoService.findPedidoPendiente(idCliente);
 
     }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{idPedido}")
+    public PedidoDTO findById(@PathVariable("idPedido") Long idPedido) {
+
+        log.info("PedidoRestController - buscarPedido por id");
+
+        PedidoDTO pedidoDTO = new PedidoDTO();
+        pedidoDTO.setId(idPedido);
+        // buscar cuentas del cliente en el servicio
+        return pedidoService.findById(pedidoDTO);
+
+    }
+
 }

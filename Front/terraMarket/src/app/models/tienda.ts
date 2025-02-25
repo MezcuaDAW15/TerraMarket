@@ -1,5 +1,6 @@
 import { CategoriaT } from './categoriaT';
-import { Mercado } from "./mercado";
+import { Direccion } from './direccion';
+import { Mercado } from './mercado';
 
 export interface Tienda {
   id: number;
@@ -9,6 +10,7 @@ export interface Tienda {
   imagen: string;
   activo: boolean;
   categoriaT: CategoriaT[];
+  direccion: Direccion;
 }
 /*    private Long id;
     private String nombre;

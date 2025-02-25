@@ -1,8 +1,11 @@
 
 package com.example.demo.service;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -61,13 +64,14 @@ public class ProductoServiceImpl implements ProductoService {
             log.warn("El producto no tiene id asignado");
         }
 
-        /*Desde el front traeremos los datos del producto y
-         * la categoria a la que pertenece, pero solo el id.*/
+        /*
+         * Desde el front traeremos los datos del producto y
+         * la categoria a la que pertenece, pero solo el id.
+         */
 
         productoDTO.setCategoriaP(CategoriaPDTO.convertToDTO(categoriaPRepository.findById(
-            productoDTO.getCategoriaP().getId()).get()));
+                productoDTO.getCategoriaP().getId()).get()));
         log.info("ProductoServiceImpl - save: Guardamos el producto ", productoDTO);
-
 
         return ProductoDTO.convertToDTO(productoRepository.save(ProductoDTO.convertToEntity(productoDTO)));
     }
@@ -88,8 +92,22 @@ public class ProductoServiceImpl implements ProductoService {
         }
         return productosDTO;
     }
-    
 
+    @Override
+    public Map<Long, String> findRutas() {
+        log.info("ProductoServiceImpl - findRutas: Localizamos las rutas de los productos");
+        Map<Long, String> rutas = new java.util.HashMap<>();
+        List<Producto> listaProductos = productoRepository.findAll();
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
 
+        for (Producto producto : listaProductos) {
+
+            String ruta = Normalizer.normalize(producto.getNombre(), Normalizer.Form.NFD);
+            ruta = pattern.matcher(ruta).replaceAll("");
+            ruta = ruta.toLowerCase().replace(" ", "-");
+            rutas.put(producto.getId(), ruta);
+        }
+        return rutas;
+    }
 
 }

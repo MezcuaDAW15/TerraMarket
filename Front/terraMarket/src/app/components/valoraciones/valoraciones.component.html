@@ -1,0 +1,25 @@
+<app-back></app-back>
+<div class="container">
+  <div class="encabezado">
+    <p class="h1">Reseña</p>
+  </div>
+  <div class="div-contenedor">
+    <div class="div-contenido">
+      <!-- <img *ngIf="imagenUrl" [src]="imagenUrl" alt="logo tienda" /> -->
+      <p>{{ tienda.nombre }}</p>
+      <form [formGroup]="valoracionForm" (ngSubmit)="onSubmit()">
+        <p-rating
+          formControlName="valoracion"
+          [cancel]="false"
+          class="rating"
+        ></p-rating>
+        <textarea
+          formControlName="comentario"
+          placeholder="Escribir comentario..."
+          class="comentario"
+        ></textarea>
+        <button type="submit" class="rd-btn red auto-size">Enviar</button>
+      </form>
+    </div>
+  </div>
+</div>

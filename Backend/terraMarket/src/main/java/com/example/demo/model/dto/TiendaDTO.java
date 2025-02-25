@@ -62,8 +62,8 @@ public class TiendaDTO implements Serializable {
         tiendaDTO.setLogo(tienda.getLogo());
         tiendaDTO.setDescripcion(tienda.getDescripcion());
         if (tienda.getImagen() != null) {
-			tiendaDTO.setImagen(Base64.getEncoder().encodeToString(tienda.getImagen()));
-		}
+            tiendaDTO.setImagen(Base64.getEncoder().encodeToString(tienda.getImagen()));
+        }
         tiendaDTO.setActivo(tienda.isActivo());
         tiendaDTO.setMercado(mercadoDTO);
         tiendaDTO.setDireccion(DireccionDTO.convertToDTO(tienda.getDireccion()));
@@ -78,14 +78,16 @@ public class TiendaDTO implements Serializable {
         tienda.setNombre(tiendaDTO.getNombre());
         tienda.setLogo(tiendaDTO.getLogo());
         tienda.setDescripcion(tiendaDTO.getDescripcion());
-        //tienda.setImagen(tiendaDTO.getImagen());
+        // tienda.setImagen(tiendaDTO.getImagen());
         tienda.setActivo(tiendaDTO.isActivo());
         tienda.setMercado(MercadoDTO.convertToEntity(tiendaDTO.getMercado()));
         tienda.setDireccion(DireccionDTO.convertToEntity(tiendaDTO.getDireccion()));
 
-        tienda.setCategorias(tiendaDTO.getCategoriaT().stream()
-                .map(CategoriaTDTO::convertToEntity)
-                .collect(Collectors.toSet()));
+        if (tiendaDTO.getCategoriaT() != null) {
+            tienda.setCategorias(tiendaDTO.getCategoriaT().stream()
+                    .map(CategoriaTDTO::convertToEntity)
+                    .collect(Collectors.toSet()));
+        }
 
         return tienda;
     }
