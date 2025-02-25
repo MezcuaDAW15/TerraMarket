@@ -11,6 +11,13 @@ import { SelectedMarketService } from '../../services/global-state/selected-mark
 import { Mercado } from '../../models/mercado';
 import { MarketService } from '../../services/markets/market.service';
 import { constrainedMemory } from 'process';
+import { ClienteService } from '../../services/clientes/cliente.service';
+import { PedidoServiceService } from '../../services/pedido-service.service';
+import { Cliente } from '../../models/cliente';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
+
 
 
 
@@ -19,7 +26,7 @@ import { constrainedMemory } from 'process';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonModule, CommonModule, SidebarComponent, MenuModule, BadgeModule, LoginComponent, DialogModule, ReactiveFormsModule],
+  imports: [ButtonModule, CommonModule, SidebarComponent, MenuModule, BadgeModule, ReactiveFormsModule, DialogModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -32,13 +39,24 @@ export class HeaderComponent implements OnInit {
   usuario: any = null;
 
   market: Mercado | undefined
+  clienteLogin: any | null = null;
+  cliente: Cliente | null = null;
+  formulario: FormGroup;
 
 
   constructor(
     private sessionService: SessionService,
     private router: Router,
     private selectedMarketService: SelectedMarketService,
-  ) { }
+    private clienteService: ClienteService,
+    private fb: FormBuilder,
+    private pedidoService: PedidoServiceService
+  ) {
+    this.formulario = this.fb.group({
+      username: ["", [Validators.required]],
+      contrasena: ["", [Validators.required]]
+    })
+  }
 
 
 
@@ -84,14 +102,7 @@ export class HeaderComponent implements OnInit {
     console.log('cliente formulario --> ' + this.clienteLogin.username);
     console.log('cliente formulario --> ' + JSON.stringify(this.clienteLogin));  // Muestra el objeto como una cadena JSON
 
-    // this.clienteService.login(this.clienteLogin).subscribe(
-    //   (response: Cliente) => {
-    //     console.log('Login successful', response);
-    //   },
-    //   (error) => {
-    //     console.error('Login failed', error);
-    //   }
-    // );
+
     this.clienteService.login(this.clienteLogin).subscribe({
       next: (response: Cliente) => {
         console.log('Login successful', response);
@@ -115,7 +126,7 @@ export class HeaderComponent implements OnInit {
   cargarItems() {
     this.items = [
       {
-        label: this.cliente?.username,
+        label:  `${this.usuario?.nombre} ${this.usuario?.apellidos}`,
         items: [
           {
             separator: true
@@ -170,5 +181,8 @@ export class HeaderComponent implements OnInit {
     this.usuarioLogueado = false;
     this.router.navigate(['/home']);
     this.usuario = null;
+  }
+  irInicio(){
+    this.router.navigate(['/home']);
   }
 }

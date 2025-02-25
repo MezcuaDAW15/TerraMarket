@@ -30,6 +30,7 @@ export class ListaProductosComponent implements OnInit {
   visible: boolean = false;
 
   ngOnInit(): void {
+    console.log('Tienda:', this.tienda);
     if (this.tienda) {
       this.ventasService
         .findByVentasTienda([], this.tienda)

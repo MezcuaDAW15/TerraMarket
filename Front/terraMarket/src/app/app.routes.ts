@@ -22,7 +22,7 @@ export const routes: Routes = [
   { path: 'cesta', component: CestaComponent },
   { path: 'registro', component: RegisterComponent },
   { path: 'home', component: MercadosComponent },
-  { path: 'editar-perfil', component: EditarPerfilComponent },
+  { path: 'perfil', component: EditarPerfilComponent },
   { path: 'cesta', component: CestaComponent },
   { path: 'realizar-pedido', component: RealizarPedidoComponent },
   { path: 'registro', component: RegistroComponent },

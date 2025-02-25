@@ -1,6 +1,6 @@
 <header>
   <div>
-    <div class="header__logo">
+    <div class="header_logo" (click)="irInicio()">
       <img class="logo" src="assets/logo_light.svg" alt="logo" />
     </div>
 
@@ -15,15 +15,14 @@
     <button class="sqr-btn auto-size" [routerLink]="['/cesta']">
       <i
         class="pi pi-shopping-bag text-xl"
-        pBadge
-        value="0"
+
         style="color: #fff"
       ></i>
     </button>
 
     <p-menu #menu [model]="items" [popup]="true" />
     <p-button
-      label="{{ usuario.nombre }}"
+      label="{{ usuario.username }}"
       (onClick)="menu.toggle($event)"
       icon="pi pi-angle-down"
       iconPos="right"
@@ -37,7 +36,7 @@
       <i class="pi pi-user text-xl"></i>
       Iniciar sesión
     </button>
-   
+
     <p-dialog header="" [(visible)]="loginVisible" [style]="{width: 'fit-content'}">
       <ng-template pTemplate="headless">
         <div class="container">
@@ -47,23 +46,23 @@
             </button>
 
               <div class="div-inicio-sesion">
-                  
+
                   <form class="form" action="#" method="post"
                   [formGroup]="formulario"
                   (ngSubmit)="iniciarSesion()" >
-      
+
                       <p class="h1">Inicio de sesión</p>
-          
+
                       <div class="div-inputs">
                           <input formControlName="username" class="input-primary" type="text" name="email" id="" placeholder="Nombre de usuario">
                           <input formControlName="contrasena" class="input-primary" type="password" name="contrasena" id="" placeholder="Contraseña">
-          
+
                           <div class="div-cb">
                               <input class="checkbox" type="checkbox" name="recuerdame" id="">
                               <p class="p">Recuérdame</p>
                           </div>
                       </div>
-          
+
                       <input class="rd-btn p boton-form" type="submit" value="Iniciar sesión">
                   </form>
               </div>
@@ -75,7 +74,7 @@
           </div>
       </div>
       </ng-template>
-      
+
     </p-dialog>
   </div>
 </header>
