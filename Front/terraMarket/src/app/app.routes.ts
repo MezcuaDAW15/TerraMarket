@@ -17,8 +17,6 @@ export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'pedidos', component: PedidosComponent },
   { path: 'pedidos/:id', component: DetallesPedidoComponent },
-  { path: 'mercados', component: MercadosComponent },
-  { path: 'mercado/:id', component: MarketViewComponent },
   { path: 'cesta', component: CestaComponent },
   { path: 'registro', component: RegisterComponent },
   { path: 'home', component: MercadosComponent },
